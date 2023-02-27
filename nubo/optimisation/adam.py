@@ -2,16 +2,14 @@ import torch
 from torch import Tensor
 from torch.optim import Adam
 from typing import Optional, Tuple, Callable, Any
-from scipy.optimize import OptimizeResult
-
-def sigmoid(x: Tensor) -> Tensor:
-    return 1/(1+torch.exp(-x))
+from nubo.optimisation import gen_candidates
+from nubo.utils import unnormalise, normalise
 
 
-def adam(func: callable,
-         x: Tensor,
-         lr: Optional[float]=0.01,
-         steps: Optional[int]=100) -> None:
+def _adam(func: callable,
+          x: Tensor,
+          lr: Optional[float]=0.01,
+          steps: Optional[int]=100) -> None:
     
     x.requires_grad_(True)
 
@@ -32,37 +30,43 @@ def adam(func: callable,
 
         # take next optimisation step
         adam.step()
-        bounds = torch.stack([-torch.ones(x.size(1)), torch.ones(x.size(1))])
-        for j, (lb, ub) in enumerate (zip(*bounds)):
-            x.data[:, j].clamp_(lb, ub)
   
     return x.detach(), loss
 
 
 def multi_adam(func: Callable,
-               candidates: Tensor,
+               bounds: Tensor,
                lr: Optional[float]=0.01,
-               steps: Optional[int]=100) -> Tuple[Tensor, OptimizeResult]:
+               steps: Optional[int]=100,
+               num_starts: Optional[int]=10,
+               num_samples: Optional[int]=100) -> Tuple[Tensor, float]:
     """
     Multi-start optimisation.
     """
     
-    n = candidates.size(0)
+    dims = bounds.size(1)
+
+    # transform function s.t. it takes real numbers
+    trans_func = lambda x: func(unnormalise(torch.sigmoid(x), bounds))
+
+    # generate candidates and transfrom to real numbers
+    candidates = gen_candidates(func, bounds, num_starts, num_samples)
+    inv_sigmoid = lambda x: torch.log(x/(1-x))
+    trans_candidates = inv_sigmoid(normalise(candidates, bounds))
 
     # initialise objects for results
-    x_res = torch.zeros(candidates.size())
-    fun_res = torch.zeros(n)
+    results = torch.zeros((num_starts, dims))
+    func_results = torch.zeros(num_starts)
 
-    # iterate over candidates
-    for i in range(n):
-        candidate = candidates[i].reshape(1, -1)
-        x, fun = adam(func, x=candidate, lr=lr, steps=steps)
-        x_res[i, :] = x
-        fun_res[i] = fun
+    # iteratively optimise over candidates
+    for i in range(num_starts):
+        x, fun = _adam(trans_func, x=trans_candidates[i], lr=lr, steps=steps)
+        results[i, :] = unnormalise(torch.sigmoid(x), bounds) # transfrom results to bounds
+        func_results[i] = fun
     
-    # select best start
-    best_i = torch.argmax(fun_res)
-    best_res = fun_res[best_i]
-    best_x =  torch.reshape(x_res[best_i, :], (1, -1))
+    # select best candidate
+    best_i = torch.argmax(func_results)
+    best_result =  torch.reshape(results[best_i, :], (1, -1))
+    best_func_result = func_results[best_i]
 
-    return best_x, best_res
+    return best_result, best_func_result

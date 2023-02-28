@@ -5,9 +5,9 @@ Bayesian Optimisation framework for the optimisation of expensive-to-evaluate bl
 
 ## Contents
 **Surrogate models**: Uses Gaussian Processes implemented in `GPyTorch`.  
-**Acquisition function**: Sequential single-point optimisation via analytical Expected Improvement (Jones et al., 1998) and Upper Confidence Bound (Srinivas et al., 2009). Parallel and asynchronous multi-point optimisation via Monte Carlo Sampling (Wilson et al., 2018). 
+**Acquisition function**: Sequential single-point optimisation via analytical Expected Improvement (Jones et al., 1998) and Upper Confidence Bound (Srinivas et al., 2009). Parallel and asynchronous multi-point optimisation via Monte Carlo Sampling (Wilson et al., 2018).  
 **Optimisers**: Bounded deterministic optimisation via multi-start L-BFGS-B. Constraint deterministic optimisation via multi-start SLSQP. Stochastic optimisation via Adam.
-**Design of experiments**: Generation of initial data points via Maximin Latin Hypercube Sampling. 
+**Design of experiments**: Generation of initial data points via Maximin Latin Hypercube Sampling.  
 **Synthetic test functions**: Test Bayesian Optimisation algorithms on one of ten synthetic test functions before deploying it for expensive experiments.
 
 ***

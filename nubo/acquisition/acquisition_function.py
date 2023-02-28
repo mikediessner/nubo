@@ -8,7 +8,7 @@ class AcquisitionFunction:
     def __init__(self) -> None:
         pass
 
-    def __call__(self, x: Tensor) -> ndarray:
+    def __call__(self, x: Tensor | ndarray) -> Tensor | ndarray:
         """
         Wrapper: torch to numpy conversion and back.
         """

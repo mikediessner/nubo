@@ -1,6 +1,5 @@
 import torch
 from torch import Tensor
-from numpy import ndarray
 import gpytorch
 from gpytorch.models import GP
 from .acquisition_function import AcquisitionFunction
@@ -12,12 +11,16 @@ class UpperConfidenceBound(AcquisitionFunction):
     def __init__(self, 
                  gp: GP,
                  beta: Optional[float]=1.0) -> None:
-        self.beta = beta
-        self.gp = gp
 
-    def eval(self, x: Tensor) -> ndarray:
+        self.gp = gp
+        self.beta = beta
+
+    def eval(self, x: Tensor) -> Tensor:
+
+        # reshape tensor to (1 x dims)
+        x = torch.reshape(x, (self.points, -1))
         
-        # set Gaussian process to eval mode
+        # set Gaussian Process to eval mode
         self.gp.eval()
 
         # make predictions
@@ -36,12 +39,14 @@ class UpperConfidenceBound(AcquisitionFunction):
 class MCUpperConfidenceBound(AcquisitionFunction):
 
     def __init__(self,
+                 batch_size: int,
                  samples: int,
                  gp: GP,
                  beta: Optional[float]=1.0,
                  x_pending: Optional[Tensor]=None,
                  fix_base_samples: Optional[bool]=True)-> None:
         
+        self.batch_size = batch_size
         self.samples = samples              # Monte Carlo samples
         self.gp = gp                        # surrogate model
         self.beta = torch.tensor(beta)      # UCB parameter
@@ -50,13 +55,16 @@ class MCUpperConfidenceBound(AcquisitionFunction):
         self.fix_base_samples = fix_base_samples
         self.base_samples = None
 
-    def eval(self, x: Tensor) -> ndarray:
+    def eval(self, x: Tensor) -> Tensor:
+
+        # reshape tensor to (batch_size x dims)
+        x = torch.reshape(x, (self.points, -1))
 
         # add pending points
         if isinstance(self.x_pending, Tensor):
             x = torch.cat([x, self.x_pending], dim=0)
 
-        # set Gaussian process to eval mode
+        # set Gaussian Process to eval mode
         self.gp.eval()
 
         # get predictive distribution
@@ -72,6 +80,7 @@ class MCUpperConfidenceBound(AcquisitionFunction):
 
         # compute Upper Confidence Bound
         ucb = mean + self.beta_coeff * torch.abs(samples - mean)
+        ucb = ucb.max(dim=1).values
         ucb = ucb.mean(dim=0) # average samples
 
-        return -ucb[0] # optimise only w.r.t. newest point
+        return -ucb

@@ -9,19 +9,20 @@ from math import inf
 from typing import Optional
 
 
-def fit_adam(x: Tensor,
-             y: Tensor,
-             gp: GP,
-             likelihood: Likelihood,
-             mll: MarginalLogLikelihood,
-             steps: Optional[int]=100) -> None:
+def fit_gp(x: Tensor,
+           y: Tensor,
+           gp: GP,
+           likelihood: Likelihood,
+           mll: MarginalLogLikelihood,
+           steps: Optional[int]=100,
+           **kwargs) -> None:
 
     # set Gaussian process and likelihood to training mode
     gp.train()
     likelihood.train()
 
     # specify Adam
-    adam = Adam(gp.parameters(), lr=0.1)
+    adam = Adam(gp.parameters(), **kwargs)
 
     # fit Gaussian process
     for i in range(steps):

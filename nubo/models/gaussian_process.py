@@ -1,15 +1,14 @@
 from torch import Tensor
 from gpytorch.distributions import MultivariateNormal
-from gpytorch.means import ZeroMean
-from gpytorch.models import ExactGP, ApproximateGP
+from gpytorch.means import ConstantMean
+from gpytorch.models import ExactGP
 from gpytorch.kernels import MaternKernel, ScaleKernel
-from gpytorch.likelihoods import Likelihood, GaussianLikelihood
-from gpytorch.priors.torch_priors import GammaPrior
+from gpytorch.likelihoods import Likelihood
 
 
 class GaussianProcess(ExactGP):
     """
-    Gaussian process model.
+    Gaussian process model with constant mean function and Matern 5/2 kernel.
     """
 
     def __init__(self,
@@ -30,12 +29,10 @@ class GaussianProcess(ExactGP):
 
 
         # specify mean function and covariance kernel
-        self.mean_module = ZeroMean()
+        self.mean_module = ConstantMean()
         self.covar_module = ScaleKernel(
             base_kernel=MaternKernel(nu=5/2,
-                                     ard_num_dims=x_train.shape[-1],
-                                     lengthscale_prior=GammaPrior(3.0, 4.0)),
-            outputscale_prior=GammaPrior(2.0, 0.15)
+                                     ard_num_dims=x_train.shape[-1])
             )
 
     def forward(self, x: Tensor) -> MultivariateNormal:
@@ -51,18 +48,3 @@ class GaussianProcess(ExactGP):
         self.covar_x = covar_x
 
         return MultivariateNormal(mean_x, covar_x)
-
-
-class BayesianGaussianProcess(ApproximateGP):
-
-    def __init__(self):
-        pass
-
-    def forward(self, x):
-        pass
-
-    def guide(self, x, y):
-        pass
-
-    def model(self, x, y):
-        pass

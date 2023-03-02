@@ -13,12 +13,12 @@ Bayesian Optimisation framework for the optimisation of expensive-to-evaluate bl
 ***
 
 ## Choice of acquisition function
-| Property | Analytical | Monte Carlo |
-| -------- | ---------- | ----------- |
-| Single-point | Yes | Yes |
-| Multi-point | - | joint strategy for small batches,sequential strategy for large batches |
-| Bounds | L-BFGS-B optimiser | Adam optimiser or L-BFGS-B when base samples fixed |
-| Constraints| SLSQP optimiser | SLSQP optimiser when base samples fixed |
+| Property       | Analytical         | Monte Carlo                                                            |
+| -------------- | ------------------ | ---------------------------------------------------------------------- |
+| Singlepoint    | Yes                | Yes                                                                    |
+| Multipoint     | -                  | Joint strategy for small batches,sequential strategy for large batches |
+| Bounds         | L-BFGS-B optimiser | Adam optimiser or L-BFGS-B when base samples fixed                     |
+| Constraints    | SLSQP optimiser    | SLSQP optimiser when base samples fixed                                |
 
 ***
 

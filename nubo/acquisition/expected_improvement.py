@@ -13,13 +13,10 @@ class ExpectedImprovement(AcquisitionFunction):
                  gp: GP,
                  y_best: Tensor) -> None:
 
-        self.gp =gp
+        self.gp = gp
         self.y_best = y_best
         
     def eval(self, x: Tensor) -> Tensor:
-
-        # reshape tensor to (1 x dims)
-        x = torch.reshape(x, (self.points, -1))
 
         # set Gaussian Process to eval mode
         self.gp.eval()

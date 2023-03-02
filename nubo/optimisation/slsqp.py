@@ -16,7 +16,7 @@ def slsqp(func: Callable,
     """
 
     dims = bounds.size(1)
-    bounds = Bounds(lb=bounds[0, :], ub=bounds[1, :])
+    opt_bounds = Bounds(lb=bounds[0, :], ub=bounds[1, :])
     
     # generate candidates
     candidates = gen_candidates(func, bounds, num_starts, num_samples)
@@ -27,13 +27,13 @@ def slsqp(func: Callable,
     
     # iteratively optimise over candidates
     for i in range(num_starts):
-        result = minimize(func, x0=candidates[i], method="SLSQP", bounds=bounds, constraints=constraints, **kwargs)
+        result = minimize(func, x0=candidates[i], method="SLSQP", bounds=opt_bounds, constraints=constraints, **kwargs)
         results[i, :] = torch.from_numpy(result["x"].reshape(1, -1))
         func_results[i] = float(result["fun"])
     
     # select best candidate
     best_i = torch.argmax(func_results)
-    best_result =  torch.reshape(torch.from_numpy(results[best_i, :]), (1, -1))
+    best_result =  torch.reshape(results[best_i, :], (1, -1))
     best_func_result = func_results[best_i]
 
     return best_result, best_func_result

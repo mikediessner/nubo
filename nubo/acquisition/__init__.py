@@ -1,2 +1,2 @@
 from .upper_confidence_bound import UpperConfidenceBound, MCUpperConfidenceBound
-from.expected_improvement import ExpectedImprovement, MCExpectedImprovement, JointMCExpectedImprovement
+from .expected_improvement import ExpectedImprovement, MCExpectedImprovement

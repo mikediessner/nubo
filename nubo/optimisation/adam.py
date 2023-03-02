@@ -8,13 +8,14 @@ from nubo.utils import unnormalise, normalise
 
 def _adam(func: callable,
           x: Tensor,
+          lr: Optional[float]=0.1,
           steps: Optional[int]=100,
           **kwargs: Any) -> None:
     
     x.requires_grad_(True)
 
     # specify Adam
-    adam = Adam([x], **kwargs)
+    adam = Adam([x], lr=lr, **kwargs)
 
     # fit Gaussian process
     for i in range(steps):
@@ -36,6 +37,7 @@ def _adam(func: callable,
 
 def adam(func: Callable,
                bounds: Tensor,
+               lr: Optional[float]=0.1,
                steps: Optional[int]=100,
                num_starts: Optional[int]=10,
                num_samples: Optional[int]=100,
@@ -47,7 +49,7 @@ def adam(func: Callable,
     dims = bounds.size(1)
 
     # transform function s.t. it takes real numbers
-    trans_func = lambda x: func(unnormalise(torch.sigmoid(x), bounds))
+    trans_func = lambda x: func(unnormalise(torch.sigmoid(x), bounds).reshape(1, -1))
 
     # generate candidates and transfrom to real numbers
     candidates = gen_candidates(func, bounds, num_starts, num_samples)
@@ -60,7 +62,7 @@ def adam(func: Callable,
 
     # iteratively optimise over candidates
     for i in range(num_starts):
-        x, fun = _adam(trans_func, x=trans_candidates[i], steps=steps, **kwargs)
+        x, fun = _adam(trans_func, lr=lr, x=trans_candidates[i], steps=steps, **kwargs)
         results[i, :] = unnormalise(torch.sigmoid(x), bounds) # transfrom results to bounds
         func_results[i] = fun
     

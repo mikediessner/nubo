@@ -1,2 +1,2 @@
-from .gaussian_process import GaussianProcess, BayesianGaussianProcess
+from .gaussian_process import GaussianProcess
 from .fit import fit_gp

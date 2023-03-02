@@ -4,8 +4,6 @@ from torch.optim import Adam
 from gpytorch.models import GP
 from gpytorch.likelihoods import Likelihood
 from gpytorch.mlls import MarginalLogLikelihood
-from nubo.optimisation import multi_start, gen_candidates
-from math import inf
 from typing import Optional
 
 
@@ -14,6 +12,7 @@ def fit_gp(x: Tensor,
            gp: GP,
            likelihood: Likelihood,
            mll: MarginalLogLikelihood,
+           lr: Optional[float]=0.1,
            steps: Optional[int]=100,
            **kwargs) -> None:
 
@@ -22,7 +21,7 @@ def fit_gp(x: Tensor,
     likelihood.train()
 
     # specify Adam
-    adam = Adam(gp.parameters(), **kwargs)
+    adam = Adam(gp.parameters(), lr=lr, **kwargs)
 
     # fit Gaussian process
     for i in range(steps):

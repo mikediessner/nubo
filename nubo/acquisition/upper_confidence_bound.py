@@ -17,9 +17,6 @@ class UpperConfidenceBound(AcquisitionFunction):
 
     def eval(self, x: Tensor) -> Tensor:
 
-        # reshape tensor to (1 x dims)
-        x = torch.reshape(x, (self.points, -1))
-        
         # set Gaussian Process to eval mode
         self.gp.eval()
 

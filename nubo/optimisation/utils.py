@@ -12,7 +12,7 @@ def gen_candidates(func: Callable,
     Generate candidates for multi-start optimisation
     """
 
-    dims = bounds.dims
+    dims = bounds.size(1)
 
     # generate samples
     lhs = LatinHypercubeSampling(dims)

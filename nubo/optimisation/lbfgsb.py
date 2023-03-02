@@ -8,7 +8,8 @@ from nubo.optimisation import gen_candidates
 def lbfgsb(func: Callable,
            bounds: Tensor,
            num_starts: Optional[int]=10,
-           num_samples: Optional[int]=100) -> Tuple[Tensor, float]:
+           num_samples: Optional[int]=100,
+           **kwargs: Any) -> Tuple[Tensor, float]:
     """
     Multi-start L-BFGS-B optimisation.
     """
@@ -25,7 +26,7 @@ def lbfgsb(func: Callable,
     
     # iteratively optimise over candidates
     for i in range(num_starts):
-        result = minimize(func, x0=candidates[i], method="L-BFGS-B", bounds=bounds)
+        result = minimize(func, x0=candidates[i], method="L-BFGS-B", bounds=bounds, **kwargs)
         results[i, :] = torch.from_numpy(result["x"].reshape(1, -1))
         func_results[i] = float(result["fun"])
     

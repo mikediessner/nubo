@@ -1,7 +1,7 @@
 import torch
 from torch import Tensor
 from scipy.optimize import minimize, Bounds
-from typing import Tuple, Optional, Callable
+from typing import Tuple, Optional, Callable, Any
 from nubo.optimisation import gen_candidates
 
 
@@ -9,7 +9,8 @@ def slsqp(func: Callable,
           bounds: Tensor,
           constraints: dict,
           num_starts: Optional[int]=10,
-          num_samples: Optional[int]=100) -> Tuple[Tensor, float]:
+          num_samples: Optional[int]=100,
+          **kwargs: Any) -> Tuple[Tensor, float]:
     """
     Multi-start SLSQP optimisation.
     """
@@ -26,7 +27,7 @@ def slsqp(func: Callable,
     
     # iteratively optimise over candidates
     for i in range(num_starts):
-        result = minimize(func, x0=candidates[i], method="SLSQP", bounds=bounds, constraints=constraints)
+        result = minimize(func, x0=candidates[i], method="SLSQP", bounds=bounds, constraints=constraints, **kwargs)
         results[i, :] = torch.from_numpy(result["x"].reshape(1, -1))
         func_results[i] = float(result["fun"])
     

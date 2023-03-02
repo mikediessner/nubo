@@ -8,13 +8,13 @@ from nubo.utils import unnormalise, normalise
 
 def _adam(func: callable,
           x: Tensor,
-          lr: Optional[float]=0.01,
-          steps: Optional[int]=100) -> None:
+          steps: Optional[int]=100,
+          **kwargs: Any) -> None:
     
     x.requires_grad_(True)
 
     # specify Adam
-    adam = Adam([x], lr=lr)
+    adam = Adam([x], **kwargs)
 
     # fit Gaussian process
     for i in range(steps):
@@ -34,12 +34,12 @@ def _adam(func: callable,
     return x.detach(), loss
 
 
-def multi_adam(func: Callable,
+def adam(func: Callable,
                bounds: Tensor,
-               lr: Optional[float]=0.01,
                steps: Optional[int]=100,
                num_starts: Optional[int]=10,
-               num_samples: Optional[int]=100) -> Tuple[Tensor, float]:
+               num_samples: Optional[int]=100,
+               **kwargs: Any) -> Tuple[Tensor, float]:
     """
     Multi-start optimisation.
     """
@@ -60,7 +60,7 @@ def multi_adam(func: Callable,
 
     # iteratively optimise over candidates
     for i in range(num_starts):
-        x, fun = _adam(trans_func, x=trans_candidates[i], lr=lr, steps=steps)
+        x, fun = _adam(trans_func, x=trans_candidates[i], steps=steps, **kwargs)
         results[i, :] = unnormalise(torch.sigmoid(x), bounds) # transfrom results to bounds
         func_results[i] = fun
     

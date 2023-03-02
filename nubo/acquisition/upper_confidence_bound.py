@@ -36,14 +36,12 @@ class UpperConfidenceBound(AcquisitionFunction):
 class MCUpperConfidenceBound(AcquisitionFunction):
 
     def __init__(self,
-                 batch_size: int,
                  samples: int,
                  gp: GP,
                  beta: Optional[float]=1.0,
                  x_pending: Optional[Tensor]=None,
-                 fix_base_samples: Optional[bool]=True)-> None:
+                 fix_base_samples: Optional[bool]=False)-> None:
         
-        self.batch_size = batch_size
         self.samples = samples              # Monte Carlo samples
         self.gp = gp                        # surrogate model
         self.beta = torch.tensor(beta)      # UCB parameter
@@ -51,11 +49,12 @@ class MCUpperConfidenceBound(AcquisitionFunction):
         self.x_pending = x_pending
         self.fix_base_samples = fix_base_samples
         self.base_samples = None
+        self.dims = gp.train_inputs[0].size(1)
 
     def eval(self, x: Tensor) -> Tensor:
 
         # reshape tensor to (batch_size x dims)
-        x = torch.reshape(x, (self.points, -1))
+        x = torch.reshape(x, (-1, self.dims))
 
         # add pending points
         if isinstance(self.x_pending, Tensor):

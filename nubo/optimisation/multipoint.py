@@ -8,7 +8,8 @@ def sequential(func: Callable,
                method: str, 
                batch_size: int, 
                bounds: Tensor,
-               constraints: Optional[dict]={}, 
+               constraints: Optional[dict]=None,
+               lr: Optional[float]=0.1,
                steps: Optional[int]=100, 
                num_starts: Optional[int]=10,
                num_samples: Optional[int]=100, 
@@ -26,11 +27,11 @@ def sequential(func: Callable,
     # sequential optimisation loop
     for i in range(batch_size):
         if method == "L-BFGS-B":
-            x_new, f_x_new = lbfgsb(func, bounds, num_starts, num_samples, **kwargs)
+            x_new, f_x_new = lbfgsb(func, bounds, num_starts, num_samples **kwargs)
         elif method == "SLSQP":
             x_new, f_x_new = slsqp(func, bounds, constraints, num_starts, num_samples, **kwargs)
         elif method == "Adam":
-            x_new, f_x_new = adam(func, bounds, steps, num_starts, num_samples, **kwargs)
+            x_new, f_x_new = adam(func, bounds, lr, steps, num_starts, num_samples, **kwargs)
         else:
             raise NotImplementedError("Method must be one of L-BFGS-B, SLSQP or Adam.")
         
@@ -43,5 +44,35 @@ def sequential(func: Callable,
             func.x_pending = torch.cat([func.x_pending, x_new], dim=0)
         else:
             func.x_pending = x_new
+
+    return batch_result, batch_func_result
+
+
+def joint(func: Callable,
+          method: str,
+          batch_size: int,
+          bounds: Tensor,
+          lr: Optional[float]=0.1,
+          steps: Optional[int]=100,
+          num_starts: Optional[int]=10,
+          num_samples: Optional[int]=100,
+          **kwargs: Any) -> Tuple[Tensor, Tensor]:
+    """
+    Joint optimisation loop for Monte Carlo acquisition functions.
+    """
+
+    # extend bounds to full batch
+    full_bounds = torch.tile(bounds, (1, batch_size))
+
+    # joint optimisation loop
+    for i in range(batch_size):
+        if method == "L-BFGS-B":
+            batch_result, batch_func_result = lbfgsb(func, full_bounds, num_starts, num_samples, **kwargs)
+        elif method == "Adam":
+            batch_result, batch_func_result = adam(func, full_bounds, lr, steps, num_starts, num_samples, **kwargs)
+        else:
+            raise NotImplementedError("Method must be one of L-BFGS-B or Adam.")
+
+    batch_result = torch.reshape(batch_result, (batch_size, -1))
 
     return batch_result, batch_func_result

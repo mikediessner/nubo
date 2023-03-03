@@ -27,15 +27,15 @@ for iter in range(iters):
     
     # specify Gaussian process
     likelihood = GaussianLikelihood()
-    gp = GaussianProcess(x_train, y_train, likelihood)
-    mll = ExactMarginalLogLikelihood(likelihood, gp)
+    gp = GaussianProcess(x_train, y_train, likelihood=likelihood)
+    mll = ExactMarginalLogLikelihood(likelihood=likelihood, model=gp)
     
     # fit Gaussian process
-    fit_gp(x_train, y_train, gp=gp, likelihood=likelihood, mll=mll, steps=200)
+    fit_gp(x_train, y_train, gp=gp, likelihood=likelihood, mll=mll, lr=0.1, steps=200)
 
     # specify acquisition function
-    acq = ExpectedImprovement(gp, torch.max(y_train))
-    acq = UpperConfidenceBound(gp, beta=1.96**2)
+    # acq = ExpectedImprovement(gp=gp, y_best=torch.max(y_train))
+    acq = UpperConfidenceBound(gp=gp, beta=1.96**2)
 
     # optimise acquisition function
     x_new, _ = lbfgsb(func=acq, bounds=bounds, num_starts=5)

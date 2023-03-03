@@ -39,16 +39,16 @@ class ExpectedImprovement(AcquisitionFunction):
 class MCExpectedImprovement(AcquisitionFunction):
 
     def __init__(self,
-                 samples: int,
                  gp: GP,
                  y_best : Tensor,
                  x_pending: Optional[Tensor]=None,
+                 samples: Optional[int]=512,
                  fix_base_samples: Optional[bool]=False)-> None:
         
-        self.samples = samples              # Monte Carlo samples
         self.gp = gp                        # surrogate model
         self.y_best = y_best                # EI target
         self.x_pending = x_pending
+        self.samples = samples              # Monte Carlo samples
         self.fix_base_samples = fix_base_samples
         self.base_samples = None
         self.dims = gp.train_inputs[0].size(1)

@@ -1,11 +1,9 @@
 from torch import Tensor
 from gpytorch.distributions import MultivariateNormal
-from gpytorch.means import ConstantMean, ZeroMean
+from gpytorch.means import ConstantMean
 from gpytorch.models import ExactGP
-from gpytorch.kernels import MaternKernel, ScaleKernel, RBFKernel
+from gpytorch.kernels import MaternKernel, ScaleKernel
 from gpytorch.likelihoods import Likelihood
-from gpytorch.priors.torch_priors import GammaPrior
-
 
 
 class GaussianProcess(ExactGP):
@@ -31,7 +29,7 @@ class GaussianProcess(ExactGP):
 
 
         # specify mean function and covariance kernel
-        self.mean_module = ZeroMean()
+        self.mean_module = ConstantMean()
         self.covar_module = ScaleKernel(
             base_kernel=MaternKernel(nu=5/2,
                                      ard_num_dims=x_train.shape[-1])

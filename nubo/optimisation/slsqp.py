@@ -7,7 +7,7 @@ from nubo.optimisation import gen_candidates
 
 def slsqp(func: Callable,
           bounds: Tensor,
-          constraints: dict,
+          constraints: dict | list,
           num_starts: Optional[int]=10,
           num_samples: Optional[int]=100,
           **kwargs: Any) -> Tuple[Tensor, float]:

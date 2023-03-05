@@ -7,7 +7,7 @@
         "id": "Iu1CcMlRlhtO"
       },
       "source": [
-        "# Single-point Bayesian Optimisation"
+        "# Sequential single-point Bayesian Optimisation"
       ]
     },
     {

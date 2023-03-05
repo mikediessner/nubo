@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="nubo.optimisation package" href="nubo.optimisation.html" /><link rel="prev" title="nubo.acquisition package" href="nubo.acquisition.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Surrogate models" href="surrogate_models.html" /><link rel="prev" title="Get started" href="get_started.html" />
 
     <!-- Generated with Sphinx 6.1.3 and Furo 2022.12.07 -->
-        <title>nubo.models package - NUBO</title>
+        <title>Bayesian Optimisation - NUBO</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -134,7 +134,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -155,10 +155,10 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">NUBO:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="get_started.html">Get started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bayesian_optimisation.html">Bayesian Optimisation</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Bayesian Optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="surrogate_models.html">Surrogate models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="acquisition_functions.html">Acquisition functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="citation.html">Citation</a></li>
@@ -174,9 +174,9 @@
 <li class="toctree-l1"><a class="reference internal" href="bayesian_gp.html">Fully Bayesian Gaussian Process for Bayesian Optimisation</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="nubo.acquisition.html">nubo.acquisition package</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">nubo.models package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nubo.models.html">nubo.models package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nubo.optimisation.html">nubo.optimisation package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nubo.test_functions.html">nubo.test_functions package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nubo.utils.html">nubo.utils package</a></li>
@@ -208,45 +208,14 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section id="nubo-models-package">
-<h1>nubo.models package<a class="headerlink" href="#nubo-models-package" title="Permalink to this heading">#</a></h1>
-<section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">#</a></h2>
-</section>
-<section id="module-nubo.models.fit">
-<span id="nubo-models-fit-module"></span><h2>nubo.models.fit module<a class="headerlink" href="#module-nubo.models.fit" title="Permalink to this heading">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="nubo.models.fit.fit_gp">
-<span class="sig-prename descclassname"><span class="pre">nubo.models.fit.</span></span><span class="sig-name descname"><span class="pre">fit_gp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GP</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">likelihood</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Likelihood</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mll</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">MarginalLogLikelihood</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/nubo/models/fit.html#fit_gp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.models.fit.fit_gp" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="module-nubo.models.gaussian_process">
-<span id="nubo-models-gaussian-process-module"></span><h2>nubo.models.gaussian_process module<a class="headerlink" href="#module-nubo.models.gaussian_process" title="Permalink to this heading">#</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="nubo.models.gaussian_process.GaussianProcess">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.models.gaussian_process.</span></span><span class="sig-name descname"><span class="pre">GaussianProcess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">likelihood</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Likelihood</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/models/gaussian_process.html#GaussianProcess"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.models.gaussian_process.GaussianProcess" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ExactGP</span></code></p>
-<p>Gaussian process model with constant mean function and Matern 5/2 kernel.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="nubo.models.gaussian_process.GaussianProcess.forward">
-<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">MultivariateNormal</span></span></span><a class="reference internal" href="_modules/nubo/models/gaussian_process.html#GaussianProcess.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.models.gaussian_process.GaussianProcess.forward" title="Permalink to this definition">#</a></dt>
-<dd><p>Compute the mean and covariance for point x and returns a multivariate
-Normal distribution.</p>
-</dd></dl>
-
-</dd></dl>
-
-</section>
-<section id="module-nubo.models">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-nubo.models" title="Permalink to this heading">#</a></h2>
-</section>
+          <section id="bayesian-optimisation">
+<h1>Bayesian Optimisation<a class="headerlink" href="#bayesian-optimisation" title="Permalink to this heading">#</a></h1>
 </section>
 
         </article>
@@ -254,23 +223,23 @@ Normal distribution.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="nubo.optimisation.html">
+          <a class="next-page" href="surrogate_models.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">nubo.optimisation package</div>
+                <div class="title">Surrogate models</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="nubo.acquisition.html">
+          <a class="prev-page" href="get_started.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">nubo.acquisition package</div>
+                <div class="title">Get started</div>
                 
               </div>
             </a>
@@ -292,39 +261,8 @@ Normal distribution.</p>
         
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            On this page
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">nubo.models package</a><ul>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-nubo.models.fit">nubo.models.fit module</a><ul>
-<li><a class="reference internal" href="#nubo.models.fit.fit_gp"><code class="docutils literal notranslate"><span class="pre">fit_gp()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-nubo.models.gaussian_process">nubo.models.gaussian_process module</a><ul>
-<li><a class="reference internal" href="#nubo.models.gaussian_process.GaussianProcess"><code class="docutils literal notranslate"><span class="pre">GaussianProcess</span></code></a><ul>
-<li><a class="reference internal" href="#nubo.models.gaussian_process.GaussianProcess.forward"><code class="docutils literal notranslate"><span class="pre">GaussianProcess.forward()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-nubo.models">Module contents</a></li>
-</ul>
-</li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>

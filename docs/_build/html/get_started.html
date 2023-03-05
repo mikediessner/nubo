@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Surrogate models" href="surrogate_models.html" /><link rel="prev" title="Overview" href="overview.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Bayesian Optimisation" href="bayesian_optimisation.html" /><link rel="prev" title="Overview" href="overview.html" />
 
     <!-- Generated with Sphinx 6.1.3 and Furo 2022.12.07 -->
         <title>Get started - NUBO</title>
@@ -158,6 +158,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bayesian_optimisation.html">Bayesian Optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="surrogate_models.html">Surrogate models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="acquisition_functions.html">Acquisition functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="citation.html">Citation</a></li>
@@ -166,8 +167,9 @@
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="singlepoint.html">Single-point Bayesian Optimisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="multipoint_joint.html">Multi-point joint Bayesian Optimisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="multipoint_sequential.html">Multi-point sequential Bayesian Optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multipoint_joint.html">Parallel multi-point joint Bayesian Optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multipoint_sequential.html">Parallel multi-point sequential Bayesian Optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asynchronous_bo.html">Asynchronous Bayesian Optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constrained_bo.html">Constrained Bayesian Optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bayesian_gp.html">Fully Bayesian Gaussian Process for Bayesian Optimisation</a></li>
 </ul>
@@ -483,10 +485,10 @@ div.rendered_html tbody tr:hover {
 <h2>Optimising a toy function with NUBO<a class="headerlink" href="#Optimising-a-toy-function-with-NUBO" title="Permalink to this heading">#</a></h2>
 <p>First, we set-up the toy function we want to optimise. In this case we choose the 6-dimensional Hartmann function, a multi-modal function.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nubo.test_functions</span> <span class="kn">import</span> <span class="n">Hartmann6D</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nubo.test_functions</span> <span class="kn">import</span> <span class="n">Hartmann6D</span>
 
 
 <span class="c1"># test function</span>
@@ -498,10 +500,10 @@ div.rendered_html tbody tr:hover {
 </div>
 <p>Then, we generate some initial training data. We decide to generate 5 data points per input dimension resulting in a total of 30 data points.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">nubo.utils</span> <span class="kn">import</span> <span class="n">LatinHypercubeSampling</span><span class="p">,</span> <span class="n">unnormalise</span>
 
 
@@ -517,10 +519,10 @@ div.rendered_html tbody tr:hover {
 <p>Now, we can prepare the Bayesian Optimisation loop. We choose a in NUBO pre-defined Gaussian Process with constant mean function and Matern 5/2 kernel and estimate its hyper-parameters via maximum likelihood estimation (MLE) using the Adam optimiser. For the acquisition function, we implement the analytical Upper Confidence Bound with trade-off parameter <span class="math notranslate nohighlight">\(\beta=1.96^2\)</span> (corresponding to 95% confidence intervals for a Gaussian distribution) and optimise it with the L-BFGS-B algorithm using
 a multi-start approach with five restarts. The Bayesian Optimisation loop is run for 40 iterations giving an evaluation budget of 70.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nubo.acquisition</span> <span class="kn">import</span> <span class="n">UpperConfidenceBound</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nubo.acquisition</span> <span class="kn">import</span> <span class="n">UpperConfidenceBound</span>
 <span class="kn">from</span> <span class="nn">nubo.models</span> <span class="kn">import</span> <span class="n">GaussianProcess</span><span class="p">,</span> <span class="n">fit_gp</span>
 <span class="kn">from</span> <span class="nn">nubo.optimisation</span> <span class="kn">import</span> <span class="n">lbfgsb</span>
 <span class="kn">from</span> <span class="nn">gpytorch.likelihoods</span> <span class="kn">import</span> <span class="n">GaussianLikelihood</span>
@@ -579,10 +581,10 @@ New best at evaluation 65:       Inputs: [0.4071 0.8853 1.     0.5749 0.     0.0
 </div>
 <p>Finally, we print the overall best solution: We get -3.1939 on evaluation 65 which approximaties the true optimum of -3.3224.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># results</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># results</span>
 <span class="n">best_iter</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">y_train</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Evaluation: </span><span class="si">{</span><span class="n">best_iter</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> </span><span class="se">\t</span><span class="s2"> Solution: </span><span class="si">{</span><span class="nb">float</span><span class="p">(</span><span class="n">y_train</span><span class="p">[</span><span class="n">best_iter</span><span class="p">])</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
@@ -604,12 +606,12 @@ Evaluation: 65   Solution: 3.1939
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="surrogate_models.html">
+          <a class="next-page" href="bayesian_optimisation.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Surrogate models</div>
+                <div class="title">Bayesian Optimisation</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>

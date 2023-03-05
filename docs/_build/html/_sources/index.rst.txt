@@ -28,6 +28,7 @@ with NUBO.
 
    overview
    get_started.ipynb
+   bayesian_optimisation
    surrogate_models
    acquisition_functions
    citation
@@ -46,7 +47,7 @@ implementing Bayesian Optimisation for specfic problems.
    singlepoint.ipynb
    multipoint_joint.ipynb
    multipoint_sequential.ipynb
-   asynchronous_bo.py
+   asynchronous_bo.ipynb
    constrained_bo.ipynb
    bayesian_gp.ipynb
 

@@ -1,0 +1,112 @@
+{
+ "cells": [
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Multi-point sequential Bayesian Optimisation"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "New best at evaluation 31: \t Inputs: [4.221e-01 9.083e-01 8.117e-01 4.429e-01 3.282e-01 8.000e-04], \t Outputs: -2.6071\n",
+      "New best at evaluation 35: \t Inputs: [0.4154 0.9929 0.992  0.5121 0.0048 0.0012], \t Outputs: -2.7314\n",
+      "New best at evaluation 43: \t Inputs: [0.4165 0.915  0.9966 0.4999 0.0085 0.073 ], \t Outputs: -2.9413\n",
+      "New best at evaluation 47: \t Inputs: [0.4151 0.8767 0.9961 0.5564 0.0012 0.0177], \t Outputs: -3.1591\n",
+      "New best at evaluation 67: \t Inputs: [0.4031 0.8638 0.9958 0.5584 0.001  0.0313], \t Outputs: -3.1753\n",
+      "Evaluation: 67 \t Solution: 3.1753\n"
+     ]
+    }
+   ],
+   "source": [
+    "import torch\n",
+    "from nubo.acquisition import MCExpectedImprovement, MCUpperConfidenceBound\n",
+    "from nubo.models import GaussianProcess, fit_gp\n",
+    "from nubo.optimisation import sequential\n",
+    "from nubo.test_functions import Hartmann6D\n",
+    "from nubo.utils import LatinHypercubeSampling, unnormalise\n",
+    "from gpytorch.likelihoods import GaussianLikelihood\n",
+    "from gpytorch.mlls import ExactMarginalLogLikelihood\n",
+    "\n",
+    "\n",
+    "# test function\n",
+    "func = Hartmann6D(minimise=False)\n",
+    "dims = func.dims\n",
+    "bounds = func.bounds\n",
+    "\n",
+    "# training data\n",
+    "torch.manual_seed(1)\n",
+    "lhs = LatinHypercubeSampling(dims=dims)\n",
+    "x_train = lhs.maximin(points=dims*5)\n",
+    "x_train = unnormalise(x_train, bounds=bounds)\n",
+    "y_train = func(x_train)\n",
+    "\n",
+    "# Bayesian optimisation loop\n",
+    "iters = 10\n",
+    "\n",
+    "for iter in range(iters):\n",
+    "    \n",
+    "    # specify Gaussian process\n",
+    "    likelihood = GaussianLikelihood()\n",
+    "    gp = GaussianProcess(x_train, y_train, likelihood=likelihood)\n",
+    "    mll = ExactMarginalLogLikelihood(likelihood=likelihood, model=gp)\n",
+    "    \n",
+    "    # fit Gaussian process\n",
+    "    fit_gp(x_train, y_train, gp=gp, likelihood=likelihood, mll=mll, lr=0.1, steps=200)\n",
+    "\n",
+    "    # specify acquisition function\n",
+    "    # acq = MCExpectedImprovement(gp=gp, y_best=torch.max(y_train), samples=256)\n",
+    "    acq = MCUpperConfidenceBound(gp=gp, beta=1.96**2, samples=256)\n",
+    "\n",
+    "    # optimise acquisition function\n",
+    "    x_new, _ = sequential(func=acq, method=\"Adam\", batch_size=4, bounds=bounds, lr=0.1, steps=200, num_starts=1)\n",
+    "\n",
+    "    # evaluate new point\n",
+    "    y_new = func(x_new)\n",
+    "    \n",
+    "    # add to data\n",
+    "    x_train = torch.vstack((x_train, x_new))\n",
+    "    y_train = torch.hstack((y_train, y_new))\n",
+    "\n",
+    "    # print new best\n",
+    "    if torch.max(y_new) > torch.max(y_train[:-y_new.size(0)]):\n",
+    "        best_eval = torch.argmax(y_train)\n",
+    "        print(f\"New best at evaluation {best_eval+1}: \\t Inputs: {x_train[best_eval, :].numpy().reshape(dims).round(4)}, \\t Outputs: {-y_train[best_eval].numpy().round(4)}\")\n",
+    "\n",
+    "# results\n",
+    "best_iter = int(torch.argmax(y_train))\n",
+    "print(f\"Evaluation: {best_iter+1} \\t Solution: {float(y_train[best_iter]):.4f}\")\n"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "env",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.10.10"
+  },
+  "orig_nbformat": 4
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}

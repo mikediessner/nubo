@@ -174,11 +174,11 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../nubo.acquisition.html">nubo.acquisition package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../nubo.models.html">nubo.models package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../nubo.optimisation.html">nubo.optimisation package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../nubo.test_functions.html">nubo.test_functions package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../nubo.utils.html">nubo.utils package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nubo.acquisition.html">Acquisition module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nubo.models.html">Surrogates module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nubo.optimisation.html">Optimisation module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nubo.test_functions.html">Test function module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nubo.utils.html">Utility module</a></li>
 </ul>
 
 </div>
@@ -225,6 +225,22 @@
                    <span class="n">num_samples</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generate candidates for multi-start optimisation</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    func : :obj:`Callable`</span>
+<span class="sd">        Function to optimise.</span>
+<span class="sd">    bounds : :obj:`torch.Tensor`</span>
+<span class="sd">        (size 2 x d) Optimisation bounds of input space.</span>
+<span class="sd">    num_candidates : :obj:`int`</span>
+<span class="sd">        Number of candidates.</span>
+<span class="sd">    num_samples : :obj:`int`</span>
+<span class="sd">        Number of samples from which to draw the starts.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :obj:`torch.Tensor`</span>
+<span class="sd">        (size `num_candidates` x d) Candidates.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">dims</span> <span class="o">=</span> <span class="n">bounds</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>

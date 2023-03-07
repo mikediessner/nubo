@@ -1,34 +1,39 @@
-nubo.test\_functions package
-============================
+Test function module
+====================
 
-Submodules
-----------
+Parent class
+------------
 
-nubo.test\_functions.ackley module
-----------------------------------
+.. automodule:: nubo.test_functions.test_functions
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Ackley function
+---------------
 
 .. automodule:: nubo.test_functions.ackley
    :members:
    :undoc-members:
    :show-inheritance:
 
-nubo.test\_functions.dixonprice module
---------------------------------------
+Dixon-Price function
+--------------------
 
 .. automodule:: nubo.test_functions.dixonprice
    :members:
    :undoc-members:
    :show-inheritance:
 
-nubo.test\_functions.griewank module
-------------------------------------
+Griewank function
+-----------------
 
 .. automodule:: nubo.test_functions.griewank
    :members:
    :undoc-members:
    :show-inheritance:
 
-nubo.test\_functions.hartmann module
+Hartmann function
 ------------------------------------
 
 .. automodule:: nubo.test_functions.hartmann
@@ -36,66 +41,50 @@ nubo.test\_functions.hartmann module
    :undoc-members:
    :show-inheritance:
 
-nubo.test\_functions.levy module
---------------------------------
+Levy function
+-------------
 
 .. automodule:: nubo.test_functions.levy
    :members:
    :undoc-members:
    :show-inheritance:
 
-nubo.test\_functions.rastrigin module
--------------------------------------
+Rastrigin function
+------------------
 
 .. automodule:: nubo.test_functions.rastrigin
    :members:
    :undoc-members:
    :show-inheritance:
 
-nubo.test\_functions.schwefel module
-------------------------------------
+Schwefel function
+-----------------
 
 .. automodule:: nubo.test_functions.schwefel
    :members:
    :undoc-members:
    :show-inheritance:
 
-nubo.test\_functions.sphere module
-----------------------------------
+Sphere function
+---------------
 
 .. automodule:: nubo.test_functions.sphere
    :members:
    :undoc-members:
    :show-inheritance:
 
-nubo.test\_functions.sumsquares module
---------------------------------------
+Sum-of-Squares function
+-----------------------
 
 .. automodule:: nubo.test_functions.sumsquares
    :members:
    :undoc-members:
    :show-inheritance:
 
-nubo.test\_functions.test\_functions module
--------------------------------------------
-
-.. automodule:: nubo.test_functions.test_functions
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-nubo.test\_functions.zakharov module
-------------------------------------
+Zakharov function
+-----------------
 
 .. automodule:: nubo.test_functions.zakharov
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: nubo.test_functions
    :members:
    :undoc-members:
    :show-inheritance:

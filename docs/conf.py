@@ -15,6 +15,7 @@ release = '0.0.1'
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
+    'numpydoc',
     'sphinx.ext.autodoc',
     'sphinx.ext.viewcode',
     'sphinx.ext.napoleon',
@@ -37,3 +38,4 @@ html_static_path = ['_static']
 html_title = 'NUBO'
 pygments_style = "default"
 pygments_dark_style = "monokai"
+numpydoc_show_inherited_class_members = False

@@ -1,37 +1,25 @@
-nubo.acquisition package
-========================
+Acquisition module
+==================
 
-Submodules
-----------
-
-nubo.acquisition.acquisition\_function module
----------------------------------------------
+Parent class
+------------
 
 .. automodule:: nubo.acquisition.acquisition_function
    :members:
    :undoc-members:
-   :show-inheritance:
 
-nubo.acquisition.expected\_improvement module
----------------------------------------------
+Analytical acquisition functions
+--------------------------------
 
-.. automodule:: nubo.acquisition.expected_improvement
+.. automodule:: nubo.acquisition.analytical
    :members:
    :undoc-members:
    :show-inheritance:
 
-nubo.acquisition.upper\_confidence\_bound module
-------------------------------------------------
+Monte Carlo aquisition functions
+--------------------------------
 
-.. automodule:: nubo.acquisition.upper_confidence_bound
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: nubo.acquisition
+.. automodule:: nubo.acquisition.monte_carlo
    :members:
    :undoc-members:
    :show-inheritance:

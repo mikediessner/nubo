@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="nubo.test_functions package" href="nubo.test_functions.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="Test function module" href="nubo.test_functions.html" />
 
     <!-- Generated with Sphinx 6.1.3 and Furo 2022.12.07 -->
-        <title>nubo.utils package - NUBO</title>
+        <title>Utility module - NUBO</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -175,11 +175,11 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="nubo.acquisition.html">nubo.acquisition package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nubo.models.html">nubo.models package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nubo.optimisation.html">nubo.optimisation package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nubo.test_functions.html">nubo.test_functions package</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">nubo.utils package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nubo.acquisition.html">Acquisition module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nubo.models.html">Surrogates module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nubo.optimisation.html">Optimisation module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nubo.test_functions.html">Test function module</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Utility module</a></li>
 </ul>
 
 </div>
@@ -214,43 +214,49 @@
           </label>
         </div>
         <article role="main">
-          <section id="nubo-utils-package">
-<h1>nubo.utils package<a class="headerlink" href="#nubo-utils-package" title="Permalink to this heading">#</a></h1>
-<section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">#</a></h2>
-</section>
+          <section id="utility-module">
+<h1>Utility module<a class="headerlink" href="#utility-module" title="Permalink to this heading">#</a></h1>
 <section id="module-nubo.utils.latin_hypercube">
-<span id="nubo-utils-latin-hypercube-module"></span><h2>nubo.utils.latin_hypercube module<a class="headerlink" href="#module-nubo.utils.latin_hypercube" title="Permalink to this heading">#</a></h2>
+<span id="latin-hypercube-sampling"></span><h2>Latin Hypercube Sampling<a class="headerlink" href="#module-nubo.utils.latin_hypercube" title="Permalink to this heading">#</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="nubo.utils.latin_hypercube.LatinHypercubeSampling">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.utils.latin_hypercube.</span></span><span class="sig-name descname"><span class="pre">LatinHypercubeSampling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/utils/latin_hypercube.html#LatinHypercubeSampling"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.utils.latin_hypercube.LatinHypercubeSampling" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p class="rubric">Methods</p>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nubo.utils.latin_hypercube.LatinHypercubeSampling.maximin" title="nubo.utils.latin_hypercube.LatinHypercubeSampling.maximin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximin</span></code></a>(points[, samples])</p></td>
+<td><p>Draw a maximin Latin hypercube sample.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nubo.utils.latin_hypercube.LatinHypercubeSampling.random" title="nubo.utils.latin_hypercube.LatinHypercubeSampling.random"><code class="xref py py-obj docutils literal notranslate"><span class="pre">random</span></code></a>(points)</p></td>
+<td><p>Draw a random Latin hypercube Sample.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="nubo.utils.latin_hypercube.LatinHypercubeSampling.maximin">
 <span class="sig-name descname"><span class="pre">maximin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/utils/latin_hypercube.html#LatinHypercubeSampling.maximin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.utils.latin_hypercube.LatinHypercubeSampling.maximin" title="Permalink to this definition">#</a></dt>
-<dd><p>Draw a maximin Latin hypercube sample.
-1. Draw a large number of random Latin hypercube samples.
-2. Compute the minimal distance between the points for each random</p>
-<blockquote>
-<div><p>Latin hypercube sample.</p>
-</div></blockquote>
-<ol class="arabic simple" start="3">
-<li><p>Pick the random Latin hypercube sample with the largest minimal
-distance.</p></li>
-</ol>
+<dd><p>Draw a maximin Latin hypercube sample. Draw a large number of random
+Latin hypercube samples. Compute the minimal distance between the
+points for each random Latin hypercube sample. Pick the random Latin
+hypercube sample with the largest minimal distance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>points</strong> (<em>int</em>) – Number of points for the Latin hypercube sample.</p></li>
-<li><p><strong>samples</strong> (<em>int</em>) – Number of random Latin hypercube samples that should be considered.</p></li>
-</ul>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>points</strong><span class="classifier">int</span></dt><dd><p>Number of points for the Latin hypercube sample.</p>
+</dd>
+<dt><strong>samples</strong><span class="classifier">int</span></dt><dd><p>Number of random Latin hypercube samples that should be considered.</p>
+</dd>
+</dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>maximin_hypercube</strong> – n x d array containing the maximin Latin hypercube sample where n
+<dd class="field-even"><dl class="simple">
+<dt>ndarray</dt><dd><p>n x d array containing the maximin Latin hypercube sample where n
 is the number of points and d is the number of dimensions.</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ndarray</p>
+</dl>
 </dd>
 </dl>
 </dd></dl>
@@ -258,27 +264,24 @@ is the number of points and d is the number of dimensions.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="nubo.utils.latin_hypercube.LatinHypercubeSampling.random">
 <span class="sig-name descname"><span class="pre">random</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/utils/latin_hypercube.html#LatinHypercubeSampling.random"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.utils.latin_hypercube.LatinHypercubeSampling.random" title="Permalink to this definition">#</a></dt>
-<dd><p>Draw a random Latin hypercube Sample.
-1. Pick random permutations of the set (0, 1, …, points-1) for each</p>
-<blockquote>
-<div><p>dimension. Each integer defines the quantile to which the final
-value has to belong to.</p>
-</div></blockquote>
-<ol class="arabic simple" start="2">
-<li><p>Translate the integers to the [0, 1] range.</p></li>
-<li><p>Sample and add an individual random uniform sample U(0, 1/points)
-to each value.</p></li>
-</ol>
+<dd><p>Draw a random Latin hypercube Sample. 1. Pick random permutations of
+the set (0, 1, …, points-1) for each dimension. Each integer defines
+the quantile to which the final value has to belong to. 2. Translate
+the integers to the [0, 1] range. 3. Sample and add an individual
+random uniform sample U(0, 1/points) to each value.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>points</strong> (<em>int</em>) – Number of points for the Latin hypercube sample.</p>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>points</strong><span class="classifier">int</span></dt><dd><p>Number of points for the Latin hypercube sample.</p>
+</dd>
+</dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>hypercube</strong> – n x d array containing the random Latin hypercube sample where n
+<dd class="field-even"><dl class="simple">
+<dt>ndarray</dt><dd><p>n x d array containing the random Latin hypercube sample where n
 is the number of points and d is the number of dimensions.</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ndarray</p>
+</dl>
 </dd>
 </dl>
 </dd></dl>
@@ -287,7 +290,7 @@ is the number of points and d is the number of dimensions.</p>
 
 </section>
 <section id="module-nubo.utils.transfrom">
-<span id="nubo-utils-transfrom-module"></span><h2>nubo.utils.transfrom module<a class="headerlink" href="#module-nubo.utils.transfrom" title="Permalink to this heading">#</a></h2>
+<span id="data-transformations"></span><h2>Data transformations<a class="headerlink" href="#module-nubo.utils.transfrom" title="Permalink to this heading">#</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="nubo.utils.transfrom.normalise">
 <span class="sig-prename descclassname"><span class="pre">nubo.utils.transfrom.</span></span><span class="sig-name descname"><span class="pre">normalise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/utils/transfrom.html#normalise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.utils.transfrom.normalise" title="Permalink to this definition">#</a></dt>
@@ -308,9 +311,6 @@ Bounds: 2xd array where the first row provides the lower bounds and the second r
 </dd></dl>
 
 </section>
-<section id="module-nubo.utils">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-nubo.utils" title="Permalink to this heading">#</a></h2>
-</section>
 </section>
 
         </article>
@@ -326,7 +326,7 @@ Bounds: 2xd array where the first row provides the lower bounds and the second r
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">nubo.test_functions package</div>
+                <div class="title">Test function module</div>
                 
               </div>
             </a>
@@ -360,9 +360,8 @@ Bounds: 2xd array where the first row provides the lower bounds and the second r
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">nubo.utils package</a><ul>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-nubo.utils.latin_hypercube">nubo.utils.latin_hypercube module</a><ul>
+<li><a class="reference internal" href="#">Utility module</a><ul>
+<li><a class="reference internal" href="#module-nubo.utils.latin_hypercube">Latin Hypercube Sampling</a><ul>
 <li><a class="reference internal" href="#nubo.utils.latin_hypercube.LatinHypercubeSampling"><code class="docutils literal notranslate"><span class="pre">LatinHypercubeSampling</span></code></a><ul>
 <li><a class="reference internal" href="#nubo.utils.latin_hypercube.LatinHypercubeSampling.maximin"><code class="docutils literal notranslate"><span class="pre">LatinHypercubeSampling.maximin()</span></code></a></li>
 <li><a class="reference internal" href="#nubo.utils.latin_hypercube.LatinHypercubeSampling.random"><code class="docutils literal notranslate"><span class="pre">LatinHypercubeSampling.random()</span></code></a></li>
@@ -370,13 +369,12 @@ Bounds: 2xd array where the first row provides the lower bounds and the second r
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#module-nubo.utils.transfrom">nubo.utils.transfrom module</a><ul>
+<li><a class="reference internal" href="#module-nubo.utils.transfrom">Data transformations</a><ul>
 <li><a class="reference internal" href="#nubo.utils.transfrom.normalise"><code class="docutils literal notranslate"><span class="pre">normalise()</span></code></a></li>
 <li><a class="reference internal" href="#nubo.utils.transfrom.standardise"><code class="docutils literal notranslate"><span class="pre">standardise()</span></code></a></li>
 <li><a class="reference internal" href="#nubo.utils.transfrom.unnormalise"><code class="docutils literal notranslate"><span class="pre">unnormalise()</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#module-nubo.utils">Module contents</a></li>
 </ul>
 </li>
 </ul>

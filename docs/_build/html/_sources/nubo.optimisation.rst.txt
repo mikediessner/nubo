@@ -1,53 +1,39 @@
-nubo.optimisation package
-=========================
+Optimisation module
+====================
 
-Submodules
-----------
-
-nubo.optimisation.adam module
------------------------------
-
-.. automodule:: nubo.optimisation.adam
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-nubo.optimisation.lbfgsb module
--------------------------------
+Deterministic optimisers
+------------------------
 
 .. automodule:: nubo.optimisation.lbfgsb
    :members:
    :undoc-members:
    :show-inheritance:
 
-nubo.optimisation.multipoint module
------------------------------------
+.. automodule:: nubo.optimisation.slsqp
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Stochastic optimisers
+---------------------
+
+.. automodule:: nubo.optimisation.adam
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Multi-point optimisation
+------------------------
 
 .. automodule:: nubo.optimisation.multipoint
    :members:
    :undoc-members:
    :show-inheritance:
 
-nubo.optimisation.slsqp module
-------------------------------
-
-.. automodule:: nubo.optimisation.slsqp
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-nubo.optimisation.utils module
-------------------------------
+Optimisation utilities
+----------------------
 
 .. automodule:: nubo.optimisation.utils
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: nubo.optimisation
    :members:
    :undoc-members:
    :show-inheritance:

@@ -174,11 +174,11 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../nubo.acquisition.html">nubo.acquisition package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../nubo.models.html">nubo.models package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../nubo.optimisation.html">nubo.optimisation package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../nubo.test_functions.html">nubo.test_functions package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../nubo.utils.html">nubo.utils package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nubo.acquisition.html">Acquisition module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nubo.models.html">Surrogates module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nubo.optimisation.html">Optimisation module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nubo.test_functions.html">Test function module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nubo.utils.html">Utility module</a></li>
 </ul>
 
 </div>
@@ -224,38 +224,31 @@
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dims</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Latin hypercube sampling.</span>
+
 <span class="sd">        Attributes</span>
 <span class="sd">        ----------</span>
 <span class="sd">        dims : int</span>
 <span class="sd">            Number of dimensions for the Latin hypercube sample.</span>
-<span class="sd">        Examples</span>
-<span class="sd">        --------</span>
-<span class="sd">        &gt;&gt;&gt; lhs = LatinHypercubeSampling(3)</span>
-<span class="sd">        &gt;&gt;&gt; hc = lhs.maximin(3, 1000)</span>
-<span class="sd">        &gt;&gt;&gt; print(hc)</span>
-<span class="sd">        [[0.59649698 0.88939696 0.94479167]</span>
-<span class="sd">         [0.04031957 0.15612151 0.46349955]</span>
-<span class="sd">         [0.94145643 0.37355910 0.05135256]]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="n">dims</span>
 
 <div class="viewcode-block" id="LatinHypercubeSampling.random"><a class="viewcode-back" href="../../../nubo.utils.html#nubo.utils.latin_hypercube.LatinHypercubeSampling.random">[docs]</a>    <span class="k">def</span> <span class="nf">random</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">points</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Draw a random Latin hypercube Sample.</span>
-<span class="sd">        1. Pick random permutations of the set (0, 1, ..., points-1) for each</span>
-<span class="sd">           dimension. Each integer defines the quantile to which the final</span>
-<span class="sd">           value has to belong to.</span>
-<span class="sd">        2. Translate the integers to the [0, 1] range.</span>
-<span class="sd">        3. Sample and add an individual random uniform sample U(0, 1/points)</span>
-<span class="sd">           to each value.</span>
+<span class="sd">        Draw a random Latin hypercube Sample. 1. Pick random permutations of</span>
+<span class="sd">        the set (0, 1, ..., points-1) for each dimension. Each integer defines</span>
+<span class="sd">        the quantile to which the final value has to belong to. 2. Translate</span>
+<span class="sd">        the integers to the [0, 1] range. 3. Sample and add an individual</span>
+<span class="sd">        random uniform sample U(0, 1/points) to each value.</span>
+<span class="sd">        </span>
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        points : int</span>
 <span class="sd">            Number of points for the Latin hypercube sample.</span>
+
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        hypercube : ndarray</span>
+<span class="sd">        ndarray</span>
 <span class="sd">            n x d array containing the random Latin hypercube sample where n</span>
 <span class="sd">            is the number of points and d is the number of dimensions.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -280,21 +273,21 @@
                 <span class="n">points</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
                 <span class="n">samples</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Draw a maximin Latin hypercube sample.</span>
-<span class="sd">        1. Draw a large number of random Latin hypercube samples.</span>
-<span class="sd">        2. Compute the minimal distance between the points for each random</span>
-<span class="sd">           Latin hypercube sample.</span>
-<span class="sd">        3. Pick the random Latin hypercube sample with the largest minimal</span>
-<span class="sd">           distance.</span>
+<span class="sd">        Draw a maximin Latin hypercube sample. Draw a large number of random</span>
+<span class="sd">        Latin hypercube samples. Compute the minimal distance between the</span>
+<span class="sd">        points for each random Latin hypercube sample. Pick the random Latin</span>
+<span class="sd">        hypercube sample with the largest minimal distance.</span>
+
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        points : int</span>
 <span class="sd">            Number of points for the Latin hypercube sample.</span>
 <span class="sd">        samples : int</span>
 <span class="sd">            Number of random Latin hypercube samples that should be considered.</span>
+
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        maximin_hypercube : ndarray</span>
+<span class="sd">        ndarray</span>
 <span class="sd">            n x d array containing the maximin Latin hypercube sample where n</span>
 <span class="sd">            is the number of points and d is the number of dimensions.</span>
 <span class="sd">        &quot;&quot;&quot;</span>

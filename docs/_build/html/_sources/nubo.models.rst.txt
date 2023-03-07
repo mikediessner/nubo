@@ -1,29 +1,18 @@
-nubo.models package
-===================
+Surrogates module
+=================
 
-Submodules
-----------
-
-nubo.models.fit module
-----------------------
-
-.. automodule:: nubo.models.fit
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-nubo.models.gaussian\_process module
-------------------------------------
+Gaussian Process
+----------------
 
 .. automodule:: nubo.models.gaussian_process
    :members:
    :undoc-members:
    :show-inheritance:
 
-Module contents
----------------
+Hyper-parameter estimation
+--------------------------
 
-.. automodule:: nubo.models
+.. automodule:: nubo.models.fit
    :members:
    :undoc-members:
    :show-inheritance:

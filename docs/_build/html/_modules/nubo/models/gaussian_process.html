@@ -174,11 +174,11 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../nubo.acquisition.html">nubo.acquisition package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../nubo.models.html">nubo.models package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../nubo.optimisation.html">nubo.optimisation package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../nubo.test_functions.html">nubo.test_functions package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../nubo.utils.html">nubo.utils package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nubo.acquisition.html">Acquisition module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nubo.models.html">Surrogates module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nubo.optimisation.html">Optimisation module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nubo.test_functions.html">Test function module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nubo.utils.html">Utility module</a></li>
 </ul>
 
 </div>
@@ -224,6 +224,19 @@
 <div class="viewcode-block" id="GaussianProcess"><a class="viewcode-back" href="../../../nubo.models.html#nubo.models.gaussian_process.GaussianProcess">[docs]</a><span class="k">class</span> <span class="nc">GaussianProcess</span><span class="p">(</span><span class="n">ExactGP</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Gaussian process model with constant mean function and Matern 5/2 kernel.</span>
+<span class="sd">    </span>
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x_train : :obj:`torch.Tensor`</span>
+<span class="sd">        (size n x d) Training inputs.</span>
+<span class="sd">    y_train : :obj:`torch.Tensor`</span>
+<span class="sd">        (size n) Training outputs.</span>
+<span class="sd">    likelihood : :obj:`gpytorch.likelihoods.Likelihood`</span>
+<span class="sd">        Likelihood.</span>
+<span class="sd">    mean_module : :obj:`gpytorch.means`</span>
+<span class="sd">        Zero mean function.</span>
+<span class="sd">    covar_module : :obj:`gpytorch.kernels`</span>
+<span class="sd">        Automatic relevance determination Matern 5/2 covariance kernel.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
@@ -233,10 +246,12 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        x_train : torch.Tensor</span>
-<span class="sd">            n x d tensor containing the training inputs.</span>
-<span class="sd">        y_train : torch.Tensor</span>
-<span class="sd">            n tesnor containing the training outputs.</span>
+<span class="sd">        x_train : :obj:`torch.Tensor`</span>
+<span class="sd">            (size n x d) Training inputs.</span>
+<span class="sd">        y_train : :obj:`torch.Tensor`</span>
+<span class="sd">            (size n) Training targets.</span>
+<span class="sd">        likelihood : :obj:`gpytorch.likelihoods.Likelihood`</span>
+<span class="sd">            Likelihood.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># initialise ExactGP</span>
@@ -252,15 +267,22 @@
 
 <div class="viewcode-block" id="GaussianProcess.forward"><a class="viewcode-back" href="../../../nubo.models.html#nubo.models.gaussian_process.GaussianProcess.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MultivariateNormal</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Compute the mean and covariance for point x and returns a multivariate</span>
-<span class="sd">        Normal distribution.</span>
+<span class="sd">        Compute the mean vector and covariance matrix for some test points `x`</span>
+<span class="sd">        and returns a multivariate Normal distribution.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        x : :obj:`torch.Tensor`</span>
+<span class="sd">            (size n x d) Test points.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :obj:`gpytorch.distributions.MultivariateNormal`</span>
+<span class="sd">            Predictice multivariate Normal distribution.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">mean_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean_module</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="n">covar_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">covar_module</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">mean_x</span> <span class="o">=</span> <span class="n">mean_x</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">covar_x</span> <span class="o">=</span> <span class="n">covar_x</span>
 
         <span class="k">return</span> <span class="n">MultivariateNormal</span><span class="p">(</span><span class="n">mean_x</span><span class="p">,</span> <span class="n">covar_x</span><span class="p">)</span></div></div>
 </pre></div>

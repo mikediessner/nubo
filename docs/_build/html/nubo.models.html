@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="nubo.optimisation package" href="nubo.optimisation.html" /><link rel="prev" title="nubo.acquisition package" href="nubo.acquisition.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Optimisation module" href="nubo.optimisation.html" /><link rel="prev" title="Acquisition module" href="nubo.acquisition.html" />
 
     <!-- Generated with Sphinx 6.1.3 and Furo 2022.12.07 -->
-        <title>nubo.models package - NUBO</title>
+        <title>Surrogates module - NUBO</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -175,11 +175,11 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="nubo.acquisition.html">nubo.acquisition package</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">nubo.models package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nubo.optimisation.html">nubo.optimisation package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nubo.test_functions.html">nubo.test_functions package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nubo.utils.html">nubo.utils package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nubo.acquisition.html">Acquisition module</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Surrogates module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nubo.optimisation.html">Optimisation module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nubo.test_functions.html">Test function module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nubo.utils.html">Utility module</a></li>
 </ul>
 
 </div>
@@ -214,38 +214,95 @@
           </label>
         </div>
         <article role="main">
-          <section id="nubo-models-package">
-<h1>nubo.models package<a class="headerlink" href="#nubo-models-package" title="Permalink to this heading">#</a></h1>
-<section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">#</a></h2>
-</section>
-<section id="module-nubo.models.fit">
-<span id="nubo-models-fit-module"></span><h2>nubo.models.fit module<a class="headerlink" href="#module-nubo.models.fit" title="Permalink to this heading">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="nubo.models.fit.fit_gp">
-<span class="sig-prename descclassname"><span class="pre">nubo.models.fit.</span></span><span class="sig-name descname"><span class="pre">fit_gp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GP</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">likelihood</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Likelihood</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mll</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">MarginalLogLikelihood</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/nubo/models/fit.html#fit_gp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.models.fit.fit_gp" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-
-</section>
+          <section id="surrogates-module">
+<h1>Surrogates module<a class="headerlink" href="#surrogates-module" title="Permalink to this heading">#</a></h1>
 <section id="module-nubo.models.gaussian_process">
-<span id="nubo-models-gaussian-process-module"></span><h2>nubo.models.gaussian_process module<a class="headerlink" href="#module-nubo.models.gaussian_process" title="Permalink to this heading">#</a></h2>
+<span id="gaussian-process"></span><h2>Gaussian Process<a class="headerlink" href="#module-nubo.models.gaussian_process" title="Permalink to this heading">#</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="nubo.models.gaussian_process.GaussianProcess">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.models.gaussian_process.</span></span><span class="sig-name descname"><span class="pre">GaussianProcess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">likelihood</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Likelihood</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/models/gaussian_process.html#GaussianProcess"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.models.gaussian_process.GaussianProcess" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ExactGP</span></code></p>
 <p>Gaussian process model with constant mean function and Matern 5/2 kernel.</p>
+<dl class="field-list">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>x_train</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x d) Training inputs.</p>
+</dd>
+<dt><strong>y_train</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n) Training outputs.</p>
+</dd>
+<dt><strong>likelihood</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gpytorch.likelihoods.Likelihood</span></code></span></dt><dd><p>Likelihood.</p>
+</dd>
+<dt><strong>mean_module</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gpytorch.means</span></code></span></dt><dd><p>Zero mean function.</p>
+</dd>
+<dt><strong>covar_module</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gpytorch.kernels</span></code></span></dt><dd><p>Automatic relevance determination Matern 5/2 covariance kernel.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nubo.models.gaussian_process.GaussianProcess.forward" title="nubo.models.gaussian_process.GaussianProcess.forward"><code class="xref py py-obj docutils literal notranslate"><span class="pre">forward</span></code></a>(x)</p></td>
+<td><p>Compute the mean vector and covariance matrix for some test points <cite>x</cite> and returns a multivariate Normal distribution.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="nubo.models.gaussian_process.GaussianProcess.forward">
 <span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">MultivariateNormal</span></span></span><a class="reference internal" href="_modules/nubo/models/gaussian_process.html#GaussianProcess.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.models.gaussian_process.GaussianProcess.forward" title="Permalink to this definition">#</a></dt>
-<dd><p>Compute the mean and covariance for point x and returns a multivariate
-Normal distribution.</p>
+<dd><p>Compute the mean vector and covariance matrix for some test points <cite>x</cite>
+and returns a multivariate Normal distribution.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>x</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x d) Test points.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">gpytorch.distributions.MultivariateNormal</span></code></dt><dd><p>Predictice multivariate Normal distribution.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
 
 </section>
-<section id="module-nubo.models">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-nubo.models" title="Permalink to this heading">#</a></h2>
+<section id="module-nubo.models.fit">
+<span id="hyper-parameter-estimation"></span><h2>Hyper-parameter estimation<a class="headerlink" href="#module-nubo.models.fit" title="Permalink to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="nubo.models.fit.fit_gp">
+<span class="sig-prename descclassname"><span class="pre">nubo.models.fit.</span></span><span class="sig-name descname"><span class="pre">fit_gp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GP</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">likelihood</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Likelihood</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mll</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">MarginalLogLikelihood</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/nubo/models/fit.html#fit_gp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.models.fit.fit_gp" title="Permalink to this definition">#</a></dt>
+<dd><p>Estimate hyper-parameters of the Gaussian process <cite>gp</cite> by maximum
+likelihood estimation (MLE) using <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.optim.Adam</span></code> algorithm.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>x</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x d) Training inputs.</p>
+</dd>
+<dt><strong>y</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n) Training targets.</p>
+</dd>
+<dt><strong>gp</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gpytorch.likelihoods.Likelihood</span></code></span></dt><dd><p>Gaussian Process model.</p>
+</dd>
+<dt><strong>mll</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gpytorch.mlls.MarginalLogLikelihood</span></code></span></dt><dd><p>Marginal log likelihood.</p>
+</dd>
+<dt><strong>lr</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>, optional</span></dt><dd><p>Learning rate of <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.optim.Adam</span></code> algorithm, default is 0.1.</p>
+</dd>
+<dt><strong>steps</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code>, optional</span></dt><dd><p>Optimisation steps of <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.optim.Adam</span></code> algorithm, default is
+200.</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Any</span></code></span></dt><dd><p>Keyword argument passed to <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.optim.Adam</span></code>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 </section>
 
@@ -259,7 +316,7 @@ Normal distribution.</p>
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">nubo.optimisation package</div>
+                <div class="title">Optimisation module</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -270,7 +327,7 @@ Normal distribution.</p>
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">nubo.acquisition package</div>
+                <div class="title">Acquisition module</div>
                 
               </div>
             </a>
@@ -304,20 +361,18 @@ Normal distribution.</p>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">nubo.models package</a><ul>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-nubo.models.fit">nubo.models.fit module</a><ul>
-<li><a class="reference internal" href="#nubo.models.fit.fit_gp"><code class="docutils literal notranslate"><span class="pre">fit_gp()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-nubo.models.gaussian_process">nubo.models.gaussian_process module</a><ul>
+<li><a class="reference internal" href="#">Surrogates module</a><ul>
+<li><a class="reference internal" href="#module-nubo.models.gaussian_process">Gaussian Process</a><ul>
 <li><a class="reference internal" href="#nubo.models.gaussian_process.GaussianProcess"><code class="docutils literal notranslate"><span class="pre">GaussianProcess</span></code></a><ul>
 <li><a class="reference internal" href="#nubo.models.gaussian_process.GaussianProcess.forward"><code class="docutils literal notranslate"><span class="pre">GaussianProcess.forward()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#module-nubo.models">Module contents</a></li>
+<li><a class="reference internal" href="#module-nubo.models.fit">Hyper-parameter estimation</a><ul>
+<li><a class="reference internal" href="#nubo.models.fit.fit_gp"><code class="docutils literal notranslate"><span class="pre">fit_gp()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

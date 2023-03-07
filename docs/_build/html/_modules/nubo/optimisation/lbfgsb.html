@@ -174,11 +174,11 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../nubo.acquisition.html">nubo.acquisition package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../nubo.models.html">nubo.models package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../nubo.optimisation.html">nubo.optimisation package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../nubo.test_functions.html">nubo.test_functions package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../nubo.utils.html">nubo.utils package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nubo.acquisition.html">Acquisition module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nubo.models.html">Surrogates module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nubo.optimisation.html">Optimisation module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nubo.test_functions.html">Test function module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nubo.utils.html">Utility module</a></li>
 </ul>
 
 </div>
@@ -215,7 +215,7 @@
           <h1>Source code for nubo.optimisation.lbfgsb</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">Tensor</span>
-<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span><span class="p">,</span> <span class="n">Bounds</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Any</span>
 <span class="kn">from</span> <span class="nn">nubo.optimisation</span> <span class="kn">import</span> <span class="n">gen_candidates</span>
 
@@ -224,13 +224,33 @@
            <span class="n">bounds</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span>
            <span class="n">num_starts</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
            <span class="n">num_samples</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-           <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Tensor</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+           <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Multi-start L-BFGS-B optimisation.</span>
+<span class="sd">    Multi-start L-BFGS-B optimiser.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    func : :obj:`Callable`</span>
+<span class="sd">        Function to optimise.</span>
+<span class="sd">    bounds : :obj:`torch.Tensor`</span>
+<span class="sd">        (size 2 x d) Optimisation bounds of input space.</span>
+<span class="sd">    num_starts : :obj:`int`, optional</span>
+<span class="sd">        Number of start for multi-start optimisation, default is 10.</span>
+<span class="sd">    num_samples : :obj:`int`, optional</span>
+<span class="sd">        Number of samples from which to draw the starts, default is 100.</span>
+<span class="sd">    **kwargs : :obj:`Any`</span>
+<span class="sd">        Keyword argument passed to :obj:`scipy.optimize.minimize`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    best_result : :obj:`torch.Tensor`</span>
+<span class="sd">        (size 1 x d) Minimiser inputs.</span>
+<span class="sd">    best_func_result : :obj:`torch.Tensor`</span>
+<span class="sd">        (size 1) Minimiser output.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">dims</span> <span class="o">=</span> <span class="n">bounds</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">opt_bounds</span> <span class="o">=</span> <span class="n">bounds</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">T</span> <span class="c1"># Bounds(lb=bounds[0, :], ub=bounds[1, :])</span>
+    <span class="n">opt_bounds</span> <span class="o">=</span> <span class="n">bounds</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
     
     <span class="c1"># generate candidates</span>
     <span class="n">candidates</span> <span class="o">=</span> <span class="n">gen_candidates</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">bounds</span><span class="p">,</span> <span class="n">num_starts</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">)</span>

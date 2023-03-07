@@ -1,6 +1,6 @@
 import torch
 from torch import Tensor
-from scipy.optimize import minimize, Bounds
+from scipy.optimize import minimize
 from typing import Tuple, Optional, Callable, Any
 from nubo.optimisation import gen_candidates
 
@@ -10,13 +10,35 @@ def slsqp(func: Callable,
           constraints: dict | list,
           num_starts: Optional[int]=10,
           num_samples: Optional[int]=100,
-          **kwargs: Any) -> Tuple[Tensor, float]:
+          **kwargs: Any) -> Tuple[Tensor, Tensor]:
     """
-    Multi-start SLSQP optimisation.
+    Multi-start SLSQP optimiser.
+
+    Parameters
+    ----------
+    func : :obj:`Callable`
+        Function to optimise.
+    bounds : :obj:`torch.Tensor`
+        (size 2 x d) Optimisation bounds of input space.
+    constraints : :obj:`dict` or :obj:`list` of :obj:`dict`
+        Optimisation constraints.
+    num_starts : :obj:`int`, optional
+        Number of start for multi-start optimisation, default is 10.
+    num_samples : :obj:`int`, optional
+        Number of samples from which to draw the starts, default is 100.
+    **kwargs : :obj:`Any`
+        Keyword argument passed to :obj:`scipy.optimize.minimize`.
+    
+    Returns
+    -------
+    best_result : :obj:`torch.Tensor`
+        (size 1 x d) Minimiser inputs.
+    best_func_result : :obj:`torch.Tensor`
+        (size 1) Minimiser output.
     """
 
     dims = bounds.size(1)
-    opt_bounds = Bounds(lb=bounds[0, :], ub=bounds[1, :])
+    opt_bounds = bounds.numpy().T
     
     # generate candidates
     candidates = gen_candidates(func, bounds, num_starts, num_samples)

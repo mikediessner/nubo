@@ -8,15 +8,47 @@ from typing import Optional
 
 
 class ExpectedImprovement(AcquisitionFunction):
+    """
+    Expected Improvement acquisition function.
+
+    Attributes
+    ----------
+    gp : :obj:`gpytorch.models.GP`
+        Gaussian Process model.
+    y_best : :obj:`torch.Tensor`
+        (size 1) Best output of training data.
+    """
 
     def __init__(self,
                  gp: GP,
                  y_best: Tensor) -> None:
+        """
+        Parameters
+        ----------
+        gp : :obj:`gpytorch.models.GP`
+            Gaussian Process model.
+        y_best : :obj:`torch.Tensor`
+            (size 1) Best output of training data.
+        """
 
         self.gp = gp
         self.y_best = y_best
         
     def eval(self, x: Tensor) -> Tensor:
+        """
+        Computes the (negative) Expected Improvement for some test points `x`
+        analytically.
+
+        Parameters
+        ----------
+        x : :obj:`torch.Tensor`
+            (size n x d) Test points.
+
+        Returns
+        -------
+        :obj:`torch.Tensor`
+            (size n) (Negative) Expected Imrpovement of `x`.
+        """
 
         # set Gaussian Process to eval mode
         self.gp.eval()
@@ -37,6 +69,31 @@ class ExpectedImprovement(AcquisitionFunction):
 
 
 class MCExpectedImprovement(AcquisitionFunction):
+    """
+    Monte Carlo Expected Improvement acquisition function.
+
+    Attributes
+    ----------
+    gp : :obj:`gpytorch.models.GP`
+        Gaussian Process model.
+    y_best : :obj:`torch.Tensor`
+        (size 1) Best output of training data.
+    x_pending : :obj:`torch.Tensor`
+        (size n x d) Training inputs of currently pending points.
+    samples : :obj:`int`
+         Number of Monte Carlo samples, default is 512.
+    fix_base_samples : :obj:`bool`
+        Whether base samples used to compute Monte Carlo samples of
+        acquisition function should be fixed for the optimisation step.
+        If false (default) stochastic optimizer (Adam) have to be used. If
+        true deterministic optimizer (L-BFGS-B, SLSQP) can be used.
+    base_samples : :obj:`NoneType` or :obj:`torch.Tensor`
+        Base samples used to compute Monte Carlo samples drawn if
+        `fix_base_samples` is true.
+    dims : :obj:`int`
+        Number of input dimensions.
+    """
+    
 
     def __init__(self,
                  gp: GP,
@@ -44,6 +101,23 @@ class MCExpectedImprovement(AcquisitionFunction):
                  x_pending: Optional[Tensor]=None,
                  samples: Optional[int]=512,
                  fix_base_samples: Optional[bool]=False)-> None:
+        """
+        Parameters
+        ----------
+        gp : :obj:`gpytorch.models.GP`
+            Gaussian Process model.
+        y_best : :obj:`torch.Tensor`
+            (size 1) Best output of training data.
+        x_pending : :obj:`torch.Tensor`, optional
+            (size n x d) Training inputs of currently pending points.
+        samples : :obj:`int`, optional
+             Number of Monte Carlo samples, default is 512.
+        fix_base_samples : :obj:`bool`, optional
+            Whether base samples used to compute Monte Carlo samples of
+            acquisition function should be fixed for the optimisation step.
+            If false (default) stochastic optimizer (Adam) have to be used. If
+            true deterministic optimizer (L-BFGS-B, SLSQP) can be used.
+        """
         
         self.gp = gp                        # surrogate model
         self.y_best = y_best                # EI target
@@ -54,6 +128,20 @@ class MCExpectedImprovement(AcquisitionFunction):
         self.dims = gp.train_inputs[0].size(1)
 
     def eval(self, x: Tensor) -> Tensor:
+        """
+        Computes the (negative) Expected Improvement for some test points `x`
+        by averaging Monte Carlo samples.
+
+        Parameters
+        ----------
+        x : :obj:`torch.Tensor`
+            (size n x d) Test points.
+
+        Returns
+        -------
+        :obj:`torch.Tensor`
+            (size n) (Negative) Expected Imrpovement of `x`.
+        """
         
         # reshape tensor to (batch_size x dims)
         x = torch.reshape(x, (-1, self.dims))

@@ -10,6 +10,22 @@ def gen_candidates(func: Callable,
                    num_samples: int) -> Tensor:
     """
     Generate candidates for multi-start optimisation
+
+    Parameters
+    ----------
+    func : :obj:`Callable`
+        Function to optimise.
+    bounds : :obj:`torch.Tensor`
+        (size 2 x d) Optimisation bounds of input space.
+    num_candidates : :obj:`int`
+        Number of candidates.
+    num_samples : :obj:`int`
+        Number of samples from which to draw the starts.
+
+    Returns
+    -------
+    :obj:`torch.Tensor`
+        (size `num_candidates` x d) Candidates.
     """
 
     dims = bounds.size(1)

@@ -1,2 +1,2 @@
-from .upper_confidence_bound import UpperConfidenceBound, MCUpperConfidenceBound
-from .expected_improvement import ExpectedImprovement, MCExpectedImprovement
+from .analytical import UpperConfidenceBound, ExpectedImprovement
+from .monte_carlo import MCExpectedImprovement, MCUpperConfidenceBound

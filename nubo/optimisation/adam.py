@@ -9,9 +9,36 @@ from nubo.utils import unnormalise, normalise
 def _adam(func: callable,
           x: Tensor,
           lr: Optional[float]=0.1,
-          steps: Optional[int]=100,
-          **kwargs: Any) -> None:
-    
+          steps: Optional[int]=200,
+          **kwargs: Any) -> Tuple[Tensor, Tensor]:
+    """
+    Adam optimiser.
+
+    Parameters
+    ----------
+    x : :obj:`torch.Tensor`
+        (size 1 x d) Initial starting point of :obj:`torch.optim.Adam`
+        algorithm.
+    lr : :obj:`float`, optional
+        Learning rate of :obj:`torch.optim.Adam` algorithm, default is 0.1.
+    steps : :obj:`int`, optional
+        Optimisation steps of :obj:`torch.optim.Adam` algorithm, default is
+        200.
+    num_starts : :obj:`int`
+        Number of start for multi-start optimisation, default is 10.
+    num_samples : :obj:`int`
+        Number of samples from which to draw the starts, default is 100.
+    **kwargs : :obj:`Any`
+        Keyword argument passed to :obj:`torch.optim.Adam`.
+
+    Returns
+    -------
+    x : :obj:`torch.Tensor`
+        (size 1 x d) Minimiser input.
+    loss : :obj:`torch.Tensor`
+        (size 1) Minimiser output.
+    """
+
     x.requires_grad_(True)
 
     # specify Adam
@@ -38,12 +65,37 @@ def _adam(func: callable,
 def adam(func: Callable,
                bounds: Tensor,
                lr: Optional[float]=0.1,
-               steps: Optional[int]=100,
+               steps: Optional[int]=200,
                num_starts: Optional[int]=10,
                num_samples: Optional[int]=100,
-               **kwargs: Any) -> Tuple[Tensor, float]:
+               **kwargs: Any) -> Tuple[Tensor, Tensor]:
     """
-    Multi-start optimisation.
+    Multi-start Adam optimiser.
+
+    Parameters
+    ----------
+    func : :obj:`Callable`
+        Function to optimise.
+    bounds : :obj:`torch.Tensor`
+        (size 2 x d) Optimisation bounds of input space.
+    lr : :obj:`float`, optional
+        Learning rate of :obj:`torch.optim.Adam` algorithm, default is 0.1.
+    steps : :obj:`int`, optional
+        Optimisation steps of :obj:`torch.optim.Adam` algorithm, default is
+        200.
+    num_starts : :obj:`int`, optional
+        Number of start for multi-start optimisation, default is 10.
+    num_samples : :obj:`int`, optional
+        Number of samples from which to draw the starts, default is 100.
+    **kwargs : :obj:`Any`
+        Keyword argument passed to :obj:`torch.optim.Adam`.
+
+    Returns
+    -------
+    best_result : :obj:`torch.Tensor`
+        (size 1 x d) Minimiser input.
+    best_func_result : :obj:`torch.Tensor`
+        (size 1) Minimiser output.
     """
     
     dims = bounds.size(1)

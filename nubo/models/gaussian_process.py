@@ -9,6 +9,19 @@ from gpytorch.likelihoods import Likelihood
 class GaussianProcess(ExactGP):
     """
     Gaussian process model with constant mean function and Matern 5/2 kernel.
+    
+    Attributes
+    ----------
+    x_train : :obj:`torch.Tensor`
+        (size n x d) Training inputs.
+    y_train : :obj:`torch.Tensor`
+        (size n) Training outputs.
+    likelihood : :obj:`gpytorch.likelihoods.Likelihood`
+        Likelihood.
+    mean_module : :obj:`gpytorch.means`
+        Zero mean function.
+    covar_module : :obj:`gpytorch.kernels`
+        Automatic relevance determination Matern 5/2 covariance kernel.
     """
 
     def __init__(self,
@@ -18,10 +31,12 @@ class GaussianProcess(ExactGP):
         """
         Parameters
         ----------
-        x_train : torch.Tensor
-            n x d tensor containing the training inputs.
-        y_train : torch.Tensor
-            n tesnor containing the training outputs.
+        x_train : :obj:`torch.Tensor`
+            (size n x d) Training inputs.
+        y_train : :obj:`torch.Tensor`
+            (size n) Training targets.
+        likelihood : :obj:`gpytorch.likelihoods.Likelihood`
+            Likelihood.
         """
 
         # initialise ExactGP
@@ -37,14 +52,21 @@ class GaussianProcess(ExactGP):
 
     def forward(self, x: Tensor) -> MultivariateNormal:
         """
-        Compute the mean and covariance for point x and returns a multivariate
-        Normal distribution.
+        Compute the mean vector and covariance matrix for some test points `x`
+        and returns a multivariate Normal distribution.
+
+        Parameters
+        ----------
+        x : :obj:`torch.Tensor`
+            (size n x d) Test points.
+        
+        Returns
+        -------
+        :obj:`gpytorch.distributions.MultivariateNormal`
+            Predictice multivariate Normal distribution.
         """
 
         mean_x = self.mean_module(x)
         covar_x = self.covar_module(x)
-
-        self.mean_x = mean_x
-        self.covar_x = covar_x
 
         return MultivariateNormal(mean_x, covar_x)

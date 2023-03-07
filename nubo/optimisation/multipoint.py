@@ -15,7 +15,39 @@ def sequential(func: Callable,
                num_samples: Optional[int]=100, 
                **kwargs: Any) -> Tuple[Tensor, Tensor]:
     """
-    Sequential optimisation loop for Monte Carlo acquisition functions.
+    Sequential greedy optimisation loop for Monte Carlo acquisition functions.
+
+    Parameters
+    ----------
+    func : :obj:`Callable`
+        Function to optimise.
+    method : :obj:`str`
+        One of "L-BFGS-B", "SLSQP", or "Adam".
+    batch_size : :obj:`int`
+        Number of points to return.
+    bounds : :obj:`torch.Tensor`
+        (size 2 x d) Optimisation bounds of input space.
+    constraints : :obj:`dict` or :obj:`list` of :obj:`dict`, optional
+        Optimisation constraints.
+    lr : :obj:`float`, optional
+        Learning rate of :obj:`torch.optim.Adam` algorithm, default is 0.1.
+    steps : :obj:`int`, optional
+        Optimisation steps of :obj:`torch.optim.Adam` algorithm, default is
+        200.
+    num_starts : :obj:`int`, optional
+        Number of start for multi-start optimisation, default is 10.
+    num_samples : :obj:`int`, optional
+        Number of samples from which to draw the starts, default is 100.
+    **kwargs : :obj:`Any`
+        Keyword argument passed to :obj:`torch.optim.Adam` or
+        :obj:`scipy.optimize.minimze`.
+
+    Returns
+    -------
+    batch_result : :obj:`torch.Tensor`
+        (size `batch_size` x d) Batch inputs.
+    batch_func_result : :obj:`torch.Tensor`
+        (size `batch_size`) Batch outputs.
     """
 
     dims = bounds.size(1)
@@ -59,6 +91,36 @@ def joint(func: Callable,
           **kwargs: Any) -> Tuple[Tensor, Tensor]:
     """
     Joint optimisation loop for Monte Carlo acquisition functions.
+
+    Parameters
+    ----------
+    func : :obj:`Callable`
+        Function to optimise.
+    method : :obj:`str`
+        One of "L-BFGS-B", "SLSQP", or "Adam".
+    batch_size : :obj:`int`
+        Number of points to return.
+    bounds : :obj:`torch.Tensor`
+        (size 2 x d) Optimisation bounds of input space.
+    lr : :obj:`float`, optional
+        Learning rate of :obj:`torch.optim.Adam` algorithm, default is 0.1.
+    steps : :obj:`int`, optional
+        Optimisation steps of :obj:`torch.optim.Adam` algorithm, default is
+        200.
+    num_starts : :obj:`int`, optional
+        Number of start for multi-start optimisation, default is 10.
+    num_samples : :obj:`int`, optional
+        Number of samples from which to draw the starts, default is 100.
+    **kwargs : :obj:`Any`
+        Keyword argument passed to :obj:`torch.optim.Adam` or
+        :obj:`scipy.optimize.minimze`.
+
+    Returns
+    -------
+    batch_result : :obj:`torch.Tensor`
+        (sizq `batch_size` x d) Batch inputs.
+    batch_func_result : :obj:`torch.Tensor`
+        (size `batch_size`) Batch outputs.
     """
 
     # extend bounds to full batch

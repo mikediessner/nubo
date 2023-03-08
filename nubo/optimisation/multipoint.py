@@ -19,34 +19,33 @@ def sequential(func: Callable,
 
     Parameters
     ----------
-    func : :obj:`Callable`
+    func : ``Callable``
         Function to optimise.
-    method : :obj:`str`
+    method : ``str``
         One of "L-BFGS-B", "SLSQP", or "Adam".
-    batch_size : :obj:`int`
+    batch_size : ``int``
         Number of points to return.
-    bounds : :obj:`torch.Tensor`
+    bounds : ``torch.Tensor``
         (size 2 x d) Optimisation bounds of input space.
-    constraints : :obj:`dict` or :obj:`list` of :obj:`dict`, optional
+    constraints : ``dict`` or ``list`` of ``dict``, optional
         Optimisation constraints.
-    lr : :obj:`float`, optional
-        Learning rate of :obj:`torch.optim.Adam` algorithm, default is 0.1.
-    steps : :obj:`int`, optional
-        Optimisation steps of :obj:`torch.optim.Adam` algorithm, default is
-        200.
-    num_starts : :obj:`int`, optional
+    lr : ``float``, optional
+        Learning rate of ``torch.optim.Adam` algorithm, default is 0.1.
+    steps : ``int``, optional
+        Optimisation steps of ``torch.optim.Adam`` algorithm, default is 200.
+    num_starts : ``int``, optional
         Number of start for multi-start optimisation, default is 10.
-    num_samples : :obj:`int`, optional
+    num_samples : ``int``, optional
         Number of samples from which to draw the starts, default is 100.
-    **kwargs : :obj:`Any`
-        Keyword argument passed to :obj:`torch.optim.Adam` or
-        :obj:`scipy.optimize.minimze`.
+    **kwargs : ``Any``
+        Keyword argument passed to ``torch.optim.Adam`` or
+        ``scipy.optimize.minimze``.
 
     Returns
     -------
-    batch_result : :obj:`torch.Tensor`
+    batch_result : ``torch.Tensor`
         (size `batch_size` x d) Batch inputs.
-    batch_func_result : :obj:`torch.Tensor`
+    batch_func_result : ``torch.Tensor`
         (size `batch_size`) Batch outputs.
     """
 
@@ -94,32 +93,31 @@ def joint(func: Callable,
 
     Parameters
     ----------
-    func : :obj:`Callable`
+    func : ``Callable``
         Function to optimise.
-    method : :obj:`str`
+    method : ``str``
         One of "L-BFGS-B", "SLSQP", or "Adam".
-    batch_size : :obj:`int`
+    batch_size : ``int``
         Number of points to return.
-    bounds : :obj:`torch.Tensor`
+    bounds : ``torch.Tensor``
         (size 2 x d) Optimisation bounds of input space.
-    lr : :obj:`float`, optional
-        Learning rate of :obj:`torch.optim.Adam` algorithm, default is 0.1.
-    steps : :obj:`int`, optional
-        Optimisation steps of :obj:`torch.optim.Adam` algorithm, default is
-        200.
-    num_starts : :obj:`int`, optional
+    lr : ``float``, optional
+        Learning rate of ``torch.optim.Adam`` algorithm, default is 0.1.
+    steps : ``int``, optional
+        Optimisation steps of ``torch.optim.Adam`` algorithm, default is 200.
+    num_starts : ``int``, optional
         Number of start for multi-start optimisation, default is 10.
-    num_samples : :obj:`int`, optional
+    num_samples : ``int``, optional
         Number of samples from which to draw the starts, default is 100.
-    **kwargs : :obj:`Any`
-        Keyword argument passed to :obj:`torch.optim.Adam` or
-        :obj:`scipy.optimize.minimze`.
+    **kwargs : ``Any``
+        Keyword argument passed to ``torch.optim.Adam`` or
+        ``scipy.optimize.minimze``.
 
     Returns
     -------
-    batch_result : :obj:`torch.Tensor`
+    batch_result : ``torch.Tensor``
         (sizq `batch_size` x d) Batch inputs.
-    batch_func_result : :obj:`torch.Tensor`
+    batch_func_result : ``torch.Tensor``
         (size `batch_size`) Batch outputs.
     """
 

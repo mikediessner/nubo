@@ -13,13 +13,12 @@ class AcquisitionFunction:
 
     def __call__(self, x: Tensor | ndarray) -> Tensor | ndarray:
         """
-        Wrapper to allow `x` to be a :obj:`torch.Tensor` or a
-        :obj:`numpy.ndarray` to enable optimisation with :obj:`torch.optim`
-        and :obj:`scipy.optimize`.
+        Wrapper to allow `x` to be a ``torch.Tensor`` or a ``numpy.ndarray``
+        to enable optimisation with ``torch.optim`` and ``scipy.optimize``.
 
         Parameters
         ----------
-        x : :obj:`torch.Tesor` or :obj:`numpy.ndarray`
+        x : ``torch.Tesor` or ``numpy.ndarray`
             (size 1 x d) Test point.
         """
 

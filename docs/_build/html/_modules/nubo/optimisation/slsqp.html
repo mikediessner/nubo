@@ -231,24 +231,24 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    func : :obj:`Callable`</span>
+<span class="sd">    func : ``Callable``</span>
 <span class="sd">        Function to optimise.</span>
-<span class="sd">    bounds : :obj:`torch.Tensor`</span>
+<span class="sd">    bounds : ``torch.Tensor``</span>
 <span class="sd">        (size 2 x d) Optimisation bounds of input space.</span>
-<span class="sd">    constraints : :obj:`dict` or :obj:`list` of :obj:`dict`</span>
+<span class="sd">    constraints : ``dict`` or ``list`` of ``dict``</span>
 <span class="sd">        Optimisation constraints.</span>
-<span class="sd">    num_starts : :obj:`int`, optional</span>
+<span class="sd">    num_starts : ``int``, optional</span>
 <span class="sd">        Number of start for multi-start optimisation, default is 10.</span>
-<span class="sd">    num_samples : :obj:`int`, optional</span>
+<span class="sd">    num_samples : ``int``, optional</span>
 <span class="sd">        Number of samples from which to draw the starts, default is 100.</span>
-<span class="sd">    **kwargs : :obj:`Any`</span>
-<span class="sd">        Keyword argument passed to :obj:`scipy.optimize.minimize`.</span>
+<span class="sd">    **kwargs : ``Any``</span>
+<span class="sd">        Keyword argument passed to ``scipy.optimize.minimize``.</span>
 <span class="sd">    </span>
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    best_result : :obj:`torch.Tensor`</span>
+<span class="sd">    best_result : ``torch.Tensor``</span>
 <span class="sd">        (size 1 x d) Minimiser inputs.</span>
-<span class="sd">    best_func_result : :obj:`torch.Tensor`</span>
+<span class="sd">    best_func_result : ``torch.Tensor``</span>
 <span class="sd">        (size 1) Minimiser output.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 

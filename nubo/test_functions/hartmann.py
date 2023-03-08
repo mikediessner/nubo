@@ -5,10 +5,41 @@ from typing import Optional
 
 
 class Hartmann3D(TestFunction):
+    """
+    3-dimensional Hartmann function.
+
+    Attributes
+    ----------
+    dims : ``int``
+        Number of input dimensions.
+    noise_std : ``float``
+        Standard deviation of Gaussian noise.
+    minimise : ``bool``
+        Minimisation problem if true, maximisation problem if false.
+    bounds : ``torch.Tensor``
+        (size 2 x `dims`) Bounds of input space.
+    optimum : ``dict``
+        Contains inputs and output of global maximum.
+    a : ``torch.Tensor``
+        (size 4 x 1) Function parameters.
+    A : ``torch.Tensor``
+        (size 4 x 3) Function parameters.
+    P : ``torch.Tensor``
+        (size 4 x 3) Function parameters.
+    """
 
     def __init__(self,
                  noise_std: Optional[float]=0.0,
                  minimise: Optional[bool]=True) -> None:
+        """
+        Parameters
+        ----------
+        noise_std : ``float``, optional
+            Standard deviation of Gaussian noise, default is 0.0.
+        minimise : ``bool``, optional
+            Minimisation problem if true (default), maximisation problem if
+            false.
+        """
 
         self.dims = 3
         self.bounds = Tensor([[0.0, ] * self.dims, [1.0, ] * self.dims])
@@ -27,7 +58,15 @@ class Hartmann3D(TestFunction):
                                   [1091.0, 8732.0, 5547.0],
                                   [ 381.0, 5743.0, 8828.0]])
 
-    def __call__(self, x: Tensor) -> Tensor:
+    def eval(self, x: Tensor) -> Tensor:
+        """
+        Compute output of Hartmann function for some test points `x`.
+
+        Parameters
+        ----------
+        x : ``torch.Tensor``
+            (size n x `dims`) Test points.
+        """ 
         
         # reformat to allow matrix computation of multiple points
         n = x.size(0)
@@ -49,10 +88,41 @@ class Hartmann3D(TestFunction):
 
 
 class Hartmann6D(TestFunction):
+    """
+    6-dimensional Hartmann function.
 
+    Attributes
+    ----------
+    dims : ``int``
+        Number of input dimensions.
+    noise_std : ``float``
+        Standard deviation of Gaussian noise.
+    minimise : ``bool``
+        Minimisation problem if true, maximisation problem if false.
+    bounds : ``torch.Tensor``
+        (size 2 x `dims`) Bounds of input space.
+    optimum : ``dict``
+        Contains inputs and output of global maximum.
+    a : ``torch.Tensor``
+        (size 4 x 1) Function parameters.
+    A : ``torch.Tensor``
+        (size 4 x 6) Function parameters.
+    P : ``torch.Tensor``
+        (size 4 x 6) Function parameters.
+    """    
+    
     def __init__(self,
                  noise_std: Optional[float]=0.0,
                  minimise: Optional[bool]=True) -> None:
+        """
+        Parameters
+        ----------
+        noise_std : ``float``, optional
+            Standard deviation of Gaussian noise, default is 0.0.
+        minimise : ``bool``, optional
+            Minimisation problem if true (default), maximisation problem if
+            false.
+        """
 
         self.dims = 6
         self.bounds = Tensor([[0.0, ] * self.dims, [1.0, ] * self.dims])
@@ -71,8 +141,16 @@ class Hartmann6D(TestFunction):
                                   [2348.0, 1451.0, 3522.0, 2883.0, 3047.0, 6650.0],
                                   [4047.0, 8828.0, 8732.0, 5743.0, 1091.0,  381.0]])
 
-    def __call__(self, x: Tensor) -> Tensor:
+    def eval(self, x: Tensor) -> Tensor:
+        """
+        Compute output of Hartmann function for some test points `x`.
 
+        Parameters
+        ----------
+        x : ``torch.Tensor``
+            (size n x `dims`) Test points.
+        """ 
+        
         # reformat to allow matrix computation of multiple points
         n = x.size(0)
         d = x.size(1)

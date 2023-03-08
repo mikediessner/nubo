@@ -12,15 +12,15 @@ class GaussianProcess(ExactGP):
     
     Attributes
     ----------
-    x_train : :obj:`torch.Tensor`
+    x_train : ``torch.Tensor``
         (size n x d) Training inputs.
-    y_train : :obj:`torch.Tensor`
+    y_train : ``torch.Tensor``
         (size n) Training outputs.
-    likelihood : :obj:`gpytorch.likelihoods.Likelihood`
+    likelihood : ``gpytorch.likelihoods.Likelihood``
         Likelihood.
-    mean_module : :obj:`gpytorch.means`
+    mean_module : ``gpytorch.means``
         Zero mean function.
-    covar_module : :obj:`gpytorch.kernels`
+    covar_module : ``gpytorch.kernels``
         Automatic relevance determination Matern 5/2 covariance kernel.
     """
 
@@ -31,11 +31,11 @@ class GaussianProcess(ExactGP):
         """
         Parameters
         ----------
-        x_train : :obj:`torch.Tensor`
+        x_train : ``torch.Tensor``
             (size n x d) Training inputs.
-        y_train : :obj:`torch.Tensor`
+        y_train : ``torch.Tensor``
             (size n) Training targets.
-        likelihood : :obj:`gpytorch.likelihoods.Likelihood`
+        likelihood : ``gpytorch.likelihoods.Likelihood``
             Likelihood.
         """
 
@@ -57,12 +57,12 @@ class GaussianProcess(ExactGP):
 
         Parameters
         ----------
-        x : :obj:`torch.Tensor`
+        x : ``torch.Tensor``
             (size n x d) Test points.
         
         Returns
         -------
-        :obj:`gpytorch.distributions.MultivariateNormal`
+        ``gpytorch.distributions.MultivariateNormal``
             Predictice multivariate Normal distribution.
         """
 

@@ -220,19 +220,54 @@
 
 
 <div class="viewcode-block" id="Levy"><a class="viewcode-back" href="../../../nubo.test_functions.html#nubo.test_functions.levy.Levy">[docs]</a><span class="k">class</span> <span class="nc">Levy</span><span class="p">(</span><span class="n">TestFunction</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    d-dimensional Levy function.</span>
 
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dims : ``int``</span>
+<span class="sd">        Number of input dimensions.</span>
+<span class="sd">    noise_std : ``float``</span>
+<span class="sd">        Standard deviation of Gaussian noise.</span>
+<span class="sd">    minimise : ``bool``</span>
+<span class="sd">        Minimisation problem if true, maximisation problem if false.</span>
+<span class="sd">    bounds : ``torch.Tensor``</span>
+<span class="sd">        (size 2 x `dims`) Bounds of input space.</span>
+<span class="sd">    optimum : ``dict``</span>
+<span class="sd">        Contains inputs and output of global maximum.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+            
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                 <span class="n">dims</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-                 <span class="n">noise_std</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
-                 <span class="n">minimise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-
+        <span class="n">dims</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">noise_std</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">minimise</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        dims : ``int``</span>
+<span class="sd">            Number of input dimensions.</span>
+<span class="sd">        noise_std : ``float``, optional</span>
+<span class="sd">            Standard deviation of Gaussian noise, default is 0.0.</span>
+<span class="sd">        minimise : ``bool``, optional</span>
+<span class="sd">            Minimisation problem if true (default), maximisation problem if</span>
+<span class="sd">            false.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+                
         <span class="bp">self</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="n">dims</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bounds</span> <span class="o">=</span> <span class="n">Tensor</span><span class="p">([[</span><span class="o">-</span><span class="mf">10.0</span><span class="p">,</span> <span class="p">]</span> <span class="o">*</span> <span class="n">dims</span><span class="p">,</span> <span class="p">[</span><span class="mf">10.0</span><span class="p">,</span> <span class="p">]</span> <span class="o">*</span> <span class="n">dims</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">optimum</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="p">]</span> <span class="o">*</span> <span class="n">dims</span><span class="p">]),</span> <span class="s2">&quot;ouput&quot;</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">]])}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">noise_std</span> <span class="o">=</span> <span class="n">noise_std</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">minimise</span> <span class="o">=</span> <span class="n">minimise</span>
 
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+<div class="viewcode-block" id="Levy.eval"><a class="viewcode-back" href="../../../nubo.test_functions.html#nubo.test_functions.levy.Levy.eval">[docs]</a>    <span class="k">def</span> <span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute output of Levy function for some test points `x`.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        x : ``torch.Tensor``</span>
+<span class="sd">            (size n x `dims`) Test points.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         
         <span class="c1"># compute output</span>
         <span class="n">w</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span><span class="o">/</span><span class="mf">4.0</span>
@@ -249,7 +284,7 @@
         <span class="n">noise</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">noise_std</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">y</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
         <span class="n">f</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">noise</span>
 
-        <span class="k">return</span> <span class="n">f</span></div>
+        <span class="k">return</span> <span class="n">f</span></div></div>
 </pre></div>
         </article>
       </div>

@@ -222,6 +222,15 @@
 <dt class="sig sig-object py" id="nubo.utils.latin_hypercube.LatinHypercubeSampling">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.utils.latin_hypercube.</span></span><span class="sig-name descname"><span class="pre">LatinHypercubeSampling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/utils/latin_hypercube.html#LatinHypercubeSampling"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.utils.latin_hypercube.LatinHypercubeSampling" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Latin hypercube sampling.</p>
+<dl class="field-list">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>dims</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code></span></dt><dd><p>Number of dimensions</p>
+</dd>
+</dl>
+</dd>
+</dl>
 <p class="rubric">Methods</p>
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
@@ -230,7 +239,7 @@
 <td><p>Draw a maximin Latin hypercube sample.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#nubo.utils.latin_hypercube.LatinHypercubeSampling.random" title="nubo.utils.latin_hypercube.LatinHypercubeSampling.random"><code class="xref py py-obj docutils literal notranslate"><span class="pre">random</span></code></a>(points)</p></td>
-<td><p>Draw a random Latin hypercube Sample.</p></td>
+<td><p>Draw a random Latin hypercube sample.</p></td>
 </tr>
 </tbody>
 </table>
@@ -238,23 +247,21 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="nubo.utils.latin_hypercube.LatinHypercubeSampling.maximin">
 <span class="sig-name descname"><span class="pre">maximin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/utils/latin_hypercube.html#LatinHypercubeSampling.maximin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.utils.latin_hypercube.LatinHypercubeSampling.maximin" title="Permalink to this definition">#</a></dt>
-<dd><p>Draw a maximin Latin hypercube sample. Draw a large number of random
-Latin hypercube samples. Compute the minimal distance between the
-points for each random Latin hypercube sample. Pick the random Latin
-hypercube sample with the largest minimal distance.</p>
-<dl class="field-list simple">
+<dd><p>Draw a maximin Latin hypercube sample. Draws a large number of random
+Latin hypercube samples and selects the one with the largest minimal
+distance between points.</p>
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>points</strong><span class="classifier">int</span></dt><dd><p>Number of points for the Latin hypercube sample.</p>
+<dd class="field-odd"><dl>
+<dt><strong>points</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code></span></dt><dd><p>Number of points.</p>
 </dd>
-<dt><strong>samples</strong><span class="classifier">int</span></dt><dd><p>Number of random Latin hypercube samples that should be considered.</p>
+<dt><strong>samples</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code></span></dt><dd><p>Number of random Latin hypercube samples.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>ndarray</dt><dd><p>n x d array containing the maximin Latin hypercube sample where n
-is the number of points and d is the number of dimensions.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></dt><dd><p>(size <cite>points</cite> x <cite>dims</cite>) Maximin Latin hypercube sample.</p>
 </dd>
 </dl>
 </dd>
@@ -264,22 +271,17 @@ is the number of points and d is the number of dimensions.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="nubo.utils.latin_hypercube.LatinHypercubeSampling.random">
 <span class="sig-name descname"><span class="pre">random</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/utils/latin_hypercube.html#LatinHypercubeSampling.random"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.utils.latin_hypercube.LatinHypercubeSampling.random" title="Permalink to this definition">#</a></dt>
-<dd><p>Draw a random Latin hypercube Sample. 1. Pick random permutations of
-the set (0, 1, …, points-1) for each dimension. Each integer defines
-the quantile to which the final value has to belong to. 2. Translate
-the integers to the [0, 1] range. 3. Sample and add an individual
-random uniform sample U(0, 1/points) to each value.</p>
-<dl class="field-list simple">
+<dd><p>Draw a random Latin hypercube sample.</p>
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>points</strong><span class="classifier">int</span></dt><dd><p>Number of points for the Latin hypercube sample.</p>
+<dd class="field-odd"><dl>
+<dt><strong>points</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code></span></dt><dd><p>Number of points.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>ndarray</dt><dd><p>n x d array containing the random Latin hypercube sample where n
-is the number of points and d is the number of dimensions.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></dt><dd><p>(size <cite>points</cite> x <cite>dims</cite>) Random Latin hypercube sample.</p>
 </dd>
 </dl>
 </dd>
@@ -292,22 +294,68 @@ is the number of points and d is the number of dimensions.</p>
 <section id="module-nubo.utils.transfrom">
 <span id="data-transformations"></span><h2>Data transformations<a class="headerlink" href="#module-nubo.utils.transfrom" title="Permalink to this heading">#</a></h2>
 <dl class="py function">
-<dt class="sig sig-object py" id="nubo.utils.transfrom.normalise">
-<span class="sig-prename descclassname"><span class="pre">nubo.utils.transfrom.</span></span><span class="sig-name descname"><span class="pre">normalise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/utils/transfrom.html#normalise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.utils.transfrom.normalise" title="Permalink to this definition">#</a></dt>
-<dd><p>Normalise data to the range [0, 1].
-Bounds: 2xd array where the first row provides the lower bounds and the second row the upper bounds for each dimension.</p>
+<dt class="sig sig-object py" id="nubo.utils.transfrom.standardise">
+<span class="sig-prename descclassname"><span class="pre">nubo.utils.transfrom.</span></span><span class="sig-name descname"><span class="pre">standardise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/utils/transfrom.html#standardise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.utils.transfrom.standardise" title="Permalink to this definition">#</a></dt>
+<dd><p>Standardise data by subtracting the mean and dividing by the standard
+deviation.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>y</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n) Data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></dt><dd><p>(size n) Standardised data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="nubo.utils.transfrom.standardise">
-<span class="sig-prename descclassname"><span class="pre">nubo.utils.transfrom.</span></span><span class="sig-name descname"><span class="pre">standardise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/utils/transfrom.html#standardise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.utils.transfrom.standardise" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dt class="sig sig-object py" id="nubo.utils.transfrom.normalise">
+<span class="sig-prename descclassname"><span class="pre">nubo.utils.transfrom.</span></span><span class="sig-name descname"><span class="pre">normalise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/utils/transfrom.html#normalise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.utils.transfrom.normalise" title="Permalink to this definition">#</a></dt>
+<dd><p>Normalise data to the unit cube [0, 1]^d.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>x</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x d) Data.</p>
+</dd>
+<dt><strong>bounds</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 2 x d) Bounds of input space.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></dt><dd><p>Normalised data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nubo.utils.transfrom.unnormalise">
 <span class="sig-prename descclassname"><span class="pre">nubo.utils.transfrom.</span></span><span class="sig-name descname"><span class="pre">unnormalise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/utils/transfrom.html#unnormalise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.utils.transfrom.unnormalise" title="Permalink to this definition">#</a></dt>
-<dd><p>Revere normalisation to the bounds.
-Bounds: 2xd array where the first row provides the lower bounds and the second row the upper bounds for each dimension.</p>
+<dd><p>Revere normalisation to the provided bounds.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>x</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x d) Normalised data.</p>
+</dd>
+<dt><strong>bounds</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 2 x d) Bounds of input space.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></dt><dd><p>Data scaled to <cite>bounds</cite>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -370,8 +418,8 @@ Bounds: 2xd array where the first row provides the lower bounds and the second r
 </ul>
 </li>
 <li><a class="reference internal" href="#module-nubo.utils.transfrom">Data transformations</a><ul>
-<li><a class="reference internal" href="#nubo.utils.transfrom.normalise"><code class="docutils literal notranslate"><span class="pre">normalise()</span></code></a></li>
 <li><a class="reference internal" href="#nubo.utils.transfrom.standardise"><code class="docutils literal notranslate"><span class="pre">standardise()</span></code></a></li>
+<li><a class="reference internal" href="#nubo.utils.transfrom.normalise"><code class="docutils literal notranslate"><span class="pre">normalise()</span></code></a></li>
 <li><a class="reference internal" href="#nubo.utils.transfrom.unnormalise"><code class="docutils literal notranslate"><span class="pre">unnormalise()</span></code></a></li>
 </ul>
 </li>

@@ -213,8 +213,7 @@
         </div>
         <article role="main">
           <h1>Source code for nubo.models.fit</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">Tensor</span>
+<span></span><span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">Tensor</span>
 <span class="kn">from</span> <span class="nn">torch.optim</span> <span class="kn">import</span> <span class="n">Adam</span>
 <span class="kn">from</span> <span class="nn">gpytorch.models</span> <span class="kn">import</span> <span class="n">GP</span>
 <span class="kn">from</span> <span class="nn">gpytorch.likelihoods</span> <span class="kn">import</span> <span class="n">Likelihood</span>
@@ -232,25 +231,24 @@
            <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Estimate hyper-parameters of the Gaussian process `gp` by maximum</span>
-<span class="sd">    likelihood estimation (MLE) using :obj:`torch.optim.Adam` algorithm.</span>
+<span class="sd">    likelihood estimation (MLE) using ``torch.optim.Adam`` algorithm.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    x : :obj:`torch.Tensor`</span>
+<span class="sd">    x : ``torch.Tensor``</span>
 <span class="sd">        (size n x d) Training inputs.</span>
-<span class="sd">    y : :obj:`torch.Tensor`</span>
+<span class="sd">    y : ``torch.Tensor``</span>
 <span class="sd">        (size n) Training targets.</span>
-<span class="sd">    gp : :obj:`gpytorch.likelihoods.Likelihood`</span>
+<span class="sd">    gp : ``gpytorch.likelihoods.Likelihood``</span>
 <span class="sd">        Gaussian Process model.</span>
-<span class="sd">    mll : :obj:`gpytorch.mlls.MarginalLogLikelihood`</span>
+<span class="sd">    mll : ``gpytorch.mlls.MarginalLogLikelihood``</span>
 <span class="sd">        Marginal log likelihood.</span>
-<span class="sd">    lr : :obj:`float`, optional</span>
-<span class="sd">        Learning rate of :obj:`torch.optim.Adam` algorithm, default is 0.1.</span>
-<span class="sd">    steps : :obj:`int`, optional</span>
-<span class="sd">        Optimisation steps of :obj:`torch.optim.Adam` algorithm, default is</span>
-<span class="sd">        200.</span>
-<span class="sd">    **kwargs : :obj:`Any`</span>
-<span class="sd">        Keyword argument passed to :obj:`torch.optim.Adam`.</span>
+<span class="sd">    lr : ``float``, optional</span>
+<span class="sd">        Learning rate of ``torch.optim.Adam`` algorithm, default is 0.1.</span>
+<span class="sd">    steps : ``int``, optional</span>
+<span class="sd">        Optimisation steps of ``torch.optim.Adam`` algorithm, default is 200.</span>
+<span class="sd">    **kwargs : ``Any``</span>
+<span class="sd">        Keyword argument passed to ``torch.optim.Adam``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># set Gaussian process and likelihood to training mode</span>

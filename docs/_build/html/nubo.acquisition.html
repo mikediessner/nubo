@@ -227,7 +227,7 @@
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code>(x)</p></td>
-<td><p>Wrapper to allow <cite>x</cite> to be a <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.Tensor</span></code> or a <code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> to enable optimisation with <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.optim</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.optimize</span></code>.</p></td>
+<td><p>Wrapper to allow <cite>x</cite> to be a <code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code> or a <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> to enable optimisation with <code class="docutils literal notranslate"><span class="pre">torch.optim</span></code> and <code class="docutils literal notranslate"><span class="pre">scipy.optimize</span></code>.</p></td>
 </tr>
 </tbody>
 </table>
@@ -245,9 +245,9 @@
 <dl class="field-list">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>gp</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gpytorch.models.GP</span></code></span></dt><dd><p>Gaussian Process model.</p>
+<dt><strong>gp</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">gpytorch.models.GP</span></code></span></dt><dd><p>Gaussian Process model.</p>
 </dd>
-<dt><strong>y_best</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 1) Best output of training data.</p>
+<dt><strong>y_best</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 1) Best output of training data.</p>
 </dd>
 </dl>
 </dd>
@@ -270,13 +270,13 @@ analytically.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>x</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x d) Test points.</p>
+<dt><strong>x</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x d) Test points.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.Tensor</span></code></dt><dd><p>(size n) (Negative) Expected Imrpovement of <cite>x</cite>.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></dt><dd><p>(size n) (Negative) Expected Imrpovement of <cite>x</cite>.</p>
 </dd>
 </dl>
 </dd>
@@ -293,9 +293,9 @@ analytically.</p>
 <dl class="field-list">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>gp</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gpytorch.models.GP</span></code></span></dt><dd><p>Gaussian Process model.</p>
+<dt><strong>gp</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">gpytorch.models.GP</span></code></span></dt><dd><p>Gaussian Process model.</p>
 </dd>
-<dt><strong>beta</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code></span></dt><dd><p>Trade-off parameter, default is 4.0.</p>
+<dt><strong>beta</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">float</span></code></span></dt><dd><p>Trade-off parameter, default is 4.0.</p>
 </dd>
 </dl>
 </dd>
@@ -318,13 +318,13 @@ analytically.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>x</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x d) Test points.</p>
+<dt><strong>x</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x d) Test points.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.Tensor</span></code></dt><dd><p>(size n) (Negative) Upper Confidence Bound of <cite>x</cite>.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></dt><dd><p>(size n) (Negative) Upper Confidence Bound of <cite>x</cite>.</p>
 </dd>
 </dl>
 </dd>
@@ -344,23 +344,23 @@ analytically.</p>
 <dl class="field-list">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>gp</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gpytorch.models.GP</span></code></span></dt><dd><p>Gaussian Process model.</p>
+<dt><strong>gp</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">gpytorch.models.GP</span></code></span></dt><dd><p>Gaussian Process model.</p>
 </dd>
-<dt><strong>y_best</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 1) Best output of training data.</p>
+<dt><strong>y_best</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 1) Best output of training data.</p>
 </dd>
-<dt><strong>x_pending</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x d) Training inputs of currently pending points.</p>
+<dt><strong>x_pending</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x d) Training inputs of currently pending points.</p>
 </dd>
-<dt><strong>samples</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></span></dt><dd><p>Number of Monte Carlo samples, default is 512.</p>
+<dt><strong>samples</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code></span></dt><dd><p>Number of Monte Carlo samples, default is 512.</p>
 </dd>
-<dt><strong>fix_base_samples</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></span></dt><dd><p>Whether base samples used to compute Monte Carlo samples of
+<dt><strong>fix_base_samples</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">bool</span></code></span></dt><dd><p>Whether base samples used to compute Monte Carlo samples of
 acquisition function should be fixed for the optimisation step.
 If false (default) stochastic optimizer (Adam) have to be used. If
 true deterministic optimizer (L-BFGS-B, SLSQP) can be used.</p>
 </dd>
-<dt><strong>base_samples</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NoneType</span></code> or <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>Base samples used to compute Monte Carlo samples drawn if
+<dt><strong>base_samples</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">NoneType</span></code> or <code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>Base samples used to compute Monte Carlo samples drawn if
 <cite>fix_base_samples</cite> is true.</p>
 </dd>
-<dt><strong>dims</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></span></dt><dd><p>Number of input dimensions.</p>
+<dt><strong>dims</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code></span></dt><dd><p>Number of input dimensions.</p>
 </dd>
 </dl>
 </dd>
@@ -383,13 +383,13 @@ by averaging Monte Carlo samples.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>x</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x d) Test points.</p>
+<dt><strong>x</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x d) Test points.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.Tensor</span></code></dt><dd><p>(size n) (Negative) Expected Imrpovement of <cite>x</cite>.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></dt><dd><p>(size n) (Negative) Expected Imrpovement of <cite>x</cite>.</p>
 </dd>
 </dl>
 </dd>
@@ -406,23 +406,23 @@ by averaging Monte Carlo samples.</p>
 <dl class="field-list">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>gp</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gpytorch.models.GP</span></code></span></dt><dd><p>Gaussian Process model.</p>
+<dt><strong>gp</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">gpytorch.models.GP</span></code></span></dt><dd><p>Gaussian Process model.</p>
 </dd>
-<dt><strong>beta</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code></span></dt><dd><p>Trade-off parameter, default is 4.0.</p>
+<dt><strong>beta</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">float</span></code></span></dt><dd><p>Trade-off parameter, default is 4.0.</p>
 </dd>
-<dt><strong>x_pending</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x d) Training inputs of currently pending points.</p>
+<dt><strong>x_pending</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x d) Training inputs of currently pending points.</p>
 </dd>
-<dt><strong>samples</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></span></dt><dd><p>Number of Monte Carlo samples, default is 512.</p>
+<dt><strong>samples</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code></span></dt><dd><p>Number of Monte Carlo samples, default is 512.</p>
 </dd>
-<dt><strong>fix_base_samples</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></span></dt><dd><p>Whether base samples used to compute Monte Carlo samples of
+<dt><strong>fix_base_samples</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">bool</span></code></span></dt><dd><p>Whether base samples used to compute Monte Carlo samples of
 acquisition function should be fixed for the optimisation step.
 If false (default) stochastic optimizer (Adam) have to be used. If
 true deterministic optimizer (L-BFGS-B, SLSQP) can be used.</p>
 </dd>
-<dt><strong>base_samples</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NoneType</span></code> or <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>Base samples used to compute Monte Carlo samples drawn if
+<dt><strong>base_samples</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">NoneType</span></code> or <code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>Base samples used to compute Monte Carlo samples drawn if
 <cite>fix_base_samples</cite> is true.</p>
 </dd>
-<dt><strong>dims</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></span></dt><dd><p>Number of input dimensions.</p>
+<dt><strong>dims</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code></span></dt><dd><p>Number of input dimensions.</p>
 </dd>
 </dl>
 </dd>
@@ -445,13 +445,13 @@ true deterministic optimizer (L-BFGS-B, SLSQP) can be used.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>x</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x d) Test points.</p>
+<dt><strong>x</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x d) Test points.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.Tensor</span></code></dt><dd><p>(size n) (Negative) Upper Confidence Bound of <cite>x</cite>.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></dt><dd><p>(size n) (Negative) Upper Confidence Bound of <cite>x</cite>.</p>
 </dd>
 </dl>
 </dd>

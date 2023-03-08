@@ -213,10 +213,22 @@
         </div>
         <article role="main">
           <h1>Source code for nubo.test_functions.test_functions</h1><div class="highlight"><pre>
-<div class="viewcode-block" id="TestFunction"><a class="viewcode-back" href="../../../nubo.test_functions.html#nubo.test_functions.test_functions.TestFunction">[docs]</a><span></span><span class="k">class</span> <span class="nc">TestFunction</span><span class="p">:</span>
+<span></span><span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">Tensor</span>
+
+
+<div class="viewcode-block" id="TestFunction"><a class="viewcode-back" href="../../../nubo.test_functions.html#nubo.test_functions.test_functions.TestFunction">[docs]</a><span class="k">class</span> <span class="nc">TestFunction</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Parent class for all test functions.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">pass</span></div>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Call ``eval`` method of the test function.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
 </pre></div>
         </article>
       </div>

@@ -16,24 +16,24 @@ def slsqp(func: Callable,
 
     Parameters
     ----------
-    func : :obj:`Callable`
+    func : ``Callable``
         Function to optimise.
-    bounds : :obj:`torch.Tensor`
+    bounds : ``torch.Tensor``
         (size 2 x d) Optimisation bounds of input space.
-    constraints : :obj:`dict` or :obj:`list` of :obj:`dict`
+    constraints : ``dict`` or ``list`` of ``dict``
         Optimisation constraints.
-    num_starts : :obj:`int`, optional
+    num_starts : ``int``, optional
         Number of start for multi-start optimisation, default is 10.
-    num_samples : :obj:`int`, optional
+    num_samples : ``int``, optional
         Number of samples from which to draw the starts, default is 100.
-    **kwargs : :obj:`Any`
-        Keyword argument passed to :obj:`scipy.optimize.minimize`.
+    **kwargs : ``Any``
+        Keyword argument passed to ``scipy.optimize.minimize``.
     
     Returns
     -------
-    best_result : :obj:`torch.Tensor`
+    best_result : ``torch.Tensor``
         (size 1 x d) Minimiser inputs.
-    best_func_result : :obj:`torch.Tensor`
+    best_func_result : ``torch.Tensor``
         (size 1) Minimiser output.
     """
 

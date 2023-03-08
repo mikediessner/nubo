@@ -220,37 +220,38 @@
 
 
 <div class="viewcode-block" id="LatinHypercubeSampling"><a class="viewcode-back" href="../../../nubo.utils.html#nubo.utils.latin_hypercube.LatinHypercubeSampling">[docs]</a><span class="k">class</span> <span class="nc">LatinHypercubeSampling</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Latin hypercube sampling.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dims : ``int``</span>
+<span class="sd">        Number of dimensions</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dims</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Latin hypercube sampling.</span>
-
-<span class="sd">        Attributes</span>
+<span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        dims : int</span>
-<span class="sd">            Number of dimensions for the Latin hypercube sample.</span>
+<span class="sd">        dims : ``int``</span>
+<span class="sd">            Number of dimensions.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="n">dims</span>
 
 <div class="viewcode-block" id="LatinHypercubeSampling.random"><a class="viewcode-back" href="../../../nubo.utils.html#nubo.utils.latin_hypercube.LatinHypercubeSampling.random">[docs]</a>    <span class="k">def</span> <span class="nf">random</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">points</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Draw a random Latin hypercube Sample. 1. Pick random permutations of</span>
-<span class="sd">        the set (0, 1, ..., points-1) for each dimension. Each integer defines</span>
-<span class="sd">        the quantile to which the final value has to belong to. 2. Translate</span>
-<span class="sd">        the integers to the [0, 1] range. 3. Sample and add an individual</span>
-<span class="sd">        random uniform sample U(0, 1/points) to each value.</span>
+<span class="sd">        Draw a random Latin hypercube sample.</span>
 <span class="sd">        </span>
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        points : int</span>
-<span class="sd">            Number of points for the Latin hypercube sample.</span>
+<span class="sd">        points : ``int``</span>
+<span class="sd">            Number of points.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        ndarray</span>
-<span class="sd">            n x d array containing the random Latin hypercube sample where n</span>
-<span class="sd">            is the number of points and d is the number of dimensions.</span>
+<span class="sd">        ``numpy.ndarray``</span>
+<span class="sd">            (size `points` x `dims`) Random Latin hypercube sample.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">hypercube</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">points</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dims</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
@@ -273,23 +274,21 @@
                 <span class="n">points</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
                 <span class="n">samples</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Draw a maximin Latin hypercube sample. Draw a large number of random</span>
-<span class="sd">        Latin hypercube samples. Compute the minimal distance between the</span>
-<span class="sd">        points for each random Latin hypercube sample. Pick the random Latin</span>
-<span class="sd">        hypercube sample with the largest minimal distance.</span>
+<span class="sd">        Draw a maximin Latin hypercube sample. Draws a large number of random</span>
+<span class="sd">        Latin hypercube samples and selects the one with the largest minimal</span>
+<span class="sd">        distance between points.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        points : int</span>
-<span class="sd">            Number of points for the Latin hypercube sample.</span>
-<span class="sd">        samples : int</span>
-<span class="sd">            Number of random Latin hypercube samples that should be considered.</span>
+<span class="sd">        points : ``int``</span>
+<span class="sd">            Number of points.</span>
+<span class="sd">        samples : ``int``</span>
+<span class="sd">            Number of random Latin hypercube samples.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        ndarray</span>
-<span class="sd">            n x d array containing the maximin Latin hypercube sample where n</span>
-<span class="sd">            is the number of points and d is the number of dimensions.</span>
+<span class="sd">        ``numpy.ndarray``</span>
+<span class="sd">            (size `points` x `dims`) Maximin Latin hypercube sample.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">hypercubes</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">samples</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dims</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>

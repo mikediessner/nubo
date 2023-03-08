@@ -5,19 +5,54 @@ from typing import Optional
 
 
 class Griewank(TestFunction):
+    """
+    d-dimensional Griewank function.
+
+    Attributes
+    ----------
+    dims : ``int``
+        Number of input dimensions.
+    noise_std : ``float``
+        Standard deviation of Gaussian noise.
+    minimise : ``bool``
+        Minimisation problem if true, maximisation problem if false.
+    bounds : ``torch.Tensor``
+        (size 2 x `dims`) Bounds of input space.
+    optimum : ``dict``
+        Contains inputs and output of global maximum.
+    """
 
     def __init__(self,
                  dims: int,
                  noise_std: Optional[float]=0.0,
                  minimise: Optional[bool]=True) -> None:
-
+        """
+        Parameters
+        ----------
+        dims : ``int``
+            Number of input dimensions.
+        noise_std : ``float``, optional
+            Standard deviation of Gaussian noise, default is 0.0.
+        minimise : ``bool``, optional
+            Minimisation problem if true (default), maximisation problem if
+            false.
+        """
+                
         self.dims = dims
         self.bounds = Tensor([[-600.0, ] * dims, [600.0, ] * dims])
         self.optimum = {"inputs": Tensor([[0.0, ] * dims]), "ouput": Tensor([[0.0]])}
         self.noise_std = noise_std
         self.minimise = minimise
 
-    def __call__(self, x: Tensor) -> Tensor:
+    def eval(self, x: Tensor) -> Tensor:
+        """
+        Compute output of Griewank function for some test points `x`.
+
+        Parameters
+        ----------
+        x : ``torch.Tensor``
+            (size n x `dims`) Test points.
+        """
         
         # compute output
         ii = torch.arange(1, self.dims+1)

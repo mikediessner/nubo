@@ -227,9 +227,9 @@
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
-<span class="sd">    gp : :obj:`gpytorch.models.GP`</span>
+<span class="sd">    gp : ``gpytorch.models.GP``</span>
 <span class="sd">        Gaussian Process model.</span>
-<span class="sd">    y_best : :obj:`torch.Tensor`</span>
+<span class="sd">    y_best : ``torch.Tensor``</span>
 <span class="sd">        (size 1) Best output of training data.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -239,9 +239,9 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        gp : :obj:`gpytorch.models.GP`</span>
+<span class="sd">        gp : ``gpytorch.models.GP``</span>
 <span class="sd">            Gaussian Process model.</span>
-<span class="sd">        y_best : :obj:`torch.Tensor`</span>
+<span class="sd">        y_best : ``torch.Tensor``</span>
 <span class="sd">            (size 1) Best output of training data.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -255,12 +255,12 @@
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        x : :obj:`torch.Tensor`</span>
+<span class="sd">        x : ``torch.Tensor``</span>
 <span class="sd">            (size n x d) Test points.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        :obj:`torch.Tensor`</span>
+<span class="sd">        ``torch.Tensor``</span>
 <span class="sd">            (size n) (Negative) Expected Imrpovement of `x`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -288,9 +288,9 @@
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
-<span class="sd">    gp : :obj:`gpytorch.models.GP`</span>
+<span class="sd">    gp : ``gpytorch.models.GP``</span>
 <span class="sd">        Gaussian Process model.</span>
-<span class="sd">    beta : :obj:`float`</span>
+<span class="sd">    beta : ``float``</span>
 <span class="sd">        Trade-off parameter, default is 4.0.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -300,9 +300,9 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        gp : :obj:`gpytorch.models.GP`</span>
+<span class="sd">        gp : ``gpytorch.models.GP``</span>
 <span class="sd">            Gaussian Process model.</span>
-<span class="sd">        beta : :obj:`float`, optional</span>
+<span class="sd">        beta : ``float``, optional</span>
 <span class="sd">            Trade-off parameter, default is 4.0.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -316,12 +316,12 @@
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        x : :obj:`torch.Tensor`</span>
+<span class="sd">        x : ``torch.Tensor``</span>
 <span class="sd">            (size n x d) Test points.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        :obj:`torch.Tensor`</span>
+<span class="sd">        ``torch.Tensor``</span>
 <span class="sd">            (size n) (Negative) Upper Confidence Bound of `x`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         

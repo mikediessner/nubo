@@ -226,15 +226,15 @@
 <dl class="field-list">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>x_train</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x d) Training inputs.</p>
+<dt><strong>x_train</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x d) Training inputs.</p>
 </dd>
-<dt><strong>y_train</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n) Training outputs.</p>
+<dt><strong>y_train</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n) Training outputs.</p>
 </dd>
-<dt><strong>likelihood</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gpytorch.likelihoods.Likelihood</span></code></span></dt><dd><p>Likelihood.</p>
+<dt><strong>likelihood</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">gpytorch.likelihoods.Likelihood</span></code></span></dt><dd><p>Likelihood.</p>
 </dd>
-<dt><strong>mean_module</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gpytorch.means</span></code></span></dt><dd><p>Zero mean function.</p>
+<dt><strong>mean_module</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">gpytorch.means</span></code></span></dt><dd><p>Zero mean function.</p>
 </dd>
-<dt><strong>covar_module</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gpytorch.kernels</span></code></span></dt><dd><p>Automatic relevance determination Matern 5/2 covariance kernel.</p>
+<dt><strong>covar_module</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">gpytorch.kernels</span></code></span></dt><dd><p>Automatic relevance determination Matern 5/2 covariance kernel.</p>
 </dd>
 </dl>
 </dd>
@@ -257,13 +257,13 @@ and returns a multivariate Normal distribution.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>x</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x d) Test points.</p>
+<dt><strong>x</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x d) Test points.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">gpytorch.distributions.MultivariateNormal</span></code></dt><dd><p>Predictice multivariate Normal distribution.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">gpytorch.distributions.MultivariateNormal</span></code></dt><dd><p>Predictice multivariate Normal distribution.</p>
 </dd>
 </dl>
 </dd>
@@ -279,24 +279,23 @@ and returns a multivariate Normal distribution.</p>
 <dt class="sig sig-object py" id="nubo.models.fit.fit_gp">
 <span class="sig-prename descclassname"><span class="pre">nubo.models.fit.</span></span><span class="sig-name descname"><span class="pre">fit_gp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GP</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">likelihood</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Likelihood</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mll</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">MarginalLogLikelihood</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/nubo/models/fit.html#fit_gp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.models.fit.fit_gp" title="Permalink to this definition">#</a></dt>
 <dd><p>Estimate hyper-parameters of the Gaussian process <cite>gp</cite> by maximum
-likelihood estimation (MLE) using <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.optim.Adam</span></code> algorithm.</p>
+likelihood estimation (MLE) using <code class="docutils literal notranslate"><span class="pre">torch.optim.Adam</span></code> algorithm.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>x</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x d) Training inputs.</p>
+<dt><strong>x</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x d) Training inputs.</p>
 </dd>
-<dt><strong>y</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n) Training targets.</p>
+<dt><strong>y</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n) Training targets.</p>
 </dd>
-<dt><strong>gp</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gpytorch.likelihoods.Likelihood</span></code></span></dt><dd><p>Gaussian Process model.</p>
+<dt><strong>gp</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">gpytorch.likelihoods.Likelihood</span></code></span></dt><dd><p>Gaussian Process model.</p>
 </dd>
-<dt><strong>mll</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gpytorch.mlls.MarginalLogLikelihood</span></code></span></dt><dd><p>Marginal log likelihood.</p>
+<dt><strong>mll</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">gpytorch.mlls.MarginalLogLikelihood</span></code></span></dt><dd><p>Marginal log likelihood.</p>
 </dd>
-<dt><strong>lr</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>, optional</span></dt><dd><p>Learning rate of <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.optim.Adam</span></code> algorithm, default is 0.1.</p>
+<dt><strong>lr</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">float</span></code>, optional</span></dt><dd><p>Learning rate of <code class="docutils literal notranslate"><span class="pre">torch.optim.Adam</span></code> algorithm, default is 0.1.</p>
 </dd>
-<dt><strong>steps</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code>, optional</span></dt><dd><p>Optimisation steps of <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.optim.Adam</span></code> algorithm, default is
-200.</p>
+<dt><strong>steps</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code>, optional</span></dt><dd><p>Optimisation steps of <code class="docutils literal notranslate"><span class="pre">torch.optim.Adam</span></code> algorithm, default is 200.</p>
 </dd>
-<dt><strong>**kwargs</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Any</span></code></span></dt><dd><p>Keyword argument passed to <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.optim.Adam</span></code>.</p>
+<dt><strong>**kwargs</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">Any</span></code></span></dt><dd><p>Keyword argument passed to <code class="docutils literal notranslate"><span class="pre">torch.optim.Adam</span></code>.</p>
 </dd>
 </dl>
 </dd>

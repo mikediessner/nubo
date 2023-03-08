@@ -16,26 +16,24 @@ def _adam(func: callable,
 
     Parameters
     ----------
-    x : :obj:`torch.Tensor`
-        (size 1 x d) Initial starting point of :obj:`torch.optim.Adam`
-        algorithm.
-    lr : :obj:`float`, optional
-        Learning rate of :obj:`torch.optim.Adam` algorithm, default is 0.1.
-    steps : :obj:`int`, optional
-        Optimisation steps of :obj:`torch.optim.Adam` algorithm, default is
-        200.
-    num_starts : :obj:`int`
+    x : ``torch.Tensor``
+        (size 1 x d) Initial starting point of ``torch.optim.Adam`` algorithm.
+    lr : ``float``, optional
+        Learning rate of ``torch.optim.Adam`` algorithm, default is 0.1.
+    steps : ``int``, optional
+        Optimisation steps of ``torch.optim.Adam`` algorithm, default is 200.
+    num_starts : ``int``
         Number of start for multi-start optimisation, default is 10.
-    num_samples : :obj:`int`
+    num_samples : ``int``
         Number of samples from which to draw the starts, default is 100.
-    **kwargs : :obj:`Any`
-        Keyword argument passed to :obj:`torch.optim.Adam`.
+    **kwargs : ``Any``
+        Keyword argument passed to ``torch.optim.Adam``.
 
     Returns
     -------
-    x : :obj:`torch.Tensor`
+    x : ``torch.Tensor``
         (size 1 x d) Minimiser input.
-    loss : :obj:`torch.Tensor`
+    loss : ``torch.Tensor``
         (size 1) Minimiser output.
     """
 
@@ -74,27 +72,26 @@ def adam(func: Callable,
 
     Parameters
     ----------
-    func : :obj:`Callable`
+    func : ``Callable``
         Function to optimise.
-    bounds : :obj:`torch.Tensor`
+    bounds : ``torch.Tensor``
         (size 2 x d) Optimisation bounds of input space.
-    lr : :obj:`float`, optional
-        Learning rate of :obj:`torch.optim.Adam` algorithm, default is 0.1.
-    steps : :obj:`int`, optional
-        Optimisation steps of :obj:`torch.optim.Adam` algorithm, default is
-        200.
-    num_starts : :obj:`int`, optional
+    lr : ``float``, optional
+        Learning rate of ``torch.optim.Adam`` algorithm, default is 0.1.
+    steps : ``int``, optional
+        Optimisation steps of ``torch.optim.Adam`` algorithm, default is 200.
+    num_starts : ``int``, optional
         Number of start for multi-start optimisation, default is 10.
-    num_samples : :obj:`int`, optional
+    num_samples : ``int``, optional
         Number of samples from which to draw the starts, default is 100.
-    **kwargs : :obj:`Any`
-        Keyword argument passed to :obj:`torch.optim.Adam`.
+    **kwargs : ``Any``
+        Keyword argument passed to ``torch.optim.Adam``.
 
     Returns
     -------
-    best_result : :obj:`torch.Tensor`
+    best_result : ``torch.Tensor``
         (size 1 x d) Minimiser input.
-    best_func_result : :obj:`torch.Tensor`
+    best_func_result : ``torch.Tensor``
         (size 1) Minimiser output.
     """
     

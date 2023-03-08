@@ -12,23 +12,23 @@ class MCExpectedImprovement(AcquisitionFunction):
 
     Attributes
     ----------
-    gp : :obj:`gpytorch.models.GP`
+    gp : ``gpytorch.models.GP``
         Gaussian Process model.
-    y_best : :obj:`torch.Tensor`
+    y_best : ``torch.Tensor``
         (size 1) Best output of training data.
-    x_pending : :obj:`torch.Tensor`
+    x_pending : ``torch.Tensor``
         (size n x d) Training inputs of currently pending points.
-    samples : :obj:`int`
+    samples : ``int``
          Number of Monte Carlo samples, default is 512.
-    fix_base_samples : :obj:`bool`
+    fix_base_samples : ``bool``
         Whether base samples used to compute Monte Carlo samples of
         acquisition function should be fixed for the optimisation step.
         If false (default) stochastic optimizer (Adam) have to be used. If
         true deterministic optimizer (L-BFGS-B, SLSQP) can be used.
-    base_samples : :obj:`NoneType` or :obj:`torch.Tensor`
+    base_samples : ``NoneType`` or ``torch.Tensor``
         Base samples used to compute Monte Carlo samples drawn if
         `fix_base_samples` is true.
-    dims : :obj:`int`
+    dims : ``int``
         Number of input dimensions.
     """
     
@@ -42,25 +42,25 @@ class MCExpectedImprovement(AcquisitionFunction):
         """
         Parameters
         ----------
-        gp : :obj:`gpytorch.models.GP`
+        gp : ``gpytorch.models.GP``
             Gaussian Process model.
-        y_best : :obj:`torch.Tensor`
+        y_best : ``torch.Tensor``
             (size 1) Best output of training data.
-        x_pending : :obj:`torch.Tensor`, optional
+        x_pending : ``torch.Tensor``, optional
             (size n x d) Training inputs of currently pending points.
-        samples : :obj:`int`, optional
+        samples : ``int``, optional
              Number of Monte Carlo samples, default is 512.
-        fix_base_samples : :obj:`bool`, optional
+        fix_base_samples : ``bool``, optional
             Whether base samples used to compute Monte Carlo samples of
             acquisition function should be fixed for the optimisation step.
             If false (default) stochastic optimizer (Adam) have to be used. If
             true deterministic optimizer (L-BFGS-B, SLSQP) can be used.
         """
         
-        self.gp = gp                        # surrogate model
-        self.y_best = y_best                # EI target
+        self.gp = gp
+        self.y_best = y_best
         self.x_pending = x_pending
-        self.samples = samples              # Monte Carlo samples
+        self.samples = samples
         self.fix_base_samples = fix_base_samples
         self.base_samples = None
         self.dims = gp.train_inputs[0].size(1)
@@ -72,12 +72,12 @@ class MCExpectedImprovement(AcquisitionFunction):
 
         Parameters
         ----------
-        x : :obj:`torch.Tensor`
+        x : ``torch.Tensor``
             (size n x d) Test points.
 
         Returns
         -------
-        :obj:`torch.Tensor`
+        ``torch.Tensor``
             (size n) (Negative) Expected Imrpovement of `x`.
         """
         
@@ -116,23 +116,23 @@ class MCUpperConfidenceBound(AcquisitionFunction):
 
     Attributes
     ----------
-    gp : :obj:`gpytorch.models.GP`
+    gp : ``gpytorch.models.GP``
         Gaussian Process model.
-    beta : :obj:`float`
+    beta : ``float``
             Trade-off parameter, default is 4.0.
-    x_pending : :obj:`torch.Tensor`
+    x_pending : ``torch.Tensor``
         (size n x d) Training inputs of currently pending points.
-    samples : :obj:`int`
+    samples : ``int``
          Number of Monte Carlo samples, default is 512.
-    fix_base_samples : :obj:`bool`
+    fix_base_samples : ``bool``
         Whether base samples used to compute Monte Carlo samples of
         acquisition function should be fixed for the optimisation step.
         If false (default) stochastic optimizer (Adam) have to be used. If
         true deterministic optimizer (L-BFGS-B, SLSQP) can be used.
-    base_samples : :obj:`NoneType` or :obj:`torch.Tensor`
+    base_samples : ``NoneType`` or ``torch.Tensor``
         Base samples used to compute Monte Carlo samples drawn if
         `fix_base_samples` is true.
-    dims : :obj:`int`
+    dims : ``int``
         Number of input dimensions.
     """
 
@@ -145,31 +145,31 @@ class MCUpperConfidenceBound(AcquisitionFunction):
         """
         Parameters
         ----------
-        gp : :obj:`gpytorch.models.GP`
+        gp : ``gpytorch.models.GP``
             Gaussian Process model.
-        beta : :obj:`float`
+        beta : ``float``
                 Trade-off parameter, default is 4.0.
-        x_pending : :obj:`torch.Tensor`
+        x_pending : ``torch.Tensor`
             (size n x d) Training inputs of currently pending points.
-        samples : :obj:`int`
+        samples : ``int``
             Number of Monte Carlo samples, default is 512.
-        fix_base_samples : :obj:`bool`
+        fix_base_samples : ``bool``
             Whether base samples used to compute Monte Carlo samples of
             acquisition function should be fixed for the optimisation step.
             If false (default) stochastic optimizer (Adam) have to be used. If
             true deterministic optimizer (L-BFGS-B, SLSQP) can be used.
-        base_samples : :obj:`NoneType` or :obj:`torch.Tensor`
+        base_samples : ``NoneType`` or ``torch.Tensor``
             Base samples used to compute Monte Carlo samples drawn if
             `fix_base_samples` is true.
-        dims : :obj:`int`
+        dims : ``int``
             Number of input dimensions.
         """
         
-        self.gp = gp                        # surrogate model
-        self.beta = torch.tensor(beta)      # UCB parameter
+        self.gp = gp
+        self.beta = torch.tensor(beta)
         self.beta_coeff = torch.sqrt(self.beta*torch.pi/2)
         self.x_pending = x_pending
-        self.samples = samples              # Monte Carlo samples
+        self.samples = samples
         self.fix_base_samples = fix_base_samples
         self.base_samples = None
         self.dims = gp.train_inputs[0].size(1)
@@ -181,12 +181,12 @@ class MCUpperConfidenceBound(AcquisitionFunction):
 
         Parameters
         ----------
-        x : :obj:`torch.Tensor`
+        x : ``torch.Tensor``
             (size n x d) Test points.
 
         Returns
         -------
-        :obj:`torch.Tensor`
+        ``torch.Tensor``
             (size n) (Negative) Upper Confidence Bound of `x`.
         """
 

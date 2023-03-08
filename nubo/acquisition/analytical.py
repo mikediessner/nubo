@@ -12,9 +12,9 @@ class ExpectedImprovement(AcquisitionFunction):
 
     Attributes
     ----------
-    gp : :obj:`gpytorch.models.GP`
+    gp : ``gpytorch.models.GP``
         Gaussian Process model.
-    y_best : :obj:`torch.Tensor`
+    y_best : ``torch.Tensor``
         (size 1) Best output of training data.
     """
 
@@ -24,9 +24,9 @@ class ExpectedImprovement(AcquisitionFunction):
         """
         Parameters
         ----------
-        gp : :obj:`gpytorch.models.GP`
+        gp : ``gpytorch.models.GP``
             Gaussian Process model.
-        y_best : :obj:`torch.Tensor`
+        y_best : ``torch.Tensor``
             (size 1) Best output of training data.
         """
 
@@ -40,12 +40,12 @@ class ExpectedImprovement(AcquisitionFunction):
 
         Parameters
         ----------
-        x : :obj:`torch.Tensor`
+        x : ``torch.Tensor``
             (size n x d) Test points.
 
         Returns
         -------
-        :obj:`torch.Tensor`
+        ``torch.Tensor``
             (size n) (Negative) Expected Imrpovement of `x`.
         """
 
@@ -73,9 +73,9 @@ class UpperConfidenceBound(AcquisitionFunction):
 
     Attributes
     ----------
-    gp : :obj:`gpytorch.models.GP`
+    gp : ``gpytorch.models.GP``
         Gaussian Process model.
-    beta : :obj:`float`
+    beta : ``float``
         Trade-off parameter, default is 4.0.
     """
 
@@ -85,9 +85,9 @@ class UpperConfidenceBound(AcquisitionFunction):
         """
         Parameters
         ----------
-        gp : :obj:`gpytorch.models.GP`
+        gp : ``gpytorch.models.GP``
             Gaussian Process model.
-        beta : :obj:`float`, optional
+        beta : ``float``, optional
             Trade-off parameter, default is 4.0.
         """
 
@@ -101,12 +101,12 @@ class UpperConfidenceBound(AcquisitionFunction):
 
         Parameters
         ----------
-        x : :obj:`torch.Tensor`
+        x : ``torch.Tensor``
             (size n x d) Test points.
 
         Returns
         -------
-        :obj:`torch.Tensor`
+        ``torch.Tensor``
             (size n) (Negative) Upper Confidence Bound of `x`.
         """
         

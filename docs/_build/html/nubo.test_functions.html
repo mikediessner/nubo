@@ -222,6 +222,17 @@
 <dt class="sig sig-object py" id="nubo.test_functions.test_functions.TestFunction">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.test_functions.test_functions.</span></span><span class="sig-name descname"><span class="pre">TestFunction</span></span><a class="reference internal" href="_modules/nubo/test_functions/test_functions.html#TestFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.test_functions.test_functions.TestFunction" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Parent class for all test functions.</p>
+<p class="rubric">Methods</p>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code>(x)</p></td>
+<td><p>Call <code class="docutils literal notranslate"><span class="pre">eval</span></code> method of the test function.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </dd></dl>
 
 </section>
@@ -231,16 +242,53 @@
 <dt class="sig sig-object py" id="nubo.test_functions.ackley.Ackley">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.test_functions.ackley.</span></span><span class="sig-name descname"><span class="pre">Ackley</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimise</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/test_functions/ackley.html#Ackley"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.test_functions.ackley.Ackley" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nubo.test_functions.test_functions.TestFunction" title="nubo.test_functions.test_functions.TestFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">TestFunction</span></code></a></p>
+<p>d-dimensional Ackley function.</p>
+<dl class="field-list">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>dims</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code></span></dt><dd><p>Number of input dimensions.</p>
+</dd>
+<dt><strong>noise_std</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">float</span></code></span></dt><dd><p>Standard deviation of Gaussian noise.</p>
+</dd>
+<dt><strong>minimise</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">bool</span></code></span></dt><dd><p>Minimisation problem if true, maximisation problem if false.</p>
+</dd>
+<dt><strong>bounds</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 2 x <cite>dims</cite>) Bounds of input space.</p>
+</dd>
+<dt><strong>optimum</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">dict</span></code></span></dt><dd><p>Contains inputs and output of global maximum.</p>
+</dd>
+<dt><strong>a</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">float</span></code></span></dt><dd><p>Function parameter.</p>
+</dd>
+<dt><strong>b</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">float</span></code></span></dt><dd><p>Function parameter.</p>
+</dd>
+<dt><strong>c</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">float</span></code></span></dt><dd><p>Function parameter.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 <p class="rubric">Methods</p>
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code>(x)</p></td>
-<td><p>Call self as a function.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nubo.test_functions.ackley.Ackley.eval" title="nubo.test_functions.ackley.Ackley.eval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval</span></code></a>(x)</p></td>
+<td><p>Compute output of Ackley function for some test points <cite>x</cite>.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<dl class="py method">
+<dt class="sig sig-object py" id="nubo.test_functions.ackley.Ackley.eval">
+<span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/test_functions/ackley.html#Ackley.eval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.test_functions.ackley.Ackley.eval" title="Permalink to this definition">#</a></dt>
+<dd><p>Compute output of Ackley function for some test points <cite>x</cite>.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>x</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x <cite>dims</cite>) Test points.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -250,16 +298,47 @@
 <dt class="sig sig-object py" id="nubo.test_functions.dixonprice.DixonPrice">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.test_functions.dixonprice.</span></span><span class="sig-name descname"><span class="pre">DixonPrice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimise</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/test_functions/dixonprice.html#DixonPrice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.test_functions.dixonprice.DixonPrice" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nubo.test_functions.test_functions.TestFunction" title="nubo.test_functions.test_functions.TestFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">TestFunction</span></code></a></p>
+<p>d-dimensional Dixon-Price function.</p>
+<dl class="field-list">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>dims</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code></span></dt><dd><p>Number of input dimensions.</p>
+</dd>
+<dt><strong>noise_std</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">float</span></code></span></dt><dd><p>Standard deviation of Gaussian noise.</p>
+</dd>
+<dt><strong>minimise</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">bool</span></code></span></dt><dd><p>Minimisation problem if true, maximisation problem if false.</p>
+</dd>
+<dt><strong>bounds</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 2 x <cite>dims</cite>) Bounds of input space.</p>
+</dd>
+<dt><strong>optimum</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">dict</span></code></span></dt><dd><p>Contains inputs and output of global maximum.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 <p class="rubric">Methods</p>
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code>(x)</p></td>
-<td><p>Call self as a function.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nubo.test_functions.dixonprice.DixonPrice.eval" title="nubo.test_functions.dixonprice.DixonPrice.eval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval</span></code></a>(x)</p></td>
+<td><p>Compute output of Dixon-Price function for some test points <cite>x</cite>.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<dl class="py method">
+<dt class="sig sig-object py" id="nubo.test_functions.dixonprice.DixonPrice.eval">
+<span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/test_functions/dixonprice.html#DixonPrice.eval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.test_functions.dixonprice.DixonPrice.eval" title="Permalink to this definition">#</a></dt>
+<dd><p>Compute output of Dixon-Price function for some test points <cite>x</cite>.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>x</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x <cite>dims</cite>) Test points.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -269,16 +348,47 @@
 <dt class="sig sig-object py" id="nubo.test_functions.griewank.Griewank">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.test_functions.griewank.</span></span><span class="sig-name descname"><span class="pre">Griewank</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimise</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/test_functions/griewank.html#Griewank"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.test_functions.griewank.Griewank" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nubo.test_functions.test_functions.TestFunction" title="nubo.test_functions.test_functions.TestFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">TestFunction</span></code></a></p>
+<p>d-dimensional Griewank function.</p>
+<dl class="field-list">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>dims</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code></span></dt><dd><p>Number of input dimensions.</p>
+</dd>
+<dt><strong>noise_std</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">float</span></code></span></dt><dd><p>Standard deviation of Gaussian noise.</p>
+</dd>
+<dt><strong>minimise</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">bool</span></code></span></dt><dd><p>Minimisation problem if true, maximisation problem if false.</p>
+</dd>
+<dt><strong>bounds</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 2 x <cite>dims</cite>) Bounds of input space.</p>
+</dd>
+<dt><strong>optimum</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">dict</span></code></span></dt><dd><p>Contains inputs and output of global maximum.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 <p class="rubric">Methods</p>
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code>(x)</p></td>
-<td><p>Call self as a function.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nubo.test_functions.griewank.Griewank.eval" title="nubo.test_functions.griewank.Griewank.eval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval</span></code></a>(x)</p></td>
+<td><p>Compute output of Griewank function for some test points <cite>x</cite>.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<dl class="py method">
+<dt class="sig sig-object py" id="nubo.test_functions.griewank.Griewank.eval">
+<span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/test_functions/griewank.html#Griewank.eval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.test_functions.griewank.Griewank.eval" title="Permalink to this definition">#</a></dt>
+<dd><p>Compute output of Griewank function for some test points <cite>x</cite>.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>x</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x <cite>dims</cite>) Test points.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -288,32 +398,106 @@
 <dt class="sig sig-object py" id="nubo.test_functions.hartmann.Hartmann3D">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.test_functions.hartmann.</span></span><span class="sig-name descname"><span class="pre">Hartmann3D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">noise_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimise</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/test_functions/hartmann.html#Hartmann3D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.test_functions.hartmann.Hartmann3D" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nubo.test_functions.test_functions.TestFunction" title="nubo.test_functions.test_functions.TestFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">TestFunction</span></code></a></p>
+<p>3-dimensional Hartmann function.</p>
+<dl class="field-list">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>dims</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code></span></dt><dd><p>Number of input dimensions.</p>
+</dd>
+<dt><strong>noise_std</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">float</span></code></span></dt><dd><p>Standard deviation of Gaussian noise.</p>
+</dd>
+<dt><strong>minimise</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">bool</span></code></span></dt><dd><p>Minimisation problem if true, maximisation problem if false.</p>
+</dd>
+<dt><strong>bounds</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 2 x <cite>dims</cite>) Bounds of input space.</p>
+</dd>
+<dt><strong>optimum</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">dict</span></code></span></dt><dd><p>Contains inputs and output of global maximum.</p>
+</dd>
+<dt><strong>a</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 4 x 1) Function parameters.</p>
+</dd>
+<dt><strong>A</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 4 x 3) Function parameters.</p>
+</dd>
+<dt><strong>P</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 4 x 3) Function parameters.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 <p class="rubric">Methods</p>
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code>(x)</p></td>
-<td><p>Call self as a function.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nubo.test_functions.hartmann.Hartmann3D.eval" title="nubo.test_functions.hartmann.Hartmann3D.eval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval</span></code></a>(x)</p></td>
+<td><p>Compute output of Hartmann function for some test points <cite>x</cite>.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<dl class="py method">
+<dt class="sig sig-object py" id="nubo.test_functions.hartmann.Hartmann3D.eval">
+<span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/test_functions/hartmann.html#Hartmann3D.eval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.test_functions.hartmann.Hartmann3D.eval" title="Permalink to this definition">#</a></dt>
+<dd><p>Compute output of Hartmann function for some test points <cite>x</cite>.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>x</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x <cite>dims</cite>) Test points.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="nubo.test_functions.hartmann.Hartmann6D">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.test_functions.hartmann.</span></span><span class="sig-name descname"><span class="pre">Hartmann6D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">noise_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimise</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/test_functions/hartmann.html#Hartmann6D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.test_functions.hartmann.Hartmann6D" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nubo.test_functions.test_functions.TestFunction" title="nubo.test_functions.test_functions.TestFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">TestFunction</span></code></a></p>
+<p>6-dimensional Hartmann function.</p>
+<dl class="field-list">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>dims</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code></span></dt><dd><p>Number of input dimensions.</p>
+</dd>
+<dt><strong>noise_std</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">float</span></code></span></dt><dd><p>Standard deviation of Gaussian noise.</p>
+</dd>
+<dt><strong>minimise</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">bool</span></code></span></dt><dd><p>Minimisation problem if true, maximisation problem if false.</p>
+</dd>
+<dt><strong>bounds</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 2 x <cite>dims</cite>) Bounds of input space.</p>
+</dd>
+<dt><strong>optimum</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">dict</span></code></span></dt><dd><p>Contains inputs and output of global maximum.</p>
+</dd>
+<dt><strong>a</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 4 x 1) Function parameters.</p>
+</dd>
+<dt><strong>A</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 4 x 6) Function parameters.</p>
+</dd>
+<dt><strong>P</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 4 x 6) Function parameters.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 <p class="rubric">Methods</p>
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code>(x)</p></td>
-<td><p>Call self as a function.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nubo.test_functions.hartmann.Hartmann6D.eval" title="nubo.test_functions.hartmann.Hartmann6D.eval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval</span></code></a>(x)</p></td>
+<td><p>Compute output of Hartmann function for some test points <cite>x</cite>.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<dl class="py method">
+<dt class="sig sig-object py" id="nubo.test_functions.hartmann.Hartmann6D.eval">
+<span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/test_functions/hartmann.html#Hartmann6D.eval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.test_functions.hartmann.Hartmann6D.eval" title="Permalink to this definition">#</a></dt>
+<dd><p>Compute output of Hartmann function for some test points <cite>x</cite>.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>x</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x <cite>dims</cite>) Test points.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -323,16 +507,47 @@
 <dt class="sig sig-object py" id="nubo.test_functions.levy.Levy">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.test_functions.levy.</span></span><span class="sig-name descname"><span class="pre">Levy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimise</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/test_functions/levy.html#Levy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.test_functions.levy.Levy" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nubo.test_functions.test_functions.TestFunction" title="nubo.test_functions.test_functions.TestFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">TestFunction</span></code></a></p>
+<p>d-dimensional Levy function.</p>
+<dl class="field-list">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>dims</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code></span></dt><dd><p>Number of input dimensions.</p>
+</dd>
+<dt><strong>noise_std</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">float</span></code></span></dt><dd><p>Standard deviation of Gaussian noise.</p>
+</dd>
+<dt><strong>minimise</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">bool</span></code></span></dt><dd><p>Minimisation problem if true, maximisation problem if false.</p>
+</dd>
+<dt><strong>bounds</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 2 x <cite>dims</cite>) Bounds of input space.</p>
+</dd>
+<dt><strong>optimum</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">dict</span></code></span></dt><dd><p>Contains inputs and output of global maximum.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 <p class="rubric">Methods</p>
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code>(x)</p></td>
-<td><p>Call self as a function.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nubo.test_functions.levy.Levy.eval" title="nubo.test_functions.levy.Levy.eval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval</span></code></a>(x)</p></td>
+<td><p>Compute output of Levy function for some test points <cite>x</cite>.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<dl class="py method">
+<dt class="sig sig-object py" id="nubo.test_functions.levy.Levy.eval">
+<span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/test_functions/levy.html#Levy.eval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.test_functions.levy.Levy.eval" title="Permalink to this definition">#</a></dt>
+<dd><p>Compute output of Levy function for some test points <cite>x</cite>.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>x</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x <cite>dims</cite>) Test points.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -342,16 +557,47 @@
 <dt class="sig sig-object py" id="nubo.test_functions.rastrigin.Rastrigin">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.test_functions.rastrigin.</span></span><span class="sig-name descname"><span class="pre">Rastrigin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimise</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/test_functions/rastrigin.html#Rastrigin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.test_functions.rastrigin.Rastrigin" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nubo.test_functions.test_functions.TestFunction" title="nubo.test_functions.test_functions.TestFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">TestFunction</span></code></a></p>
+<p>d-dimensional Rastrigin function.</p>
+<dl class="field-list">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>dims</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code></span></dt><dd><p>Number of input dimensions.</p>
+</dd>
+<dt><strong>noise_std</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">float</span></code></span></dt><dd><p>Standard deviation of Gaussian noise.</p>
+</dd>
+<dt><strong>minimise</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">bool</span></code></span></dt><dd><p>Minimisation problem if true, maximisation problem if false.</p>
+</dd>
+<dt><strong>bounds</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 2 x <cite>dims</cite>) Bounds of input space.</p>
+</dd>
+<dt><strong>optimum</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">dict</span></code></span></dt><dd><p>Contains inputs and output of global maximum.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 <p class="rubric">Methods</p>
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code>(x)</p></td>
-<td><p>Call self as a function.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nubo.test_functions.rastrigin.Rastrigin.eval" title="nubo.test_functions.rastrigin.Rastrigin.eval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval</span></code></a>(x)</p></td>
+<td><p>Compute output of Rastrigin function for some test points <cite>x</cite>.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<dl class="py method">
+<dt class="sig sig-object py" id="nubo.test_functions.rastrigin.Rastrigin.eval">
+<span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/test_functions/rastrigin.html#Rastrigin.eval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.test_functions.rastrigin.Rastrigin.eval" title="Permalink to this definition">#</a></dt>
+<dd><p>Compute output of Rastrigin function for some test points <cite>x</cite>.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>x</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x <cite>dims</cite>) Test points.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -361,16 +607,47 @@
 <dt class="sig sig-object py" id="nubo.test_functions.schwefel.Schwefel">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.test_functions.schwefel.</span></span><span class="sig-name descname"><span class="pre">Schwefel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimise</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/test_functions/schwefel.html#Schwefel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.test_functions.schwefel.Schwefel" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nubo.test_functions.test_functions.TestFunction" title="nubo.test_functions.test_functions.TestFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">TestFunction</span></code></a></p>
+<p>d-dimensional Schwefel function.</p>
+<dl class="field-list">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>dims</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code></span></dt><dd><p>Number of input dimensions.</p>
+</dd>
+<dt><strong>noise_std</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">float</span></code></span></dt><dd><p>Standard deviation of Gaussian noise.</p>
+</dd>
+<dt><strong>minimise</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">bool</span></code></span></dt><dd><p>Minimisation problem if true, maximisation problem if false.</p>
+</dd>
+<dt><strong>bounds</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 2 x <cite>dims</cite>) Bounds of input space.</p>
+</dd>
+<dt><strong>optimum</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">dict</span></code></span></dt><dd><p>Contains inputs and output of global maximum.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 <p class="rubric">Methods</p>
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code>(x)</p></td>
-<td><p>Call self as a function.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nubo.test_functions.schwefel.Schwefel.eval" title="nubo.test_functions.schwefel.Schwefel.eval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval</span></code></a>(x)</p></td>
+<td><p>Compute output of Schwefel function for some test points <cite>x</cite>.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<dl class="py method">
+<dt class="sig sig-object py" id="nubo.test_functions.schwefel.Schwefel.eval">
+<span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/test_functions/schwefel.html#Schwefel.eval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.test_functions.schwefel.Schwefel.eval" title="Permalink to this definition">#</a></dt>
+<dd><p>Compute output of Schwefel function for some test points <cite>x</cite>.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>x</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x <cite>dims</cite>) Test points.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -380,16 +657,47 @@
 <dt class="sig sig-object py" id="nubo.test_functions.sphere.Sphere">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.test_functions.sphere.</span></span><span class="sig-name descname"><span class="pre">Sphere</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimise</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/test_functions/sphere.html#Sphere"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.test_functions.sphere.Sphere" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nubo.test_functions.test_functions.TestFunction" title="nubo.test_functions.test_functions.TestFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">TestFunction</span></code></a></p>
+<p>d-dimensional Sphere function.</p>
+<dl class="field-list">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>dims</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code></span></dt><dd><p>Number of input dimensions.</p>
+</dd>
+<dt><strong>noise_std</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">float</span></code></span></dt><dd><p>Standard deviation of Gaussian noise.</p>
+</dd>
+<dt><strong>minimise</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">bool</span></code></span></dt><dd><p>Minimisation problem if true, maximisation problem if false.</p>
+</dd>
+<dt><strong>bounds</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 2 x <cite>dims</cite>) Bounds of input space.</p>
+</dd>
+<dt><strong>optimum</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">dict</span></code></span></dt><dd><p>Contains inputs and output of global maximum.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 <p class="rubric">Methods</p>
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code>(x)</p></td>
-<td><p>Call self as a function.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nubo.test_functions.sphere.Sphere.eval" title="nubo.test_functions.sphere.Sphere.eval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval</span></code></a>(x)</p></td>
+<td><p>Compute output of Sphere function for some test points <cite>x</cite>.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<dl class="py method">
+<dt class="sig sig-object py" id="nubo.test_functions.sphere.Sphere.eval">
+<span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/test_functions/sphere.html#Sphere.eval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.test_functions.sphere.Sphere.eval" title="Permalink to this definition">#</a></dt>
+<dd><p>Compute output of Sphere function for some test points <cite>x</cite>.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>x</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x <cite>dims</cite>) Test points.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -399,16 +707,47 @@
 <dt class="sig sig-object py" id="nubo.test_functions.sumsquares.SumSquares">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.test_functions.sumsquares.</span></span><span class="sig-name descname"><span class="pre">SumSquares</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimise</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/test_functions/sumsquares.html#SumSquares"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.test_functions.sumsquares.SumSquares" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nubo.test_functions.test_functions.TestFunction" title="nubo.test_functions.test_functions.TestFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">TestFunction</span></code></a></p>
+<p>d-dimensional Sum-of-Squares function.</p>
+<dl class="field-list">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>dims</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code></span></dt><dd><p>Number of input dimensions.</p>
+</dd>
+<dt><strong>noise_std</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">float</span></code></span></dt><dd><p>Standard deviation of Gaussian noise.</p>
+</dd>
+<dt><strong>minimise</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">bool</span></code></span></dt><dd><p>Minimisation problem if true, maximisation problem if false.</p>
+</dd>
+<dt><strong>bounds</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 2 x <cite>dims</cite>) Bounds of input space.</p>
+</dd>
+<dt><strong>optimum</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">dict</span></code></span></dt><dd><p>Contains inputs and output of global maximum.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 <p class="rubric">Methods</p>
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code>(x)</p></td>
-<td><p>Call self as a function.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nubo.test_functions.sumsquares.SumSquares.eval" title="nubo.test_functions.sumsquares.SumSquares.eval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval</span></code></a>(x)</p></td>
+<td><p>Compute output of Sum-of-Squares function for some test points <cite>x</cite>.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<dl class="py method">
+<dt class="sig sig-object py" id="nubo.test_functions.sumsquares.SumSquares.eval">
+<span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/test_functions/sumsquares.html#SumSquares.eval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.test_functions.sumsquares.SumSquares.eval" title="Permalink to this definition">#</a></dt>
+<dd><p>Compute output of Sum-of-Squares function for some test points <cite>x</cite>.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>x</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x <cite>dims</cite>) Test points.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -418,16 +757,47 @@
 <dt class="sig sig-object py" id="nubo.test_functions.zakharov.Zakharov">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.test_functions.zakharov.</span></span><span class="sig-name descname"><span class="pre">Zakharov</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimise</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/test_functions/zakharov.html#Zakharov"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.test_functions.zakharov.Zakharov" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nubo.test_functions.test_functions.TestFunction" title="nubo.test_functions.test_functions.TestFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">TestFunction</span></code></a></p>
+<p>d-dimensional Zakharov function.</p>
+<dl class="field-list">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>dims</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code></span></dt><dd><p>Number of input dimensions.</p>
+</dd>
+<dt><strong>noise_std</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">float</span></code></span></dt><dd><p>Standard deviation of Gaussian noise.</p>
+</dd>
+<dt><strong>minimise</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">bool</span></code></span></dt><dd><p>Minimisation problem if true, maximisation problem if false.</p>
+</dd>
+<dt><strong>bounds</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 2 x <cite>dims</cite>) Bounds of input space.</p>
+</dd>
+<dt><strong>optimum</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">dict</span></code></span></dt><dd><p>Contains inputs and output of global maximum.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 <p class="rubric">Methods</p>
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code>(x)</p></td>
-<td><p>Call self as a function.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nubo.test_functions.zakharov.Zakharov.eval" title="nubo.test_functions.zakharov.Zakharov.eval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval</span></code></a>(x)</p></td>
+<td><p>Compute output of Zakharov function for some test points <cite>x</cite>.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<dl class="py method">
+<dt class="sig sig-object py" id="nubo.test_functions.zakharov.Zakharov.eval">
+<span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/test_functions/zakharov.html#Zakharov.eval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.test_functions.zakharov.Zakharov.eval" title="Permalink to this definition">#</a></dt>
+<dd><p>Compute output of Zakharov function for some test points <cite>x</cite>.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>x</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x <cite>dims</cite>) Test points.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -494,44 +864,77 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#module-nubo.test_functions.ackley">Ackley function</a><ul>
-<li><a class="reference internal" href="#nubo.test_functions.ackley.Ackley"><code class="docutils literal notranslate"><span class="pre">Ackley</span></code></a></li>
+<li><a class="reference internal" href="#nubo.test_functions.ackley.Ackley"><code class="docutils literal notranslate"><span class="pre">Ackley</span></code></a><ul>
+<li><a class="reference internal" href="#nubo.test_functions.ackley.Ackley.eval"><code class="docutils literal notranslate"><span class="pre">Ackley.eval()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-nubo.test_functions.dixonprice">Dixon-Price function</a><ul>
-<li><a class="reference internal" href="#nubo.test_functions.dixonprice.DixonPrice"><code class="docutils literal notranslate"><span class="pre">DixonPrice</span></code></a></li>
+<li><a class="reference internal" href="#nubo.test_functions.dixonprice.DixonPrice"><code class="docutils literal notranslate"><span class="pre">DixonPrice</span></code></a><ul>
+<li><a class="reference internal" href="#nubo.test_functions.dixonprice.DixonPrice.eval"><code class="docutils literal notranslate"><span class="pre">DixonPrice.eval()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-nubo.test_functions.griewank">Griewank function</a><ul>
-<li><a class="reference internal" href="#nubo.test_functions.griewank.Griewank"><code class="docutils literal notranslate"><span class="pre">Griewank</span></code></a></li>
+<li><a class="reference internal" href="#nubo.test_functions.griewank.Griewank"><code class="docutils literal notranslate"><span class="pre">Griewank</span></code></a><ul>
+<li><a class="reference internal" href="#nubo.test_functions.griewank.Griewank.eval"><code class="docutils literal notranslate"><span class="pre">Griewank.eval()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-nubo.test_functions.hartmann">Hartmann function</a><ul>
-<li><a class="reference internal" href="#nubo.test_functions.hartmann.Hartmann3D"><code class="docutils literal notranslate"><span class="pre">Hartmann3D</span></code></a></li>
-<li><a class="reference internal" href="#nubo.test_functions.hartmann.Hartmann6D"><code class="docutils literal notranslate"><span class="pre">Hartmann6D</span></code></a></li>
+<li><a class="reference internal" href="#nubo.test_functions.hartmann.Hartmann3D"><code class="docutils literal notranslate"><span class="pre">Hartmann3D</span></code></a><ul>
+<li><a class="reference internal" href="#nubo.test_functions.hartmann.Hartmann3D.eval"><code class="docutils literal notranslate"><span class="pre">Hartmann3D.eval()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#nubo.test_functions.hartmann.Hartmann6D"><code class="docutils literal notranslate"><span class="pre">Hartmann6D</span></code></a><ul>
+<li><a class="reference internal" href="#nubo.test_functions.hartmann.Hartmann6D.eval"><code class="docutils literal notranslate"><span class="pre">Hartmann6D.eval()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-nubo.test_functions.levy">Levy function</a><ul>
-<li><a class="reference internal" href="#nubo.test_functions.levy.Levy"><code class="docutils literal notranslate"><span class="pre">Levy</span></code></a></li>
+<li><a class="reference internal" href="#nubo.test_functions.levy.Levy"><code class="docutils literal notranslate"><span class="pre">Levy</span></code></a><ul>
+<li><a class="reference internal" href="#nubo.test_functions.levy.Levy.eval"><code class="docutils literal notranslate"><span class="pre">Levy.eval()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-nubo.test_functions.rastrigin">Rastrigin function</a><ul>
-<li><a class="reference internal" href="#nubo.test_functions.rastrigin.Rastrigin"><code class="docutils literal notranslate"><span class="pre">Rastrigin</span></code></a></li>
+<li><a class="reference internal" href="#nubo.test_functions.rastrigin.Rastrigin"><code class="docutils literal notranslate"><span class="pre">Rastrigin</span></code></a><ul>
+<li><a class="reference internal" href="#nubo.test_functions.rastrigin.Rastrigin.eval"><code class="docutils literal notranslate"><span class="pre">Rastrigin.eval()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-nubo.test_functions.schwefel">Schwefel function</a><ul>
-<li><a class="reference internal" href="#nubo.test_functions.schwefel.Schwefel"><code class="docutils literal notranslate"><span class="pre">Schwefel</span></code></a></li>
+<li><a class="reference internal" href="#nubo.test_functions.schwefel.Schwefel"><code class="docutils literal notranslate"><span class="pre">Schwefel</span></code></a><ul>
+<li><a class="reference internal" href="#nubo.test_functions.schwefel.Schwefel.eval"><code class="docutils literal notranslate"><span class="pre">Schwefel.eval()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-nubo.test_functions.sphere">Sphere function</a><ul>
-<li><a class="reference internal" href="#nubo.test_functions.sphere.Sphere"><code class="docutils literal notranslate"><span class="pre">Sphere</span></code></a></li>
+<li><a class="reference internal" href="#nubo.test_functions.sphere.Sphere"><code class="docutils literal notranslate"><span class="pre">Sphere</span></code></a><ul>
+<li><a class="reference internal" href="#nubo.test_functions.sphere.Sphere.eval"><code class="docutils literal notranslate"><span class="pre">Sphere.eval()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-nubo.test_functions.sumsquares">Sum-of-Squares function</a><ul>
-<li><a class="reference internal" href="#nubo.test_functions.sumsquares.SumSquares"><code class="docutils literal notranslate"><span class="pre">SumSquares</span></code></a></li>
+<li><a class="reference internal" href="#nubo.test_functions.sumsquares.SumSquares"><code class="docutils literal notranslate"><span class="pre">SumSquares</span></code></a><ul>
+<li><a class="reference internal" href="#nubo.test_functions.sumsquares.SumSquares.eval"><code class="docutils literal notranslate"><span class="pre">SumSquares.eval()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-nubo.test_functions.zakharov">Zakharov function</a><ul>
-<li><a class="reference internal" href="#nubo.test_functions.zakharov.Zakharov"><code class="docutils literal notranslate"><span class="pre">Zakharov</span></code></a></li>
+<li><a class="reference internal" href="#nubo.test_functions.zakharov.Zakharov"><code class="docutils literal notranslate"><span class="pre">Zakharov</span></code></a><ul>
+<li><a class="reference internal" href="#nubo.test_functions.zakharov.Zakharov.eval"><code class="docutils literal notranslate"><span class="pre">Zakharov.eval()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

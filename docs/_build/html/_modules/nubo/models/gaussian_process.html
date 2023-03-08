@@ -227,15 +227,15 @@
 <span class="sd">    </span>
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
-<span class="sd">    x_train : :obj:`torch.Tensor`</span>
+<span class="sd">    x_train : ``torch.Tensor``</span>
 <span class="sd">        (size n x d) Training inputs.</span>
-<span class="sd">    y_train : :obj:`torch.Tensor`</span>
+<span class="sd">    y_train : ``torch.Tensor``</span>
 <span class="sd">        (size n) Training outputs.</span>
-<span class="sd">    likelihood : :obj:`gpytorch.likelihoods.Likelihood`</span>
+<span class="sd">    likelihood : ``gpytorch.likelihoods.Likelihood``</span>
 <span class="sd">        Likelihood.</span>
-<span class="sd">    mean_module : :obj:`gpytorch.means`</span>
+<span class="sd">    mean_module : ``gpytorch.means``</span>
 <span class="sd">        Zero mean function.</span>
-<span class="sd">    covar_module : :obj:`gpytorch.kernels`</span>
+<span class="sd">    covar_module : ``gpytorch.kernels``</span>
 <span class="sd">        Automatic relevance determination Matern 5/2 covariance kernel.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -246,11 +246,11 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        x_train : :obj:`torch.Tensor`</span>
+<span class="sd">        x_train : ``torch.Tensor``</span>
 <span class="sd">            (size n x d) Training inputs.</span>
-<span class="sd">        y_train : :obj:`torch.Tensor`</span>
+<span class="sd">        y_train : ``torch.Tensor``</span>
 <span class="sd">            (size n) Training targets.</span>
-<span class="sd">        likelihood : :obj:`gpytorch.likelihoods.Likelihood`</span>
+<span class="sd">        likelihood : ``gpytorch.likelihoods.Likelihood``</span>
 <span class="sd">            Likelihood.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -272,12 +272,12 @@
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        x : :obj:`torch.Tensor`</span>
+<span class="sd">        x : ``torch.Tensor``</span>
 <span class="sd">            (size n x d) Test points.</span>
 <span class="sd">        </span>
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        :obj:`gpytorch.distributions.MultivariateNormal`</span>
+<span class="sd">        ``gpytorch.distributions.MultivariateNormal``</span>
 <span class="sd">            Predictice multivariate Normal distribution.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 

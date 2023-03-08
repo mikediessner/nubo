@@ -13,18 +13,18 @@ def gen_candidates(func: Callable,
 
     Parameters
     ----------
-    func : :obj:`Callable`
+    func : ``Callable``
         Function to optimise.
-    bounds : :obj:`torch.Tensor`
+    bounds : ``torch.Tensor``
         (size 2 x d) Optimisation bounds of input space.
-    num_candidates : :obj:`int`
+    num_candidates : ``int``
         Number of candidates.
-    num_samples : :obj:`int`
+    num_samples : ``int``
         Number of samples from which to draw the starts.
 
     Returns
     -------
-    :obj:`torch.Tensor`
+    ``torch.Tensor``
         (size `num_candidates` x d) Candidates.
     """
 

@@ -5,12 +5,38 @@ from typing import Optional
 
 
 class DixonPrice(TestFunction):
+    """
+    d-dimensional Dixon-Price function.
+
+    Attributes
+    ----------
+    dims : ``int``
+        Number of input dimensions.
+    noise_std : ``float``
+        Standard deviation of Gaussian noise.
+    minimise : ``bool``
+        Minimisation problem if true, maximisation problem if false.
+    bounds : ``torch.Tensor``
+        (size 2 x `dims`) Bounds of input space.
+    optimum : ``dict``
+        Contains inputs and output of global maximum.
+        """
 
     def __init__(self,
                  dims: int,
                  noise_std: Optional[float]=0.0,
                  minimise: Optional[bool]=True) -> None:
-
+        """
+        Parameters
+        ----------
+        dims : ``int``
+            Number of input dimensions.
+        noise_std : ``float``, optional
+            Standard deviation of Gaussian noise, default is 0.0.
+        minimise : ``bool``, optional
+            Minimisation problem if true (default), maximisation problem if
+            false.
+        """
         ii = torch.arange(1, dims+1)
         optimals_xs = 2.0**( -(2.0**ii - 2.0)/2.0**ii )
 
@@ -20,7 +46,15 @@ class DixonPrice(TestFunction):
         self.noise_std = noise_std
         self.minimise = minimise
 
-    def __call__(self, x: Tensor) -> Tensor:
+    def eval(self, x: Tensor) -> Tensor:
+        """
+        Compute output of Dixon-Price function for some test points `x`.
+
+        Parameters
+        ----------
+        x : ``torch.Tensor``
+            (size n x `dims`) Test points.
+        """
         
         # compute output
         ii = torch.arange(2, self.dims+1)

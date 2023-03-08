@@ -5,37 +5,38 @@ from typing import Optional
 
 
 class LatinHypercubeSampling:
+    """
+    Latin hypercube sampling.
+
+    Attributes
+    ----------
+    dims : ``int``
+        Number of dimensions
+    """
 
     def __init__(self, dims: int) -> None:
         """
-        Latin hypercube sampling.
-
-        Attributes
+        Parameters
         ----------
-        dims : int
-            Number of dimensions for the Latin hypercube sample.
+        dims : ``int``
+            Number of dimensions.
         """
 
         self.dims = dims
 
     def random(self, points: int) -> Tensor:
         """
-        Draw a random Latin hypercube Sample. 1. Pick random permutations of
-        the set (0, 1, ..., points-1) for each dimension. Each integer defines
-        the quantile to which the final value has to belong to. 2. Translate
-        the integers to the [0, 1] range. 3. Sample and add an individual
-        random uniform sample U(0, 1/points) to each value.
+        Draw a random Latin hypercube sample.
         
         Parameters
         ----------
-        points : int
-            Number of points for the Latin hypercube sample.
+        points : ``int``
+            Number of points.
 
         Returns
         -------
-        ndarray
-            n x d array containing the random Latin hypercube sample where n
-            is the number of points and d is the number of dimensions.
+        ``numpy.ndarray``
+            (size `points` x `dims`) Random Latin hypercube sample.
         """
 
         hypercube = torch.empty((points, self.dims), dtype=torch.float64)
@@ -58,23 +59,21 @@ class LatinHypercubeSampling:
                 points: int,
                 samples: Optional[int]=1000) -> Tensor:
         """
-        Draw a maximin Latin hypercube sample. Draw a large number of random
-        Latin hypercube samples. Compute the minimal distance between the
-        points for each random Latin hypercube sample. Pick the random Latin
-        hypercube sample with the largest minimal distance.
+        Draw a maximin Latin hypercube sample. Draws a large number of random
+        Latin hypercube samples and selects the one with the largest minimal
+        distance between points.
 
         Parameters
         ----------
-        points : int
-            Number of points for the Latin hypercube sample.
-        samples : int
-            Number of random Latin hypercube samples that should be considered.
+        points : ``int``
+            Number of points.
+        samples : ``int``
+            Number of random Latin hypercube samples.
 
         Returns
         -------
-        ndarray
-            n x d array containing the maximin Latin hypercube sample where n
-            is the number of points and d is the number of dimensions.
+        ``numpy.ndarray``
+            (size `points` x `dims`) Maximin Latin hypercube sample.
         """
 
         hypercubes = torch.empty((samples, points, self.dims), dtype=torch.float64)

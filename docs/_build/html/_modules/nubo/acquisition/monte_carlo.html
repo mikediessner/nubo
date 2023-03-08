@@ -227,23 +227,23 @@
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
-<span class="sd">    gp : :obj:`gpytorch.models.GP`</span>
+<span class="sd">    gp : ``gpytorch.models.GP``</span>
 <span class="sd">        Gaussian Process model.</span>
-<span class="sd">    y_best : :obj:`torch.Tensor`</span>
+<span class="sd">    y_best : ``torch.Tensor``</span>
 <span class="sd">        (size 1) Best output of training data.</span>
-<span class="sd">    x_pending : :obj:`torch.Tensor`</span>
+<span class="sd">    x_pending : ``torch.Tensor``</span>
 <span class="sd">        (size n x d) Training inputs of currently pending points.</span>
-<span class="sd">    samples : :obj:`int`</span>
+<span class="sd">    samples : ``int``</span>
 <span class="sd">         Number of Monte Carlo samples, default is 512.</span>
-<span class="sd">    fix_base_samples : :obj:`bool`</span>
+<span class="sd">    fix_base_samples : ``bool``</span>
 <span class="sd">        Whether base samples used to compute Monte Carlo samples of</span>
 <span class="sd">        acquisition function should be fixed for the optimisation step.</span>
 <span class="sd">        If false (default) stochastic optimizer (Adam) have to be used. If</span>
 <span class="sd">        true deterministic optimizer (L-BFGS-B, SLSQP) can be used.</span>
-<span class="sd">    base_samples : :obj:`NoneType` or :obj:`torch.Tensor`</span>
+<span class="sd">    base_samples : ``NoneType`` or ``torch.Tensor``</span>
 <span class="sd">        Base samples used to compute Monte Carlo samples drawn if</span>
 <span class="sd">        `fix_base_samples` is true.</span>
-<span class="sd">    dims : :obj:`int`</span>
+<span class="sd">    dims : ``int``</span>
 <span class="sd">        Number of input dimensions.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
@@ -257,25 +257,25 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        gp : :obj:`gpytorch.models.GP`</span>
+<span class="sd">        gp : ``gpytorch.models.GP``</span>
 <span class="sd">            Gaussian Process model.</span>
-<span class="sd">        y_best : :obj:`torch.Tensor`</span>
+<span class="sd">        y_best : ``torch.Tensor``</span>
 <span class="sd">            (size 1) Best output of training data.</span>
-<span class="sd">        x_pending : :obj:`torch.Tensor`, optional</span>
+<span class="sd">        x_pending : ``torch.Tensor``, optional</span>
 <span class="sd">            (size n x d) Training inputs of currently pending points.</span>
-<span class="sd">        samples : :obj:`int`, optional</span>
+<span class="sd">        samples : ``int``, optional</span>
 <span class="sd">             Number of Monte Carlo samples, default is 512.</span>
-<span class="sd">        fix_base_samples : :obj:`bool`, optional</span>
+<span class="sd">        fix_base_samples : ``bool``, optional</span>
 <span class="sd">            Whether base samples used to compute Monte Carlo samples of</span>
 <span class="sd">            acquisition function should be fixed for the optimisation step.</span>
 <span class="sd">            If false (default) stochastic optimizer (Adam) have to be used. If</span>
 <span class="sd">            true deterministic optimizer (L-BFGS-B, SLSQP) can be used.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         
-        <span class="bp">self</span><span class="o">.</span><span class="n">gp</span> <span class="o">=</span> <span class="n">gp</span>                        <span class="c1"># surrogate model</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">y_best</span> <span class="o">=</span> <span class="n">y_best</span>                <span class="c1"># EI target</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gp</span> <span class="o">=</span> <span class="n">gp</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y_best</span> <span class="o">=</span> <span class="n">y_best</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">x_pending</span> <span class="o">=</span> <span class="n">x_pending</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">samples</span> <span class="o">=</span> <span class="n">samples</span>              <span class="c1"># Monte Carlo samples</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">samples</span> <span class="o">=</span> <span class="n">samples</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fix_base_samples</span> <span class="o">=</span> <span class="n">fix_base_samples</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">base_samples</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">train_inputs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -287,12 +287,12 @@
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        x : :obj:`torch.Tensor`</span>
+<span class="sd">        x : ``torch.Tensor``</span>
 <span class="sd">            (size n x d) Test points.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        :obj:`torch.Tensor`</span>
+<span class="sd">        ``torch.Tensor``</span>
 <span class="sd">            (size n) (Negative) Expected Imrpovement of `x`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         
@@ -331,23 +331,23 @@
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
-<span class="sd">    gp : :obj:`gpytorch.models.GP`</span>
+<span class="sd">    gp : ``gpytorch.models.GP``</span>
 <span class="sd">        Gaussian Process model.</span>
-<span class="sd">    beta : :obj:`float`</span>
+<span class="sd">    beta : ``float``</span>
 <span class="sd">            Trade-off parameter, default is 4.0.</span>
-<span class="sd">    x_pending : :obj:`torch.Tensor`</span>
+<span class="sd">    x_pending : ``torch.Tensor``</span>
 <span class="sd">        (size n x d) Training inputs of currently pending points.</span>
-<span class="sd">    samples : :obj:`int`</span>
+<span class="sd">    samples : ``int``</span>
 <span class="sd">         Number of Monte Carlo samples, default is 512.</span>
-<span class="sd">    fix_base_samples : :obj:`bool`</span>
+<span class="sd">    fix_base_samples : ``bool``</span>
 <span class="sd">        Whether base samples used to compute Monte Carlo samples of</span>
 <span class="sd">        acquisition function should be fixed for the optimisation step.</span>
 <span class="sd">        If false (default) stochastic optimizer (Adam) have to be used. If</span>
 <span class="sd">        true deterministic optimizer (L-BFGS-B, SLSQP) can be used.</span>
-<span class="sd">    base_samples : :obj:`NoneType` or :obj:`torch.Tensor`</span>
+<span class="sd">    base_samples : ``NoneType`` or ``torch.Tensor``</span>
 <span class="sd">        Base samples used to compute Monte Carlo samples drawn if</span>
 <span class="sd">        `fix_base_samples` is true.</span>
-<span class="sd">    dims : :obj:`int`</span>
+<span class="sd">    dims : ``int``</span>
 <span class="sd">        Number of input dimensions.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -360,31 +360,31 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        gp : :obj:`gpytorch.models.GP`</span>
+<span class="sd">        gp : ``gpytorch.models.GP``</span>
 <span class="sd">            Gaussian Process model.</span>
-<span class="sd">        beta : :obj:`float`</span>
+<span class="sd">        beta : ``float``</span>
 <span class="sd">                Trade-off parameter, default is 4.0.</span>
-<span class="sd">        x_pending : :obj:`torch.Tensor`</span>
+<span class="sd">        x_pending : ``torch.Tensor`</span>
 <span class="sd">            (size n x d) Training inputs of currently pending points.</span>
-<span class="sd">        samples : :obj:`int`</span>
+<span class="sd">        samples : ``int``</span>
 <span class="sd">            Number of Monte Carlo samples, default is 512.</span>
-<span class="sd">        fix_base_samples : :obj:`bool`</span>
+<span class="sd">        fix_base_samples : ``bool``</span>
 <span class="sd">            Whether base samples used to compute Monte Carlo samples of</span>
 <span class="sd">            acquisition function should be fixed for the optimisation step.</span>
 <span class="sd">            If false (default) stochastic optimizer (Adam) have to be used. If</span>
 <span class="sd">            true deterministic optimizer (L-BFGS-B, SLSQP) can be used.</span>
-<span class="sd">        base_samples : :obj:`NoneType` or :obj:`torch.Tensor`</span>
+<span class="sd">        base_samples : ``NoneType`` or ``torch.Tensor``</span>
 <span class="sd">            Base samples used to compute Monte Carlo samples drawn if</span>
 <span class="sd">            `fix_base_samples` is true.</span>
-<span class="sd">        dims : :obj:`int`</span>
+<span class="sd">        dims : ``int``</span>
 <span class="sd">            Number of input dimensions.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         
-        <span class="bp">self</span><span class="o">.</span><span class="n">gp</span> <span class="o">=</span> <span class="n">gp</span>                        <span class="c1"># surrogate model</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">beta</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">beta</span><span class="p">)</span>      <span class="c1"># UCB parameter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gp</span> <span class="o">=</span> <span class="n">gp</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">beta</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">beta</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">beta_coeff</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="o">*</span><span class="n">torch</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">x_pending</span> <span class="o">=</span> <span class="n">x_pending</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">samples</span> <span class="o">=</span> <span class="n">samples</span>              <span class="c1"># Monte Carlo samples</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">samples</span> <span class="o">=</span> <span class="n">samples</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fix_base_samples</span> <span class="o">=</span> <span class="n">fix_base_samples</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">base_samples</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">train_inputs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -396,12 +396,12 @@
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        x : :obj:`torch.Tensor`</span>
+<span class="sd">        x : ``torch.Tensor``</span>
 <span class="sd">            (size n x d) Test points.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        :obj:`torch.Tensor`</span>
+<span class="sd">        ``torch.Tensor``</span>
 <span class="sd">            (size n) (Negative) Upper Confidence Bound of `x`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 

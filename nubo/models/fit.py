@@ -1,4 +1,3 @@
-import torch
 from torch import Tensor
 from torch.optim import Adam
 from gpytorch.models import GP
@@ -17,25 +16,24 @@ def fit_gp(x: Tensor,
            **kwargs) -> None:
     """
     Estimate hyper-parameters of the Gaussian process `gp` by maximum
-    likelihood estimation (MLE) using :obj:`torch.optim.Adam` algorithm.
+    likelihood estimation (MLE) using ``torch.optim.Adam`` algorithm.
 
     Parameters
     ----------
-    x : :obj:`torch.Tensor`
+    x : ``torch.Tensor``
         (size n x d) Training inputs.
-    y : :obj:`torch.Tensor`
+    y : ``torch.Tensor``
         (size n) Training targets.
-    gp : :obj:`gpytorch.likelihoods.Likelihood`
+    gp : ``gpytorch.likelihoods.Likelihood``
         Gaussian Process model.
-    mll : :obj:`gpytorch.mlls.MarginalLogLikelihood`
+    mll : ``gpytorch.mlls.MarginalLogLikelihood``
         Marginal log likelihood.
-    lr : :obj:`float`, optional
-        Learning rate of :obj:`torch.optim.Adam` algorithm, default is 0.1.
-    steps : :obj:`int`, optional
-        Optimisation steps of :obj:`torch.optim.Adam` algorithm, default is
-        200.
-    **kwargs : :obj:`Any`
-        Keyword argument passed to :obj:`torch.optim.Adam`.
+    lr : ``float``, optional
+        Learning rate of ``torch.optim.Adam`` algorithm, default is 0.1.
+    steps : ``int``, optional
+        Optimisation steps of ``torch.optim.Adam`` algorithm, default is 200.
+    **kwargs : ``Any``
+        Keyword argument passed to ``torch.optim.Adam``.
     """
 
     # set Gaussian process and likelihood to training mode

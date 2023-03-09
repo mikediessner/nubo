@@ -157,7 +157,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../get_started.html">Get started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../bayesian_optimisation.html">Bayesian Optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bayesian_optimisation.html">Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../surrogate_models.html">Surrogate models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../acquisition_functions.html">Acquisition functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../citation.html">Citation</a></li>
@@ -283,7 +283,10 @@
                <span class="n">num_samples</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
                <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Multi-start Adam optimiser.</span>
+<span class="sd">    Multi-start Adam optimiser using the ``torch.optim.Adam`` implementation</span>
+<span class="sd">    from ``PyTorch``. Picks the best `num_starts` points from a total </span>
+<span class="sd">    `num_samples` Latin hypercube samples to initialise the optimser. Returns</span>
+<span class="sd">    the best result.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>

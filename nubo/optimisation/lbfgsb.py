@@ -11,7 +11,10 @@ def lbfgsb(func: Callable,
            num_samples: Optional[int]=100,
            **kwargs: Any) -> Tuple[Tensor, Tensor]:
     """
-    Multi-start L-BFGS-B optimiser.
+    Multi-start L-BFGS-B optimiser using the ``scipy.optimize.minimize``
+    implementation from ``SciPy``. Picks the best `num_starts` points from
+    a total `num_samples` Latin hypercube samples to initialise the optimser.
+    Returns the best result.
 
     Parameters
     ----------

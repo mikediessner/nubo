@@ -1,0 +1,4 @@
+.. _model:
+
+Surrogate models
+=================

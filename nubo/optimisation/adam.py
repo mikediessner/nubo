@@ -68,7 +68,10 @@ def adam(func: Callable,
                num_samples: Optional[int]=100,
                **kwargs: Any) -> Tuple[Tensor, Tensor]:
     """
-    Multi-start Adam optimiser.
+    Multi-start Adam optimiser using the ``torch.optim.Adam`` implementation
+    from ``PyTorch``. Picks the best `num_starts` points from a total 
+    `num_samples` Latin hypercube samples to initialise the optimser. Returns
+    the best result.
 
     Parameters
     ----------

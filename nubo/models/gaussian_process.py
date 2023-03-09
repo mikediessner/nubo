@@ -53,7 +53,7 @@ class GaussianProcess(ExactGP):
     def forward(self, x: Tensor) -> MultivariateNormal:
         """
         Compute the mean vector and covariance matrix for some test points `x`
-        and returns a multivariate Normal distribution.
+        and returns a multivariate normal distribution.
 
         Parameters
         ----------
@@ -63,7 +63,7 @@ class GaussianProcess(ExactGP):
         Returns
         -------
         ``gpytorch.distributions.MultivariateNormal``
-            Predictice multivariate Normal distribution.
+            Predictice multivariate normal distribution.
         """
 
         mean_x = self.mean_module(x)

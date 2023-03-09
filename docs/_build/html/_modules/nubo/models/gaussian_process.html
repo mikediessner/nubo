@@ -157,7 +157,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../get_started.html">Get started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../bayesian_optimisation.html">Bayesian Optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bayesian_optimisation.html">Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../surrogate_models.html">Surrogate models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../acquisition_functions.html">Acquisition functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../citation.html">Citation</a></li>
@@ -268,7 +268,7 @@
 <div class="viewcode-block" id="GaussianProcess.forward"><a class="viewcode-back" href="../../../nubo.models.html#nubo.models.gaussian_process.GaussianProcess.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MultivariateNormal</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute the mean vector and covariance matrix for some test points `x`</span>
-<span class="sd">        and returns a multivariate Normal distribution.</span>
+<span class="sd">        and returns a multivariate normal distribution.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -278,7 +278,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        ``gpytorch.distributions.MultivariateNormal``</span>
-<span class="sd">            Predictice multivariate Normal distribution.</span>
+<span class="sd">            Predictice multivariate normal distribution.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">mean_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean_module</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>

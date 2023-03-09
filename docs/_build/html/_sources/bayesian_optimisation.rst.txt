@@ -1,0 +1,4 @@
+.. _bo:
+
+Bayesian optimisation
+=====================

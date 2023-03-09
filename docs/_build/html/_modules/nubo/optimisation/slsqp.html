@@ -157,7 +157,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../get_started.html">Get started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../bayesian_optimisation.html">Bayesian Optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bayesian_optimisation.html">Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../surrogate_models.html">Surrogate models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../acquisition_functions.html">Acquisition functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../citation.html">Citation</a></li>
@@ -227,7 +227,10 @@
           <span class="n">num_samples</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
           <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Multi-start SLSQP optimiser.</span>
+<span class="sd">    Multi-start SLSQP optimiser using the ``scipy.optimize.minimize``</span>
+<span class="sd">    implementation from ``SciPy``. Picks the best `num_starts` points from</span>
+<span class="sd">    a total `num_samples` Latin hypercube samples to initialise the optimser.</span>
+<span class="sd">    Returns the best result.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>

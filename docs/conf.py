@@ -19,6 +19,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.viewcode',
     'sphinx.ext.napoleon',
+    'sphinx.ext.autosummary',
     'myst_parser',
     'nbsphinx'
 ]
@@ -39,3 +40,4 @@ html_title = 'NUBO'
 pygments_style = "default"
 pygments_dark_style = "monokai"
 numpydoc_show_inherited_class_members = False
+numpydoc_class_members_toctree = False

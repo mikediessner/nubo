@@ -30,7 +30,7 @@ def sequential(func: Callable,
     constraints : ``dict`` or ``list`` of ``dict``, optional
         Optimisation constraints.
     lr : ``float``, optional
-        Learning rate of ``torch.optim.Adam` algorithm, default is 0.1.
+        Learning rate of ``torch.optim.Adam`` algorithm, default is 0.1.
     steps : ``int``, optional
         Optimisation steps of ``torch.optim.Adam`` algorithm, default is 200.
     num_starts : ``int``, optional
@@ -43,9 +43,9 @@ def sequential(func: Callable,
 
     Returns
     -------
-    batch_result : ``torch.Tensor`
+    batch_result : ``torch.Tensor``
         (size `batch_size` x d) Batch inputs.
-    batch_func_result : ``torch.Tensor`
+    batch_func_result : ``torch.Tensor``
         (size `batch_size`) Batch outputs.
     """
 

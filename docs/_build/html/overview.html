@@ -158,9 +158,7 @@
 <ul class="current">
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="get_started.html">Get started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bayesian_optimisation.html">Bayesian optimisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="surrogate_models.html">Surrogate models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="acquisition_functions.html">Acquisition functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bayesian_optimisation.html">Primer on Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="citation.html">Citation</a></li>
 <li class="toctree-l1"><a class="reference external" href="http://github.com/mikediessner/nubo-dev">Github</a></li>
 </ul>
@@ -227,16 +225,16 @@ under the <a class="reference external" href="https://joinup.ec.europa.eu/licenc
 <section id="bayesian-optimisation">
 <h2>Bayesian optimisation<a class="headerlink" href="#bayesian-optimisation" title="Permalink to this heading">#</a></h2>
 <p><a class="reference internal" href="bayesian_optimisation.html#bo"><span class="std std-ref">Bayesian optimisation</span></a> is a surrogate model-based optimisation
-algorithm that aims to maximise an objective function in a minimum number of
+algorithm that aims to maximise an <a class="reference internal" href="bayesian_optimisation.html#objfunc"><span class="std std-ref">objective function</span></a> in a minimum number of
 function evaluations. Usually, the objective function does not have a known
 mathematical expression and every function evaluation is expensive requiring
 a cost-effective and sample-efficient optimisation routine. Bayesian
 optimisation meets these criteria by representing the objective function
-through a <a class="reference internal" href="surrogate_models.html#model"><span class="std std-ref">surrogate model</span></a>, often a Gaussian process. This
+through a <a class="reference internal" href="bayesian_optimisation.html#model"><span class="std std-ref">surrogate model</span></a>, often a Gaussian process. This
 representation can then be used to find the next point that should be
-evaluated by maximising a criterion specified through an <a class="reference internal" href="acquisition_functions.html#acquisition"><span class="std std-ref">acquisition
+evaluated by maximising a criterion specified through an <a class="reference internal" href="bayesian_optimisation.html#acquisition"><span class="std std-ref">acquisition
 function</span></a>. A popular criterion is, for example, the
-<a class="reference internal" href="acquisition_functions.html#ei"><span class="std std-ref">Expected Improvement</span></a> that is the expectation of the new point
+Expected Improvement that is the expectation of the new point
 returning a better solution than the previous best. Bayesian optimisation is
 performed in a loop where training data is used to fit the surrogate model
 before the next point suggested by the acquisition function is evaluated and

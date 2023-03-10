@@ -30,8 +30,6 @@ NUBO.
    overview
    get_started.ipynb
    bayesian_optimisation
-   surrogate_models
-   acquisition_functions
    citation
    Github <http://github.com/mikediessner/nubo-dev>
 

@@ -1,7 +1,8 @@
 # Citation
 
 Please cite as:  
-- Diessner, Mike, Kevin Wilson, and Richard D. Whalley. "NUBO: a transparent python package for Bayesian Optimisation." *arXiv preprint arXiv:1234.56789* (2023).
+
+> Diessner, Mike, Kevin Wilson, and Richard D. Whalley. "NUBO: a transparent python package for Bayesian Optimisation." *arXiv preprint arXiv:1234.56789* (2023).
 
 
 BibTex:

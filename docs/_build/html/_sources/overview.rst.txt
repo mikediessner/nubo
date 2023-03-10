@@ -12,7 +12,7 @@ under the `BSD 3-Clause license`_.
 Bayesian optimisation
 ---------------------
 :ref:`Bayesian optimisation <bo>` is a surrogate model-based optimisation 
-algorithm that aims to maximise an objective function in a minimum number of
+algorithm that aims to maximise an :ref:`objective function <objfunc>` in a minimum number of
 function evaluations. Usually, the objective function does not have a known
 mathematical expression and every function evaluation is expensive requiring
 a cost-effective and sample-efficient optimisation routine. Bayesian
@@ -21,7 +21,7 @@ through a :ref:`surrogate model <model>`, often a Gaussian process. This
 representation can then be used to find the next point that should be
 evaluated by maximising a criterion specified through an :ref:`acquisition 
 function <acquisition>`. A popular criterion is, for example, the
-:ref:`Expected Improvement <ei>` that is the expectation of the new point
+Expected Improvement that is the expectation of the new point 
 returning a better solution than the previous best. Bayesian optimisation is
 performed in a loop where training data is used to fit the surrogate model
 before the next point suggested by the acquisition function is evaluated and

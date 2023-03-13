@@ -1,8 +1,3 @@
-.. NUBO documentation master file, created by
-   sphinx-quickstart on Sat Mar  4 14:32:08 2023.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 NUBO: a transparent python package for Bayesian optimisation
 ============================================================
 NUBO, short for Newcastle University Bayesian optimisation, is a Bayesian
@@ -12,7 +7,7 @@ the `experimental fluid dynamics research group`_ at `Newcastle University`_.
 It focuses on transparent implementations of algorithms and precise references
 and documentation for all methods to make Bayesian optimisation accessible for
 researchers from all disciplines.  NUBO is written in Python_ and distributed
-under the `BSD 3-Clause license`_.
+open-source under the `BSD 3-Clause license`_.
 
 NUBO
 ----

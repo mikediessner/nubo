@@ -1,7 +1,7 @@
 .. _bo:
 
-Primer on Bayesian optimisation
-===============================
+A primer on Bayesian optimisation
+=================================
 
 .. _objfunc:
 
@@ -21,19 +21,19 @@ and we further define training inputs as matrix :math:`\boldsymbol X_n = \{\bold
 
 Bayesian optimisation
 ---------------------
-Bayesian optimisation is a surrogate model-based optimisation algorithm that aims to maximise the objective function :math:`f(\boldsymbol x)` in a minimum number of function evaluations. Usually, the objective function does not have a known mathematical expression and every function evaluation is expensive requiring a cost-effective and sample-efficient optimisation routine. Bayesian optimisation meets these criteria by representing the objective function through a surrogate model :math:`\mathcal{M}`, often a Gaussian process :math:`\mathcal{GP}`. This representation can then be used to find the next point that should be evaluated by maximising a criterion specified through an acquisition function :math:`\alpha`. A popular criterion is, for example, the Expected Improvement that is the expectation of the new point returning a better solution than the previous best. Bayesian optimisation is performed in a loop where training data :math:`\mathcal{D}_n` is used to fit the surrogate model before the next point suggested by the acquisition function is evaluated and added to the training data itself. The loop than restarts gaining more information about the objective function with each iteration. Bayesian optimisation is run for as many iterations as the evaluation budget $N$ allows, until a satisfying solution is found, or unitl a pre-defined stopping criterion is met.
+Bayesian optimisation [1]_ [3]_ [4]_ [7]_ [8]_ is a surrogate model-based optimisation algorithm that aims to maximise the objective function :math:`f(\boldsymbol x)` in a minimum number of function evaluations. Usually, the objective function does not have a known mathematical expression and every function evaluation is expensive requiring a cost-effective and sample-efficient optimisation routine. Bayesian optimisation meets these criteria by representing the objective function through a surrogate model :math:`\mathcal{M}`, often a Gaussian process :math:`\mathcal{GP}`. This representation can then be used to find the next point that should be evaluated by maximising a criterion specified through an acquisition function :math:`\alpha`. A popular criterion is, for example, the Expected Improvement that is the expectation of the new point returning a better solution than the previous best. Bayesian optimisation is performed in a loop where training data :math:`\mathcal{D}_n` is used to fit the surrogate model before the next point suggested by the acquisition function is evaluated and added to the training data itself. The loop than restarts gaining more information about the objective function with each iteration. Bayesian optimisation is run for as many iterations as the evaluation budget $N$ allows, until a satisfying solution is found, or unitl a pre-defined stopping criterion is met.
 
     **Algorithm**
 
     Specify evaluation budget :math:`N`, number of initial points :math:`n_0`, surrogate model :math:`\mathcal{M}`, acquisition function :math:`\alpha`.
 
-    Sample :math:`n_0` initial training data points :math:`\boldsymbol X_0` via a space-filling design and gather observations :math:`\boldsymbol y_0`. 
+    Sample :math:`n_0` initial training data points :math:`\boldsymbol X_0` via a space-filling design [6]_ and gather observations :math:`\boldsymbol y_0`. 
     Set :math:`n = n_0` and :math:`\mathcal{D}_n = \{ \boldsymbol X_0, \boldsymbol y_0 \}`.
 
     **while** :math:`n \leq N` **do:**
 
         1. Fit surrogate model :math:`\mathcal{M}` to training data :math:`\mathcal{D}_n`.  
-        2. Find :math:`x_n^*`` that maximises an acquisition criterion :math:`\alpha` computed with model :math:`\mathcal{M}`.  
+        2. Find :math:`x_n^*` that maximises an acquisition criterion :math:`\alpha` based on model :math:`\mathcal{M}`.  
         3. Evaluate :math:`\boldsymbol x_n^*` observing :math:`y_n^*` and add to :math:`\mathcal{D}_n`.  
         4. Increment :math:`n`.
 
@@ -42,9 +42,10 @@ Bayesian optimisation is a surrogate model-based optimisation algorithm that aim
     Return point with highest observation :math:`\boldsymbol x^*`.
 
 .. _model:
+
 Surrogate model
 ---------------
-A popular choice for the surrogate model :math:`\mathcal{M}` that acts as a representation of the objective function :math:`f(\boldsymbol x)` is a Gaussian process :math:`\mathcal{GP}`, a flexible non-parametric regression model. A Gaussian process is a finite collection of random variables that has a joint Gaussian distribution and is defined by a mean function :math:`\mu_0(\boldsymbol x) : \mathcal{X} \mapsto \mathbb{R}` and a covariance kernel :math:`\Sigma_0(\boldsymbol x, \boldsymbol x')  : \mathcal{X} \times \mathcal{X} \mapsto \mathbb{R}` resulting in the prior distribution
+A popular choice for the surrogate model :math:`\mathcal{M}` that acts as a representation of the objective function :math:`f(\boldsymbol x)` is a Gaussian process :math:`\mathcal{GP}` [3]_ [10]_, a flexible non-parametric regression model. A Gaussian process is a finite collection of random variables that has a joint Gaussian distribution and is defined by a mean function :math:`\mu_0(\boldsymbol x) : \mathcal{X} \mapsto \mathbb{R}` and a covariance kernel :math:`\Sigma_0(\boldsymbol x, \boldsymbol x')  : \mathcal{X} \times \mathcal{X} \mapsto \mathbb{R}` resulting in the prior distribution
 
 .. math::
     f(\boldsymbol X_n) \sim \mathcal{N} (m(\boldsymbol X_n), K(\boldsymbol X_n, \boldsymbol X_n)).
@@ -64,14 +65,17 @@ where :math:`m(\boldsymbol X_*)` is the mean vector of size :math:`n_*` over all
 
 Hyper-parameters of the Gaussian process such as any parameters :math:`\theta` in the mean function and the covariance kernel or the noise variance :math:`\sigma^2` can be estimated by maximum likelihood estimation (MLE), maximum a posteriori estimation (MAP), or fully Bayesian estimation.
 
-NUBO uses the ``GPyTorch`` [1]_ package for surrogate modelling. This is a very powerful package that allows the implementation of a wide selection of models ranging from exact Gaussian processes to approximate and even deep Gaussian processes. It also comes with a rich documentation, many practical examples, and a large community if help is needed.
+NUBO uses the ``GPyTorch`` package [2]_ for surrogate modelling. This is a very powerful package that allows the implementation of a wide selection of models ranging from exact Gaussian processes to approximate and even deep Gaussian processes. It also comes with a rich documentation, many practical examples, and a large community if help is needed.
 
 .. _acquisition:
+
 Acquisition function
 --------------------
 Acquisition functions use the posterior or predictive distribution of the Gaussian process :math:`\mathcal{GP}` to compute a criterion that assess if a test point is good potential solution when evaluated through the objective function :math:`f(\boldsymbol x)`. Thus, maximising the acquisition function suggests the test point that based on the current training data :math:`\mathcal{D_n}` has the highest potential of being the global optimum. To do this, an acquisition function :math:`\alpha` balances exploration and exploitation. The former characterised by areas that lack of observed data points and where the uncertainty of the Gaussian process is high, and the latter by promising areas with a high posterior mean of the Gaussian process. This exploration-exploitation trade-off ensures that Bayesian optimisation does not converge to the first (potentially local) maximum it finds but explores the full input space.
 
-NUBO supports two of the most popular acquisition functions that are grounded in a rich history of theoretical and empirical research. Expected Improvement (EI) [2]_ selects points with the biggest potential of improving on the current best observation while Upper Confidence Bound (UCB) [3]_ takes an optimistic view of the posterior uncertainty and assumes a user-defined (through the hyper-parameter :math:`\beta`) level of it to be true. Expected Improvement is defined as
+Analytical acquisition functions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+NUBO supports two of the most popular acquisition functions that are grounded in a rich history of theoretical and empirical research. Expected Improvement (EI) [4]_ selects points with the biggest potential of improving on the current best observation while Upper Confidence Bound (UCB) [9]_ takes an optimistic view of the posterior uncertainty and assumes a user-defined (through the hyper-parameter :math:`\beta`) level of it to be true. Expected Improvement is defined as
 
 .. math::
     \alpha_{EI} (\boldsymbol X_*) = \left(\mu_n(\boldsymbol X_*) - y^{best} \right) \Phi(z) + \sigma_n(\boldsymbol X_*) \phi(z)
@@ -84,7 +88,11 @@ Upper Confidence bound can be computed by
 
 where :math:`\beta` is a pre-defined trade-off parameter, and :math:`\mu_n(\cdot)` and :math:`\sigma_n(\cdot)` are the mean and the standard deviation of the predictive distribution of the Gaussian process.
 
-Both of these acquisition functions can be computed analytically by maximising them with a deterministic optimiser such as L-BFGS-B for bounded unconstraint problems or SLSQP for bounded or constraint problems. However, this is only true for the sequential single-point case in which every points suggested by Bayesian optimisation is observed through the objective function :math:`f( \boldsymbol x)` immediatley before the optimisation loop is repeated. For parallel multi-point batches or asynchronous optimisation, the analytical acquisition functions are in general intractable. To allow Bayesian optimisation in these cases, NUBO supports the approximation of the analytical acquisition function through Monte Carlo sampling [4]_.
+Both of these acquisition functions can be computed analytically by maximising them with a deterministic optimiser such as L-BFGS-B for bounded unconstraint problems or SLSQP for bounded or constraint problems. However, this is only true for the sequential single-point case in which every points suggested by Bayesian optimisation is observed through the objective function :math:`f( \boldsymbol x)` immediatley before the optimisation loop is repeated. NUBO contains a pre-specified Gaussian process with constant mean function and the Matern 5/2 covariance kernel that is especially suited for practical optimisation [8]_.
+
+Monte Carlo acquisition functions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+For parallel multi-point batches or asynchronous optimisation, the analytical acquisition functions are in general intractable. To allow Bayesian optimisation in these cases, NUBO supports the approximation of the analytical acquisition function through Monte Carlo sampling [8]_ [11]_.
 
 The idea is to draw a large number of samples directly from the predicitve distribution and then to approximate the acquisition by averaging these Monte Carlo samples. This method is made viable by reparameterising the acquisition functions and then computing samples from the predicitve distribution by utilising base samples from a standard normal distribution :math:`z \sim \mathcal{N} (0, 1)`.
 
@@ -98,14 +106,39 @@ where :math:`\mu_n(\cdot)` is the mean of the predictive distribution of the Gau
 
 Due to the randomness of the Monte Carlo samples, these acquisition functions can only be optimised by stochastic optimisers such as Adam [5]_. However, there is some empirical evidence that fixing the base samples for individual Bayesian optimisation loops does not affect the performance negatively. This method would allow deterministic optimiser to be used but could potentially introduce bias due to sampling randomness.
 
-Furthermore, two optimisation strategies for batches are possible: The default is a joint optimisation approach where the acquisition functions are optimised over all points of the batch. The second option is a greedy sequential approach where one point after the other is selected holding each previous point fixed until the batch is full. Empirical evidence shows that both methods approximate the acquisition similarly for smaller batches. For larger batches, greedy optimisation performs better as the optimisation of the joint approach increases in complexity with the batch size.
+Furthermore, two optimisation strategies for batches are possible [11]_: The default is a joint optimisation approach where the acquisition functions are optimised over all points of the batch. The second option is a greedy sequential approach where one point after the other is selected holding each previous point fixed until the batch is full. Empirical evidence shows that both methods approximate the acquisition similarly for smaller batches. For larger batches, greedy optimisation performs better as the optimisation of the joint approach increases in complexity with the batch size.
 
-Asynchronous optimisation leverages the same property as sequential greedy optimisation: the pending points that have not yet been evaluated can be added to the test points but are treated as fixed. In this way, they affect the joint multivariate normal distribution but are not considered directly in the optimisation.
+Asynchronous optimisation [8]_ leverages the same property as sequential greedy optimisation: the pending points that have not yet been evaluated can be added to the test points but are treated as fixed. In this way, they affect the joint multivariate normal distribution but are not considered directly in the optimisation.
+
+.. image:: unnamed.png
+    :width: 49 %
+.. image:: unnamed-2.png
+    :width: 49 %
+.. image:: unnamed-3.png
+    :width: 49 %
+.. image:: unnamed-4.png
+    :width: 49 %
+
+Figure 1: Bayesian optimisation example. A Gaussian process is fitted to three
+initial observations (dark blue dots) resulting in the posterior mean (solid
+red line) and the posterior variance represented here as the 95% confidence
+interval (blue area). The Expected Improvement acquisition function (orange
+area) is maximised to find the next point that should be observed (dashed
+black line) from the objective function. Once observed, the input and output
+are added to the training data and the process is repeated two more times. The
+final Gaussian process model is than compared to the true objective function
+(solid black line). The last evaluated point approximates the maximum.
 
 ----
 
-.. [1] Gardner, Jacob, Geoff Pleiss, Kilian Q. Weinberger, David Bindel, and Andrew G. Wilson. "GPyTorch: Blackbox matrix-matrix Gaussian process inference with GPU acceleration." *Advances in neural information processing systems* 31 (2018).
-.. [2] Jones, Donald R., Matthias Schonlau, and William J. Welch. "Efficient global optimization of expensive black-box functions." *Journal of Global optimization* 13, no. 4 (1998): 455.
-.. [3] Srinivas, Niranjan, Andreas Krause, Sham M. Kakade, and Matthias Seeger. "Gaussian process optimization in the bandit setting: No regret and experimental design."" *Proceedings of the 27th International Conference on Machine Learning* (2010): 1015-1022.
-.. [4] Wilson, James, Frank Hutter, and Marc Deisenroth. "Maximizing acquisition functions for Bayesian optimization." *Advances in neural information processing systems* 31 (2018).
+.. [1] Frazier, Peter I. "A tutorial on Bayesian optimization." *arXiv preprint arXiv:1807.02811* (2018).
+.. [2] Gardner, Jacob, Geoff Pleiss, Kilian Q. Weinberger, David Bindel, and Andrew G. Wilson. "GPyTorch: Blackbox matrix-matrix Gaussian process inference with GPU acceleration." *Advances in neural information processing systems* 31 (2018).
+.. [3] Gramacy, Robert B. *Surrogates: Gaussian process modeling, design, and optimization for the applied sciences.* CRC press, 2020.
+.. [4] Jones, Donald R., Matthias Schonlau, and William J. Welch. "Efficient global optimization of expensive black-box functions." *Journal of Global optimization* 13, no. 4 (1998): 455.
 .. [5] Kingma, Diederik P., and Jimmy Ba. "Adam: A method for stochastic optimization." *Proceedings of the 3rd International Conference on Learning Representations* (2015).
+.. [6] McKay, Michael D., Richard J. Beckman, and William J. Conover. "A comparison of three methods for selecting values of input variables in the analysis of output from a computer code." Technometrics 42, no. 1 (2000): 55-61.
+.. [7] Shahriari, Bobak, Kevin Swersky, Ziyu Wang, Ryan P. Adams, and Nando De Freitas. "Taking the human out of the loop: A review of Bayesian optimization." *Proceedings of the IEEE* 104, no. 1 (2015): 148-175.
+.. [8] Snoek, Jasper, Hugo Larochelle, and Ryan P. Adams. "Practical bayesian optimization of machine learning algorithms." *Advances in neural information processing systems* 25 (2012).
+.. [9] Srinivas, Niranjan, Andreas Krause, Sham M. Kakade, and Matthias Seeger. "Gaussian process optimization in the bandit setting: No regret and experimental design."" *Proceedings of the 27th International Conference on Machine Learning* (2010): 1015-1022.
+.. [10] Williams, Christopher KI, and Carl Edward Rasmussen. *Gaussian processes for machine learning.* Vol. 2, no. 3. Cambridge, MA: MIT press, 2006.
+.. [11] Wilson, James, Frank Hutter, and Marc Deisenroth. "Maximizing acquisition functions for Bayesian optimization." *Advances in neural information processing systems* 31 (2018).

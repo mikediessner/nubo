@@ -41,3 +41,4 @@ pygments_style = "default"
 pygments_dark_style = "monokai"
 numpydoc_show_inherited_class_members = False
 numpydoc_class_members_toctree = False
+html_favicon = 'favicon.ico'

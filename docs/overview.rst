@@ -61,20 +61,20 @@ Contents
 
 ----
 
-.. _`experimental fluid dynamics research group`: https://www.experimental-fluid-dynamics.com/
-.. _`Newcastle University`: https://www.ncl.ac.uk/
-.. _Python: https://www.python.org/
-.. _`BSD 3-Clause license`: https://joinup.ec.europa.eu/licence/bsd-3-clause-new-or-revised-license/
+.. _`experimental fluid dynamics research group`: https://www.experimental-fluid-dynamics.com
+.. _`Newcastle University`: https://www.ncl.ac.uk
+.. _Python: https://www.python.org
+.. _`BSD 3-Clause license`: https://joinup.ec.europa.eu/licence/bsd-3-clause-new-or-revised-license
 
-.. [1] Frazier, Peter I. "A tutorial on Bayesian optimization." *arXiv preprint arXiv:1807.02811* (2018).
-.. [2] Gardner, Jacob, Geoff Pleiss, Kilian Q. Weinberger, David Bindel, and Andrew G. Wilson. "GPyTorch: Blackbox matrix-matrix Gaussian process inference with GPU acceleration." *Advances in neural information processing systems* 31 (2018).
-.. [3] Gramacy, Robert B. *Surrogates: Gaussian process modeling, design, and optimization for the applied sciences.* CRC press, 2020.
-.. [4] Jones, Donald R., Matthias Schonlau, and William J. Welch. "Efficient global optimization of expensive black-box functions." *Journal of Global optimization* 13, no. 4 (1998): 455.
-.. [5] Kingma, Diederik P., and Jimmy Ba. "Adam: A method for stochastic optimization." *Proceedings of the 3rd International Conference on Learning Representations* (2015).
-.. [6] McKay, Michael D., Richard J. Beckman, and William J. Conover. "A comparison of three methods for selecting values of input variables in the analysis of output from a computer code." Technometrics 42, no. 1 (2000): 55-61.
-.. [7] Shahriari, Bobak, Kevin Swersky, Ziyu Wang, Ryan P. Adams, and Nando De Freitas. "Taking the human out of the loop: A review of Bayesian optimization." *Proceedings of the IEEE* 104, no. 1 (2015): 148-175.
-.. [8] Snoek, Jasper, Hugo Larochelle, and Ryan P. Adams. "Practical bayesian optimization of machine learning algorithms." *Advances in neural information processing systems* 25 (2012).
-.. [9] Surjanovic, Sonja, and Derek Bingham. "Virtual library of simulation experiments: Test functions and datasets." Sfu. March 11, 2023. https://www.sfu.ca/~ssurjano/optimization.html/.
-.. [10] Srinivas, Niranjan, Andreas Krause, Sham M. Kakade, and Matthias Seeger. "Gaussian process optimization in the bandit setting: No regret and experimental design."" *Proceedings of the 27th International Conference on Machine Learning* (2010): 1015-1022.
-.. [11] Williams, Christopher KI, and Carl Edward Rasmussen. *Gaussian processes for machine learning.* Vol. 2, no. 3. Cambridge, MA: MIT press, 2006.
-.. [12] Wilson, James, Frank Hutter, and Marc Deisenroth. "Maximizing acquisition functions for Bayesian optimization." *Advances in neural information processing systems* 31 (2018).
+.. [1] PI Frazier, "A tutorial on Bayesian optimization," *arXiv preprint arXiv:1807.02811*, 2018.
+.. [2] J Gardner, G Pleiss, KQ Weinberger, D Bindel, and AG Wilson, "GPyTorch: Blackbox matrix-matrix Gaussian process inference with GPU acceleration," *Advances in neural information processing systems*, vol. 31, 2018.
+.. [3] RB Gramacy, *Surrogates: Gaussian process modeling, design, and optimization for the applied sciences*, 1st ed. Boca Raton, FL: CRC press, 2020.
+.. [4] DR Jones, M Schonlau, and WJ Welch, "Efficient global optimization of expensive black-box functions," *Journal of Global optimization*, vol. 13, no. 4, p. 566, 1998.
+.. [5] DP Kingma and J Ba, "Adam: A method for stochastic optimization," *Proceedings of the 3rd International Conference on Learning Representations*, 2015.
+.. [6] MD McKay, RJ Beckman, and WJ Conover, "A comparison of three methods for selecting values of input variables in the analysis of output from a computer code," *Technometrics*, vol. 42, no. 1, p. 55-61, 2000.
+.. [7] B Shahriari, K Swersky, Z Wang, RP Adams, and N De Freitas, "Taking the human out of the loop: A review of Bayesian optimization," *Proceedings of the IEEE*, vol. 104, no. 1, p. 148-175, 2015.
+.. [8] J Snoek, H Larochelle, and RP Adams, "Practical bayesian optimization of machine learning algorithms," *Advances in neural information processing systems*, vol. 25, 2012.
+.. [9] S Surjanovic and D Bingham, "Virtual library of simulation experiments: Test functions and datasets," *sfu.ca*. [Online]. Available: https://www.sfu.ca/~ssurjano/optimization.html. [Accessed March 11, 2023].
+.. [10] N Srinivas, A Krause, SM Kakade, and M Seeger, "Gaussian process optimization in the bandit setting: No regret and experimental design," *Proceedings of the 27th International Conference on Machine Learning*, p. 1015-1022, 2010.
+.. [11] CKI Williams, and CE Rasmussen, *Gaussian processes for machine learning*, 2nd ed. Cambridge, MA: MIT press, 2006.
+.. [12] J Wilson, F Hutter, and M Deisenroth, "Maximizing acquisition functions for Bayesian optimization," *Advances in neural information processing systems*, vol. 31, 2018.

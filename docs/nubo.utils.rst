@@ -1,10 +1,15 @@
 Utility module
 ==============
 
-Latin Hypercube Sampling
-------------------------
+Data generation
+---------------
 
 .. automodule:: nubo.utils.latin_hypercube
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: nubo.utils.generate_inputs
    :members:
    :undoc-members:
    :show-inheritance:
@@ -12,7 +17,7 @@ Latin Hypercube Sampling
 Data transformations
 --------------------
 
-.. automodule:: nubo.utils.transfrom
+.. automodule:: nubo.utils.transform
    :members:
    :undoc-members:
    :show-inheritance:

@@ -502,14 +502,14 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">from</span> <span class="nn">nubo.utils</span> <span class="kn">import</span> <span class="n">LatinHypercubeSampling</span><span class="p">,</span> <span class="n">unnormalise</span>
+<span class="kn">from</span> <span class="nn">nubo.utils</span> <span class="kn">import</span> <span class="n">gen_inputs</span>
 
 
 <span class="c1"># training data</span>
-<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">lhs</span> <span class="o">=</span> <span class="n">LatinHypercubeSampling</span><span class="p">(</span><span class="n">dims</span><span class="o">=</span><span class="n">dims</span><span class="p">)</span>
-<span class="n">x_train</span> <span class="o">=</span> <span class="n">lhs</span><span class="o">.</span><span class="n">maximin</span><span class="p">(</span><span class="n">points</span><span class="o">=</span><span class="n">dims</span><span class="o">*</span><span class="mi">5</span><span class="p">)</span>
-<span class="n">x_train</span> <span class="o">=</span> <span class="n">unnormalise</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">)</span>
+<span class="n">x_train</span> <span class="o">=</span> <span class="n">gen_inputs</span><span class="p">(</span><span class="n">num_points</span><span class="o">=</span><span class="n">dims</span><span class="o">*</span><span class="mi">5</span><span class="p">,</span>
+                     <span class="n">num_dims</span><span class="o">=</span><span class="n">dims</span><span class="p">,</span>
+                     <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">,</span>
+                     <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">y_train</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span>
 </pre></div>
 </div>

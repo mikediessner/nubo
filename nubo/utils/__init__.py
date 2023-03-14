@@ -1,2 +1,3 @@
 from .latin_hypercube import LatinHypercubeSampling
-from .transfrom import normalise, unnormalise, standardise
+from .transform import normalise, unnormalise, standardise
+from .generate_inputs import gen_inputs

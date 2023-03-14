@@ -5,7 +5,7 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# Fully Bayesian Gaussian Process for Bayesian Optimisation"
+    "# Fully Bayesian Gaussian process for Bayesian optimisation"
    ]
   },
   {

@@ -41,9 +41,9 @@ Contents
   estimation (MAP) or fully Bayesian estimation.
 - **Acquisition function**: NUBO supports the use of analytical acquisition
   functions and approximations through Monte Carlo sampling. Analytical
-  Expected Improvement [4]_ and Upper Confidence Bound [10]_ can be used for
-  sequential   single-point problems where results are evaluated after each
-  iteration. Multi-point batches for parallel evaluation or asynchronous
+  expected improvement (EI) [4]_ and upper confidence bound (UCB) [10]_ can be
+  used for sequential single-point problems where results are evaluated after
+  each iteration. Multi-point batches for parallel evaluation or asynchronous
   problems where the optimnisation algorithm is continued while other points
   are still being evaluated can be performed via Monte Carlo acquisition
   functions [12]_.

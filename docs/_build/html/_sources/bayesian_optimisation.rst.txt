@@ -21,7 +21,7 @@ and we further define training inputs as matrix :math:`\boldsymbol X_n = \{\bold
 
 Bayesian optimisation
 ---------------------
-Bayesian optimisation [1]_ [3]_ [4]_ [7]_ [8]_ is a surrogate model-based optimisation algorithm that aims to maximise the objective function :math:`f(\boldsymbol x)` in a minimum number of function evaluations. Usually, the objective function does not have a known mathematical expression and every function evaluation is expensive requiring a cost-effective and sample-efficient optimisation routine. Bayesian optimisation meets these criteria by representing the objective function through a surrogate model :math:`\mathcal{M}`, often a Gaussian process :math:`\mathcal{GP}`. This representation can then be used to find the next point that should be evaluated by maximising a criterion specified through an acquisition function :math:`\alpha`. A popular criterion is, for example, the Expected Improvement that is the expectation of the new point returning a better solution than the previous best. Bayesian optimisation is performed in a loop where training data :math:`\mathcal{D}_n` is used to fit the surrogate model before the next point suggested by the acquisition function is evaluated and added to the training data itself. The loop than restarts gaining more information about the objective function with each iteration. Bayesian optimisation is run for as many iterations as the evaluation budget $N$ allows, until a satisfying solution is found, or unitl a pre-defined stopping criterion is met.
+Bayesian optimisation [1]_ [3]_ [4]_ [7]_ [8]_ is a surrogate model-based optimisation algorithm that aims to maximise the objective function :math:`f(\boldsymbol x)` in a minimum number of function evaluations. Usually, the objective function does not have a known mathematical expression and every function evaluation is expensive requiring a cost-effective and sample-efficient optimisation routine. Bayesian optimisation meets these criteria by representing the objective function through a surrogate model :math:`\mathcal{M}`, often a Gaussian process :math:`\mathcal{GP}`. This representation can then be used to find the next point that should be evaluated by maximising a criterion specified through an acquisition function :math:`\alpha`. A popular criterion is, for example, the expected improvement (EI) that is the expectation of the new point returning a better solution than the previous best. Bayesian optimisation is performed in a loop where training data :math:`\mathcal{D}_n` is used to fit the surrogate model before the next point suggested by the acquisition function is evaluated and added to the training data itself. The loop than restarts gaining more information about the objective function with each iteration. Bayesian optimisation is run for as many iterations as the evaluation budget $N$ allows, until a satisfying solution is found, or unitl a pre-defined stopping criterion is met.
 
     **Algorithm**
 
@@ -75,13 +75,13 @@ Acquisition functions use the posterior or predictive distribution of the Gaussi
 
 Analytical acquisition functions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-NUBO supports two of the most popular acquisition functions that are grounded in a rich history of theoretical and empirical research. Expected Improvement (EI) [4]_ selects points with the biggest potential of improving on the current best observation while Upper Confidence Bound (UCB) [9]_ takes an optimistic view of the posterior uncertainty and assumes a user-defined (through the hyper-parameter :math:`\beta`) level of it to be true. Expected Improvement is defined as
+NUBO supports two of the most popular acquisition functions that are grounded in a rich history of theoretical and empirical research. Expected improvement (EI) [4]_ selects points with the biggest potential of improving on the current best observation while upper confidence bound (UCB) [9]_ takes an optimistic view of the posterior uncertainty and assumes a user-defined (through the hyper-parameter :math:`\beta`) level of it to be true. Expected improvement (EI) is defined as
 
 .. math::
     \alpha_{EI} (\boldsymbol X_*) = \left(\mu_n(\boldsymbol X_*) - y^{best} \right) \Phi(z) + \sigma_n(\boldsymbol X_*) \phi(z)
 
 where :math:`z = \frac{\mu_n(\boldsymbol X_*) - y^{best}}{\sigma_n(\boldsymbol X_*)}`, :math:`\mu_n(\cdot)` and :math:`\sigma_n(\cdot)` are the mean and the standard deviation of the predictive distribution of the Gaussian process, $y^{best}$ is the current best observation, and :math:`\Phi` and :math:`\phi` are the cumulative distribution function and the probability density function of the standard normal distribution.
-Upper Confidence bound can be computed by
+upper confidence bound (UCB) can be computed by
 
 .. math::
     \alpha_{UCB} (\boldsymbol X_*) = \mu_n(\boldsymbol X_*) + \sqrt{\beta} \sigma_n(\boldsymbol X_*)
@@ -122,12 +122,13 @@ Asynchronous optimisation [8]_ leverages the same property as sequential greedy 
 Figure 1: Bayesian optimisation example. A Gaussian process is fitted to three
 initial observations (dark blue dots) resulting in the posterior mean (solid
 red line) and the posterior variance represented here as the 95% confidence
-interval (blue area). The Expected Improvement acquisition function (orange
-area) is maximised to find the next point that should be observed (dashed
-black line) from the objective function. Once observed, the input and output
-are added to the training data and the process is repeated two more times. The
-final Gaussian process model is than compared to the true objective function
-(solid black line). The last evaluated point approximates the maximum.
+interval (blue area). The expected improvement (EI) acquisition function
+(orange area) is maximised to find the next point that should be observed
+(dashed black line) from the objective function. Once observed, the input and
+output are added to the training data and the process is repeated two more
+times. The final Gaussian process model is than compared to the true objective
+function (solid black line). The last evaluated point approximates the
+maximum.
 
 ----
 

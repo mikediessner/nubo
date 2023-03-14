@@ -164,12 +164,12 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="singlepoint.html">Sequential single-point Bayesian Optimisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="multipoint_joint.html">Parallel multi-point joint Bayesian Optimisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="multipoint_sequential.html">Parallel multi-point sequential Bayesian Optimisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="asynchronous_bo.html">Asynchronous Bayesian Optimisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="constrained_bo.html">Constrained Bayesian Optimisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bayesian_gp.html">Fully Bayesian Gaussian Process for Bayesian Optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="singlepoint.html">Sequential single-point Bayesian optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multipoint_joint.html">Parallel multi-point joint Bayesian optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multipoint_sequential.html">Parallel multi-point sequential Bayesian optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asynchronous_bo.html">Asynchronous Bayesian optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constrained_bo.html">Constrained Bayesian optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bayesian_gp.html">Fully Bayesian Gaussian process for Bayesian optimisation</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
 <ul>
@@ -255,9 +255,9 @@ estimated via maximum likelihood estimation (MLE), maximum a posteriori
 estimation (MAP) or fully Bayesian estimation.</p></li>
 <li><p><strong>Acquisition function</strong>: NUBO supports the use of analytical acquisition
 functions and approximations through Monte Carlo sampling. Analytical
-Expected Improvement <a class="footnote-reference brackets" href="#id21" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> and Upper Confidence Bound <a class="footnote-reference brackets" href="#id27" id="id13" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a> can be used for
-sequential   single-point problems where results are evaluated after each
-iteration. Multi-point batches for parallel evaluation or asynchronous
+expected improvement (EI) <a class="footnote-reference brackets" href="#id21" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> and upper confidence bound (UCB) <a class="footnote-reference brackets" href="#id27" id="id13" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a> can be
+used for sequential single-point problems where results are evaluated after
+each iteration. Multi-point batches for parallel evaluation or asynchronous
 problems where the optimnisation algorithm is continued while other points
 are still being evaluated can be performed via Monte Carlo acquisition
 functions <a class="footnote-reference brackets" href="#id29" id="id14" role="doc-noteref"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></a>.</p></li>

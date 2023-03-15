@@ -9,6 +9,7 @@
         <title>Get started - NUBO</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
@@ -169,7 +170,6 @@
 <li class="toctree-l1"><a class="reference internal" href="multipoint_sequential.html">Parallel multi-point sequential Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="asynchronous_bo.html">Asynchronous Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constrained_bo.html">Constrained Bayesian optimisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bayesian_gp.html">Fully Bayesian Gaussian process for Bayesian optimisation</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
 <ul>
@@ -212,264 +212,7 @@
           </label>
         </div>
         <article role="main">
-          
-<style>
-/* CSS for nbsphinx extension */
-
-/* remove conflicting styling from Sphinx themes */
-div.nbinput.container div.prompt *,
-div.nboutput.container div.prompt *,
-div.nbinput.container div.input_area pre,
-div.nboutput.container div.output_area pre,
-div.nbinput.container div.input_area .highlight,
-div.nboutput.container div.output_area .highlight {
-    border: none;
-    padding: 0;
-    margin: 0;
-    box-shadow: none;
-}
-
-div.nbinput.container > div[class*=highlight],
-div.nboutput.container > div[class*=highlight] {
-    margin: 0;
-}
-
-div.nbinput.container div.prompt *,
-div.nboutput.container div.prompt * {
-    background: none;
-}
-
-div.nboutput.container div.output_area .highlight,
-div.nboutput.container div.output_area pre {
-    background: unset;
-}
-
-div.nboutput.container div.output_area div.highlight {
-    color: unset;  /* override Pygments text color */
-}
-
-/* avoid gaps between output lines */
-div.nboutput.container div[class*=highlight] pre {
-    line-height: normal;
-}
-
-/* input/output containers */
-div.nbinput.container,
-div.nboutput.container {
-    display: -webkit-flex;
-    display: flex;
-    align-items: flex-start;
-    margin: 0;
-    width: 100%;
-}
-@media (max-width: 540px) {
-    div.nbinput.container,
-    div.nboutput.container {
-        flex-direction: column;
-    }
-}
-
-/* input container */
-div.nbinput.container {
-    padding-top: 5px;
-}
-
-/* last container */
-div.nblast.container {
-    padding-bottom: 5px;
-}
-
-/* input prompt */
-div.nbinput.container div.prompt pre {
-    color: #307FC1;
-}
-
-/* output prompt */
-div.nboutput.container div.prompt pre {
-    color: #BF5B3D;
-}
-
-/* all prompts */
-div.nbinput.container div.prompt,
-div.nboutput.container div.prompt {
-    width: 4.5ex;
-    padding-top: 5px;
-    position: relative;
-    user-select: none;
-}
-
-div.nbinput.container div.prompt > div,
-div.nboutput.container div.prompt > div {
-    position: absolute;
-    right: 0;
-    margin-right: 0.3ex;
-}
-
-@media (max-width: 540px) {
-    div.nbinput.container div.prompt,
-    div.nboutput.container div.prompt {
-        width: unset;
-        text-align: left;
-        padding: 0.4em;
-    }
-    div.nboutput.container div.prompt.empty {
-        padding: 0;
-    }
-
-    div.nbinput.container div.prompt > div,
-    div.nboutput.container div.prompt > div {
-        position: unset;
-    }
-}
-
-/* disable scrollbars and line breaks on prompts */
-div.nbinput.container div.prompt pre,
-div.nboutput.container div.prompt pre {
-    overflow: hidden;
-    white-space: pre;
-}
-
-/* input/output area */
-div.nbinput.container div.input_area,
-div.nboutput.container div.output_area {
-    -webkit-flex: 1;
-    flex: 1;
-    overflow: auto;
-}
-@media (max-width: 540px) {
-    div.nbinput.container div.input_area,
-    div.nboutput.container div.output_area {
-        width: 100%;
-    }
-}
-
-/* input area */
-div.nbinput.container div.input_area {
-    border: 1px solid #e0e0e0;
-    border-radius: 2px;
-    /*background: #f5f5f5;*/
-}
-
-/* override MathJax center alignment in output cells */
-div.nboutput.container div[class*=MathJax] {
-    text-align: left !important;
-}
-
-/* override sphinx.ext.imgmath center alignment in output cells */
-div.nboutput.container div.math p {
-    text-align: left;
-}
-
-/* standard error */
-div.nboutput.container div.output_area.stderr {
-    background: #fdd;
-}
-
-/* ANSI colors */
-.ansi-black-fg { color: #3E424D; }
-.ansi-black-bg { background-color: #3E424D; }
-.ansi-black-intense-fg { color: #282C36; }
-.ansi-black-intense-bg { background-color: #282C36; }
-.ansi-red-fg { color: #E75C58; }
-.ansi-red-bg { background-color: #E75C58; }
-.ansi-red-intense-fg { color: #B22B31; }
-.ansi-red-intense-bg { background-color: #B22B31; }
-.ansi-green-fg { color: #00A250; }
-.ansi-green-bg { background-color: #00A250; }
-.ansi-green-intense-fg { color: #007427; }
-.ansi-green-intense-bg { background-color: #007427; }
-.ansi-yellow-fg { color: #DDB62B; }
-.ansi-yellow-bg { background-color: #DDB62B; }
-.ansi-yellow-intense-fg { color: #B27D12; }
-.ansi-yellow-intense-bg { background-color: #B27D12; }
-.ansi-blue-fg { color: #208FFB; }
-.ansi-blue-bg { background-color: #208FFB; }
-.ansi-blue-intense-fg { color: #0065CA; }
-.ansi-blue-intense-bg { background-color: #0065CA; }
-.ansi-magenta-fg { color: #D160C4; }
-.ansi-magenta-bg { background-color: #D160C4; }
-.ansi-magenta-intense-fg { color: #A03196; }
-.ansi-magenta-intense-bg { background-color: #A03196; }
-.ansi-cyan-fg { color: #60C6C8; }
-.ansi-cyan-bg { background-color: #60C6C8; }
-.ansi-cyan-intense-fg { color: #258F8F; }
-.ansi-cyan-intense-bg { background-color: #258F8F; }
-.ansi-white-fg { color: #C5C1B4; }
-.ansi-white-bg { background-color: #C5C1B4; }
-.ansi-white-intense-fg { color: #A1A6B2; }
-.ansi-white-intense-bg { background-color: #A1A6B2; }
-
-.ansi-default-inverse-fg { color: #FFFFFF; }
-.ansi-default-inverse-bg { background-color: #000000; }
-
-.ansi-bold { font-weight: bold; }
-.ansi-underline { text-decoration: underline; }
-
-
-div.nbinput.container div.input_area div[class*=highlight] > pre,
-div.nboutput.container div.output_area div[class*=highlight] > pre,
-div.nboutput.container div.output_area div[class*=highlight].math,
-div.nboutput.container div.output_area.rendered_html,
-div.nboutput.container div.output_area > div.output_javascript,
-div.nboutput.container div.output_area:not(.rendered_html) > img{
-    padding: 5px;
-    margin: 0;
-}
-
-/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
-div.nbinput.container div.input_area > div[class^='highlight'],
-div.nboutput.container div.output_area > div[class^='highlight']{
-    overflow-y: hidden;
-}
-
-/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
-.prompt .copybtn {
-    display: none;
-}
-
-/* Some additional styling taken form the Jupyter notebook CSS */
-.jp-RenderedHTMLCommon table,
-div.rendered_html table {
-  border: none;
-  border-collapse: collapse;
-  border-spacing: 0;
-  color: black;
-  font-size: 12px;
-  table-layout: fixed;
-}
-.jp-RenderedHTMLCommon thead,
-div.rendered_html thead {
-  border-bottom: 1px solid black;
-  vertical-align: bottom;
-}
-.jp-RenderedHTMLCommon tr,
-.jp-RenderedHTMLCommon th,
-.jp-RenderedHTMLCommon td,
-div.rendered_html tr,
-div.rendered_html th,
-div.rendered_html td {
-  text-align: right;
-  vertical-align: middle;
-  padding: 0.5em 0.5em;
-  line-height: normal;
-  white-space: normal;
-  max-width: none;
-  border: none;
-}
-.jp-RenderedHTMLCommon th,
-div.rendered_html th {
-  font-weight: bold;
-}
-.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
-div.rendered_html tbody tr:nth-child(odd) {
-  background: #f5f5f5;
-}
-.jp-RenderedHTMLCommon tbody tr:hover,
-div.rendered_html tbody tr:hover {
-  background: rgba(66, 165, 245, 0.2);
-}
-</style>
-<section id="Get-started">
+          <section id="Get-started">
 <h1>Get started<a class="headerlink" href="#Get-started" title="Permalink to this heading">#</a></h1>
 <section id="Installing-NUBO">
 <h2>Installing NUBO<a class="headerlink" href="#Installing-NUBO" title="Permalink to this heading">#</a></h2>
@@ -508,14 +251,13 @@ div.rendered_html tbody tr:hover {
 <span class="c1"># training data</span>
 <span class="n">x_train</span> <span class="o">=</span> <span class="n">gen_inputs</span><span class="p">(</span><span class="n">num_points</span><span class="o">=</span><span class="n">dims</span><span class="o">*</span><span class="mi">5</span><span class="p">,</span>
                      <span class="n">num_dims</span><span class="o">=</span><span class="n">dims</span><span class="p">,</span>
-                     <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">,</span>
-                     <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+                     <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">)</span>
 <span class="n">y_train</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<p>Now, we can prepare the Bayesian optimisation loop. We choose a in NUBO pre-defined Gaussian process with constant mean function and Matern 5/2 kernel and estimate its hyper-parameters via maximum likelihood estimation (MLE) using the Adam optimiser. For the acquisition function, we implement the analytical Upper Confidence Bound with trade-off parameter <span class="math notranslate nohighlight">\(\beta=1.96^2\)</span> (corresponding to 95% confidence intervals for a Gaussian distribution) and optimise it with the L-BFGS-B algorithm using
-a multi-start approach with five restarts. The Bayesian optimisation loop is run for 40 iterations giving an evaluation budget of 70.</p>
+<p>Now, we can prepare the Bayesian optimisation loop. We choose a in NUBO pre-defined Gaussian process with constant mean function and Matern 5/2 kernel and estimate its hyper-parameters via maximum likelihood estimation (MLE) using the Adam optimiser. For the acquisition function, we implement the analytical upper confidence bound (UCB) with trade-off parameter <span class="math notranslate nohighlight">\(\beta=1.96^2\)</span> (corresponding to 95% confidence intervals for a Gaussian distribution) and optimise it with the L-BFGS-B algorithm
+using a multi-start approach with five restarts. The Bayesian optimisation loop is run for 40 iterations giving an evaluation budget of 70.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -524,7 +266,6 @@ a multi-start approach with five restarts. The Bayesian optimisation loop is run
 <span class="kn">from</span> <span class="nn">nubo.models</span> <span class="kn">import</span> <span class="n">GaussianProcess</span><span class="p">,</span> <span class="n">fit_gp</span>
 <span class="kn">from</span> <span class="nn">nubo.optimisation</span> <span class="kn">import</span> <span class="n">lbfgsb</span>
 <span class="kn">from</span> <span class="nn">gpytorch.likelihoods</span> <span class="kn">import</span> <span class="n">GaussianLikelihood</span>
-<span class="kn">from</span> <span class="nn">gpytorch.mlls</span> <span class="kn">import</span> <span class="n">ExactMarginalLogLikelihood</span>
 
 
 <span class="c1"># Bayesian optimisation loop</span>
@@ -535,10 +276,9 @@ a multi-start approach with five restarts. The Bayesian optimisation loop is run
     <span class="c1"># specify Gaussian process</span>
     <span class="n">likelihood</span> <span class="o">=</span> <span class="n">GaussianLikelihood</span><span class="p">()</span>
     <span class="n">gp</span> <span class="o">=</span> <span class="n">GaussianProcess</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">likelihood</span><span class="o">=</span><span class="n">likelihood</span><span class="p">)</span>
-    <span class="n">mll</span> <span class="o">=</span> <span class="n">ExactMarginalLogLikelihood</span><span class="p">(</span><span class="n">likelihood</span><span class="o">=</span><span class="n">likelihood</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">gp</span><span class="p">)</span>
 
     <span class="c1"># fit Gaussian process</span>
-    <span class="n">fit_gp</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">gp</span><span class="o">=</span><span class="n">gp</span><span class="p">,</span> <span class="n">likelihood</span><span class="o">=</span><span class="n">likelihood</span><span class="p">,</span> <span class="n">mll</span><span class="o">=</span><span class="n">mll</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+    <span class="n">fit_gp</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">gp</span><span class="o">=</span><span class="n">gp</span><span class="p">,</span> <span class="n">likelihood</span><span class="o">=</span><span class="n">likelihood</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
 
     <span class="c1"># specify acquisition function</span>
     <span class="n">acq</span> <span class="o">=</span> <span class="n">UpperConfidenceBound</span><span class="p">(</span><span class="n">gp</span><span class="o">=</span><span class="n">gp</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">1.96</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
@@ -564,20 +304,19 @@ a multi-start approach with five restarts. The Bayesian optimisation loop is run
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-New best at evaluation 33:       Inputs: [0.3159 0.8291 0.     0.5973 1.     0.    ],    Outputs: [-2.3698]
-New best at evaluation 39:       Inputs: [0.3975 0.8033 0.2752 0.5622 0.635  0.    ],    Outputs: [-2.8438]
-New best at evaluation 42:       Inputs: [0.4225 0.8332 1.     0.5555 0.     0.    ],    Outputs: [-3.0419]
-New best at evaluation 49:       Inputs: [0.4017 0.8468 1.     0.5813 0.     0.0085],    Outputs: [-3.1208]
-New best at evaluation 51:       Inputs: [0.4026 0.8657 1.     0.5994 0.     0.0246],    Outputs: [-3.1584]
-New best at evaluation 55:       Inputs: [0.4253 0.8895 1.     0.5895 0.     0.0399],    Outputs: [-3.1627]
-New best at evaluation 57:       Inputs: [0.3971 0.9002 1.     0.5686 0.     0.0405],    Outputs: [-3.1823]
-New best at evaluation 62:       Inputs: [0.4015 0.873  1.     0.5623 0.     0.0426],    Outputs: [-3.1861]
-New best at evaluation 63:       Inputs: [0.4035 0.8879 1.     0.5812 0.     0.0375],    Outputs: [-3.1921]
-New best at evaluation 64:       Inputs: [0.4045 0.8868 1.     0.5793 0.     0.038 ],    Outputs: [-3.1932]
-New best at evaluation 65:       Inputs: [0.4071 0.8853 1.     0.5749 0.     0.0374],    Outputs: [-3.1939]
+New best at evaluation 43:       Inputs: [0.18   0.147  0.     0.1909 0.3424 0.7121],    Outputs: [-2.1026]
+New best at evaluation 46:       Inputs: [0.2992 0.1852 0.     0.21   0.3398 0.6985],    Outputs: [-2.18]
+New best at evaluation 48:       Inputs: [0.2597 0.1744 0.     0.2323 0.3173 0.6544],    Outputs: [-2.337]
+New best at evaluation 50:       Inputs: [0.2486 0.1728 0.112  0.2413 0.2927 0.6674],    Outputs: [-2.6599]
+New best at evaluation 51:       Inputs: [0.234  0.1519 0.3204 0.2624 0.2972 0.6662],    Outputs: [-3.1372]
+New best at evaluation 52:       Inputs: [0.2117 0.1087 0.3731 0.313  0.3146 0.66  ],    Outputs: [-3.1906]
+New best at evaluation 54:       Inputs: [0.1698 0.1394 0.405  0.3109 0.2839 0.6623],    Outputs: [-3.1964]
+New best at evaluation 55:       Inputs: [0.1431 0.1126 0.4022 0.2795 0.3051 0.635 ],    Outputs: [-3.198]
+New best at evaluation 58:       Inputs: [0.2112 0.1557 0.4745 0.288  0.3086 0.6555],    Outputs: [-3.3158]
+New best at evaluation 64:       Inputs: [0.2013 0.1443 0.4779 0.2734 0.3131 0.6584],    Outputs: [-3.3218]
 </pre></div></div>
 </div>
-<p>Finally, we print the overall best solution: We get -3.1939 on evaluation 65 which approximaties the true optimum of -3.3224.</p>
+<p>Finally, we print the overall best solution: We get -3.3218 on evaluation 66 which approximaties the true optimum of -3.3224.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -593,7 +332,7 @@ New best at evaluation 65:       Inputs: [0.4071 0.8853 1.     0.5749 0.     0.0
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Evaluation: 65   Solution: 3.1939
+Evaluation: 64   Solution: 3.3218
 </pre></div></div>
 </div>
 </section>

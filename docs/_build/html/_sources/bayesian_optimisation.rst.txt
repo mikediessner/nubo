@@ -63,9 +63,12 @@ The posterior or predictive distribution for :math:`n_*` test points :math:`\bol
 
 where :math:`m(\boldsymbol X_*)` is the mean vector of size :math:`n_*` over all test inputs, :math:`K(\boldsymbol X_*, \boldsymbol X_n)` is the :math:`n_* \times n`, :math:`K(\boldsymbol X_n, \boldsymbol X_*)` is the :math:`n \times n_*`, and :math:`K(\boldsymbol X_*, \boldsymbol X_*)` is the :math:`n_* \times n_*` covariance matrix between training inputs :math:`\boldsymbol X_n` and test inputs :math:`\boldsymbol X_*`.
 
-Hyper-parameters of the Gaussian process such as any parameters :math:`\theta` in the mean function and the covariance kernel or the noise variance :math:`\sigma^2` can be estimated by maximum likelihood estimation (MLE), maximum a posteriori estimation (MAP), or fully Bayesian estimation.
+Hyper-parameters of the Gaussian process such as any parameters :math:`\theta` in the mean function and the covariance kernel or the noise variance :math:`\sigma^2` can be estimated by maximising the log marginal likelihood via maximum likelihood estimation (MLE):
 
-NUBO uses the ``GPyTorch`` package [2]_ for surrogate modelling. This is a very powerful package that allows the implementation of a wide selection of models ranging from exact Gaussian processes to approximate and even deep Gaussian processes. It also comes with a rich documentation, many practical examples, and a large community if help is needed.
+.. math::
+    \log p(\boldsymbol y_n \mid \boldsymbol X_n) = -\frac{1}{2} \boldsymbol y_n^T [K(\boldsymbol X_n, \boldsymbol X_n) + \sigma^2 I]^{-1} \boldsymbol y_n - \frac{1}{2} \log [K(\boldsymbol X_n, \boldsymbol X_n) + \sigma^2 I] - \frac{n}{2} \log 2 \pi
+
+NUBO uses the ``GPyTorch`` package [2]_ for surrogate modelling. This is a very powerful package that allows the implementation of a wide selection of models ranging from exact Gaussian processes to approximate and even deep Gaussian processes. Besides maximum likelihood estimation (MLE) ``GPyTorch`` also supports maximum a posteriori estimation (MAP) and fully Bayesian estimation to estimate the hyper-parameter. It also comes with a rich documentation, many practical examples, and a large community.
 
 .. _acquisition:
 

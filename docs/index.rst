@@ -43,7 +43,6 @@ Bayesian optimisation algorithm to your specfic problem.
    multipoint_sequential.ipynb
    asynchronous_bo.ipynb
    constrained_bo.ipynb
-   bayesian_gp.ipynb
 
 Package reference
 -----------------

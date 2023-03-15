@@ -169,7 +169,6 @@
 <li class="toctree-l1"><a class="reference internal" href="multipoint_sequential.html">Parallel multi-point sequential Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="asynchronous_bo.html">Asynchronous Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constrained_bo.html">Constrained Bayesian optimisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bayesian_gp.html">Fully Bayesian Gaussian process for Bayesian optimisation</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
 <ul>
@@ -271,8 +270,12 @@ Set <span class="math notranslate nohighlight">\(n = n_0\)</span> and <span clas
 \[\sigma^2_n (\boldsymbol X_*) = K (\boldsymbol X_*, \boldsymbol X_*) - K(\boldsymbol X_*, \boldsymbol X_n) \left[ K(\boldsymbol X_n, \boldsymbol X_n) + \sigma^2 I \right]^{-1} K(\boldsymbol X_n, \boldsymbol X_*)\]</div>
 </div>
 <p>where <span class="math notranslate nohighlight">\(m(\boldsymbol X_*)\)</span> is the mean vector of size <span class="math notranslate nohighlight">\(n_*\)</span> over all test inputs, <span class="math notranslate nohighlight">\(K(\boldsymbol X_*, \boldsymbol X_n)\)</span> is the <span class="math notranslate nohighlight">\(n_* \times n\)</span>, <span class="math notranslate nohighlight">\(K(\boldsymbol X_n, \boldsymbol X_*)\)</span> is the <span class="math notranslate nohighlight">\(n \times n_*\)</span>, and <span class="math notranslate nohighlight">\(K(\boldsymbol X_*, \boldsymbol X_*)\)</span> is the <span class="math notranslate nohighlight">\(n_* \times n_*\)</span> covariance matrix between training inputs <span class="math notranslate nohighlight">\(\boldsymbol X_n\)</span> and test inputs <span class="math notranslate nohighlight">\(\boldsymbol X_*\)</span>.</p>
-<p>Hyper-parameters of the Gaussian process such as any parameters <span class="math notranslate nohighlight">\(\theta\)</span> in the mean function and the covariance kernel or the noise variance <span class="math notranslate nohighlight">\(\sigma^2\)</span> can be estimated by maximum likelihood estimation (MLE), maximum a posteriori estimation (MAP), or fully Bayesian estimation.</p>
-<p>NUBO uses the <code class="docutils literal notranslate"><span class="pre">GPyTorch</span></code> package <a class="footnote-reference brackets" href="#id19" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> for surrogate modelling. This is a very powerful package that allows the implementation of a wide selection of models ranging from exact Gaussian processes to approximate and even deep Gaussian processes. It also comes with a rich documentation, many practical examples, and a large community if help is needed.</p>
+<p>Hyper-parameters of the Gaussian process such as any parameters <span class="math notranslate nohighlight">\(\theta\)</span> in the mean function and the covariance kernel or the noise variance <span class="math notranslate nohighlight">\(\sigma^2\)</span> can be estimated by maximising the log marginal likelihood via maximum likelihood estimation (MLE):</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\log p(\boldsymbol y_n \mid \boldsymbol X_n) = -\frac{1}{2} \boldsymbol y_n^T [K(\boldsymbol X_n, \boldsymbol X_n) + \sigma^2 I]^{-1} \boldsymbol y_n - \frac{1}{2} \log [K(\boldsymbol X_n, \boldsymbol X_n) + \sigma^2 I] - \frac{n}{2} \log 2 \pi\]</div>
+</div>
+<p>NUBO uses the <code class="docutils literal notranslate"><span class="pre">GPyTorch</span></code> package <a class="footnote-reference brackets" href="#id19" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> for surrogate modelling. This is a very powerful package that allows the implementation of a wide selection of models ranging from exact Gaussian processes to approximate and even deep Gaussian processes. Besides maximum likelihood estimation (MLE) <code class="docutils literal notranslate"><span class="pre">GPyTorch</span></code> also supports maximum a posteriori estimation (MAP) and fully Bayesian estimation to estimate the hyper-parameter. It also comes with a rich documentation, many practical examples, and a large community.</p>
 </section>
 <section id="acquisition-function">
 <span id="acquisition"></span><h2>Acquisition function<a class="headerlink" href="#acquisition-function" title="Permalink to this heading">#</a></h2>

@@ -17,17 +17,18 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "New best at evaluation 40: \t Inputs: [0.2426 0.2574 0.3801 0.3812 0.1807 0.6823], \t Outputs: [-2.1706]\n",
-      "New best at evaluation 43: \t Inputs: [0.2159 0.2841 0.3293 0.3916 0.2908 0.5618], \t Outputs: [-2.4406]\n",
-      "New best at evaluation 46: \t Inputs: [0.1803 0.1897 0.3561 0.3714 0.2694 0.6034], \t Outputs: [-2.8027]\n",
-      "New best at evaluation 52: \t Inputs: [0.2436 0.1538 0.4723 0.3641 0.2724 0.6077], \t Outputs: [-2.9484]\n",
-      "New best at evaluation 56: \t Inputs: [0.2045 0.1369 0.5032 0.3406 0.2733 0.6303], \t Outputs: [-3.0979]\n",
-      "New best at evaluation 57: \t Inputs: [0.208  0.1383 0.457  0.257  0.3181 0.6691], \t Outputs: [-3.3]\n",
-      "New best at evaluation 65: \t Inputs: [0.2012 0.1452 0.4682 0.2816 0.3081 0.6545], \t Outputs: [-3.3196]\n",
-      "New best at evaluation 66: \t Inputs: [0.2011 0.1455 0.4686 0.281  0.3085 0.6547], \t Outputs: [-3.32]\n",
-      "New best at evaluation 67: \t Inputs: [0.2009 0.1458 0.4684 0.2803 0.3089 0.655 ], \t Outputs: [-3.3204]\n",
-      "New best at evaluation 68: \t Inputs: [0.201  0.1471 0.4692 0.2798 0.3091 0.6553], \t Outputs: [-3.3208]\n",
-      "Evaluation: 68 \t Solution: 3.3208\n"
+      "New best at evaluation 37: \t Inputs: [0.2957 0.2043 0.5873 0.2205 0.2488 0.7749], \t Outputs: [-2.5862]\n",
+      "New best at evaluation 41: \t Inputs: [0.2762 0.2129 0.5612 0.2206 0.2766 0.747 ], \t Outputs: [-2.8477]\n",
+      "New best at evaluation 45: \t Inputs: [0.2587 0.     0.5491 0.2672 0.274  0.703 ], \t Outputs: [-2.867]\n",
+      "New best at evaluation 50: \t Inputs: [0.2671 0.2329 0.52   0.2676 0.2833 0.6934], \t Outputs: [-3.1119]\n",
+      "New best at evaluation 51: \t Inputs: [0.2393 0.1902 0.4034 0.2632 0.3038 0.6772], \t Outputs: [-3.2298]\n",
+      "New best at evaluation 54: \t Inputs: [0.2175 0.1541 0.4372 0.285  0.3091 0.6501], \t Outputs: [-3.3029]\n",
+      "New best at evaluation 60: \t Inputs: [0.2094 0.1434 0.486  0.2706 0.3062 0.6675], \t Outputs: [-3.3153]\n",
+      "New best at evaluation 62: \t Inputs: [0.2042 0.1543 0.484  0.2716 0.3087 0.6639], \t Outputs: [-3.3197]\n",
+      "New best at evaluation 63: \t Inputs: [0.2046 0.1547 0.4831 0.2726 0.3091 0.6625], \t Outputs: [-3.3204]\n",
+      "New best at evaluation 64: \t Inputs: [0.2044 0.1565 0.4828 0.274  0.3093 0.6609], \t Outputs: [-3.3208]\n",
+      "New best at evaluation 65: \t Inputs: [0.2038 0.1558 0.4806 0.2732 0.3105 0.6605], \t Outputs: [-3.3213]\n",
+      "Evaluation: 65 \t Solution: 3.3213\n"
      ]
     }
    ],
@@ -39,7 +40,6 @@
     "from nubo.test_functions import Hartmann6D\n",
     "from nubo.utils import gen_inputs\n",
     "from gpytorch.likelihoods import GaussianLikelihood\n",
-    "from gpytorch.mlls import ExactMarginalLogLikelihood\n",
     "\n",
     "\n",
     "# test function\n",
@@ -50,8 +50,7 @@
     "# training data\n",
     "x_train = gen_inputs(num_points=dims*5,\n",
     "                     num_dims=dims,\n",
-    "                     bounds=bounds,\n",
-    "                     seed=1)\n",
+    "                     bounds=bounds)\n",
     "y_train = func(x_train)\n",
     "\n",
     "# Bayesian optimisation loop\n",
@@ -62,10 +61,9 @@
     "    # specify Gaussian process\n",
     "    likelihood = GaussianLikelihood()\n",
     "    gp = GaussianProcess(x_train, y_train, likelihood=likelihood)\n",
-    "    mll = ExactMarginalLogLikelihood(likelihood=likelihood, model=gp)\n",
     "    \n",
     "    # fit Gaussian process\n",
-    "    fit_gp(x_train, y_train, gp=gp, likelihood=likelihood, mll=mll, lr=0.1, steps=200)\n",
+    "    fit_gp(x_train, y_train, gp=gp, likelihood=likelihood, lr=0.1, steps=200)\n",
     "\n",
     "    # specify acquisition function\n",
     "    # acq = ExpectedImprovement(gp=gp, y_best=torch.max(y_train))\n",
@@ -111,9 +109,14 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.10.10"
+   "version": "3.11.1"
   },
-  "orig_nbformat": 4
+  "orig_nbformat": 4,
+  "vscode": {
+   "interpreter": {
+    "hash": "440ccce7314e8ea21bc6387ad3e4b0d06ade5f0dbc76119080186fc1c6dec90d"
+   }
+  }
  },
  "nbformat": 4,
  "nbformat_minor": 2

@@ -8,8 +8,7 @@ from .transform import unnormalise
 def gen_inputs(num_points: int,
                num_dims: int,
                bounds: Optional[Tensor]=None,
-               num_lhd: Optional[int]=1000,
-               seed: Optional[int]=None) -> Tensor:
+               num_lhd: Optional[int]=1000) -> Tensor:
     """
     Generate data inputs from a maximin Latin hypercube design.
 
@@ -24,17 +23,12 @@ def gen_inputs(num_points: int,
         bounds are a [0, 1]^`num_dims`.
     num_lhd : ``int``, optional
         Number of Latin hypercube designs to consider, default is 1000.
-    seed : ``int``, optional
-        Seed for reproducibility, default is none (random).
 
     Returns
     -------
     ``torch.Tensor``
         (size `num_points` x `num_dims`) Input data.
     """
-    
-    if seed != None:
-        torch.manual_seed(seed)
 
     if bounds == None:
         bounds = torch.Tensor([[0.]*num_dims, [1.]*num_dims])

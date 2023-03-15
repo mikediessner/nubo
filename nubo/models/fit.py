@@ -2,7 +2,7 @@ from torch import Tensor
 from torch.optim import Adam
 from gpytorch.models import GP
 from gpytorch.likelihoods import Likelihood
-from gpytorch.mlls import MarginalLogLikelihood
+from gpytorch.mlls import ExactMarginalLogLikelihood
 from typing import Optional
 
 
@@ -10,7 +10,6 @@ def fit_gp(x: Tensor,
            y: Tensor,
            gp: GP,
            likelihood: Likelihood,
-           mll: MarginalLogLikelihood,
            lr: Optional[float]=0.1,
            steps: Optional[int]=200,
            **kwargs) -> None:
@@ -26,8 +25,6 @@ def fit_gp(x: Tensor,
         (size n) Training targets.
     gp : ``gpytorch.likelihoods.Likelihood``
         Gaussian Process model.
-    mll : ``gpytorch.mlls.MarginalLogLikelihood``
-        Marginal log likelihood.
     lr : ``float``, optional
         Learning rate of ``torch.optim.Adam`` algorithm, default is 0.1.
     steps : ``int``, optional
@@ -35,6 +32,9 @@ def fit_gp(x: Tensor,
     **kwargs : ``Any``
         Keyword argument passed to ``torch.optim.Adam``.
     """
+
+    # specify marginal log likelihood
+    mll = ExactMarginalLogLikelihood(likelihood=likelihood, model=gp)
 
     # set Gaussian process and likelihood to training mode
     gp.train()

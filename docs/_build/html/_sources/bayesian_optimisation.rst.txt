@@ -66,7 +66,7 @@ where :math:`m(\boldsymbol X_*)` is the mean vector of size :math:`n_*` over all
 Hyper-parameters of the Gaussian process such as any parameters :math:`\theta` in the mean function and the covariance kernel or the noise variance :math:`\sigma^2` can be estimated by maximising the log marginal likelihood via maximum likelihood estimation (MLE):
 
 .. math::
-    \log p(\boldsymbol y_n \mid \boldsymbol X_n) = -\frac{1}{2} \boldsymbol y_n^T [K(\boldsymbol X_n, \boldsymbol X_n) + \sigma^2 I]^{-1} \boldsymbol y_n - \frac{1}{2} \log [K(\boldsymbol X_n, \boldsymbol X_n) + \sigma^2 I] - \frac{n}{2} \log 2 \pi
+    \log p(\boldsymbol y_n \mid \boldsymbol X_n) = -\frac{1}{2} (\boldsymbol y_n - m(\boldsymbol X_n))^T [K(\boldsymbol X_n, \boldsymbol X_n) + \sigma^2 I]^{-1} (\boldsymbol y_n - m(\boldsymbol X_n)) - \frac{1}{2} \log \lvert K(\boldsymbol X_n, \boldsymbol X_n) + \sigma^2 I \rvert - \frac{n}{2} \log 2 \pi
 
 NUBO uses the ``GPyTorch`` package [2]_ for surrogate modelling. This is a very powerful package that allows the implementation of a wide selection of models ranging from exact Gaussian processes to approximate and even deep Gaussian processes. Besides maximum likelihood estimation (MLE) ``GPyTorch`` also supports maximum a posteriori estimation (MAP) and fully Bayesian estimation to estimate the hyper-parameter. It also comes with a rich documentation, many practical examples, and a large community.
 

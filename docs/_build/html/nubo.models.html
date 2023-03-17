@@ -160,7 +160,7 @@
 <li class="toctree-l1"><a class="reference internal" href="get_started.html">Get started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bayesian_optimisation.html">A primer on Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="citation.html">Citation</a></li>
-<li class="toctree-l1"><a class="reference external" href="http://github.com/mikediessner/nubo-dev">Github</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://github.com/mikediessner/nubo">Github</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
@@ -213,9 +213,25 @@
         <article role="main">
           <section id="surrogates-module">
 <h1>Surrogates module<a class="headerlink" href="#surrogates-module" title="Permalink to this heading">#</a></h1>
-<section id="module-nubo.models.gaussian_process">
-<span id="gaussian-process"></span><h2>Gaussian Process<a class="headerlink" href="#module-nubo.models.gaussian_process" title="Permalink to this heading">#</a></h2>
-<dl class="py class">
+<div class="seealso admonition">
+<p class="admonition-title">References</p>
+<ul class="simple">
+<li><p>CKI Williams, and CE Rasmussen, <em>Gaussian processes for machine learning</em>, 2nd ed. Cambridge, MA: MIT press, 2006.</p></li>
+<li><p>RB Gramacy, <em>Surrogates: Gaussian process modeling, design, and optimization for the applied sciences</em>, 1st ed. Boca Raton, FL: CRC press, 2020.</p></li>
+<li><p>J Gardner, G Pleiss, KQ Weinberger, D Bindel, and AG Wilson, “GPyTorch: Blackbox matrix-matrix Gaussian process inference with GPU acceleration,” <em>Advances in neural information processing systems</em>, vol. 31, 2018.</p></li>
+</ul>
+</div>
+<section id="gaussian-process">
+<h2>Gaussian Process<a class="headerlink" href="#gaussian-process" title="Permalink to this heading">#</a></h2>
+<div class="seealso admonition">
+<p class="admonition-title">References</p>
+<ul class="simple">
+<li><p>J Snoek, H Larochelle, and RP Adams, “Practical Bayesian optimization of machine learning algorithms,” <em>Advances in neural information processing systems</em>, vol. 25, 2012.</p></li>
+<li><p>CKI Williams, and CE Rasmussen, <em>Gaussian processes for machine learning</em>, 2nd ed. Cambridge, MA: MIT press, 2006.</p></li>
+<li><p>RB Gramacy, <em>Surrogates: Gaussian process modeling, design, and optimization for the applied sciences</em>, 1st ed. Boca Raton, FL: CRC press, 2020.</p></li>
+</ul>
+</div>
+<span class="target" id="module-nubo.models.gaussian_process"></span><dl class="py class">
 <dt class="sig sig-object py" id="nubo.models.gaussian_process.GaussianProcess">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.models.gaussian_process.</span></span><span class="sig-name descname"><span class="pre">GaussianProcess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">likelihood</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Likelihood</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/models/gaussian_process.html#GaussianProcess"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.models.gaussian_process.GaussianProcess" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ExactGP</span></code></p>
@@ -270,9 +286,17 @@ and returns a multivariate normal distribution.</p>
 </dd></dl>
 
 </section>
-<section id="module-nubo.models.fit">
-<span id="hyper-parameter-estimation"></span><h2>Hyper-parameter estimation<a class="headerlink" href="#module-nubo.models.fit" title="Permalink to this heading">#</a></h2>
-<dl class="py function">
+<section id="hyper-parameter-estimation">
+<h2>Hyper-parameter estimation<a class="headerlink" href="#hyper-parameter-estimation" title="Permalink to this heading">#</a></h2>
+<div class="seealso admonition">
+<p class="admonition-title">References</p>
+<ul class="simple">
+<li><p>CKI Williams, and CE Rasmussen, <em>Gaussian processes for machine learning</em>, 2nd ed. Cambridge, MA: MIT press, 2006.</p></li>
+<li><p>RB Gramacy, <em>Surrogates: Gaussian process modeling, design, and optimization for the applied sciences</em>, 1st ed. Boca Raton, FL: CRC press, 2020.</p></li>
+<li><p>DP Kingma and J Ba, “Adam: A method for stochastic optimization,” <em>Proceedings of the 3rd international conference on learning representations</em>, 2015.</p></li>
+</ul>
+</div>
+<span class="target" id="module-nubo.models.fit"></span><dl class="py function">
 <dt class="sig sig-object py" id="nubo.models.fit.fit_gp">
 <span class="sig-prename descclassname"><span class="pre">nubo.models.fit.</span></span><span class="sig-name descname"><span class="pre">fit_gp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GP</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">likelihood</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Likelihood</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/nubo/models/fit.html#fit_gp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.models.fit.fit_gp" title="Permalink to this definition">#</a></dt>
 <dd><p>Estimate hyper-parameters of the Gaussian process <cite>gp</cite> by maximum
@@ -356,14 +380,14 @@ likelihood estimation (MLE) using <code class="docutils literal notranslate"><sp
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Surrogates module</a><ul>
-<li><a class="reference internal" href="#module-nubo.models.gaussian_process">Gaussian Process</a><ul>
+<li><a class="reference internal" href="#gaussian-process">Gaussian Process</a><ul>
 <li><a class="reference internal" href="#nubo.models.gaussian_process.GaussianProcess"><code class="docutils literal notranslate"><span class="pre">GaussianProcess</span></code></a><ul>
 <li><a class="reference internal" href="#nubo.models.gaussian_process.GaussianProcess.forward"><code class="docutils literal notranslate"><span class="pre">GaussianProcess.forward()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#module-nubo.models.fit">Hyper-parameter estimation</a><ul>
+<li><a class="reference internal" href="#hyper-parameter-estimation">Hyper-parameter estimation</a><ul>
 <li><a class="reference internal" href="#nubo.models.fit.fit_gp"><code class="docutils literal notranslate"><span class="pre">fit_gp()</span></code></a></li>
 </ul>
 </li>

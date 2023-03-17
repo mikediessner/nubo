@@ -26,7 +26,7 @@ NUBO.
    get_started.ipynb
    bayesian_optimisation
    citation
-   Github <http://github.com/mikediessner/nubo-dev>
+   Github <http://github.com/mikediessner/nubo>
 
 Examples
 --------

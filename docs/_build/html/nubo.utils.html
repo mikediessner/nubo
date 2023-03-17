@@ -160,7 +160,7 @@
 <li class="toctree-l1"><a class="reference internal" href="get_started.html">Get started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bayesian_optimisation.html">A primer on Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="citation.html">Citation</a></li>
-<li class="toctree-l1"><a class="reference external" href="http://github.com/mikediessner/nubo-dev">Github</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://github.com/mikediessner/nubo">Github</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
@@ -213,9 +213,15 @@
         <article role="main">
           <section id="utility-module">
 <h1>Utility module<a class="headerlink" href="#utility-module" title="Permalink to this heading">#</a></h1>
-<section id="module-nubo.utils.latin_hypercube">
-<span id="data-generation"></span><h2>Data generation<a class="headerlink" href="#module-nubo.utils.latin_hypercube" title="Permalink to this heading">#</a></h2>
-<dl class="py class">
+<section id="data-generation">
+<h2>Data generation<a class="headerlink" href="#data-generation" title="Permalink to this heading">#</a></h2>
+<div class="seealso admonition">
+<p class="admonition-title">References</p>
+<ul class="simple">
+<li><p>MD McKay, RJ Beckman, and WJ Conover, “A comparison of three methods for selecting values of input variables in the analysis of output from a computer code,” <em>Technometrics</em>, vol. 42, no. 1, p. 55-61, 2000.</p></li>
+</ul>
+</div>
+<span class="target" id="module-nubo.utils.latin_hypercube"></span><dl class="py class">
 <dt class="sig sig-object py" id="nubo.utils.latin_hypercube.LatinHypercubeSampling">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.utils.latin_hypercube.</span></span><span class="sig-name descname"><span class="pre">LatinHypercubeSampling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/utils/latin_hypercube.html#LatinHypercubeSampling"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.utils.latin_hypercube.LatinHypercubeSampling" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
@@ -433,7 +439,7 @@ deviation.</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Utility module</a><ul>
-<li><a class="reference internal" href="#module-nubo.utils.latin_hypercube">Data generation</a><ul>
+<li><a class="reference internal" href="#data-generation">Data generation</a><ul>
 <li><a class="reference internal" href="#nubo.utils.latin_hypercube.LatinHypercubeSampling"><code class="docutils literal notranslate"><span class="pre">LatinHypercubeSampling</span></code></a><ul>
 <li><a class="reference internal" href="#nubo.utils.latin_hypercube.LatinHypercubeSampling.maximin"><code class="docutils literal notranslate"><span class="pre">LatinHypercubeSampling.maximin()</span></code></a></li>
 <li><a class="reference internal" href="#nubo.utils.latin_hypercube.LatinHypercubeSampling.random"><code class="docutils literal notranslate"><span class="pre">LatinHypercubeSampling.random()</span></code></a></li>

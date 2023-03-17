@@ -160,7 +160,7 @@
 <li class="toctree-l1"><a class="reference internal" href="get_started.html">Get started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bayesian_optimisation.html">A primer on Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="citation.html">Citation</a></li>
-<li class="toctree-l1"><a class="reference external" href="http://github.com/mikediessner/nubo-dev">Github</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://github.com/mikediessner/nubo">Github</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
@@ -213,9 +213,15 @@
         <article role="main">
           <section id="optimisation-module">
 <h1>Optimisation module<a class="headerlink" href="#optimisation-module" title="Permalink to this heading">#</a></h1>
-<section id="module-nubo.optimisation.lbfgsb">
-<span id="deterministic-optimisers"></span><h2>Deterministic optimisers<a class="headerlink" href="#module-nubo.optimisation.lbfgsb" title="Permalink to this heading">#</a></h2>
-<dl class="py function">
+<section id="deterministic-optimisers">
+<h2>Deterministic optimisers<a class="headerlink" href="#deterministic-optimisers" title="Permalink to this heading">#</a></h2>
+<div class="seealso admonition">
+<p class="admonition-title">References</p>
+<ul class="simple">
+<li><p>P Virtanen <em>et al.</em>, “SciPy 1.0: Fundamental algorithms for scientific computing in Python,”” <em>Nature methods</em>, vol. 17, no. 3, p. 261-272, 2020.</p></li>
+</ul>
+</div>
+<span class="target" id="module-nubo.optimisation.lbfgsb"></span><dl class="py function">
 <dt class="sig sig-object py" id="nubo.optimisation.lbfgsb.lbfgsb">
 <span class="sig-prename descclassname"><span class="pre">nubo.optimisation.lbfgsb.</span></span><span class="sig-name descname"><span class="pre">lbfgsb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_starts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/nubo/optimisation/lbfgsb.html#lbfgsb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.optimisation.lbfgsb.lbfgsb" title="Permalink to this definition">#</a></dt>
 <dd><p>Multi-start L-BFGS-B optimiser using the <code class="docutils literal notranslate"><span class="pre">scipy.optimize.minimize</span></code>
@@ -284,9 +290,16 @@ Returns the best result.</p>
 </dd></dl>
 
 </section>
-<section id="module-nubo.optimisation.adam">
-<span id="stochastic-optimisers"></span><h2>Stochastic optimisers<a class="headerlink" href="#module-nubo.optimisation.adam" title="Permalink to this heading">#</a></h2>
-<dl class="py function">
+<section id="stochastic-optimisers">
+<h2>Stochastic optimisers<a class="headerlink" href="#stochastic-optimisers" title="Permalink to this heading">#</a></h2>
+<div class="seealso admonition">
+<p class="admonition-title">References</p>
+<ul class="simple">
+<li><p>DP Kingma and J Ba, “Adam: A method for stochastic optimization,” <em>Proceedings of the 3rd international conference on learning representations</em>, 2015.</p></li>
+<li><p>A Paszke, <em>et al.</em>, “PyTorch: An imperative style, high-performance deep learning library,” <em>In advances in neural information processing systems</em>, vol. 32, 2019.</p></li>
+</ul>
+</div>
+<span class="target" id="module-nubo.optimisation.adam"></span><dl class="py function">
 <dt class="sig sig-object py" id="nubo.optimisation.adam.adam">
 <span class="sig-prename descclassname"><span class="pre">nubo.optimisation.adam.</span></span><span class="sig-name descname"><span class="pre">adam</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_starts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/nubo/optimisation/adam.html#adam"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.optimisation.adam.adam" title="Permalink to this definition">#</a></dt>
 <dd><p>Multi-start Adam optimiser using the <code class="docutils literal notranslate"><span class="pre">torch.optim.Adam</span></code> implementation
@@ -494,12 +507,12 @@ the best result.</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Optimisation module</a><ul>
-<li><a class="reference internal" href="#module-nubo.optimisation.lbfgsb">Deterministic optimisers</a><ul>
+<li><a class="reference internal" href="#deterministic-optimisers">Deterministic optimisers</a><ul>
 <li><a class="reference internal" href="#nubo.optimisation.lbfgsb.lbfgsb"><code class="docutils literal notranslate"><span class="pre">lbfgsb()</span></code></a></li>
 <li><a class="reference internal" href="#nubo.optimisation.slsqp.slsqp"><code class="docutils literal notranslate"><span class="pre">slsqp()</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#module-nubo.optimisation.adam">Stochastic optimisers</a><ul>
+<li><a class="reference internal" href="#stochastic-optimisers">Stochastic optimisers</a><ul>
 <li><a class="reference internal" href="#nubo.optimisation.adam.adam"><code class="docutils literal notranslate"><span class="pre">adam()</span></code></a></li>
 </ul>
 </li>

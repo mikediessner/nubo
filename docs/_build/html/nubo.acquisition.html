@@ -160,7 +160,7 @@
 <li class="toctree-l1"><a class="reference internal" href="get_started.html">Get started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bayesian_optimisation.html">A primer on Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="citation.html">Citation</a></li>
-<li class="toctree-l1"><a class="reference external" href="http://github.com/mikediessner/nubo-dev">Github</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://github.com/mikediessner/nubo">Github</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
@@ -232,9 +232,16 @@
 </dd></dl>
 
 </section>
-<section id="module-nubo.acquisition.analytical">
-<span id="analytical-acquisition-functions"></span><h2>Analytical acquisition functions<a class="headerlink" href="#module-nubo.acquisition.analytical" title="Permalink to this heading">#</a></h2>
-<dl class="py class">
+<section id="analytical-acquisition-functions">
+<h2>Analytical acquisition functions<a class="headerlink" href="#analytical-acquisition-functions" title="Permalink to this heading">#</a></h2>
+<div class="seealso admonition">
+<p class="admonition-title">References</p>
+<ul class="simple">
+<li><p>DR Jones, M Schonlau, and WJ Welch, “Efficient global optimization of expensive black-box functions,” <em>Journal of global optimization</em>, vol. 13, no. 4, p. 566, 1998.</p></li>
+<li><p>N Srinivas, A Krause, SM Kakade, and M Seeger, “Gaussian process optimization in the bandit setting: No regret and experimental design,” <em>Proceedings of the 27th international conference on machine learning</em>, p. 1015-1022, 2010.</p></li>
+</ul>
+</div>
+<span class="target" id="module-nubo.acquisition.analytical"></span><dl class="py class">
 <dt class="sig sig-object py" id="nubo.acquisition.analytical.ExpectedImprovement">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.acquisition.analytical.</span></span><span class="sig-name descname"><span class="pre">ExpectedImprovement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GP</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_best</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/acquisition/analytical.html#ExpectedImprovement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.acquisition.analytical.ExpectedImprovement" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nubo.acquisition.acquisition_function.AcquisitionFunction" title="nubo.acquisition.acquisition_function.AcquisitionFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">AcquisitionFunction</span></code></a></p>
@@ -331,9 +338,15 @@ analytically.</p>
 </dd></dl>
 
 </section>
-<section id="module-nubo.acquisition.monte_carlo">
-<span id="monte-carlo-aquisition-functions"></span><h2>Monte Carlo aquisition functions<a class="headerlink" href="#module-nubo.acquisition.monte_carlo" title="Permalink to this heading">#</a></h2>
-<dl class="py class">
+<section id="monte-carlo-aquisition-functions">
+<h2>Monte Carlo aquisition functions<a class="headerlink" href="#monte-carlo-aquisition-functions" title="Permalink to this heading">#</a></h2>
+<div class="seealso admonition">
+<p class="admonition-title">References</p>
+<ul class="simple">
+<li><p>J Wilson, F Hutter, and M Deisenroth, “Maximizing acquisition functions for Bayesian optimization,” <em>Advances in neural information processing systems</em>, vol. 31, 2018.</p></li>
+</ul>
+</div>
+<span class="target" id="module-nubo.acquisition.monte_carlo"></span><dl class="py class">
 <dt class="sig sig-object py" id="nubo.acquisition.monte_carlo.MCExpectedImprovement">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.acquisition.monte_carlo.</span></span><span class="sig-name descname"><span class="pre">MCExpectedImprovement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GP</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_best</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_pending</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">512</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fix_base_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/acquisition/monte_carlo.html#MCExpectedImprovement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.acquisition.monte_carlo.MCExpectedImprovement" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nubo.acquisition.acquisition_function.AcquisitionFunction" title="nubo.acquisition.acquisition_function.AcquisitionFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">AcquisitionFunction</span></code></a></p>
@@ -520,7 +533,7 @@ true deterministic optimizer (L-BFGS-B, SLSQP) can be used.</p>
 <li><a class="reference internal" href="#nubo.acquisition.acquisition_function.AcquisitionFunction"><code class="docutils literal notranslate"><span class="pre">AcquisitionFunction</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#module-nubo.acquisition.analytical">Analytical acquisition functions</a><ul>
+<li><a class="reference internal" href="#analytical-acquisition-functions">Analytical acquisition functions</a><ul>
 <li><a class="reference internal" href="#nubo.acquisition.analytical.ExpectedImprovement"><code class="docutils literal notranslate"><span class="pre">ExpectedImprovement</span></code></a><ul>
 <li><a class="reference internal" href="#nubo.acquisition.analytical.ExpectedImprovement.eval"><code class="docutils literal notranslate"><span class="pre">ExpectedImprovement.eval()</span></code></a></li>
 </ul>
@@ -531,7 +544,7 @@ true deterministic optimizer (L-BFGS-B, SLSQP) can be used.</p>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#module-nubo.acquisition.monte_carlo">Monte Carlo aquisition functions</a><ul>
+<li><a class="reference internal" href="#monte-carlo-aquisition-functions">Monte Carlo aquisition functions</a><ul>
 <li><a class="reference internal" href="#nubo.acquisition.monte_carlo.MCExpectedImprovement"><code class="docutils literal notranslate"><span class="pre">MCExpectedImprovement</span></code></a><ul>
 <li><a class="reference internal" href="#nubo.acquisition.monte_carlo.MCExpectedImprovement.eval"><code class="docutils literal notranslate"><span class="pre">MCExpectedImprovement.eval()</span></code></a></li>
 </ul>

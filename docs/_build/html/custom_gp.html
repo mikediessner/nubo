@@ -215,8 +215,12 @@
         <article role="main">
           <section id="Custom-Gaussian-process">
 <h1>Custom Gaussian process<a class="headerlink" href="#Custom-Gaussian-process" title="Permalink to this heading">#</a></h1>
+<p>This notebook gives a introduction to specifying custom Gaussian process with <code class="docutils literal notranslate"><span class="pre">GPyTorch</span></code> that can be used with NUBO.</p>
 <section id="Define-Gaussian-process">
 <h2>Define Gaussian process<a class="headerlink" href="#Define-Gaussian-process" title="Permalink to this heading">#</a></h2>
+<p>A Gaussian process is defined by its mean function and its covariance kernel. Both are specified in the <code class="docutils literal notranslate"><span class="pre">__init__()</span></code> method of the the <code class="docutils literal notranslate"><span class="pre">GaussianProcess</span></code> class below and can be easily swapped out by the desired function and kernel. While <code class="docutils literal notranslate"><span class="pre">GPyTorch</span></code> offers many different options, the most common choices are the zero mean or constant mean function and the Matern or RBF kernel. Some kernel, such as the Matern and the RBF kernel, are only defined for a certain range so that they need to be
+scaled through the <code class="docutils literal notranslate"><span class="pre">ScaleKernel</span></code> to be used with all problems. The length-scale parameters of the covariance kernel can either be represented as a single length-scale or as one length-scale parameter for each input dimensions. The latter is known as automatic relevance determination (ARD) and allows inputs to be differently correlated. The <code class="docutils literal notranslate"><span class="pre">forward()</span></code> function takes a test point and returns the predictive multivariate normal distribution. All other properties of the Gaussian process are
+inherited by the <code class="docutils literal notranslate"><span class="pre">ExactGP</span></code> making it easy to implement custom Gaussian processes. For more information about Gaussian processes and about options for mean function and covariance kernel see the documentation of <code class="docutils literal notranslate"><span class="pre">GPyTorch</span></code>.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -257,6 +261,7 @@
 </section>
 <section id="Generate-training-data">
 <h2>Generate training data<a class="headerlink" href="#Generate-training-data" title="Permalink to this heading">#</a></h2>
+<p>To use the Gaussian process, we first generate some training data.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
@@ -281,12 +286,14 @@
 </section>
 <section id="Fit-Gaussian-process">
 <h2>Fit Gaussian process<a class="headerlink" href="#Fit-Gaussian-process" title="Permalink to this heading">#</a></h2>
+<p>Before we fit the Gaussian process to the training data, we first have to decide on the likelihood that should be used. There are two likelihoods we want to consider here: First, we have the standard Gaussian likelihood. This likelihood assumes a constant homoskedastic observation noise and estimates the noise parameter <span class="math notranslate nohighlight">\(\sigma^2\)</span> from the data. Second, there is the Gaussian likelihood with fixed noise. You want to use this option when you know or can measure the observation noise of your
+objective function. In this case, you can still decide if you want to estimate the additional noise besides the observations noise or not. This example continues with the full estimation of the noise level. NUBO has the convenience function <code class="docutils literal notranslate"><span class="pre">fit_gp</span></code> that maximises the log marginal likelihood with maximum likelihood estimation (MLE) using <code class="docutils literal notranslate"><span class="pre">torch</span></code>’s Adam optimiser.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nubo.models</span> <span class="kn">import</span> <span class="n">fit_gp</span>
-<span class="kn">from</span> <span class="nn">gpytorch.likelihoods</span> <span class="kn">import</span> <span class="n">GaussianLikelihood</span>
+<span class="kn">from</span> <span class="nn">gpytorch.likelihoods</span> <span class="kn">import</span> <span class="n">GaussianLikelihood</span><span class="p">,</span> <span class="n">FixedNoiseGaussianLikelihood</span>
 
 
 <span class="c1"># initialise Gaussian process</span>
@@ -299,8 +306,9 @@
 </div>
 </div>
 </section>
-<section id="Predict-test-point">
-<h2>Predict test point<a class="headerlink" href="#Predict-test-point" title="Permalink to this heading">#</a></h2>
+<section id="Make-predictions-for-test-points">
+<h2>Make predictions for test points<a class="headerlink" href="#Make-predictions-for-test-points" title="Permalink to this heading">#</a></h2>
+<p>With the fitted Gaussian process in hand, we can easily predict the mean and the variance of previously unobserved test points. Below, we sample five points randomly and print the predictive mean and variance that define the predictive distribution for each test point based on the training data and our Gaussian process specified above.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -331,8 +339,8 @@
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Mean: tensor([-0.1095, -0.1708,  0.1029,  0.2947, -0.0896], dtype=torch.float64)
-Variance: tensor([0.0838, 0.0431, 0.0119, 0.0370, 0.0544], dtype=torch.float64)
+Mean: tensor([ 0.2188,  0.1616, -0.0127,  0.0252, -0.0069], dtype=torch.float64)
+Variance: tensor([0.0136, 0.0191, 0.0252, 0.0164, 0.0343], dtype=torch.float64)
 </pre></div></div>
 </div>
 </section>
@@ -397,7 +405,7 @@ Variance: tensor([0.0838, 0.0431, 0.0119, 0.0370, 0.0544], dtype=torch.float64)
 <li><a class="reference internal" href="#Define-Gaussian-process">Define Gaussian process</a></li>
 <li><a class="reference internal" href="#Generate-training-data">Generate training data</a></li>
 <li><a class="reference internal" href="#Fit-Gaussian-process">Fit Gaussian process</a></li>
-<li><a class="reference internal" href="#Predict-test-point">Predict test point</a></li>
+<li><a class="reference internal" href="#Make-predictions-for-test-points">Make predictions for test points</a></li>
 </ul>
 </li>
 </ul>

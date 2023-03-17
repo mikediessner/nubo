@@ -125,7 +125,9 @@ ranging from exact Gaussian processes to approximate and even deep Gaussian
 processes. Besides maximum likelihood estimation (MLE) ``GPyTorch`` also
 supports maximum a posteriori estimation (MAP) and fully Bayesian estimation
 to estimate the hyper-parameter. It also comes with a rich documentation, many
-practical examples, and a large community. NUBO provides a Gaussian process for
+practical examples, and a large community.
+
+NUBO provides a Gaussian process for
 off-the-shelf use with a constant mean function and a Matern 5/2 covariance
 kernel that due to its flexibility is especially suited for practical
 optimisation [9]_. A tutorial on how to implement a custom Gaussian process for

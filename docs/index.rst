@@ -38,6 +38,7 @@ Bayesian optimisation algorithm to your specfic problem.
    :maxdepth: 1
    :caption: Examples:
 
+   custom_gp.rst
    singlepoint.ipynb
    multipoint_joint.ipynb
    multipoint_sequential.ipynb

@@ -164,6 +164,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="custom_gp.html">Custom Gaussian process</a></li>
 <li class="toctree-l1"><a class="reference internal" href="singlepoint.html">Sequential single-point Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multipoint_joint.html">Parallel multi-point joint Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multipoint_sequential.html">Parallel multi-point sequential Bayesian optimisation</a></li>
@@ -260,28 +261,21 @@ training data itself. The loop than restarts gaining more information about the
 objective function with each iteration. Bayesian optimisation is run for as
 many iterations as the evaluation budget $N$ allows, until a satisfying
 solution is found, or unitl a pre-defined stopping criterion is met.</p>
-<blockquote>
-<div><p><strong>Algorithm</strong></p>
-<p>Specify evaluation budget <span class="math notranslate nohighlight">\(N\)</span>, number of initial points <span class="math notranslate nohighlight">\(n_0\)</span>,
-surrogate model <span class="math notranslate nohighlight">\(\mathcal{M}\)</span>, acquisition function <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
-<p>Sample <span class="math notranslate nohighlight">\(n_0\)</span> initial training data points <span class="math notranslate nohighlight">\(\boldsymbol X_0\)</span> via
-a space-filling design <a class="footnote-reference brackets" href="#id26" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a> and gather observations
-<span class="math notranslate nohighlight">\(\boldsymbol y_0\)</span>.
-Set <span class="math notranslate nohighlight">\(n = n_0\)</span> and
-<span class="math notranslate nohighlight">\(\mathcal{D}_n = \{ \boldsymbol X_0, \boldsymbol y_0 \}\)</span>.</p>
+<div class="seealso admonition">
+<p class="admonition-title">Algorithm</p>
+<p>Specify evaluation budget <span class="math notranslate nohighlight">\(N\)</span>, number of initial points <span class="math notranslate nohighlight">\(n_0\)</span>, surrogate model <span class="math notranslate nohighlight">\(\mathcal{M}\)</span>, acquisition function <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
+<p>Sample <span class="math notranslate nohighlight">\(n_0\)</span> initial training data points <span class="math notranslate nohighlight">\(\boldsymbol X_0\)</span> via a space-filling design <a class="footnote-reference brackets" href="#id26" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a> and gather observations <span class="math notranslate nohighlight">\(\boldsymbol y_0\)</span>.</p>
+<p>Set <span class="math notranslate nohighlight">\(n = n_0\)</span> and <span class="math notranslate nohighlight">\(\mathcal{D}_n = \{ \boldsymbol X_0, \boldsymbol y_0 \}\)</span>.</p>
 <p><strong>while</strong> <span class="math notranslate nohighlight">\(n \leq N\)</span> <strong>do:</strong></p>
-<blockquote>
-<div><p>1. Fit surrogate model <span class="math notranslate nohighlight">\(\mathcal{M}\)</span> to training data
-<span class="math notranslate nohighlight">\(\mathcal{D}_n\)</span>.
-2. Find <span class="math notranslate nohighlight">\(x_n^*\)</span> that maximises an acquisition criterion
-<span class="math notranslate nohighlight">\(\alpha\)</span> based on model <span class="math notranslate nohighlight">\(\mathcal{M}\)</span>.
-3. Evaluate <span class="math notranslate nohighlight">\(\boldsymbol x_n^*\)</span> observing <span class="math notranslate nohighlight">\(y_n^*\)</span> and add
-to <span class="math notranslate nohighlight">\(\mathcal{D}_n\)</span>.
-4. Increment <span class="math notranslate nohighlight">\(n\)</span>.</p>
-</div></blockquote>
+<ol class="arabic simple">
+<li><p>Fit surrogate model <span class="math notranslate nohighlight">\(\mathcal{M}\)</span> to training data <span class="math notranslate nohighlight">\(\mathcal{D}_n\)</span>.</p></li>
+<li><p>Find <span class="math notranslate nohighlight">\(\boldsymbol x_n^*\)</span> that maximises an acquisition criterion <span class="math notranslate nohighlight">\(\alpha\)</span> based on model <span class="math notranslate nohighlight">\(\mathcal{M}\)</span>.</p></li>
+<li><p>Evaluate <span class="math notranslate nohighlight">\(\boldsymbol x_n^*\)</span> observing <span class="math notranslate nohighlight">\(y_n^*\)</span> and add to <span class="math notranslate nohighlight">\(\mathcal{D}_n\)</span>.</p></li>
+<li><p>Increment <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+</ol>
 <p><strong>end while</strong></p>
-<p>Return point with highest observation <span class="math notranslate nohighlight">\(\boldsymbol x^*\)</span>.</p>
-</div></blockquote>
+<p>Return point <span class="math notranslate nohighlight">\(\boldsymbol x^*\)</span> with highest observation.</p>
+</div>
 </section>
 <section id="surrogate-model">
 <span id="model"></span><h2>Surrogate model<a class="headerlink" href="#surrogate-model" title="Permalink to this heading">#</a></h2>
@@ -335,7 +329,12 @@ ranging from exact Gaussian processes to approximate and even deep Gaussian
 processes. Besides maximum likelihood estimation (MLE) <code class="docutils literal notranslate"><span class="pre">GPyTorch</span></code> also
 supports maximum a posteriori estimation (MAP) and fully Bayesian estimation
 to estimate the hyper-parameter. It also comes with a rich documentation, many
-practical examples, and a large community.</p>
+practical examples, and a large community. NUBO provides a Gaussian process for
+off-the-shelf use with a constant mean function and a Matern 5/2 covariance
+kernel that due to its flexibility is especially suited for practical
+optimisation <a class="footnote-reference brackets" href="#id28" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a>. A tutorial on how to implement a custom Gaussian process for
+NUBO can be found in the examples section. For more complex models we recommend
+consulting the <code class="docutils literal notranslate"><span class="pre">GPyTorch</span></code> <a class="reference external" href="https://docs.gpytorch.ai/en/stable">documentation</a>.</p>
 </section>
 <section id="acquisition-function">
 <span id="acquisition"></span><h2>Acquisition function<a class="headerlink" href="#acquisition-function" title="Permalink to this heading">#</a></h2>
@@ -356,8 +355,8 @@ full input space.</p>
 <h3>Analytical acquisition functions<a class="headerlink" href="#analytical-acquisition-functions" title="Permalink to this heading">#</a></h3>
 <p>NUBO supports two of the most popular acquisition functions that are grounded
 in a rich history of theoretical and empirical research. Expected improvement
-(EI) <a class="footnote-reference brackets" href="#id24" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a> selects points with the biggest potential of improving on the current
-best observation while upper confidence bound (UCB) <a class="footnote-reference brackets" href="#id29" id="id11" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a> takes an optimistic
+(EI) <a class="footnote-reference brackets" href="#id24" id="id11" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a> selects points with the biggest potential of improving on the current
+best observation while upper confidence bound (UCB) <a class="footnote-reference brackets" href="#id29" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a> takes an optimistic
 view of the posterior uncertainty and assumes a user-defined (through the
 hyper-parameter <span class="math notranslate nohighlight">\(\beta\)</span>) level of it to be true. Expected improvement
 (EI) is defined as</p>
@@ -384,10 +383,7 @@ them with a deterministic optimiser such as L-BFGS-B for bounded unconstraint
 problems or SLSQP for bounded or constraint problems. However, this is only
 true for the sequential single-point case in which every points suggested by
 Bayesian optimisation is observed through the objective function
-<span class="math notranslate nohighlight">\(f( \boldsymbol x)\)</span> immediatley before the optimisation loop is repeated.
-NUBO contains a pre-specified Gaussian process with constant mean function and
-the Matern 5/2 covariance kernel that is especially suited for practical
-optimisation <a class="footnote-reference brackets" href="#id28" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a>.</p>
+<span class="math notranslate nohighlight">\(f( \boldsymbol x)\)</span> immediatley before the optimisation loop is repeated.</p>
 </section>
 <section id="monte-carlo-acquisition-functions">
 <h3>Monte Carlo acquisition functions<a class="headerlink" href="#monte-carlo-acquisition-functions" title="Permalink to this heading">#</a></h3>
@@ -471,7 +467,7 @@ maximum.</p>
 </aside>
 <aside class="footnote brackets" id="id24" role="note">
 <span class="label"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></span>
-<span class="backrefs">(<a role="doc-backlink" href="#id3">1</a>,<a role="doc-backlink" href="#id10">2</a>)</span>
+<span class="backrefs">(<a role="doc-backlink" href="#id3">1</a>,<a role="doc-backlink" href="#id11">2</a>)</span>
 <p>DR Jones, M Schonlau, and WJ Welch, “Efficient global optimization of expensive black-box functions,” <em>Journal of global optimization</em>, vol. 13, no. 4, p. 566, 1998.</p>
 </aside>
 <aside class="footnote brackets" id="id25" role="note">
@@ -488,11 +484,11 @@ maximum.</p>
 </aside>
 <aside class="footnote brackets" id="id28" role="note">
 <span class="label"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></span>
-<span class="backrefs">(<a role="doc-backlink" href="#id5">1</a>,<a role="doc-backlink" href="#id12">2</a>,<a role="doc-backlink" href="#id13">3</a>,<a role="doc-backlink" href="#id19">4</a>)</span>
+<span class="backrefs">(<a role="doc-backlink" href="#id5">1</a>,<a role="doc-backlink" href="#id10">2</a>,<a role="doc-backlink" href="#id13">3</a>,<a role="doc-backlink" href="#id19">4</a>)</span>
 <p>J Snoek, H Larochelle, and RP Adams, “Practical Bayesian optimization of machine learning algorithms,” <em>Advances in neural information processing systems</em>, vol. 25, 2012.</p>
 </aside>
 <aside class="footnote brackets" id="id29" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id11">10</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id12">10</a><span class="fn-bracket">]</span></span>
 <p>N Srinivas, A Krause, SM Kakade, and M Seeger, “Gaussian process optimization in the bandit setting: No regret and experimental design,” <em>Proceedings of the 27th international conference on machine learning</em>, p. 1015-1022, 2010.</p>
 </aside>
 <aside class="footnote brackets" id="id30" role="note">

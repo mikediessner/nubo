@@ -53,30 +53,25 @@ objective function with each iteration. Bayesian optimisation is run for as
 many iterations as the evaluation budget $N$ allows, until a satisfying
 solution is found, or unitl a pre-defined stopping criterion is met.
 
-    **Algorithm**
+.. admonition:: Algorithm
+    :class: seealso
 
-    Specify evaluation budget :math:`N`, number of initial points :math:`n_0`,
-    surrogate model :math:`\mathcal{M}`, acquisition function :math:`\alpha`.
+    Specify evaluation budget :math:`N`, number of initial points :math:`n_0`, surrogate model :math:`\mathcal{M}`, acquisition function :math:`\alpha`.
 
-    Sample :math:`n_0` initial training data points :math:`\boldsymbol X_0` via
-    a space-filling design [7]_ and gather observations
-    :math:`\boldsymbol y_0`. 
-    Set :math:`n = n_0` and
-    :math:`\mathcal{D}_n = \{ \boldsymbol X_0, \boldsymbol y_0 \}`.
+    Sample :math:`n_0` initial training data points :math:`\boldsymbol X_0` via a space-filling design [7]_ and gather observations :math:`\boldsymbol y_0`.
+
+    Set :math:`n = n_0` and :math:`\mathcal{D}_n = \{ \boldsymbol X_0, \boldsymbol y_0 \}`.
 
     **while** :math:`n \leq N` **do:**
 
-        1. Fit surrogate model :math:`\mathcal{M}` to training data
-        :math:`\mathcal{D}_n`.  
-        2. Find :math:`x_n^*` that maximises an acquisition criterion
-        :math:`\alpha` based on model :math:`\mathcal{M}`.  
-        3. Evaluate :math:`\boldsymbol x_n^*` observing :math:`y_n^*` and add
-        to :math:`\mathcal{D}_n`.  
-        4. Increment :math:`n`.
+    1. Fit surrogate model :math:`\mathcal{M}` to training data :math:`\mathcal{D}_n`.  
+    2. Find :math:`\boldsymbol x_n^*` that maximises an acquisition criterion :math:`\alpha` based on model :math:`\mathcal{M}`.  
+    3. Evaluate :math:`\boldsymbol x_n^*` observing :math:`y_n^*` and add to :math:`\mathcal{D}_n`.  
+    4. Increment :math:`n`.
 
     **end while**
 
-    Return point with highest observation :math:`\boldsymbol x^*`.
+    Return point :math:`\boldsymbol x^*` with highest observation.
 
 .. _model:
 
@@ -130,7 +125,12 @@ ranging from exact Gaussian processes to approximate and even deep Gaussian
 processes. Besides maximum likelihood estimation (MLE) ``GPyTorch`` also
 supports maximum a posteriori estimation (MAP) and fully Bayesian estimation
 to estimate the hyper-parameter. It also comes with a rich documentation, many
-practical examples, and a large community.
+practical examples, and a large community. NUBO provides a Gaussian process for
+off-the-shelf use with a constant mean function and a Matern 5/2 covariance
+kernel that due to its flexibility is especially suited for practical
+optimisation [9]_. A tutorial on how to implement a custom Gaussian process for
+NUBO can be found in the examples section. For more complex models we recommend
+consulting the ``GPyTorch`` `documentation`_.
 
 .. _acquisition:
 
@@ -185,9 +185,6 @@ problems or SLSQP for bounded or constraint problems. However, this is only
 true for the sequential single-point case in which every points suggested by
 Bayesian optimisation is observed through the objective function
 :math:`f( \boldsymbol x)` immediatley before the optimisation loop is repeated.
-NUBO contains a pre-specified Gaussian process with constant mean function and
-the Matern 5/2 covariance kernel that is especially suited for practical
-optimisation [9]_.
 
 Monte Carlo acquisition functions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -261,6 +258,8 @@ function (solid black line). The last evaluated point approximates the
 maximum.
 
 ----
+
+.. _documentation: https://docs.gpytorch.ai/en/stable
 
 .. [1] M Balandat *et al.*, "BoTorch: A framework for efficient Monte-CarloBayesian optimization," *Advances in neural information processing systems*, vol. 33, 2020.
 .. [2] PI Frazier, "A tutorial on Bayesian optimization," *arXiv preprint arXiv:1807.02811*, 2018.

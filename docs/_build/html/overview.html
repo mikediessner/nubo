@@ -223,15 +223,16 @@ researchers from all disciplines. NUBO is written in <a class="reference externa
 open-source under the <a class="reference external" href="https://joinup.ec.europa.eu/licence/bsd-3-clause-new-or-revised-license">BSD 3-Clause license</a>.</p>
 <section id="bayesian-optimisation">
 <h2>Bayesian optimisation<a class="headerlink" href="#bayesian-optimisation" title="Permalink to this heading">#</a></h2>
-<p><a class="reference internal" href="bayesian_optimisation.html#bo"><span class="std std-ref">Bayesian optimisation</span></a> <a class="footnote-reference brackets" href="#id18" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id20" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id21" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id24" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id25" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a> is a surrogate model-based optimisation
-algorithm that aims to maximise an <a class="reference internal" href="bayesian_optimisation.html#objfunc"><span class="std std-ref">objective function</span></a> in a
-minimum number of function evaluations. Usually, the objective function does
-not have a known mathematical expression and every function evaluation is
-expensive requiring a cost-effective and sample-efficient optimisation
-routine. Bayesian optimisation meets these criteria by representing the
-objective function through a <a class="reference internal" href="bayesian_optimisation.html#model"><span class="std std-ref">surrogate model</span></a>, often a Gaussian
-process <a class="footnote-reference brackets" href="#id20" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id28" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></a>. This representation can then be used to find the next point that
-should be evaluated by maximising a criterion specified through an
+<p><a class="reference internal" href="bayesian_optimisation.html#bo"><span class="std std-ref">Bayesian optimisation</span></a> <a class="footnote-reference brackets" href="#id18" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id20" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id21" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id24" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id25" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a> is a surrogate
+model-based optimisation algorithm that aims to maximise an
+<a class="reference internal" href="bayesian_optimisation.html#objfunc"><span class="std std-ref">objective function</span></a> in a minimum number of function
+evaluations. Usually, the objective function does not have a known mathematical
+expression and every function evaluation is expensive requiring a
+cost-effective and sample-efficient optimisation routine. Bayesian optimisation
+meets these criteria by representing the objective function through a
+<a class="reference internal" href="bayesian_optimisation.html#model"><span class="std std-ref">surrogate model</span></a>, often a Gaussian process <a class="footnote-reference brackets" href="#id20" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id28" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></a>. This
+representation can then be used to find the next point that should be evaluated
+by maximising a criterion specified through an
 <a class="reference internal" href="bayesian_optimisation.html#acquisition"><span class="std std-ref">acquisition function</span></a>. A popular criterion is, for
 example, the Expected Improvement <a class="footnote-reference brackets" href="#id21" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> that is the expectation of the new point
 returning a better solution than the current best. Bayesian optimisation is

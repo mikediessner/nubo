@@ -11,15 +11,16 @@ open-source under the `BSD 3-Clause license`_.
 
 Bayesian optimisation
 ---------------------
-:ref:`Bayesian optimisation <bo>` [1]_ [3]_ [4]_ [7]_ [8]_ is a surrogate model-based optimisation 
-algorithm that aims to maximise an :ref:`objective function <objfunc>` in a
-minimum number of function evaluations. Usually, the objective function does
-not have a known mathematical expression and every function evaluation is
-expensive requiring a cost-effective and sample-efficient optimisation
-routine. Bayesian optimisation meets these criteria by representing the
-objective function through a :ref:`surrogate model <model>`, often a Gaussian
-process [3]_ [11]_. This representation can then be used to find the next point that
-should be evaluated by maximising a criterion specified through an
+:ref:`Bayesian optimisation <bo>` [1]_ [3]_ [4]_ [7]_ [8]_ is a surrogate
+model-based optimisation algorithm that aims to maximise an
+:ref:`objective function <objfunc>` in a minimum number of function
+evaluations. Usually, the objective function does not have a known mathematical
+expression and every function evaluation is expensive requiring a
+cost-effective and sample-efficient optimisation routine. Bayesian optimisation
+meets these criteria by representing the objective function through a
+:ref:`surrogate model <model>`, often a Gaussian process [3]_ [11]_. This
+representation can then be used to find the next point that should be evaluated
+by maximising a criterion specified through an
 :ref:`acquisition function <acquisition>`. A popular criterion is, for
 example, the Expected Improvement [4]_ that is the expectation of the new point
 returning a better solution than the current best. Bayesian optimisation is

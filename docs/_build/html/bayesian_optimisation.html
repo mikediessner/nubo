@@ -218,31 +218,66 @@
 <p>Bayesian optimisation aims to solve the $d$-dimensional maximisation problem</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
-\[\boldsymbol  x^* = \arg \max_{\boldsymbol  x \in \mathcal{X}} f(\boldsymbol  x)\]</div>
+\[\boldsymbol  x^* = \arg \max_{\boldsymbol  x \in \mathcal{X}} f(\boldsymbol x)\]</div>
 </div>
-<p>where the input space is usually continuous and bounded by a hyper-rectangle <span class="math notranslate nohighlight">\(\mathcal{X} \in [a, b]^d\)</span> with <span class="math notranslate nohighlight">\(a, b \in \mathbb{R}\)</span>. The function <span class="math notranslate nohighlight">\(f(\boldsymbol x)\)</span> is most commonly a derivative-free expensive-to-evaluate black box problem that only allows inputs <span class="math notranslate nohighlight">\(\boldsymbol x_i\)</span> to be querried and outputs <span class="math notranslate nohighlight">\(y_i\)</span> to be observed without gaining any further insights into the underlying system. We assume any noise <span class="math notranslate nohighlight">\(\epsilon\)</span> that is introduced when taking measurements to be independent and identically distributed Gaussian noise <span class="math notranslate nohighlight">\(\epsilon \sim \mathcal{N} (0, \sigma^2)\)</span> such that <span class="math notranslate nohighlight">\(y_i = f(\boldsymbol  x_i) + \epsilon\)</span>. Hence, a set of $n$ pairs of data points and corresponding observations is defined as</p>
+<p>where the input space is usually continuous and bounded by a hyper-rectangle
+<span class="math notranslate nohighlight">\(\mathcal{X} \in [a, b]^d\)</span> with <span class="math notranslate nohighlight">\(a, b \in \mathbb{R}\)</span>. The function
+<span class="math notranslate nohighlight">\(f(\boldsymbol x)\)</span> is most commonly a derivative-free
+expensive-to-evaluate black box problem that only allows inputs
+<span class="math notranslate nohighlight">\(\boldsymbol x_i\)</span> to be querried and outputs <span class="math notranslate nohighlight">\(y_i\)</span> to be observed
+without gaining any further insights into the underlying system. We assume any
+noise <span class="math notranslate nohighlight">\(\epsilon\)</span> that is introduced when taking measurements to be
+independent and identically distributed Gaussian noise
+<span class="math notranslate nohighlight">\(\epsilon \sim \mathcal{N} (0, \sigma^2)\)</span> such that
+<span class="math notranslate nohighlight">\(y_i = f(\boldsymbol  x_i) + \epsilon\)</span>. Hence, a set of $n$ pairs of data
+points and corresponding observations is defined as</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
 \[\mathcal{D_n} = \{(\boldsymbol x_i, y_i)\}_{i=1}^n\]</div>
 </div>
-<p>and we further define training inputs as matrix <span class="math notranslate nohighlight">\(\boldsymbol X_n = \{\boldsymbol x_i \}_{i=1}^n\)</span> and their training outputs as vector <span class="math notranslate nohighlight">\(\boldsymbol y_n = \{y_i\}_{i=1}^n\)</span>.</p>
+<p>and we further define training inputs as matrix
+<span class="math notranslate nohighlight">\(\boldsymbol X_n = \{\boldsymbol x_i \}_{i=1}^n\)</span> and their training
+outputs as vector <span class="math notranslate nohighlight">\(\boldsymbol y_n = \{y_i\}_{i=1}^n\)</span>.</p>
 </section>
 <section id="bayesian-optimisation">
 <h2>Bayesian optimisation<a class="headerlink" href="#bayesian-optimisation" title="Permalink to this heading">#</a></h2>
-<p>Bayesian optimisation <a class="footnote-reference brackets" href="#id18" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id20" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id21" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id24" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id25" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a> is a surrogate model-based optimisation algorithm that aims to maximise the objective function <span class="math notranslate nohighlight">\(f(\boldsymbol x)\)</span> in a minimum number of function evaluations. Usually, the objective function does not have a known mathematical expression and every function evaluation is expensive requiring a cost-effective and sample-efficient optimisation routine. Bayesian optimisation meets these criteria by representing the objective function through a surrogate model <span class="math notranslate nohighlight">\(\mathcal{M}\)</span>, often a Gaussian process <span class="math notranslate nohighlight">\(\mathcal{GP}\)</span>. This representation can then be used to find the next point that should be evaluated by maximising a criterion specified through an acquisition function <span class="math notranslate nohighlight">\(\alpha\)</span>. A popular criterion is, for example, the expected improvement (EI) that is the expectation of the new point returning a better solution than the previous best. Bayesian optimisation is performed in a loop where training data <span class="math notranslate nohighlight">\(\mathcal{D}_n\)</span> is used to fit the surrogate model before the next point suggested by the acquisition function is evaluated and added to the training data itself. The loop than restarts gaining more information about the objective function with each iteration. Bayesian optimisation is run for as many iterations as the evaluation budget $N$ allows, until a satisfying solution is found, or unitl a pre-defined stopping criterion is met.</p>
+<p>Bayesian optimisation <a class="footnote-reference brackets" href="#id21" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id23" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id24" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id27" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id28" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a> is a surrogate model-based
+optimisation algorithm that aims to maximise the objective function
+<span class="math notranslate nohighlight">\(f(\boldsymbol x)\)</span> in a minimum number of function evaluations. Usually,
+the objective function does not have a known mathematical expression and every
+function evaluation is expensive requiring a cost-effective and
+sample-efficient optimisation routine. Bayesian optimisation meets these
+criteria by representing the objective function through a surrogate model
+<span class="math notranslate nohighlight">\(\mathcal{M}\)</span>, often a Gaussian process <span class="math notranslate nohighlight">\(\mathcal{GP}\)</span>. This
+representation can then be used to find the next point that should be evaluated
+by maximising a criterion specified through an acquisition function
+<span class="math notranslate nohighlight">\(\alpha\)</span>. A popular criterion is, for example, the expected improvement
+(EI) that is the expectation of the new point returning a better solution than
+the previous best. Bayesian optimisation is performed in a loop where training
+data <span class="math notranslate nohighlight">\(\mathcal{D}_n\)</span> is used to fit the surrogate model before the next
+point suggested by the acquisition function is evaluated and added to the
+training data itself. The loop than restarts gaining more information about the
+objective function with each iteration. Bayesian optimisation is run for as
+many iterations as the evaluation budget $N$ allows, until a satisfying
+solution is found, or unitl a pre-defined stopping criterion is met.</p>
 <blockquote>
 <div><p><strong>Algorithm</strong></p>
-<p>Specify evaluation budget <span class="math notranslate nohighlight">\(N\)</span>, number of initial points <span class="math notranslate nohighlight">\(n_0\)</span>, surrogate model <span class="math notranslate nohighlight">\(\mathcal{M}\)</span>, acquisition function <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
-<p>Sample <span class="math notranslate nohighlight">\(n_0\)</span> initial training data points <span class="math notranslate nohighlight">\(\boldsymbol X_0\)</span> via a space-filling design <a class="footnote-reference brackets" href="#id23" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a> and gather observations <span class="math notranslate nohighlight">\(\boldsymbol y_0\)</span>.
-Set <span class="math notranslate nohighlight">\(n = n_0\)</span> and <span class="math notranslate nohighlight">\(\mathcal{D}_n = \{ \boldsymbol X_0, \boldsymbol y_0 \}\)</span>.</p>
+<p>Specify evaluation budget <span class="math notranslate nohighlight">\(N\)</span>, number of initial points <span class="math notranslate nohighlight">\(n_0\)</span>,
+surrogate model <span class="math notranslate nohighlight">\(\mathcal{M}\)</span>, acquisition function <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
+<p>Sample <span class="math notranslate nohighlight">\(n_0\)</span> initial training data points <span class="math notranslate nohighlight">\(\boldsymbol X_0\)</span> via
+a space-filling design <a class="footnote-reference brackets" href="#id26" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a> and gather observations
+<span class="math notranslate nohighlight">\(\boldsymbol y_0\)</span>.
+Set <span class="math notranslate nohighlight">\(n = n_0\)</span> and
+<span class="math notranslate nohighlight">\(\mathcal{D}_n = \{ \boldsymbol X_0, \boldsymbol y_0 \}\)</span>.</p>
 <p><strong>while</strong> <span class="math notranslate nohighlight">\(n \leq N\)</span> <strong>do:</strong></p>
 <blockquote>
-<div><ol class="arabic simple">
-<li><p>Fit surrogate model <span class="math notranslate nohighlight">\(\mathcal{M}\)</span> to training data <span class="math notranslate nohighlight">\(\mathcal{D}_n\)</span>.</p></li>
-<li><p>Find <span class="math notranslate nohighlight">\(x_n^*\)</span> that maximises an acquisition criterion <span class="math notranslate nohighlight">\(\alpha\)</span> based on model <span class="math notranslate nohighlight">\(\mathcal{M}\)</span>.</p></li>
-<li><p>Evaluate <span class="math notranslate nohighlight">\(\boldsymbol x_n^*\)</span> observing <span class="math notranslate nohighlight">\(y_n^*\)</span> and add to <span class="math notranslate nohighlight">\(\mathcal{D}_n\)</span>.</p></li>
-<li><p>Increment <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
-</ol>
+<div><p>1. Fit surrogate model <span class="math notranslate nohighlight">\(\mathcal{M}\)</span> to training data
+<span class="math notranslate nohighlight">\(\mathcal{D}_n\)</span>.
+2. Find <span class="math notranslate nohighlight">\(x_n^*\)</span> that maximises an acquisition criterion
+<span class="math notranslate nohighlight">\(\alpha\)</span> based on model <span class="math notranslate nohighlight">\(\mathcal{M}\)</span>.
+3. Evaluate <span class="math notranslate nohighlight">\(\boldsymbol x_n^*\)</span> observing <span class="math notranslate nohighlight">\(y_n^*\)</span> and add
+to <span class="math notranslate nohighlight">\(\mathcal{D}_n\)</span>.
+4. Increment <span class="math notranslate nohighlight">\(n\)</span>.</p>
 </div></blockquote>
 <p><strong>end while</strong></p>
 <p>Return point with highest observation <span class="math notranslate nohighlight">\(\boldsymbol x^*\)</span>.</p>
@@ -250,13 +285,24 @@ Set <span class="math notranslate nohighlight">\(n = n_0\)</span> and <span clas
 </section>
 <section id="surrogate-model">
 <span id="model"></span><h2>Surrogate model<a class="headerlink" href="#surrogate-model" title="Permalink to this heading">#</a></h2>
-<p>A popular choice for the surrogate model <span class="math notranslate nohighlight">\(\mathcal{M}\)</span> that acts as a representation of the objective function <span class="math notranslate nohighlight">\(f(\boldsymbol x)\)</span> is a Gaussian process <span class="math notranslate nohighlight">\(\mathcal{GP}\)</span> <a class="footnote-reference brackets" href="#id20" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id27" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a>, a flexible non-parametric regression model. A Gaussian process is a finite collection of random variables that has a joint Gaussian distribution and is defined by a mean function <span class="math notranslate nohighlight">\(\mu_0(\boldsymbol x) : \mathcal{X} \mapsto \mathbb{R}\)</span> and a covariance kernel <span class="math notranslate nohighlight">\(\Sigma_0(\boldsymbol x, \boldsymbol x')  : \mathcal{X} \times \mathcal{X} \mapsto \mathbb{R}\)</span> resulting in the prior distribution</p>
+<p>A popular choice for the surrogate model <span class="math notranslate nohighlight">\(\mathcal{M}\)</span> that acts as a
+representation of the objective function <span class="math notranslate nohighlight">\(f(\boldsymbol x)\)</span> is a Gaussian
+process <span class="math notranslate nohighlight">\(\mathcal{GP}\)</span> <a class="footnote-reference brackets" href="#id23" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id30" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></a>, a flexible non-parametric regression
+model. A Gaussian process is a finite collection of random variables that has a
+joint Gaussian distribution and is defined by a mean function
+<span class="math notranslate nohighlight">\(\mu_0(\boldsymbol x) : \mathcal{X} \mapsto \mathbb{R}\)</span> and a covariance
+kernel <span class="math notranslate nohighlight">\(\Sigma_0(\boldsymbol x, \boldsymbol x')  : \mathcal{X} \times \mathcal{X} \mapsto \mathbb{R}\)</span>
+resulting in the prior distribution</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
 \[f(\boldsymbol X_n) \sim \mathcal{N} (m(\boldsymbol X_n), K(\boldsymbol X_n, \boldsymbol X_n)).\]</div>
 </div>
-<p>where <span class="math notranslate nohighlight">\(m(\boldsymbol X_n)\)</span> is the mean vector of size $n$ over all training inputs and <span class="math notranslate nohighlight">\(K(\boldsymbol X_n, \boldsymbol X_n)\)</span> is the <span class="math notranslate nohighlight">\(n \times n\)</span> covariance matrix between all training inputs.</p>
-<p>The posterior or predictive distribution for <span class="math notranslate nohighlight">\(n_*\)</span> test points <span class="math notranslate nohighlight">\(\boldsymbol X_*\)</span> can be computed as the multivariate normal distribution conditional on some training data <span class="math notranslate nohighlight">\(\mathcal{D}_n\)</span></p>
+<p>where <span class="math notranslate nohighlight">\(m(\boldsymbol X_n)\)</span> is the mean vector of size $n$ over all
+training inputs and <span class="math notranslate nohighlight">\(K(\boldsymbol X_n, \boldsymbol X_n)\)</span> is the
+<span class="math notranslate nohighlight">\(n \times n\)</span> covariance matrix between all training inputs.</p>
+<p>The posterior or predictive distribution for <span class="math notranslate nohighlight">\(n_*\)</span> test points
+<span class="math notranslate nohighlight">\(\boldsymbol X_*\)</span> can be computed as the multivariate normal distribution
+conditional on some training data <span class="math notranslate nohighlight">\(\mathcal{D}_n\)</span></p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
 \[f(\boldsymbol X_*) \mid \mathcal{D}_n, \boldsymbol X_* \sim \mathcal{N} \left(\mu_n (\boldsymbol X_*), \sigma^2_n (\boldsymbol X_*) \right)\]</div>
@@ -269,37 +315,92 @@ Set <span class="math notranslate nohighlight">\(n = n_0\)</span> and <span clas
 <div class="math notranslate nohighlight">
 \[\sigma^2_n (\boldsymbol X_*) = K (\boldsymbol X_*, \boldsymbol X_*) - K(\boldsymbol X_*, \boldsymbol X_n) \left[ K(\boldsymbol X_n, \boldsymbol X_n) + \sigma^2 I \right]^{-1} K(\boldsymbol X_n, \boldsymbol X_*)\]</div>
 </div>
-<p>where <span class="math notranslate nohighlight">\(m(\boldsymbol X_*)\)</span> is the mean vector of size <span class="math notranslate nohighlight">\(n_*\)</span> over all test inputs, <span class="math notranslate nohighlight">\(K(\boldsymbol X_*, \boldsymbol X_n)\)</span> is the <span class="math notranslate nohighlight">\(n_* \times n\)</span>, <span class="math notranslate nohighlight">\(K(\boldsymbol X_n, \boldsymbol X_*)\)</span> is the <span class="math notranslate nohighlight">\(n \times n_*\)</span>, and <span class="math notranslate nohighlight">\(K(\boldsymbol X_*, \boldsymbol X_*)\)</span> is the <span class="math notranslate nohighlight">\(n_* \times n_*\)</span> covariance matrix between training inputs <span class="math notranslate nohighlight">\(\boldsymbol X_n\)</span> and test inputs <span class="math notranslate nohighlight">\(\boldsymbol X_*\)</span>.</p>
-<p>Hyper-parameters of the Gaussian process such as any parameters <span class="math notranslate nohighlight">\(\theta\)</span> in the mean function and the covariance kernel or the noise variance <span class="math notranslate nohighlight">\(\sigma^2\)</span> can be estimated by maximising the log marginal likelihood via maximum likelihood estimation (MLE):</p>
+<p>where <span class="math notranslate nohighlight">\(m(\boldsymbol X_*)\)</span> is the mean vector of size <span class="math notranslate nohighlight">\(n_*\)</span> over
+all test inputs, <span class="math notranslate nohighlight">\(K(\boldsymbol X_*, \boldsymbol X_n)\)</span> is the
+<span class="math notranslate nohighlight">\(n_* \times n\)</span>, <span class="math notranslate nohighlight">\(K(\boldsymbol X_n, \boldsymbol X_*)\)</span> is the
+<span class="math notranslate nohighlight">\(n \times n_*\)</span>, and <span class="math notranslate nohighlight">\(K(\boldsymbol X_*, \boldsymbol X_*)\)</span> is the
+<span class="math notranslate nohighlight">\(n_* \times n_*\)</span> covariance matrix between training inputs
+<span class="math notranslate nohighlight">\(\boldsymbol X_n\)</span> and test inputs <span class="math notranslate nohighlight">\(\boldsymbol X_*\)</span>.</p>
+<p>Hyper-parameters of the Gaussian process such as any parameters <span class="math notranslate nohighlight">\(\theta\)</span>
+in the mean function and the covariance kernel or the noise variance
+<span class="math notranslate nohighlight">\(\sigma^2\)</span> can be estimated by maximising the log marginal likelihood
+via maximum likelihood estimation (MLE):</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
 \[\log p(\boldsymbol y_n \mid \boldsymbol X_n) = -\frac{1}{2} (\boldsymbol y_n - m(\boldsymbol X_n))^T [K(\boldsymbol X_n, \boldsymbol X_n) + \sigma^2 I]^{-1} (\boldsymbol y_n - m(\boldsymbol X_n)) - \frac{1}{2} \log \lvert K(\boldsymbol X_n, \boldsymbol X_n) + \sigma^2 I \rvert - \frac{n}{2} \log 2 \pi\]</div>
 </div>
-<p>NUBO uses the <code class="docutils literal notranslate"><span class="pre">GPyTorch</span></code> package <a class="footnote-reference brackets" href="#id19" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> for surrogate modelling. This is a very powerful package that allows the implementation of a wide selection of models ranging from exact Gaussian processes to approximate and even deep Gaussian processes. Besides maximum likelihood estimation (MLE) <code class="docutils literal notranslate"><span class="pre">GPyTorch</span></code> also supports maximum a posteriori estimation (MAP) and fully Bayesian estimation to estimate the hyper-parameter. It also comes with a rich documentation, many practical examples, and a large community.</p>
+<p>NUBO uses the <code class="docutils literal notranslate"><span class="pre">GPyTorch</span></code> package <a class="footnote-reference brackets" href="#id22" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> for surrogate modelling. This is a very
+powerful package that allows the implementation of a wide selection of models
+ranging from exact Gaussian processes to approximate and even deep Gaussian
+processes. Besides maximum likelihood estimation (MLE) <code class="docutils literal notranslate"><span class="pre">GPyTorch</span></code> also
+supports maximum a posteriori estimation (MAP) and fully Bayesian estimation
+to estimate the hyper-parameter. It also comes with a rich documentation, many
+practical examples, and a large community.</p>
 </section>
 <section id="acquisition-function">
 <span id="acquisition"></span><h2>Acquisition function<a class="headerlink" href="#acquisition-function" title="Permalink to this heading">#</a></h2>
-<p>Acquisition functions use the posterior or predictive distribution of the Gaussian process <span class="math notranslate nohighlight">\(\mathcal{GP}\)</span> to compute a criterion that assess if a test point is good potential solution when evaluated through the objective function <span class="math notranslate nohighlight">\(f(\boldsymbol x)\)</span>. Thus, maximising the acquisition function suggests the test point that based on the current training data <span class="math notranslate nohighlight">\(\mathcal{D_n}\)</span> has the highest potential of being the global optimum. To do this, an acquisition function <span class="math notranslate nohighlight">\(\alpha\)</span> balances exploration and exploitation. The former characterised by areas that lack of observed data points and where the uncertainty of the Gaussian process is high, and the latter by promising areas with a high posterior mean of the Gaussian process. This exploration-exploitation trade-off ensures that Bayesian optimisation does not converge to the first (potentially local) maximum it finds but explores the full input space.</p>
+<p>Acquisition functions use the posterior or predictive distribution of the
+Gaussian process <span class="math notranslate nohighlight">\(\mathcal{GP}\)</span> to compute a criterion that assess if a
+test point is good potential solution when evaluated through the objective
+function <span class="math notranslate nohighlight">\(f(\boldsymbol x)\)</span>. Thus, maximising the acquisition function
+suggests the test point that based on the current training data
+<span class="math notranslate nohighlight">\(\mathcal{D_n}\)</span> has the highest potential of being the global optimum. To
+do this, an acquisition function <span class="math notranslate nohighlight">\(\alpha\)</span> balances exploration and
+exploitation. The former characterised by areas that lack of observed data
+points and where the uncertainty of the Gaussian process is high, and the
+latter by promising areas with a high posterior mean of the Gaussian process.
+This exploration-exploitation trade-off ensures that Bayesian optimisation does
+not converge to the first (potentially local) maximum it finds but explores the
+full input space.</p>
 <section id="analytical-acquisition-functions">
 <h3>Analytical acquisition functions<a class="headerlink" href="#analytical-acquisition-functions" title="Permalink to this heading">#</a></h3>
-<p>NUBO supports two of the most popular acquisition functions that are grounded in a rich history of theoretical and empirical research. Expected improvement (EI) <a class="footnote-reference brackets" href="#id21" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> selects points with the biggest potential of improving on the current best observation while upper confidence bound (UCB) <a class="footnote-reference brackets" href="#id26" id="id11" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a> takes an optimistic view of the posterior uncertainty and assumes a user-defined (through the hyper-parameter <span class="math notranslate nohighlight">\(\beta\)</span>) level of it to be true. Expected improvement (EI) is defined as</p>
+<p>NUBO supports two of the most popular acquisition functions that are grounded
+in a rich history of theoretical and empirical research. Expected improvement
+(EI) <a class="footnote-reference brackets" href="#id24" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a> selects points with the biggest potential of improving on the current
+best observation while upper confidence bound (UCB) <a class="footnote-reference brackets" href="#id29" id="id11" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a> takes an optimistic
+view of the posterior uncertainty and assumes a user-defined (through the
+hyper-parameter <span class="math notranslate nohighlight">\(\beta\)</span>) level of it to be true. Expected improvement
+(EI) is defined as</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
 \[\alpha_{EI} (\boldsymbol X_*) = \left(\mu_n(\boldsymbol X_*) - y^{best} \right) \Phi(z) + \sigma_n(\boldsymbol X_*) \phi(z)\]</div>
 </div>
-<p>where <span class="math notranslate nohighlight">\(z = \frac{\mu_n(\boldsymbol X_*) - y^{best}}{\sigma_n(\boldsymbol X_*)}\)</span>, <span class="math notranslate nohighlight">\(\mu_n(\cdot)\)</span> and <span class="math notranslate nohighlight">\(\sigma_n(\cdot)\)</span> are the mean and the standard deviation of the predictive distribution of the Gaussian process, $y^{best}$ is the current best observation, and <span class="math notranslate nohighlight">\(\Phi\)</span> and <span class="math notranslate nohighlight">\(\phi\)</span> are the cumulative distribution function and the probability density function of the standard normal distribution.
-upper confidence bound (UCB) can be computed by</p>
+<p>where <span class="math notranslate nohighlight">\(z = \frac{\mu_n(\boldsymbol X_*) - y^{best}}{\sigma_n(\boldsymbol X_*)}\)</span>,
+<span class="math notranslate nohighlight">\(\mu_n(\cdot)\)</span> and <span class="math notranslate nohighlight">\(\sigma_n(\cdot)\)</span> are the mean and the standard
+deviation of the predictive distribution of the Gaussian process, $y^{best}$ is
+the current best observation, and <span class="math notranslate nohighlight">\(\Phi\)</span> and <span class="math notranslate nohighlight">\(\phi\)</span> are the
+cumulative distribution function and the probability density function of the
+standard normal distribution.</p>
+<p>The upper confidence bound (UCB) can be computed by</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
 \[\alpha_{UCB} (\boldsymbol X_*) = \mu_n(\boldsymbol X_*) + \sqrt{\beta} \sigma_n(\boldsymbol X_*)\]</div>
 </div>
-<p>where <span class="math notranslate nohighlight">\(\beta\)</span> is a pre-defined trade-off parameter, and <span class="math notranslate nohighlight">\(\mu_n(\cdot)\)</span> and <span class="math notranslate nohighlight">\(\sigma_n(\cdot)\)</span> are the mean and the standard deviation of the predictive distribution of the Gaussian process.</p>
-<p>Both of these acquisition functions can be computed analytically by maximising them with a deterministic optimiser such as L-BFGS-B for bounded unconstraint problems or SLSQP for bounded or constraint problems. However, this is only true for the sequential single-point case in which every points suggested by Bayesian optimisation is observed through the objective function <span class="math notranslate nohighlight">\(f( \boldsymbol x)\)</span> immediatley before the optimisation loop is repeated. NUBO contains a pre-specified Gaussian process with constant mean function and the Matern 5/2 covariance kernel that is especially suited for practical optimisation <a class="footnote-reference brackets" href="#id25" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a>.</p>
+<p>where <span class="math notranslate nohighlight">\(\beta\)</span> is a pre-defined trade-off parameter, and
+<span class="math notranslate nohighlight">\(\mu_n(\cdot)\)</span> and <span class="math notranslate nohighlight">\(\sigma_n(\cdot)\)</span> are the mean and the standard
+deviation of the predictive distribution of the Gaussian process.</p>
+<p>Both of these acquisition functions can be computed analytically by maximising
+them with a deterministic optimiser such as L-BFGS-B for bounded unconstraint
+problems or SLSQP for bounded or constraint problems. However, this is only
+true for the sequential single-point case in which every points suggested by
+Bayesian optimisation is observed through the objective function
+<span class="math notranslate nohighlight">\(f( \boldsymbol x)\)</span> immediatley before the optimisation loop is repeated.
+NUBO contains a pre-specified Gaussian process with constant mean function and
+the Matern 5/2 covariance kernel that is especially suited for practical
+optimisation <a class="footnote-reference brackets" href="#id28" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a>.</p>
 </section>
 <section id="monte-carlo-acquisition-functions">
 <h3>Monte Carlo acquisition functions<a class="headerlink" href="#monte-carlo-acquisition-functions" title="Permalink to this heading">#</a></h3>
-<p>For parallel multi-point batches or asynchronous optimisation, the analytical acquisition functions are in general intractable. To allow Bayesian optimisation in these cases, NUBO supports the approximation of the analytical acquisition function through Monte Carlo sampling <a class="footnote-reference brackets" href="#id25" id="id13" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id28" id="id14" role="doc-noteref"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></a>.</p>
-<p>The idea is to draw a large number of samples directly from the predicitve distribution and then to approximate the acquisition by averaging these Monte Carlo samples. This method is made viable by reparameterising the acquisition functions and then computing samples from the predicitve distribution by utilising base samples from a standard normal distribution <span class="math notranslate nohighlight">\(z \sim \mathcal{N} (0, 1)\)</span>.</p>
+<p>For parallel multi-point batches or asynchronous optimisation, the analytical
+acquisition functions are in general intractable. To allow Bayesian
+optimisation in these cases, NUBO supports the approximation of the analytical
+acquisition function through Monte Carlo sampling <a class="footnote-reference brackets" href="#id28" id="id13" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id31" id="id14" role="doc-noteref"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></a>.</p>
+<p>The idea is to draw a large number of samples directly from the predicitve
+distribution and then to approximate the acquisition by averaging these Monte
+Carlo samples. This method is made viable by reparameterising the acquisition
+functions and then computing samples from the predicitve distribution by
+utilising base samples from a standard normal distribution
+<span class="math notranslate nohighlight">\(z \sim \mathcal{N} (0, 1)\)</span>.</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
 \[\alpha_{EI}^{MC} (\boldsymbol X_*) = \max \left(ReLU(\mu_n(\boldsymbol X_*) + \boldsymbol L \boldsymbol z - y^{best}) \right)\]</div>
@@ -308,10 +409,33 @@ upper confidence bound (UCB) can be computed by</p>
 <div class="math notranslate nohighlight">
 \[\alpha_{UCB}^{MC} (\boldsymbol X_*) = \max \left(\mu_n(\boldsymbol X_*) + \sqrt{\frac{\beta \pi}{2}} \lvert \boldsymbol L \boldsymbol z \rvert \right)\]</div>
 </div>
-<p>where <span class="math notranslate nohighlight">\(\mu_n(\cdot)\)</span> is the mean of the predictive distribution of the Gaussian process, <span class="math notranslate nohighlight">\(\boldsymbol L\)</span> is the lower triangular matrix of the Cholesky decomposition of the covariance matrix <span class="math notranslate nohighlight">\(\boldsymbol L \boldsymbol L^T = K(\boldsymbol X_n, \boldsymbol X_n)\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol z\)</span> are samples from the standard normal distribution, $y^{best}$ is the current best observation, <span class="math notranslate nohighlight">\(\beta\)</span> is the trade-off parameter, and <span class="math notranslate nohighlight">\(ReLU (\cdot)\)</span> is the rectified linear unit function that zeros all values below $0$ and leaves the rest as is.</p>
-<p>Due to the randomness of the Monte Carlo samples, these acquisition functions can only be optimised by stochastic optimisers such as Adam <a class="footnote-reference brackets" href="#id22" id="id15" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a>. However, there is some empirical evidence that fixing the base samples for individual Bayesian optimisation loops does not affect the performance negatively. This method would allow deterministic optimiser to be used but could potentially introduce bias due to sampling randomness.</p>
-<p>Furthermore, two optimisation strategies for batches are possible <a class="footnote-reference brackets" href="#id28" id="id16" role="doc-noteref"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></a>: The default is a joint optimisation approach where the acquisition functions are optimised over all points of the batch. The second option is a greedy sequential approach where one point after the other is selected holding each previous point fixed until the batch is full. Empirical evidence shows that both methods approximate the acquisition similarly for smaller batches. For larger batches, greedy optimisation performs better as the optimisation of the joint approach increases in complexity with the batch size.</p>
-<p>Asynchronous optimisation <a class="footnote-reference brackets" href="#id25" id="id17" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a> leverages the same property as sequential greedy optimisation: the pending points that have not yet been evaluated can be added to the test points but are treated as fixed. In this way, they affect the joint multivariate normal distribution but are not considered directly in the optimisation.</p>
+<p>where <span class="math notranslate nohighlight">\(\mu_n(\cdot)\)</span> is the mean of the predictive distribution of the
+Gaussian process, <span class="math notranslate nohighlight">\(\boldsymbol L\)</span> is the lower triangular matrix of the
+Cholesky decomposition of the covariance matrix
+<span class="math notranslate nohighlight">\(\boldsymbol L \boldsymbol L^T = K(\boldsymbol X_n, \boldsymbol X_n)\)</span>,
+<span class="math notranslate nohighlight">\(\boldsymbol z\)</span> are samples from the standard normal distribution,
+<span class="math notranslate nohighlight">\(y^{best}\)</span> is the current best observation, <span class="math notranslate nohighlight">\(\beta\)</span> is the
+trade-off parameter, and <span class="math notranslate nohighlight">\(ReLU (\cdot)\)</span> is the rectified linear unit
+function that zeros all values below $0$ and leaves the rest as is.</p>
+<p>Due to the randomness of the Monte Carlo samples, these acquisition functions
+can only be optimised by stochastic optimisers such as Adam <a class="footnote-reference brackets" href="#id25" id="id15" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a>. However,
+there is some empirical evidence that fixing the base samples for individual
+Bayesian optimisation loops does not affect the performance negatively <a class="footnote-reference brackets" href="#id20" id="id16" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.
+This method would allow deterministic optimiser to be used but could
+potentially introduce bias due to sampling randomness.</p>
+<p>Furthermore, two optimisation strategies for batches are possible <a class="footnote-reference brackets" href="#id31" id="id17" role="doc-noteref"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></a>: The
+default is a joint optimisation approach where the acquisition functions are
+optimised over all points of the batch. The second option is a greedy
+sequential approach where one point after the other is selected holding each
+previous point fixed until the batch is full. Empirical evidence shows that
+both methods approximate the acquisition successfully. However, the greedy
+approach seems to have a slight edge over the joint strategy for some examples
+<a class="footnote-reference brackets" href="#id31" id="id18" role="doc-noteref"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></a>. It also is faster to compute for larger batches.</p>
+<p>Asynchronous optimisation <a class="footnote-reference brackets" href="#id28" id="id19" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a> leverages the same property as sequential greedy
+optimisation: the pending points that have not yet been evaluated can be added
+to the test points but are treated as fixed. In this way, they affect the joint
+multivariate normal distribution but are not considered directly in the
+optimisation.</p>
 <a class="reference internal image-reference" href="_images/unnamed.png"><img alt="_images/unnamed.png" src="_images/unnamed.png" style="width: 49%;" /></a>
 <a class="reference internal image-reference" href="_images/unnamed-2.png"><img alt="_images/unnamed-2.png" src="_images/unnamed-2.png" style="width: 49%;" /></a>
 <a class="reference internal image-reference" href="_images/unnamed-3.png"><img alt="_images/unnamed-3.png" src="_images/unnamed-3.png" style="width: 49%;" /></a>
@@ -328,52 +452,56 @@ function (solid black line). The last evaluated point approximates the
 maximum.</p>
 <hr class="docutils" />
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id18" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<aside class="footnote brackets" id="id20" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id16">1</a><span class="fn-bracket">]</span></span>
+<p>M Balandat <em>et al.</em>, “BoTorch: A framework for efficient Monte-CarloBayesian optimization,” <em>Advances in neural information processing systems</em>, vol. 33, 2020.</p>
+</aside>
+<aside class="footnote brackets" id="id21" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">2</a><span class="fn-bracket">]</span></span>
 <p>PI Frazier, “A tutorial on Bayesian optimization,” <em>arXiv preprint arXiv:1807.02811</em>, 2018.</p>
 </aside>
-<aside class="footnote brackets" id="id19" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id9">2</a><span class="fn-bracket">]</span></span>
+<aside class="footnote brackets" id="id22" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id9">3</a><span class="fn-bracket">]</span></span>
 <p>J Gardner, G Pleiss, KQ Weinberger, D Bindel, and AG Wilson, “GPyTorch: Blackbox matrix-matrix Gaussian process inference with GPU acceleration,” <em>Advances in neural information processing systems</em>, vol. 31, 2018.</p>
 </aside>
-<aside class="footnote brackets" id="id20" role="note">
-<span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
+<aside class="footnote brackets" id="id23" role="note">
+<span class="label"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id2">1</a>,<a role="doc-backlink" href="#id7">2</a>)</span>
 <p>RB Gramacy, <em>Surrogates: Gaussian process modeling, design, and optimization for the applied sciences</em>, 1st ed. Boca Raton, FL: CRC press, 2020.</p>
 </aside>
-<aside class="footnote brackets" id="id21" role="note">
-<span class="label"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></span>
+<aside class="footnote brackets" id="id24" role="note">
+<span class="label"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id3">1</a>,<a role="doc-backlink" href="#id10">2</a>)</span>
 <p>DR Jones, M Schonlau, and WJ Welch, “Efficient global optimization of expensive black-box functions,” <em>Journal of global optimization</em>, vol. 13, no. 4, p. 566, 1998.</p>
 </aside>
-<aside class="footnote brackets" id="id22" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id15">5</a><span class="fn-bracket">]</span></span>
+<aside class="footnote brackets" id="id25" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id15">6</a><span class="fn-bracket">]</span></span>
 <p>DP Kingma and J Ba, “Adam: A method for stochastic optimization,” <em>Proceedings of the 3rd international conference on learning representations</em>, 2015.</p>
 </aside>
-<aside class="footnote brackets" id="id23" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">6</a><span class="fn-bracket">]</span></span>
+<aside class="footnote brackets" id="id26" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">7</a><span class="fn-bracket">]</span></span>
 <p>MD McKay, RJ Beckman, and WJ Conover, “A comparison of three methods for selecting values of input variables in the analysis of output from a computer code,” <em>Technometrics</em>, vol. 42, no. 1, p. 55-61, 2000.</p>
 </aside>
-<aside class="footnote brackets" id="id24" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">7</a><span class="fn-bracket">]</span></span>
+<aside class="footnote brackets" id="id27" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">8</a><span class="fn-bracket">]</span></span>
 <p>B Shahriari, K Swersky, Z Wang, RP Adams, and N De Freitas, “Taking the human out of the loop: A review of Bayesian optimization,” <em>Proceedings of the IEEE</em>, vol. 104, no. 1, p. 148-175, 2015.</p>
 </aside>
-<aside class="footnote brackets" id="id25" role="note">
-<span class="label"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></span>
-<span class="backrefs">(<a role="doc-backlink" href="#id5">1</a>,<a role="doc-backlink" href="#id12">2</a>,<a role="doc-backlink" href="#id13">3</a>,<a role="doc-backlink" href="#id17">4</a>)</span>
+<aside class="footnote brackets" id="id28" role="note">
+<span class="label"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id5">1</a>,<a role="doc-backlink" href="#id12">2</a>,<a role="doc-backlink" href="#id13">3</a>,<a role="doc-backlink" href="#id19">4</a>)</span>
 <p>J Snoek, H Larochelle, and RP Adams, “Practical Bayesian optimization of machine learning algorithms,” <em>Advances in neural information processing systems</em>, vol. 25, 2012.</p>
 </aside>
-<aside class="footnote brackets" id="id26" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id11">9</a><span class="fn-bracket">]</span></span>
+<aside class="footnote brackets" id="id29" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id11">10</a><span class="fn-bracket">]</span></span>
 <p>N Srinivas, A Krause, SM Kakade, and M Seeger, “Gaussian process optimization in the bandit setting: No regret and experimental design,” <em>Proceedings of the 27th international conference on machine learning</em>, p. 1015-1022, 2010.</p>
 </aside>
-<aside class="footnote brackets" id="id27" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">10</a><span class="fn-bracket">]</span></span>
+<aside class="footnote brackets" id="id30" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">11</a><span class="fn-bracket">]</span></span>
 <p>CKI Williams, and CE Rasmussen, <em>Gaussian processes for machine learning</em>, 2nd ed. Cambridge, MA: MIT press, 2006.</p>
 </aside>
-<aside class="footnote brackets" id="id28" role="note">
-<span class="label"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></span>
-<span class="backrefs">(<a role="doc-backlink" href="#id14">1</a>,<a role="doc-backlink" href="#id16">2</a>)</span>
+<aside class="footnote brackets" id="id31" role="note">
+<span class="label"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id14">1</a>,<a role="doc-backlink" href="#id17">2</a>,<a role="doc-backlink" href="#id18">3</a>)</span>
 <p>J Wilson, F Hutter, and M Deisenroth, “Maximizing acquisition functions for Bayesian optimization,” <em>Advances in neural information processing systems</em>, vol. 31, 2018.</p>
 </aside>
 </aside>

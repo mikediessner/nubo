@@ -160,6 +160,7 @@
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="get_started.html">Get started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bayesian_optimisation.html">A primer on Bayesian optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="practical_considerations.html">Practical considerations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="citation.html">Citation</a></li>
 <li class="toctree-l1"><a class="reference external" href="http://github.com/mikediessner/nubo">Github</a></li>
 </ul>
@@ -219,7 +220,7 @@
 <section id="Define-Gaussian-process">
 <h2>Define Gaussian process<a class="headerlink" href="#Define-Gaussian-process" title="Permalink to this heading">#</a></h2>
 <p>A Gaussian process is defined by its mean function and its covariance kernel. Both are specified in the <code class="docutils literal notranslate"><span class="pre">__init__()</span></code> method of the the <code class="docutils literal notranslate"><span class="pre">GaussianProcess</span></code> class below and can be easily swapped out by the desired function and kernel. While <code class="docutils literal notranslate"><span class="pre">GPyTorch</span></code> offers many different options, the most common choices are the zero mean or constant mean function and the Matern or RBF kernel. Some kernel, such as the Matern and the RBF kernel, are only defined for a certain range so that they need to be
-scaled through the <code class="docutils literal notranslate"><span class="pre">ScaleKernel</span></code> to be used with all problems. The length-scale parameters of the covariance kernel can either be represented as a single length-scale or as one length-scale parameter for each input dimensions. The latter is known as automatic relevance determination (ARD) and allows inputs to be differently correlated. The <code class="docutils literal notranslate"><span class="pre">forward()</span></code> function takes a test point and returns the predictive multivariate normal distribution. All other properties of the Gaussian process are
+scaled through the <code class="docutils literal notranslate"><span class="pre">ScaleKernel</span></code> to be used with all problems. The length-scale parameters of the covariance kernel can either be represented as a single length-scale or as one length-scale parameter for each input dimensions. The latter is known as automatic relevance determination (ARD) and allows inputs to be differently correlated. The <code class="docutils literal notranslate"><span class="pre">forward()</span></code> method takes a test point and returns the predictive multivariate normal distribution. All other properties of the Gaussian process are
 inherited by the <code class="docutils literal notranslate"><span class="pre">ExactGP</span></code> making it easy to implement custom Gaussian processes. For more information about Gaussian processes and about options for mean function and covariance kernel see the documentation of <code class="docutils literal notranslate"><span class="pre">GPyTorch</span></code>.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:

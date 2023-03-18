@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Citation" href="citation.html" /><link rel="prev" title="Get started" href="get_started.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Practical considerations" href="practical_considerations.html" /><link rel="prev" title="Get started" href="get_started.html" />
 
     <link rel="shortcut icon" href="_static/favicon.ico"/><!-- Generated with Sphinx 6.1.3 and Furo 2022.12.07 -->
         <title>A primer on Bayesian optimisation - NUBO</title>
@@ -159,6 +159,7 @@
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="get_started.html">Get started</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">A primer on Bayesian optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="practical_considerations.html">Practical considerations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="citation.html">Citation</a></li>
 <li class="toctree-l1"><a class="reference external" href="http://github.com/mikediessner/nubo">Github</a></li>
 </ul>
@@ -276,6 +277,9 @@ solution is found, or unitl a pre-defined stopping criterion is met.</p>
 <p><strong>end while</strong></p>
 <p>Return point <span class="math notranslate nohighlight">\(\boldsymbol x^*\)</span> with highest observation.</p>
 </div>
+<figure class="align-default">
+<img alt="_images/bo.gif" src="_images/bo.gif" />
+</figure>
 </section>
 <section id="surrogate-model">
 <span id="model"></span><h2>Surrogate model<a class="headerlink" href="#surrogate-model" title="Permalink to this heading">#</a></h2>
@@ -323,6 +327,9 @@ via maximum likelihood estimation (MLE):</p>
 <div class="math notranslate nohighlight">
 \[\log p(\boldsymbol y_n \mid \boldsymbol X_n) = -\frac{1}{2} (\boldsymbol y_n - m(\boldsymbol X_n))^T [K(\boldsymbol X_n, \boldsymbol X_n) + \sigma^2 I]^{-1} (\boldsymbol y_n - m(\boldsymbol X_n)) - \frac{1}{2} \log \lvert K(\boldsymbol X_n, \boldsymbol X_n) + \sigma^2 I \rvert - \frac{n}{2} \log 2 \pi\]</div>
 </div>
+<figure class="align-default">
+<img alt="_images/gp.gif" src="_images/gp.gif" />
+</figure>
 <p>NUBO uses the <code class="docutils literal notranslate"><span class="pre">GPyTorch</span></code> package <a class="footnote-reference brackets" href="#id22" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> for surrogate modelling. This is a very
 powerful package that allows the implementation of a wide selection of models
 ranging from exact Gaussian processes to approximate and even deep Gaussian
@@ -371,6 +378,9 @@ deviation of the predictive distribution of the Gaussian process, $y^{best}$ is
 the current best observation, and <span class="math notranslate nohighlight">\(\Phi\)</span> and <span class="math notranslate nohighlight">\(\phi\)</span> are the
 cumulative distribution function and the probability density function of the
 standard normal distribution.</p>
+<figure class="align-default">
+<img alt="_images/bo_ei.gif" src="_images/bo_ei.gif" />
+</figure>
 <p>The upper confidence bound (UCB) can be computed by</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
@@ -379,6 +389,9 @@ standard normal distribution.</p>
 <p>where <span class="math notranslate nohighlight">\(\beta\)</span> is a pre-defined trade-off parameter, and
 <span class="math notranslate nohighlight">\(\mu_n(\cdot)\)</span> and <span class="math notranslate nohighlight">\(\sigma_n(\cdot)\)</span> are the mean and the standard
 deviation of the predictive distribution of the Gaussian process.</p>
+<figure class="align-default">
+<img alt="_images/bo_ucb.gif" src="_images/bo_ucb.gif" />
+</figure>
 <p>Both of these acquisition functions can be computed analytically by maximising
 them with a deterministic optimiser such as L-BFGS-B for bounded unconstraint
 problems or SLSQP for bounded or constraint problems. However, this is only
@@ -433,20 +446,6 @@ optimisation: the pending points that have not yet been evaluated can be added
 to the test points but are treated as fixed. In this way, they affect the joint
 multivariate normal distribution but are not considered directly in the
 optimisation.</p>
-<a class="reference internal image-reference" href="_images/unnamed.png"><img alt="_images/unnamed.png" src="_images/unnamed.png" style="width: 49%;" /></a>
-<a class="reference internal image-reference" href="_images/unnamed-2.png"><img alt="_images/unnamed-2.png" src="_images/unnamed-2.png" style="width: 49%;" /></a>
-<a class="reference internal image-reference" href="_images/unnamed-3.png"><img alt="_images/unnamed-3.png" src="_images/unnamed-3.png" style="width: 49%;" /></a>
-<a class="reference internal image-reference" href="_images/unnamed-4.png"><img alt="_images/unnamed-4.png" src="_images/unnamed-4.png" style="width: 49%;" /></a>
-<p>Figure 1: Bayesian optimisation example. A Gaussian process is fitted to three
-initial observations (dark blue dots) resulting in the posterior mean (solid
-red line) and the posterior variance represented here as the 95% confidence
-interval (blue area). The expected improvement (EI) acquisition function
-(orange area) is maximised to find the next point that should be observed
-(dashed black line) from the objective function. Once observed, the input and
-output are added to the training data and the process is repeated two more
-times. The final Gaussian process model is than compared to the true objective
-function (solid black line). The last evaluated point approximates the
-maximum.</p>
 <hr class="docutils" />
 <aside class="footnote-list brackets">
 <aside class="footnote brackets" id="id20" role="note">
@@ -511,12 +510,12 @@ maximum.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="citation.html">
+          <a class="next-page" href="practical_considerations.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Citation</div>
+                <div class="title">Practical considerations</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>

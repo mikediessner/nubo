@@ -9,6 +9,10 @@ and documentation for all methods to make Bayesian optimisation accessible for
 researchers from all disciplines.  NUBO is written in Python_ and distributed
 open-source under the `BSD 3-Clause license`_.
 
+.. only:: html
+
+    .. figure:: bo.gif
+
 NUBO
 ----
 The NUBO section contains general information about the package and gives an
@@ -25,6 +29,7 @@ NUBO.
    overview
    get_started.ipynb
    bayesian_optimisation
+   practical_considerations
    citation
    Github <http://github.com/mikediessner/nubo>
 

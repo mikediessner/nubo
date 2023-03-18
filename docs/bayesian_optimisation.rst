@@ -73,6 +73,10 @@ solution is found, or unitl a pre-defined stopping criterion is met.
 
     Return point :math:`\boldsymbol x^*` with highest observation.
 
+.. only:: html
+
+    .. figure:: bo.gif
+
 .. _model:
 
 Surrogate model
@@ -118,6 +122,10 @@ via maximum likelihood estimation (MLE):
 
 .. math::
     \log p(\boldsymbol y_n \mid \boldsymbol X_n) = -\frac{1}{2} (\boldsymbol y_n - m(\boldsymbol X_n))^T [K(\boldsymbol X_n, \boldsymbol X_n) + \sigma^2 I]^{-1} (\boldsymbol y_n - m(\boldsymbol X_n)) - \frac{1}{2} \log \lvert K(\boldsymbol X_n, \boldsymbol X_n) + \sigma^2 I \rvert - \frac{n}{2} \log 2 \pi
+
+.. only:: html
+
+    .. figure:: gp.gif
 
 NUBO uses the ``GPyTorch`` package [3]_ for surrogate modelling. This is a very
 powerful package that allows the implementation of a wide selection of models
@@ -172,6 +180,10 @@ the current best observation, and :math:`\Phi` and :math:`\phi` are the
 cumulative distribution function and the probability density function of the
 standard normal distribution.
 
+.. only:: html
+
+    .. figure:: bo_ei.gif
+
 The upper confidence bound (UCB) can be computed by
 
 .. math::
@@ -180,6 +192,10 @@ The upper confidence bound (UCB) can be computed by
 where :math:`\beta` is a pre-defined trade-off parameter, and
 :math:`\mu_n(\cdot)` and :math:`\sigma_n(\cdot)` are the mean and the standard
 deviation of the predictive distribution of the Gaussian process.
+
+.. only:: html
+
+    .. figure:: bo_ucb.gif
 
 Both of these acquisition functions can be computed analytically by maximising
 them with a deterministic optimiser such as L-BFGS-B for bounded unconstraint
@@ -238,26 +254,6 @@ optimisation: the pending points that have not yet been evaluated can be added
 to the test points but are treated as fixed. In this way, they affect the joint
 multivariate normal distribution but are not considered directly in the
 optimisation.
-
-.. image:: unnamed.png
-    :width: 49 %
-.. image:: unnamed-2.png
-    :width: 49 %
-.. image:: unnamed-3.png
-    :width: 49 %
-.. image:: unnamed-4.png
-    :width: 49 %
-
-Figure 1: Bayesian optimisation example. A Gaussian process is fitted to three
-initial observations (dark blue dots) resulting in the posterior mean (solid
-red line) and the posterior variance represented here as the 95% confidence
-interval (blue area). The expected improvement (EI) acquisition function
-(orange area) is maximised to find the next point that should be observed
-(dashed black line) from the objective function. Once observed, the input and
-output are added to the training data and the process is repeated two more
-times. The final Gaussian process model is than compared to the true objective
-function (solid black line). The last evaluated point approximates the
-maximum.
 
 ----
 

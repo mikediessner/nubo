@@ -32,6 +32,10 @@ optimisation is run for as many iterations as the evaluation budget allows,
 until a satisfying solution is found, or unitl a pre-defined stopping
 criterion is met.
 
+.. only:: html
+
+    .. figure:: bo.gif
+
 Contents
 --------
 - **Surrogate models**: Gaussian Processes [3]_ [11]_ are specified through the

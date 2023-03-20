@@ -1,1 +1,13 @@
+# NUBO
+torch
+gpytorch
+scipy
 
+# docs
+sphinx
+numpydoc
+myst_parser
+nbsphinx
+furo
+jupyter
+matplotlib

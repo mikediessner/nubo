@@ -214,26 +214,34 @@
         </div>
         <article role="main">
           <section id="nubo-a-transparent-python-package-for-bayesian-optimisation">
-<h1>NUBO: a transparent python package for Bayesian optimisation<a class="headerlink" href="#nubo-a-transparent-python-package-for-bayesian-optimisation" title="Permalink to this heading">#</a></h1>
+<h1>NUBO: A transparent Python package for Bayesian optimisation<a class="headerlink" href="#nubo-a-transparent-python-package-for-bayesian-optimisation" title="Permalink to this heading">#</a></h1>
 <p>NUBO, short for Newcastle University Bayesian optimisation, is a Bayesian
 optimisation framework for the optimisation of expensive-to-evaluate black box
-functions, such as physical experiments and computer simulations, developed by
-the <a class="reference external" href="https://www.experimental-fluid-dynamics.com">experimental fluid dynamics research group</a> at <a class="reference external" href="https://www.ncl.ac.uk">Newcastle University</a>.
-It focuses on transparent implementations of algorithms and precise references
-and documentation for all methods to make Bayesian optimisation accessible for
-researchers from all disciplines.  NUBO is written in <a class="reference external" href="https://www.python.org">Python</a> and distributed
-open-source under the <a class="reference external" href="https://joinup.ec.europa.eu/licence/bsd-3-clause-new-or-revised-license">BSD 3-Clause license</a>.</p>
-<figure class="align-default">
-<img alt="_images/bo.gif" src="_images/bo.gif" />
-</figure>
+functions, such as physical experiments and computer simulations. It is
+developed and maintained by the <a class="reference external" href="https://www.experimental-fluid-dynamics.com">experimental fluid dynamics research group</a>
+at <a class="reference external" href="https://www.ncl.ac.uk">Newcastle University</a>. NUBO focuses primarly on transparency and user
+experience to make Bayesian optimisation easily accessible to researchers from
+all disciplines. Transparency is ensured by clean and comprehensible code,
+precise references, and thourough documentation. User experience is guaranteed
+by a modular and flexible design that allows you to tailor Bayesian
+optimisation to your specific problem by writing the optimisation loop yourself
+using the building blocks that NUBO provides. The package is written in <a class="reference external" href="https://www.python.org">Python</a>
+but does not require expert knowledge to optimise your simulations and
+experiments. NUBO is distributed as an open-source software under the
+<a class="reference external" href="https://joinup.ec.europa.eu/licence/bsd-3-clause-new-or-revised-license">BSD 3-Clause license</a>.</p>
+<p>On this page you can find an overview of the three main documentation sections
+consisting of (i) an introduction to Bayesian optimisation with NUBO, (ii) a
+selection of examples that can be used as boilerplate code, and (iii) detailed
+references for all of NUBO’s functions and objects.</p>
 <section id="nubo">
 <h2>NUBO<a class="headerlink" href="#nubo" title="Permalink to this heading">#</a></h2>
-<p>The NUBO section contains general information about the package and gives an
-in-depth explanation of Bayesian optimisation and its components such as the
-surrogate models and the acquisition functions. It also gives a quickstart
-guide to NUBO so you can start optimising your simulations and experiments in
-minutes. This is the place to start your Bayesian optimisation journey with
-NUBO.</p>
+<p>The NUBO section contains general information about the package, gives a
+concise introduction to <a class="reference internal" href="bayesian_optimisation.html#bo"><span class="std std-ref">Bayesian optimisation</span></a>, and explains its
+components, such as the <a class="reference internal" href="bayesian_optimisation.html#model"><span class="std std-ref">surrogate model</span></a> and the
+<a class="reference internal" href="bayesian_optimisation.html#acquisition"><span class="std std-ref">acquisition functions</span></a>. It also provides a
+<a class="reference internal" href="get_started.html#get-started"><span class="std std-ref">quickstart guide</span></a> to NUBO allowing you to start optimising
+your simulations and experiments in minutes. This is the place to start your
+Bayesian optimisation journey with NUBO.</p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">NUBO:</span></p>
 <ul>
@@ -249,8 +257,9 @@ NUBO.</p>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
 <p>The examples section provides guides to some problems that NUBO is capable
-of optimising. This boilerplate code is a good starting point when tailoring a
-Bayesian optimisation algorithm to your specfic problem.</p>
+of optimising, and shows how to implement <a class="reference internal" href="custom_gp.html#custom-gp"><span class="std std-ref">custom surrogate models</span></a>.
+This boilerplate code is a good starting point when tailoring a Bayesian
+optimisation algorithm to your specfic problem.</p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
@@ -326,7 +335,7 @@ a specific object or function should be used.</p>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">NUBO: a transparent python package for Bayesian optimisation</a><ul>
+<li><a class="reference internal" href="#">NUBO: A transparent Python package for Bayesian optimisation</a><ul>
 <li><a class="reference internal" href="#nubo">NUBO</a></li>
 <li><a class="reference internal" href="#examples">Examples</a></li>
 <li><a class="reference internal" href="#package-reference">Package reference</a></li>

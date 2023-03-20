@@ -1,33 +1,41 @@
-NUBO: a transparent python package for Bayesian optimisation
+NUBO: A transparent Python package for Bayesian optimisation
 ============================================================
 NUBO, short for Newcastle University Bayesian optimisation, is a Bayesian
 optimisation framework for the optimisation of expensive-to-evaluate black box
-functions, such as physical experiments and computer simulations, developed by
-the `experimental fluid dynamics research group`_ at `Newcastle University`_.
-It focuses on transparent implementations of algorithms and precise references
-and documentation for all methods to make Bayesian optimisation accessible for
-researchers from all disciplines.  NUBO is written in Python_ and distributed
-open-source under the `BSD 3-Clause license`_.
+functions, such as physical experiments and computer simulations. It is
+developed and maintained by the `experimental fluid dynamics research group`_
+at `Newcastle University`_. NUBO focuses primarly on transparency and user
+experience to make Bayesian optimisation easily accessible to researchers from
+all disciplines. Transparency is ensured by clean and comprehensible code,
+precise references, and thourough documentation. User experience is guaranteed
+by a modular and flexible design that allows you to tailor Bayesian 
+optimisation to your specific problem by writing the optimisation loop yourself
+using the building blocks that NUBO provides. The package is written in Python_
+but does not require expert knowledge to optimise your simulations and
+experiments. NUBO is distributed as an open-source software under the
+`BSD 3-Clause license`_.
 
-.. only:: html
-
-    .. figure:: bo.gif
+On this page you can find an overview of the three main documentation sections
+consisting of (i) an introduction to Bayesian optimisation with NUBO, (ii) a
+selection of examples that can be used as boilerplate code, and (iii) detailed
+references for all of NUBO's functions and objects.
 
 NUBO
 ----
-The NUBO section contains general information about the package and gives an
-in-depth explanation of Bayesian optimisation and its components such as the
-surrogate models and the acquisition functions. It also gives a quickstart
-guide to NUBO so you can start optimising your simulations and experiments in
-minutes. This is the place to start your Bayesian optimisation journey with
-NUBO.
+The NUBO section contains general information about the package, gives a
+concise introduction to :ref:`Bayesian optimisation <bo>`, and explains its
+components, such as the :ref:`surrogate model <model>` and the
+:ref:`acquisition functions <acquisition>`. It also provides a
+:ref:`quickstart guide <get_started>` to NUBO allowing you to start optimising
+your simulations and experiments in minutes. This is the place to start your
+Bayesian optimisation journey with NUBO.
 
 .. toctree::
    :maxdepth: 1
    :caption: NUBO:
 
    overview
-   get_started.ipynb
+   get_started
    bayesian_optimisation
    practical_considerations
    citation
@@ -36,14 +44,15 @@ NUBO.
 Examples
 --------
 The examples section provides guides to some problems that NUBO is capable
-of optimising. This boilerplate code is a good starting point when tailoring a
-Bayesian optimisation algorithm to your specfic problem.
+of optimising, and shows how to implement :ref:`custom surrogate models <custom_gp>`.
+This boilerplate code is a good starting point when tailoring a Bayesian
+optimisation algorithm to your specfic problem.
 
 .. toctree::
    :maxdepth: 1
    :caption: Examples:
 
-   custom_gp.rst
+   custom_gp.ipynb
    singlepoint.ipynb
    multipoint_joint.ipynb
    multipoint_sequential.ipynb

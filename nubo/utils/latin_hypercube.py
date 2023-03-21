@@ -5,8 +5,16 @@ from typing import Optional
 
 
 class LatinHypercubeSampling:
-    """
+    r"""
     Latin hypercube sampling.
+
+    Generates a space-filling design. Two options are possible: sampling from a
+    random or a maximin Latin hypercube. To sample :math:`n` points, the random
+    Latin hypercube divides each dimension into :math:`n` equal parts and
+    places :math:`n` points such that for every dimension each equal part
+    contains exactly one point. The maximin Latin hypercube takes a simple
+    approach and draws a large number of random Latin hypercube samples and
+    returns the one with the largest minimal distance between points.
 
     Attributes
     ----------
@@ -25,8 +33,12 @@ class LatinHypercubeSampling:
         self.dims = dims
 
     def random(self, points: int) -> Tensor:
-        """
+        r"""
         Draw a random Latin hypercube sample.
+
+        To sample :math:`n` points, the random Latin hypercube divides each
+        dimension into :math:`n` equal parts and places :math:`n` points such
+        that for every dimension each equal part contains exactly one point.
         
         Parameters
         ----------
@@ -58,10 +70,11 @@ class LatinHypercubeSampling:
     def maximin(self,
                 points: int,
                 samples: Optional[int]=1000) -> Tensor:
-        """
-        Draw a maximin Latin hypercube sample. Draws a large number of random
-        Latin hypercube samples and selects the one with the largest minimal
-        distance between points.
+        r"""
+        Draw a maximin Latin hypercube sample. 
+        
+        Draws a large number of random Latin hypercube samples and selects the
+        one with the largest minimal distance between points.
 
         Parameters
         ----------

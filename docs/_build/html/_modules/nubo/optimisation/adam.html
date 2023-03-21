@@ -284,9 +284,13 @@
                <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Multi-start Adam optimiser using the ``torch.optim.Adam`` implementation</span>
-<span class="sd">    from ``PyTorch``. Picks the best `num_starts` points from a total </span>
-<span class="sd">    `num_samples` Latin hypercube samples to initialise the optimser. Returns</span>
-<span class="sd">    the best result.</span>
+<span class="sd">    from ``PyTorch``.</span>
+<span class="sd">    </span>
+<span class="sd">    Used for maximising Monte Carlo acquisition function when base samples are</span>
+<span class="sd">    not fixed. Bounds are enforced by transforming `func` with the sigmoid</span>
+<span class="sd">    function and scaling results. Picks the best `num_starts` points from a</span>
+<span class="sd">    total `num_samples` Latin hypercube samples to initialise the optimser.</span>
+<span class="sd">    Returns the best result.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>

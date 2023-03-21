@@ -222,8 +222,24 @@
 
 
 <div class="viewcode-block" id="GaussianProcess"><a class="viewcode-back" href="../../../nubo.models.html#nubo.models.gaussian_process.GaussianProcess">[docs]</a><span class="k">class</span> <span class="nc">GaussianProcess</span><span class="p">(</span><span class="n">ExactGP</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Gaussian process model with constant mean function and Matern 5/2 kernel.</span>
+
+<span class="sd">    Constant mean function:</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        \mu (\boldsymbol x) = c</span>
+
+<span class="sd">    where constant :math:`c` is estimated.</span>
+
+<span class="sd">    Matern 5/2 Kernel:</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        \Sigma_0 (\boldsymbol x, \boldsymbol x^\prime) = \sigma_K^2 \left(1 + \sqrt{5}r + \frac{5}{3}r^2 \right) \exp{\left(-\sqrt{5}r \right)}</span>
+
+<span class="sd">    where :math:`r = \sqrt{\sum_{m=1}^d \frac{(\boldsymbol x_m - \boldsymbol x^\prime_m)^2}{l^2_m}}`,</span>
+<span class="sd">    :math:`l` is the length-scale, :math:`\sigma_K^2` is the outputscale, and </span>
+<span class="sd">    :math:`m` is the :math:`m`-th dimension of the input points.</span>
 <span class="sd">    </span>
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>

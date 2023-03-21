@@ -3,9 +3,14 @@ from torch import Tensor
 
 
 def standardise(y: Tensor) -> Tensor:
-    """
+    r"""
     Standardise data by subtracting the mean and dividing by the standard
-    deviation.
+    deviation:
+
+    .. math::
+        \hat{\boldsymbol y} = \frac{\boldsymbol y - \mu}{\sigma}
+
+    where :math:`\mu` is the mean and :math:`\sigma` is the standard deviation.
 
     Parameters
     ----------
@@ -26,8 +31,13 @@ def standardise(y: Tensor) -> Tensor:
 
 
 def normalise(x: Tensor, bounds: Tensor) -> Tensor:
-    """
-    Normalise data to the unit cube [0, 1]^d.
+    r"""
+    Normalise data to the unit cube :math:`[0, 1]^d`.
+
+    .. math::
+        \hat{\boldsymbol x} = \frac{\boldsymbol x - lb}{ub - lb}
+    
+    where :math:`lb` are the lower bounds and :math:`ub` are the upper bounds.
 
     Parameters
     ----------
@@ -49,8 +59,13 @@ def normalise(x: Tensor, bounds: Tensor) -> Tensor:
 
 
 def unnormalise(x: Tensor, bounds: Tensor) -> Tensor:
-    """
+    r"""
     Revere normalisation to the provided bounds.
+    
+    .. math::
+        \boldsymbol x = \hat{\boldsymbol x} (ub - lb) + lb
+    
+    where :math:`lb` are the lower bounds and :math:`ub` are the upper bounds.
 
     Parameters
     ----------

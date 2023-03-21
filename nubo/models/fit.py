@@ -13,9 +13,12 @@ def fit_gp(x: Tensor,
            lr: Optional[float]=0.1,
            steps: Optional[int]=200,
            **kwargs) -> None:
-    """
+    r"""
     Estimate hyper-parameters of the Gaussian process `gp` by maximum
     likelihood estimation (MLE) using ``torch.optim.Adam`` algorithm.
+    
+    Maximisesthe log marginal likelihood
+    :math:`\log p(\boldsymbol y \mid \boldsymbol X)`.
 
     Parameters
     ----------

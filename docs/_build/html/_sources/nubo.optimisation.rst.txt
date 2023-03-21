@@ -25,7 +25,7 @@ Stochastic optimisers
 .. admonition:: References
    :class: seealso
 
-   - DP Kingma and J Ba, "Adam: A method for stochastic optimization," *Proceedings of the 3rd international conference on learning representations*, 2015.
+   - D P Kingma and J Ba, "Adam: A method for stochastic optimization," *Proceedings of the 3rd international conference on learning representations*, 2015.
    - A Paszke, *et al.*, "PyTorch: An imperative style, high-performance deep learning library," *In advances in neural information processing systems*, vol. 32, 2019.
 
 .. automodule:: nubo.optimisation.adam
@@ -35,6 +35,11 @@ Stochastic optimisers
 
 Multi-point optimisation
 ------------------------
+
+.. admonition:: References
+   :class: seealso
+   
+   - J Wilson, F Hutter, and M Deisenroth, "Maximizing acquisition functions for Bayesian optimization," *Advances in neural information processing systems*, vol. 31, 2018.
 
 .. automodule:: nubo.optimisation.multipoint
    :members:

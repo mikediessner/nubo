@@ -7,8 +7,20 @@ from typing import Optional
 
 
 class MCExpectedImprovement(AcquisitionFunction):
-    """
-    Monte Carlo Expected Improvement acquisition function.
+    r"""
+    Monte Carlo Expected Improvement acquisition function:
+
+    .. math::
+        \alpha_{EI}^{MC} (\boldsymbol X_*) = \max \left(ReLU(\mu_n(\boldsymbol X_*) + \boldsymbol L \boldsymbol z - y^{best}) \right)
+
+    where :math:`\mu_n(\cdot)` is the mean of the predictive distribution of
+    the Gaussian process, :math:`\boldsymbol L` is the lower triangular matrix
+    of the Cholesky decomposition of the covariance matrix 
+    :math:`\boldsymbol L \boldsymbol L^T = K(\boldsymbol X_n, \boldsymbol X_n)`,
+    :math:`\boldsymbol z` are samples from the standard normal distribution
+    :math:`\mathcal{N} (0, 1)`, :math:`y^{best}` is the current best
+    observation, and :math:`ReLU (\cdot)` is the rectified linear unit function
+    that zeros all values below 0 and leaves the rest as is.
 
     Attributes
     ----------
@@ -111,8 +123,18 @@ class MCExpectedImprovement(AcquisitionFunction):
 
 
 class MCUpperConfidenceBound(AcquisitionFunction):
-    """
-    Monte Carlo Upper Confidence Bound acquisition function.
+    r"""
+    Monte Carlo Upper Confidence Bound acquisition function:
+
+    .. math::
+        \alpha_{UCB}^{MC} (\boldsymbol X_*) = \max \left(\mu_n(\boldsymbol X_*) + \sqrt{\frac{\beta \pi}{2}} \lvert \boldsymbol L \boldsymbol z \rvert \right)
+
+    where :math:`\mu_n(\cdot)` is the mean of the predictive distribution of
+    the Gaussian process, :math:`\boldsymbol L` is the lower triangular matrix
+    of the Cholesky decomposition of the covariance matrix 
+    :math:`\boldsymbol L \boldsymbol L^T = K(\boldsymbol X_n, \boldsymbol X_n)`,
+    :math:`\boldsymbol z` are samples from the standard normal distribution
+    :math:`\mathcal{N} (0, 1)`, and :math:`\beta` is the trade-off parameter.
 
     Attributes
     ----------

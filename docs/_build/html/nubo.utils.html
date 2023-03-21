@@ -221,7 +221,7 @@
 <div class="seealso admonition">
 <p class="admonition-title">References</p>
 <ul class="simple">
-<li><p>MD McKay, RJ Beckman, and WJ Conover, “A comparison of three methods for selecting values of input variables in the analysis of output from a computer code,” <em>Technometrics</em>, vol. 42, no. 1, p. 55-61, 2000.</p></li>
+<li><p>M D McKay, R J Beckman, and W J Conover, “A comparison of three methods for selecting values of input variables in the analysis of output from a computer code,” <em>Technometrics</em>, vol. 42, no. 1, p. 55-61, 2000.</p></li>
 </ul>
 </div>
 <span class="target" id="module-nubo.utils.latin_hypercube"></span><dl class="py class">
@@ -229,6 +229,13 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.utils.latin_hypercube.</span></span><span class="sig-name descname"><span class="pre">LatinHypercubeSampling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/utils/latin_hypercube.html#LatinHypercubeSampling"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.utils.latin_hypercube.LatinHypercubeSampling" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Latin hypercube sampling.</p>
+<p>Generates a space-filling design. Two options are possible: sampling from a
+random or a maximin Latin hypercube. To sample <span class="math notranslate nohighlight">\(n\)</span> points, the random
+Latin hypercube divides each dimension into <span class="math notranslate nohighlight">\(n\)</span> equal parts and
+places <span class="math notranslate nohighlight">\(n\)</span> points such that for every dimension each equal part
+contains exactly one point. The maximin Latin hypercube takes a simple
+approach and draws a large number of random Latin hypercube samples and
+returns the one with the largest minimal distance between points.</p>
 <dl class="field-list">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
@@ -253,9 +260,9 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="nubo.utils.latin_hypercube.LatinHypercubeSampling.maximin">
 <span class="sig-name descname"><span class="pre">maximin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/utils/latin_hypercube.html#LatinHypercubeSampling.maximin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.utils.latin_hypercube.LatinHypercubeSampling.maximin" title="Permalink to this definition">#</a></dt>
-<dd><p>Draw a maximin Latin hypercube sample. Draws a large number of random
-Latin hypercube samples and selects the one with the largest minimal
-distance between points.</p>
+<dd><p>Draw a maximin Latin hypercube sample.</p>
+<p>Draws a large number of random Latin hypercube samples and selects the
+one with the largest minimal distance between points.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
@@ -278,6 +285,9 @@ distance between points.</p>
 <dt class="sig sig-object py" id="nubo.utils.latin_hypercube.LatinHypercubeSampling.random">
 <span class="sig-name descname"><span class="pre">random</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/utils/latin_hypercube.html#LatinHypercubeSampling.random"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.utils.latin_hypercube.LatinHypercubeSampling.random" title="Permalink to this definition">#</a></dt>
 <dd><p>Draw a random Latin hypercube sample.</p>
+<p>To sample <span class="math notranslate nohighlight">\(n\)</span> points, the random Latin hypercube divides each
+dimension into <span class="math notranslate nohighlight">\(n\)</span> equal parts and places <span class="math notranslate nohighlight">\(n\)</span> points such
+that for every dimension each equal part contains exactly one point.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
@@ -330,7 +340,12 @@ bounds are a [0, 1]^`num_dims`.</p>
 <dt class="sig sig-object py" id="nubo.utils.transform.standardise">
 <span class="sig-prename descclassname"><span class="pre">nubo.utils.transform.</span></span><span class="sig-name descname"><span class="pre">standardise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/utils/transform.html#standardise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.utils.transform.standardise" title="Permalink to this definition">#</a></dt>
 <dd><p>Standardise data by subtracting the mean and dividing by the standard
-deviation.</p>
+deviation:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\hat{\boldsymbol y} = \frac{\boldsymbol y - \mu}{\sigma}\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\mu\)</span> is the mean and <span class="math notranslate nohighlight">\(\sigma\)</span> is the standard deviation.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
@@ -350,7 +365,12 @@ deviation.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="nubo.utils.transform.normalise">
 <span class="sig-prename descclassname"><span class="pre">nubo.utils.transform.</span></span><span class="sig-name descname"><span class="pre">normalise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/utils/transform.html#normalise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.utils.transform.normalise" title="Permalink to this definition">#</a></dt>
-<dd><p>Normalise data to the unit cube [0, 1]^d.</p>
+<dd><p>Normalise data to the unit cube <span class="math notranslate nohighlight">\([0, 1]^d\)</span>.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\hat{\boldsymbol x} = \frac{\boldsymbol x - lb}{ub - lb}\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(lb\)</span> are the lower bounds and <span class="math notranslate nohighlight">\(ub\)</span> are the upper bounds.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
@@ -373,6 +393,11 @@ deviation.</p>
 <dt class="sig sig-object py" id="nubo.utils.transform.unnormalise">
 <span class="sig-prename descclassname"><span class="pre">nubo.utils.transform.</span></span><span class="sig-name descname"><span class="pre">unnormalise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/utils/transform.html#unnormalise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.utils.transform.unnormalise" title="Permalink to this definition">#</a></dt>
 <dd><p>Revere normalisation to the provided bounds.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\boldsymbol x = \hat{\boldsymbol x} (ub - lb) + lb\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(lb\)</span> are the lower bounds and <span class="math notranslate nohighlight">\(ub\)</span> are the upper bounds.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
@@ -473,5 +498,7 @@ deviation.</p>
     <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/scripts/furo.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>
 </html>

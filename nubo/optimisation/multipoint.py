@@ -17,6 +17,11 @@ def sequential(func: Callable,
     """
     Sequential greedy optimisation loop for Monte Carlo acquisition functions.
 
+    Computes one point after the other for a batch always keeping previous
+    points fixed, i.e. compute point 1, compute point 2 holding point 1 fixed,
+    compute point 3 holding point 1 and 2 fixed and so on until the batch is
+    full.
+
     Parameters
     ----------
     func : ``Callable``
@@ -90,6 +95,8 @@ def joint(func: Callable,
           **kwargs: Any) -> Tuple[Tensor, Tensor]:
     """
     Joint optimisation loop for Monte Carlo acquisition functions.
+    
+    Computes all points of a batch at once.
 
     Parameters
     ----------

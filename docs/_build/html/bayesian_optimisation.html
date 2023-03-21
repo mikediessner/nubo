@@ -225,7 +225,7 @@ references highlight resources for additional reading that will present a more
 detailed picture of Bayesian optimisation than is possible here.</p>
 <section id="maximisation-problem">
 <span id="objfunc"></span><h2>Maximisation problem<a class="headerlink" href="#maximisation-problem" title="Permalink to this heading">#</a></h2>
-<p>Bayesian optimisation aims to solve the $d$-dimensional maximisation problem</p>
+<p>Bayesian optimisation aims to solve the <span class="math notranslate nohighlight">\(d\)</span>-dimensional maximisation problem</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
 \[\boldsymbol  x^* = \arg \max_{\boldsymbol  x \in \mathcal{X}} f(\boldsymbol x)\]</div>
@@ -239,7 +239,7 @@ without gaining any further insights into the underlying system. We assume any
 noise <span class="math notranslate nohighlight">\(\epsilon\)</span> that is introduced when taking measurements to be
 independent and identically distributed Gaussian noise
 <span class="math notranslate nohighlight">\(\epsilon \sim \mathcal{N} (0, \sigma^2)\)</span> such that
-<span class="math notranslate nohighlight">\(y_i = f(\boldsymbol  x_i) + \epsilon\)</span>. Hence, a set of $n$ pairs of data
+<span class="math notranslate nohighlight">\(y_i = f(\boldsymbol  x_i) + \epsilon\)</span>. Hence, a set of <span class="math notranslate nohighlight">\(n\)</span> pairs of data
 points and corresponding observations is defined as</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
@@ -323,7 +323,7 @@ resulting in the prior distribution</p>
 <div class="math notranslate nohighlight">
 \[f(\boldsymbol X_n) \sim \mathcal{N} (m(\boldsymbol X_n), K(\boldsymbol X_n, \boldsymbol X_n)).\]</div>
 </div>
-<p>where <span class="math notranslate nohighlight">\(m(\boldsymbol X_n)\)</span> is the mean vector of size $n$ over all
+<p>where <span class="math notranslate nohighlight">\(m(\boldsymbol X_n)\)</span> is the mean vector of size <span class="math notranslate nohighlight">\(n\)</span> over all
 training inputs and <span class="math notranslate nohighlight">\(K(\boldsymbol X_n, \boldsymbol X_n)\)</span> is the
 <span class="math notranslate nohighlight">\(n \times n\)</span> covariance matrix between all training inputs.</p>
 <p>The posterior distribution for <span class="math notranslate nohighlight">\(n_*\)</span> test points <span class="math notranslate nohighlight">\(\boldsymbol X_*\)</span>
@@ -457,7 +457,7 @@ Cholesky decomposition of the covariance matrix
 <span class="math notranslate nohighlight">\(\boldsymbol z\)</span> are samples from the standard normal distribution
 <span class="math notranslate nohighlight">\(\mathcal{N} (0, 1)\)</span>, <span class="math notranslate nohighlight">\(y^{best}\)</span> is the current best observation,
 <span class="math notranslate nohighlight">\(\beta\)</span> is the trade-off parameter, and <span class="math notranslate nohighlight">\(ReLU (\cdot)\)</span> is the
-rectified linear unit function that zeros all values below $0$ and leaves the
+rectified linear unit function that zeros all values below 0 and leaves the
 rest as is.</p>
 <p>Due to the randomness of the Monte Carlo samples, these acquisition functions
 can only be optimised by stochastic optimisers, such as Adam <a class="footnote-reference brackets" href="#kingma2015" id="id17" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a>. However,

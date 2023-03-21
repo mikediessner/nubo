@@ -3,15 +3,15 @@ Citation
 
 Please cite as:  
 
-  M Diessner, K Wilson, and RD Whalley, "NUBO: a transparent python package for Bayesian optimisation," *arXiv preprint arXiv:1234.56789*, 2023.
+  M Diessner, K Wilson, and RD Whalley, "NUBO: A transparent Python package for Bayesian optimisation," *Journal for statistical software*, 2023.
 
 
 BibTex::
 
   @article{nubo2023,
-    title = {NUBO: a transparent python package for Bayesian optimisation},
+    title = {NUBO: A transparent Python package for Bayesian optimisation},
     author = {Diessner, Mike and Wilson, Kevin and Whalley, Richard D},
-    journal = {arXiv preprint arXiv:1234.56789}
+    journal = {Journal of statistical software}
     year = {2023}
   }
 

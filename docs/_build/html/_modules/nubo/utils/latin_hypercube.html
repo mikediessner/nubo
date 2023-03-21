@@ -220,8 +220,16 @@
 
 
 <div class="viewcode-block" id="LatinHypercubeSampling"><a class="viewcode-back" href="../../../nubo.utils.html#nubo.utils.latin_hypercube.LatinHypercubeSampling">[docs]</a><span class="k">class</span> <span class="nc">LatinHypercubeSampling</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Latin hypercube sampling.</span>
+
+<span class="sd">    Generates a space-filling design. Two options are possible: sampling from a</span>
+<span class="sd">    random or a maximin Latin hypercube. To sample :math:`n` points, the random</span>
+<span class="sd">    Latin hypercube divides each dimension into :math:`n` equal parts and</span>
+<span class="sd">    places :math:`n` points such that for every dimension each equal part</span>
+<span class="sd">    contains exactly one point. The maximin Latin hypercube takes a simple</span>
+<span class="sd">    approach and draws a large number of random Latin hypercube samples and</span>
+<span class="sd">    returns the one with the largest minimal distance between points.</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
@@ -240,8 +248,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="n">dims</span>
 
 <div class="viewcode-block" id="LatinHypercubeSampling.random"><a class="viewcode-back" href="../../../nubo.utils.html#nubo.utils.latin_hypercube.LatinHypercubeSampling.random">[docs]</a>    <span class="k">def</span> <span class="nf">random</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">points</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Draw a random Latin hypercube sample.</span>
+
+<span class="sd">        To sample :math:`n` points, the random Latin hypercube divides each</span>
+<span class="sd">        dimension into :math:`n` equal parts and places :math:`n` points such</span>
+<span class="sd">        that for every dimension each equal part contains exactly one point.</span>
 <span class="sd">        </span>
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -273,10 +285,11 @@
 <div class="viewcode-block" id="LatinHypercubeSampling.maximin"><a class="viewcode-back" href="../../../nubo.utils.html#nubo.utils.latin_hypercube.LatinHypercubeSampling.maximin">[docs]</a>    <span class="k">def</span> <span class="nf">maximin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                 <span class="n">points</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
                 <span class="n">samples</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Draw a maximin Latin hypercube sample. Draws a large number of random</span>
-<span class="sd">        Latin hypercube samples and selects the one with the largest minimal</span>
-<span class="sd">        distance between points.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Draw a maximin Latin hypercube sample. </span>
+<span class="sd">        </span>
+<span class="sd">        Draws a large number of random Latin hypercube samples and selects the</span>
+<span class="sd">        one with the largest minimal distance between points.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>

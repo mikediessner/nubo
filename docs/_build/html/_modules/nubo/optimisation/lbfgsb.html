@@ -227,9 +227,12 @@
            <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Multi-start L-BFGS-B optimiser using the ``scipy.optimize.minimize``</span>
-<span class="sd">    implementation from ``SciPy``. Picks the best `num_starts` points from</span>
-<span class="sd">    a total `num_samples` Latin hypercube samples to initialise the optimser.</span>
-<span class="sd">    Returns the best result.</span>
+<span class="sd">    implementation from ``SciPy``.</span>
+<span class="sd">    </span>
+<span class="sd">    Used for maximising analytical acquisition functions or Monte Carlo</span>
+<span class="sd">    acquisition function when base samples are fixed. Picks the best</span>
+<span class="sd">    `num_starts` points from a total `num_samples` Latin hypercube samples to</span>
+<span class="sd">    initialise the optimser. Returns the best result.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>

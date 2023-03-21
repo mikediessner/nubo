@@ -69,9 +69,13 @@ def adam(func: Callable,
                **kwargs: Any) -> Tuple[Tensor, Tensor]:
     """
     Multi-start Adam optimiser using the ``torch.optim.Adam`` implementation
-    from ``PyTorch``. Picks the best `num_starts` points from a total 
-    `num_samples` Latin hypercube samples to initialise the optimser. Returns
-    the best result.
+    from ``PyTorch``.
+    
+    Used for maximising Monte Carlo acquisition function when base samples are
+    not fixed. Bounds are enforced by transforming `func` with the sigmoid
+    function and scaling results. Picks the best `num_starts` points from a
+    total `num_samples` Latin hypercube samples to initialise the optimser.
+    Returns the best result.
 
     Parameters
     ----------

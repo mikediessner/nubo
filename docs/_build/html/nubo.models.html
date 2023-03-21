@@ -219,9 +219,9 @@
 <div class="seealso admonition">
 <p class="admonition-title">References</p>
 <ul class="simple">
-<li><p>CKI Williams, and CE Rasmussen, <em>Gaussian processes for machine learning</em>, 2nd ed. Cambridge, MA: MIT press, 2006.</p></li>
-<li><p>RB Gramacy, <em>Surrogates: Gaussian process modeling, design, and optimization for the applied sciences</em>, 1st ed. Boca Raton, FL: CRC press, 2020.</p></li>
-<li><p>J Gardner, G Pleiss, KQ Weinberger, D Bindel, and AG Wilson, “GPyTorch: Blackbox matrix-matrix Gaussian process inference with GPU acceleration,” <em>Advances in neural information processing systems</em>, vol. 31, 2018.</p></li>
+<li><p>C K I Williams, and C E Rasmussen, <em>Gaussian processes for machine learning</em>, 2nd ed. Cambridge, MA: MIT press, 2006.</p></li>
+<li><p>R B Gramacy, <em>Surrogates: Gaussian process modeling, design, and optimization for the applied sciences</em>, 1st ed. Boca Raton, FL: CRC press, 2020.</p></li>
+<li><p>J Gardner, G Pleiss, K Q Weinberger, D Bindel, and A G Wilson, “GPyTorch: Blackbox matrix-matrix Gaussian process inference with GPU acceleration,” <em>Advances in neural information processing systems</em>, vol. 31, 2018.</p></li>
 </ul>
 </div>
 <section id="gaussian-process">
@@ -229,9 +229,9 @@
 <div class="seealso admonition">
 <p class="admonition-title">References</p>
 <ul class="simple">
-<li><p>J Snoek, H Larochelle, and RP Adams, “Practical Bayesian optimization of machine learning algorithms,” <em>Advances in neural information processing systems</em>, vol. 25, 2012.</p></li>
-<li><p>CKI Williams, and CE Rasmussen, <em>Gaussian processes for machine learning</em>, 2nd ed. Cambridge, MA: MIT press, 2006.</p></li>
-<li><p>RB Gramacy, <em>Surrogates: Gaussian process modeling, design, and optimization for the applied sciences</em>, 1st ed. Boca Raton, FL: CRC press, 2020.</p></li>
+<li><p>J Snoek, H Larochelle, and R P Adams, “Practical Bayesian optimization of machine learning algorithms,” <em>Advances in neural information processing systems</em>, vol. 25, 2012.</p></li>
+<li><p>C K I Williams, and C E Rasmussen, <em>Gaussian processes for machine learning</em>, 2nd ed. Cambridge, MA: MIT press, 2006.</p></li>
+<li><p>R B Gramacy, <em>Surrogates: Gaussian process modeling, design, and optimization for the applied sciences</em>, 1st ed. Boca Raton, FL: CRC press, 2020.</p></li>
 </ul>
 </div>
 <span class="target" id="module-nubo.models.gaussian_process"></span><dl class="py class">
@@ -239,6 +239,20 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.models.gaussian_process.</span></span><span class="sig-name descname"><span class="pre">GaussianProcess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">likelihood</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Likelihood</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/models/gaussian_process.html#GaussianProcess"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.models.gaussian_process.GaussianProcess" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ExactGP</span></code></p>
 <p>Gaussian process model with constant mean function and Matern 5/2 kernel.</p>
+<p>Constant mean function:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\mu (\boldsymbol x) = c\]</div>
+</div>
+<p>where constant <span class="math notranslate nohighlight">\(c\)</span> is estimated.</p>
+<p>Matern 5/2 Kernel:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\Sigma_0 (\boldsymbol x, \boldsymbol x^\prime) = \sigma_K^2 \left(1 + \sqrt{5}r + \frac{5}{3}r^2 \right) \exp{\left(-\sqrt{5}r \right)}\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(r = \sqrt{\sum_{m=1}^d \frac{(\boldsymbol x_m - \boldsymbol x^\prime_m)^2}{l^2_m}}\)</span>,
+<span class="math notranslate nohighlight">\(l\)</span> is the length-scale, <span class="math notranslate nohighlight">\(\sigma_K^2\)</span> is the outputscale, and
+<span class="math notranslate nohighlight">\(m\)</span> is the <span class="math notranslate nohighlight">\(m\)</span>-th dimension of the input points.</p>
 <dl class="field-list">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
@@ -294,9 +308,9 @@ and returns a multivariate normal distribution.</p>
 <div class="seealso admonition">
 <p class="admonition-title">References</p>
 <ul class="simple">
-<li><p>CKI Williams, and CE Rasmussen, <em>Gaussian processes for machine learning</em>, 2nd ed. Cambridge, MA: MIT press, 2006.</p></li>
-<li><p>RB Gramacy, <em>Surrogates: Gaussian process modeling, design, and optimization for the applied sciences</em>, 1st ed. Boca Raton, FL: CRC press, 2020.</p></li>
-<li><p>DP Kingma and J Ba, “Adam: A method for stochastic optimization,” <em>Proceedings of the 3rd international conference on learning representations</em>, 2015.</p></li>
+<li><p>C K I Williams, and C E Rasmussen, <em>Gaussian processes for machine learning</em>, 2nd ed. Cambridge, MA: MIT press, 2006.</p></li>
+<li><p>R B Gramacy, <em>Surrogates: Gaussian process modeling, design, and optimization for the applied sciences</em>, 1st ed. Boca Raton, FL: CRC press, 2020.</p></li>
+<li><p>D P Kingma and J Ba, “Adam: A method for stochastic optimization,” <em>Proceedings of the 3rd international conference on learning representations</em>, 2015.</p></li>
 </ul>
 </div>
 <span class="target" id="module-nubo.models.fit"></span><dl class="py function">
@@ -304,6 +318,8 @@ and returns a multivariate normal distribution.</p>
 <span class="sig-prename descclassname"><span class="pre">nubo.models.fit.</span></span><span class="sig-name descname"><span class="pre">fit_gp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GP</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">likelihood</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Likelihood</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/nubo/models/fit.html#fit_gp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.models.fit.fit_gp" title="Permalink to this definition">#</a></dt>
 <dd><p>Estimate hyper-parameters of the Gaussian process <cite>gp</cite> by maximum
 likelihood estimation (MLE) using <code class="docutils literal notranslate"><span class="pre">torch.optim.Adam</span></code> algorithm.</p>
+<p>Maximisesthe log marginal likelihood
+<span class="math notranslate nohighlight">\(\log p(\boldsymbol y \mid \boldsymbol X)\)</span>.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
@@ -410,5 +426,7 @@ likelihood estimation (MLE) using <code class="docutils literal notranslate"><sp
     <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/scripts/furo.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>
 </html>

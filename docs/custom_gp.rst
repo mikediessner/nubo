@@ -96,7 +96,7 @@ with maximum likelihood estimation (MLE) using ``torch``'s Adam optimiser.
 .. code-block:: python
 
     from nubo.models import fit_gp
-        from gpytorch.likelihoods import GaussianLikelihood, FixedNoiseGaussianLikelihood
+    from gpytorch.likelihoods import GaussianLikelihood, FixedNoiseGaussianLikelihood
 
 
     # initialise Gaussian process

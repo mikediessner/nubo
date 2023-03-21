@@ -222,8 +222,20 @@
 
 
 <div class="viewcode-block" id="MCExpectedImprovement"><a class="viewcode-back" href="../../../nubo.acquisition.html#nubo.acquisition.monte_carlo.MCExpectedImprovement">[docs]</a><span class="k">class</span> <span class="nc">MCExpectedImprovement</span><span class="p">(</span><span class="n">AcquisitionFunction</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Monte Carlo Expected Improvement acquisition function.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Monte Carlo Expected Improvement acquisition function:</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        \alpha_{EI}^{MC} (\boldsymbol X_*) = \max \left(ReLU(\mu_n(\boldsymbol X_*) + \boldsymbol L \boldsymbol z - y^{best}) \right)</span>
+
+<span class="sd">    where :math:`\mu_n(\cdot)` is the mean of the predictive distribution of</span>
+<span class="sd">    the Gaussian process, :math:`\boldsymbol L` is the lower triangular matrix</span>
+<span class="sd">    of the Cholesky decomposition of the covariance matrix </span>
+<span class="sd">    :math:`\boldsymbol L \boldsymbol L^T = K(\boldsymbol X_n, \boldsymbol X_n)`,</span>
+<span class="sd">    :math:`\boldsymbol z` are samples from the standard normal distribution</span>
+<span class="sd">    :math:`\mathcal{N} (0, 1)`, :math:`y^{best}` is the current best</span>
+<span class="sd">    observation, and :math:`ReLU (\cdot)` is the rectified linear unit function</span>
+<span class="sd">    that zeros all values below 0 and leaves the rest as is.</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
@@ -326,8 +338,18 @@
 
 
 <div class="viewcode-block" id="MCUpperConfidenceBound"><a class="viewcode-back" href="../../../nubo.acquisition.html#nubo.acquisition.monte_carlo.MCUpperConfidenceBound">[docs]</a><span class="k">class</span> <span class="nc">MCUpperConfidenceBound</span><span class="p">(</span><span class="n">AcquisitionFunction</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Monte Carlo Upper Confidence Bound acquisition function.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Monte Carlo Upper Confidence Bound acquisition function:</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        \alpha_{UCB}^{MC} (\boldsymbol X_*) = \max \left(\mu_n(\boldsymbol X_*) + \sqrt{\frac{\beta \pi}{2}} \lvert \boldsymbol L \boldsymbol z \rvert \right)</span>
+
+<span class="sd">    where :math:`\mu_n(\cdot)` is the mean of the predictive distribution of</span>
+<span class="sd">    the Gaussian process, :math:`\boldsymbol L` is the lower triangular matrix</span>
+<span class="sd">    of the Cholesky decomposition of the covariance matrix </span>
+<span class="sd">    :math:`\boldsymbol L \boldsymbol L^T = K(\boldsymbol X_n, \boldsymbol X_n)`,</span>
+<span class="sd">    :math:`\boldsymbol z` are samples from the standard normal distribution</span>
+<span class="sd">    :math:`\mathcal{N} (0, 1)`, and :math:`\beta` is the trade-off parameter.</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>

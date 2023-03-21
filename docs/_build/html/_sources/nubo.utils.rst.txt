@@ -7,7 +7,7 @@ Data generation
 .. admonition:: References
    :class: seealso
 
-   - MD McKay, RJ Beckman, and WJ Conover, "A comparison of three methods for selecting values of input variables in the analysis of output from a computer code," *Technometrics*, vol. 42, no. 1, p. 55-61, 2000.
+   - M D McKay, R J Beckman, and W J Conover, "A comparison of three methods for selecting values of input variables in the analysis of output from a computer code," *Technometrics*, vol. 42, no. 1, p. 55-61, 2000.
 
 .. automodule:: nubo.utils.latin_hypercube
    :members:

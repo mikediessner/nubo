@@ -14,7 +14,7 @@ detailed picture of Bayesian optimisation than is possible here.
 
 Maximisation problem
 --------------------
-Bayesian optimisation aims to solve the $d$-dimensional maximisation problem
+Bayesian optimisation aims to solve the :math:`d`-dimensional maximisation problem
 
 .. math::
     \boldsymbol  x^* = \arg \max_{\boldsymbol  x \in \mathcal{X}} f(\boldsymbol x)
@@ -28,7 +28,7 @@ without gaining any further insights into the underlying system. We assume any
 noise :math:`\epsilon` that is introduced when taking measurements to be
 independent and identically distributed Gaussian noise
 :math:`\epsilon \sim \mathcal{N} (0, \sigma^2)` such that
-:math:`y_i = f(\boldsymbol  x_i) + \epsilon`. Hence, a set of $n$ pairs of data
+:math:`y_i = f(\boldsymbol  x_i) + \epsilon`. Hence, a set of :math:`n` pairs of data
 points and corresponding observations is defined as
 
 .. math::
@@ -122,7 +122,7 @@ resulting in the prior distribution
 .. math::
     f(\boldsymbol X_n) \sim \mathcal{N} (m(\boldsymbol X_n), K(\boldsymbol X_n, \boldsymbol X_n)).
 
-where :math:`m(\boldsymbol X_n)` is the mean vector of size $n$ over all
+where :math:`m(\boldsymbol X_n)` is the mean vector of size :math:`n` over all
 training inputs and :math:`K(\boldsymbol X_n, \boldsymbol X_n)` is the
 :math:`n \times n` covariance matrix between all training inputs.
 
@@ -263,7 +263,7 @@ Cholesky decomposition of the covariance matrix
 :math:`\boldsymbol z` are samples from the standard normal distribution
 :math:`\mathcal{N} (0, 1)`, :math:`y^{best}` is the current best observation,
 :math:`\beta` is the trade-off parameter, and :math:`ReLU (\cdot)` is the
-rectified linear unit function that zeros all values below $0$ and leaves the
+rectified linear unit function that zeros all values below 0 and leaves the
 rest as is.
 
 Due to the randomness of the Monte Carlo samples, these acquisition functions

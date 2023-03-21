@@ -9,7 +9,8 @@ def gen_candidates(func: Callable,
                    num_candidates: int,
                    num_samples: int) -> Tensor:
     """
-    Generate candidates for multi-start optimisation
+    Generate candidates for multi-start optimisation using a maximin Latin 
+    hypercube design.
 
     Parameters
     ----------

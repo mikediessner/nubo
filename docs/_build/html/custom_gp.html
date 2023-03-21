@@ -304,7 +304,7 @@ example continues with the full estimation of the noise level. NUBO has the
 convenience function <code class="docutils literal notranslate"><span class="pre">fit_gp()</span></code> that maximises the log marginal likelihood
 with maximum likelihood estimation (MLE) using <code class="docutils literal notranslate"><span class="pre">torch</span></code>’s Adam optimiser.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nubo.models</span> <span class="kn">import</span> <span class="n">fit_gp</span>
-    <span class="kn">from</span> <span class="nn">gpytorch.likelihoods</span> <span class="kn">import</span> <span class="n">GaussianLikelihood</span><span class="p">,</span> <span class="n">FixedNoiseGaussianLikelihood</span>
+<span class="kn">from</span> <span class="nn">gpytorch.likelihoods</span> <span class="kn">import</span> <span class="n">GaussianLikelihood</span><span class="p">,</span> <span class="n">FixedNoiseGaussianLikelihood</span>
 
 
 <span class="c1"># initialise Gaussian process</span>

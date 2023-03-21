@@ -8,12 +8,15 @@ at `Newcastle University`_. NUBO focuses primarly on transparency and user
 experience to make Bayesian optimisation easily accessible to researchers from
 all disciplines. Transparency is ensured by clean and comprehensible code,
 precise references, and thourough documentation. User experience is guaranteed
-by a modular and flexible design that allows you to tailor Bayesian 
+by a modular and flexible design, easy-to-write syntax, and careful selection
+of Bayesian optimisation algorithms. NUBO allows you to tailor Bayesian 
 optimisation to your specific problem by writing the optimisation loop yourself
-using the building blocks that NUBO provides. The package is written in Python_
-but does not require expert knowledge to optimise your simulations and
-experiments. NUBO is distributed as an open-source software under the
-`BSD 3-Clause license`_.
+using the provided building blocks. Only algorithms and methods that are
+sufficiently tested and proven to perform well are included in NUBO. This
+ensures that the package remains compact and does not overwhelm with an
+unnecessary large number of options. The package is written in Python_ but does
+not require expert knowledge to optimise your simulations and experiments. NUBO
+is distributed as an open-source software under the `BSD 3-Clause license`_.
 
 On this page you can find an overview of the three main documentation sections
 consisting of (i) an introduction to Bayesian optimisation with NUBO, (ii) a
@@ -58,6 +61,7 @@ optimisation algorithm to your specfic problem.
    multipoint_sequential.ipynb
    asynchronous_bo.ipynb
    constrained_bo.ipynb
+   fixed_noise.ipynb
 
 Package reference
 -----------------

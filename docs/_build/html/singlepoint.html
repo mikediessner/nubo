@@ -172,6 +172,7 @@
 <li class="toctree-l1"><a class="reference internal" href="multipoint_sequential.html">Parallel multi-point sequential Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="asynchronous_bo.html">Asynchronous Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constrained_bo.html">Constrained Bayesian optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fixed_noise.html">Bayesian optimisation with known observational noise</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
 <ul>
@@ -216,6 +217,8 @@
         <article role="main">
           <section id="Sequential-single-point-Bayesian-optimisation">
 <h1>Sequential single-point Bayesian optimisation<a class="headerlink" href="#Sequential-single-point-Bayesian-optimisation" title="Permalink to this heading">#</a></h1>
+<p>In this example, NUBO is used for sequential single-point optimisation. The <code class="docutils literal notranslate"><span class="pre">Hartmann6D</span></code> synthetic test function acts as a surrogate for a black box objective funtion, such as an experiment or a simulation. We use the analytical acquisiton function <code class="docutils literal notranslate"><span class="pre">UpperConfidenceBound</span></code> with <span class="math notranslate nohighlight">\(\beta = 1.96^2\)</span> corresponding to the 95% confidence interval of the Gaussian distribution. We optimise this acquisition function with the <code class="docutils literal notranslate"><span class="pre">lbfgsb()</span></code> algorithm with 5 starts to avoid getting stuck in a local
+maximum. The optimisation loop is run for 40 iterations and finds a solution close the true optimum of -3.3224.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -272,7 +275,7 @@
 
 <span class="c1"># results</span>
 <span class="n">best_iter</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">y_train</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Evaluation: </span><span class="si">{</span><span class="n">best_iter</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> </span><span class="se">\t</span><span class="s2"> Solution: </span><span class="si">{</span><span class="nb">float</span><span class="p">(</span><span class="n">y_train</span><span class="p">[</span><span class="n">best_iter</span><span class="p">])</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Evaluation: </span><span class="si">{</span><span class="n">best_iter</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> </span><span class="se">\t</span><span class="s2"> Solution: </span><span class="si">{</span><span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="n">y_train</span><span class="p">[</span><span class="n">best_iter</span><span class="p">])</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <br/></pre></div>
 </div>
 </div>
@@ -281,19 +284,19 @@
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-New best at evaluation 34:       Inputs: [0.1944 0.2627 0.     0.311  0.3311 0.7252],    Outputs: [-2.2019]
-New best at evaluation 35:       Inputs: [0.2237 0.1796 0.     0.3295 0.3233 0.6819],    Outputs: [-2.3608]
-New best at evaluation 36:       Inputs: [0.2334 0.1673 0.501  0.3297 0.3209 0.6827],    Outputs: [-3.194]
-New best at evaluation 40:       Inputs: [0.2061 0.1872 0.513  0.317  0.2864 0.642 ],    Outputs: [-3.2033]
-New best at evaluation 41:       Inputs: [0.2555 0.1491 0.4892 0.2897 0.2878 0.6616],    Outputs: [-3.2528]
-New best at evaluation 42:       Inputs: [0.1926 0.161  0.5281 0.2637 0.3057 0.683 ],    Outputs: [-3.2734]
-New best at evaluation 47:       Inputs: [0.2236 0.1315 0.4595 0.2746 0.3192 0.6622],    Outputs: [-3.3069]
-New best at evaluation 48:       Inputs: [0.1971 0.1513 0.4775 0.278  0.3096 0.6462],    Outputs: [-3.3184]
-New best at evaluation 53:       Inputs: [0.207  0.1481 0.4719 0.2767 0.3093 0.6667],    Outputs: [-3.3193]
-New best at evaluation 55:       Inputs: [0.2069 0.1546 0.4753 0.2798 0.3106 0.6618],    Outputs: [-3.3207]
-New best at evaluation 62:       Inputs: [0.2056 0.154  0.4771 0.2802 0.3105 0.6606],    Outputs: [-3.321]
-New best at evaluation 63:       Inputs: [0.2053 0.1533 0.4768 0.2799 0.3105 0.6599],    Outputs: [-3.3213]
-Evaluation: 63   Solution: 3.3213
+New best at evaluation 33:       Inputs: [0.1247 0.     0.634  0.2347 0.257  0.4351],    Outputs: [-1.7711]
+New best at evaluation 37:       Inputs: [0.1196 0.0298 0.2002 0.2853 0.3047 0.5265],    Outputs: [-2.3202]
+New best at evaluation 38:       Inputs: [0.1407 0.     0.2125 0.2922 0.3278 0.6806],    Outputs: [-2.6529]
+New best at evaluation 40:       Inputs: [0.1356 0.     0.3436 0.3205 0.3754 0.6734],    Outputs: [-2.6605]
+New best at evaluation 44:       Inputs: [0.1756 0.     0.351  0.3389 0.3135 0.637 ],    Outputs: [-2.8567]
+New best at evaluation 45:       Inputs: [0.1758 0.     0.4007 0.2858 0.2995 0.6475],    Outputs: [-3.0165]
+New best at evaluation 46:       Inputs: [0.1803 0.1282 0.4165 0.2719 0.299  0.6528],    Outputs: [-3.2702]
+New best at evaluation 50:       Inputs: [0.205  0.1713 0.4946 0.2829 0.3034 0.6497],    Outputs: [-3.3072]
+New best at evaluation 54:       Inputs: [0.2177 0.1405 0.474  0.2793 0.2996 0.6665],    Outputs: [-3.3091]
+New best at evaluation 55:       Inputs: [0.2128 0.1415 0.4793 0.2709 0.3187 0.6467],    Outputs: [-3.314]
+New best at evaluation 56:       Inputs: [0.1959 0.1521 0.4704 0.281  0.3138 0.6611],    Outputs: [-3.3199]
+New best at evaluation 58:       Inputs: [0.2003 0.1573 0.4749 0.2769 0.3109 0.6575],    Outputs: [-3.3216]
+Evaluation: 58   Solution: -3.3216
 </pre></div></div>
 </div>
 </section>

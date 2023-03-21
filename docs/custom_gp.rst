@@ -2,27 +2,28 @@
 
 Custom Gaussian process
 =======================
-This notebook gives a introduction to specifying custom Gaussian process with
-GPyTorch that can be used with NUBO.
+This notebook gives a introduction to specifying custom Gaussian processes with
+``GPyTorch`` that can be used with NUBO.
 
 Define Gaussian process
 -----------------------
 A Gaussian process is defined by its mean function and its covariance kernel.
 Both are specified in the ``__init__()`` method of the ``GaussianProcess``
-class below and can be easily swapped out by the desired function and kernel.
+class below and can easily be swapped out by the desired function or kernel.
 While ``GPyTorch`` offers many different options, the most common choices are
 the zero mean or constant mean function and the Matern or RBF kernel. Some
 kernels, such as the Matern and the RBF kernel, are only defined for a certain
-range so that they need to be scaled through the ``ScaleKernel`` to be used
-with all problems. The length-scale parameters of the covariance kernel can
-either be represented as a single length-scale or as one length-scale parameter
-for each input dimensions. The latter is known as automatic relevance
-determination (ARD) and allows inputs to be differently correlated. The
-``forward()`` method takes a test point and returns the predictive multivariate
-normal distribution. All other properties of the Gaussian process are inherited
-by the ExactGP making it easy to implement custom Gaussian processes. For more
-information about Gaussian processes and about options for mean function and
-covariance kernel see the documentation of ``GPyTorch``.
+range. They need to be scaled through the ``ScaleKernel`` to be used with all
+problems. The length-scale parameters of the covariance kernel can either be
+represented as a single length-scale or as one length-scale parameter for each
+input dimensions. The latter is known as automatic relevance determination
+(ARD) and allows inputs to be differently correlated. The ``forward()`` method
+takes a test point and returns the predictive multivariate normal distribution.
+All other properties of the Gaussian process are inherited by the ``ExactGP``
+class making it easy to implement custom Gaussian processes with ``GPyTorch``
+for NUBO. For more information about Gaussian processes and about options for
+the prior mean function and the prior covariance kernel see ``GPyTorch``'s
+documentation_.
 
 .. code-block:: python
 
@@ -82,16 +83,15 @@ Fit Gaussian process
 --------------------
 Before we fit the Gaussian process to the training data, we first have to
 decide on the likelihood that should be used. There are two likelihoods we want
-to consider here: First, we have the standard Gaussian likelihood. This
+to consider here: First, we have the standard ``GaussianLikelihood``. This
 likelihood assumes a constant homoskedastic observation noise and estimates the
-noise parameter :math:`\sigma^2` from the data. Second, there is the Gaussian
-likelihood with fixed noise. You want to use this option when you know or can
-measure the observation noise of your objective function. In this case, you can
-still decide if you want to estimate the additional noise besides the
-observations noise or not. This example continues with the full estimation of
-the noise level. NUBO has the convenience function ``fit_gp`` that maximises
-the log marginal likelihood with maximum likelihood estimation (MLE) using
-``torch``'s Adam optimiser.
+noise parameter :math:`\sigma^2` from the data. Second, there is the 
+``FixedNoiseGaussianLikelihood``. Use this option when you know or can measure
+the observation noise of your objective function. In this case, you can still
+decide if you want to estimate any additional noise besides or not. This
+example continues with the full estimation of the noise level. NUBO has the
+convenience function ``fit_gp()`` that maximises the log marginal likelihood
+with maximum likelihood estimation (MLE) using ``torch``'s Adam optimiser.
 
 .. code-block:: python
 
@@ -139,3 +139,5 @@ process specified above.
 
     Mean: tensor([ 0.2188,  0.1616, -0.0127,  0.0252, -0.0069], dtype=torch.float64)
     Variance: tensor([0.0136, 0.0191, 0.0252, 0.0164, 0.0343], dtype=torch.float64)
+
+.. _documentation: https://docs.gpytorch.ai/en/stable

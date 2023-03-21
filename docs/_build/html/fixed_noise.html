@@ -3,12 +3,13 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="A primer on Bayesian optimisation" href="bayesian_optimisation.html" /><link rel="prev" title="Overview" href="overview.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Acquisition module" href="nubo.acquisition.html" /><link rel="prev" title="Constrained Bayesian optimisation" href="constrained_bo.html" />
 
     <link rel="shortcut icon" href="_static/favicon.ico"/><!-- Generated with Sphinx 6.1.3 and Furo 2022.12.07 -->
-        <title>Get started - NUBO</title>
+        <title>Bayesian optimisation with known observational noise - NUBO</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
@@ -134,7 +135,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -155,23 +156,23 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">NUBO:</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="get_started.html">Get started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bayesian_optimisation.html">A primer on Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="practical_considerations.html">Practical considerations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="citation.html">Citation</a></li>
 <li class="toctree-l1"><a class="reference external" href="http://github.com/mikediessner/nubo">Github</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="custom_gp.html">Custom Gaussian process</a></li>
 <li class="toctree-l1"><a class="reference internal" href="singlepoint.html">Sequential single-point Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multipoint_joint.html">Parallel multi-point joint Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multipoint_sequential.html">Parallel multi-point sequential Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="asynchronous_bo.html">Asynchronous Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constrained_bo.html">Constrained Bayesian optimisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="fixed_noise.html">Bayesian optimisation with known observational noise</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Bayesian optimisation with known observational noise</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
 <ul>
@@ -208,71 +209,39 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section id="get-started">
-<span id="id1"></span><h1>Get started<a class="headerlink" href="#get-started" title="Permalink to this heading">#</a></h1>
-<p>This brief introduction will teach you how to install NUBO from the GitHub
-repository and how to set up a Bayeisan optimisation loop to maximise a toy
-function using NUBO’s pre-defined Gaussian process as the surrogate model.</p>
-<section id="installing-nubo">
-<h2>Installing NUBO<a class="headerlink" href="#installing-nubo" title="Permalink to this heading">#</a></h2>
-<p>Install NUBO and all its dependencies directly from the GitHub repository using
-the packet manager <cite>pip</cite> with the following code. We recommend the use of a
-virtual environment.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">mikediessner</span><span class="o">/</span><span class="n">nubo</span>
+          <section id="Bayesian-optimisation-with-known-observational-noise">
+<h1>Bayesian optimisation with known observational noise<a class="headerlink" href="#Bayesian-optimisation-with-known-observational-noise" title="Permalink to this heading">#</a></h1>
+<p>In this example, NUBO is used for sequential single-point optimisation for situations where the observational noise from taking the measurements is known. We assume that the variance of the observational noise of our black box funcion (simulated here by the <code class="docutils literal notranslate"><span class="pre">Hartmann6D</span></code> function) to be equal to <span class="math notranslate nohighlight">\(\sigma^2 = 0.025\)</span>. The Bayesian optimisation loop compared to the case with unknown noise differs only in terms of the likelihood that we use. Here, we use the <code class="docutils literal notranslate"><span class="pre">FixedNoiseGaussianLikelihood</span></code>
+and specify the observational noise variance for each data point (for this example, the same variance is used for all points). We also allow the likelihood to estimate any additional noise. The optimisation loop is run for 40 iterations and finds a solution close the true optimum of -3.3224.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-</section>
-<section id="optimising-a-toy-function-with-nubo">
-<h2>Optimising a toy function with NUBO<a class="headerlink" href="#optimising-a-toy-function-with-nubo" title="Permalink to this heading">#</a></h2>
-<p>First, we set-up the toy function we want to optimise. In this case we choose
-the 6-dimensional Hartmann function, a multi-modal function with one global
-optimum. This synthetic test function acts as a surrogate for a black box
-objective funtion, such as an experiment or a simulation.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nubo.test_functions</span> <span class="kn">import</span> <span class="n">Hartmann6D</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">nubo.acquisition</span> <span class="kn">import</span> <span class="n">ExpectedImprovement</span><span class="p">,</span> <span class="n">UpperConfidenceBound</span>
+<span class="kn">from</span> <span class="nn">nubo.models</span> <span class="kn">import</span> <span class="n">GaussianProcess</span><span class="p">,</span> <span class="n">fit_gp</span>
+<span class="kn">from</span> <span class="nn">nubo.optimisation</span> <span class="kn">import</span> <span class="n">lbfgsb</span>
+<span class="kn">from</span> <span class="nn">nubo.test_functions</span> <span class="kn">import</span> <span class="n">Hartmann6D</span>
+<span class="kn">from</span> <span class="nn">nubo.utils</span> <span class="kn">import</span> <span class="n">gen_inputs</span>
+<span class="kn">from</span> <span class="nn">gpytorch.likelihoods</span> <span class="kn">import</span> <span class="n">FixedNoiseGaussianLikelihood</span>
 
 
 <span class="c1"># test function</span>
-<span class="n">func</span> <span class="o">=</span> <span class="n">Hartmann6D</span><span class="p">(</span><span class="n">minimise</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">func</span> <span class="o">=</span> <span class="n">Hartmann6D</span><span class="p">(</span><span class="n">minimise</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">noise_std</span><span class="o">=</span><span class="mf">0.025</span><span class="p">)</span>
 <span class="n">dims</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">dims</span>
 <span class="n">bounds</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">bounds</span>
-</pre></div>
-</div>
-<p>Then, we generate some initial training data. We decide to generate 5 data
-points per input dimension resulting in a total of 30 data points.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">from</span> <span class="nn">nubo.utils</span> <span class="kn">import</span> <span class="n">gen_inputs</span>
-
 
 <span class="c1"># training data</span>
 <span class="n">x_train</span> <span class="o">=</span> <span class="n">gen_inputs</span><span class="p">(</span><span class="n">num_points</span><span class="o">=</span><span class="n">dims</span><span class="o">*</span><span class="mi">5</span><span class="p">,</span>
-                    <span class="n">num_dims</span><span class="o">=</span><span class="n">dims</span><span class="p">,</span>
-                    <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">)</span>
+                     <span class="n">num_dims</span><span class="o">=</span><span class="n">dims</span><span class="p">,</span>
+                     <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">)</span>
 <span class="n">y_train</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Now, we can prepare the Bayesian optimisation loop. We choose NUBO’s
-pre-defined Gaussian process that comes with a constant mean function and a
-Matern 5/2 kernel. We also use the Gaussian likelihood to estimate potential
-noise such as observational noise. We estimate its hyper-parameters via maximum
-likelihood estimation (MLE) using the Adam optimiser. For the acquisition
-function, we implement the analytical upper confidence bound (UCB) with
-trade-off parameter <span class="math notranslate nohighlight">\(\beta = 1.96^2\)</span> (corresponding to 95% confidence
-intervals for the Gaussian distribution) and optimise it with the L-BFGS-B
-algorithm using a multi-start approach with five starts. These multiple starts
-ensure that the optimiser does not get stuck in a local optimum. The Bayesian
-optimisation loop is run for 40 iterations giving an evaluation budget of 70.</p>
-<blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nubo.acquisition</span> <span class="kn">import</span> <span class="n">UpperConfidenceBound</span>
-<span class="kn">from</span> <span class="nn">nubo.models</span> <span class="kn">import</span> <span class="n">GaussianProcess</span><span class="p">,</span> <span class="n">fit_gp</span>
-<span class="kn">from</span> <span class="nn">nubo.optimisation</span> <span class="kn">import</span> <span class="n">lbfgsb</span>
-<span class="kn">from</span> <span class="nn">gpytorch.likelihoods</span> <span class="kn">import</span> <span class="n">GaussianLikelihood</span>
-
 
 <span class="c1"># Bayesian optimisation loop</span>
 <span class="n">iters</span> <span class="o">=</span> <span class="mi">40</span>
@@ -280,13 +249,14 @@ optimisation loop is run for 40 iterations giving an evaluation budget of 70.</p
 <span class="k">for</span> <span class="nb">iter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">):</span>
 
     <span class="c1"># specify Gaussian process</span>
-    <span class="n">likelihood</span> <span class="o">=</span> <span class="n">GaussianLikelihood</span><span class="p">()</span>
+    <span class="n">likelihood</span> <span class="o">=</span> <span class="n">FixedNoiseGaussianLikelihood</span><span class="p">(</span><span class="n">noise</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">x_train</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span><span class="o">*</span><span class="mf">0.025</span><span class="p">,</span> <span class="n">learn_additional_noise</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">gp</span> <span class="o">=</span> <span class="n">GaussianProcess</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">likelihood</span><span class="o">=</span><span class="n">likelihood</span><span class="p">)</span>
 
     <span class="c1"># fit Gaussian process</span>
     <span class="n">fit_gp</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">gp</span><span class="o">=</span><span class="n">gp</span><span class="p">,</span> <span class="n">likelihood</span><span class="o">=</span><span class="n">likelihood</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
 
     <span class="c1"># specify acquisition function</span>
+    <span class="c1"># acq = ExpectedImprovement(gp=gp, y_best=torch.max(y_train))</span>
     <span class="n">acq</span> <span class="o">=</span> <span class="n">UpperConfidenceBound</span><span class="p">(</span><span class="n">gp</span><span class="o">=</span><span class="n">gp</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">1.96</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
     <span class="c1"># optimise acquisition function</span>
@@ -302,32 +272,29 @@ optimisation loop is run for 40 iterations giving an evaluation budget of 70.</p
     <span class="c1"># print new best</span>
     <span class="k">if</span> <span class="n">y_new</span> <span class="o">&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">y_train</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;New best at evaluation </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span><span class="si">}</span><span class="s2">: </span><span class="se">\t</span><span class="s2"> Inputs: </span><span class="si">{</span><span class="n">x_new</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">dims</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">, </span><span class="se">\t</span><span class="s2"> Outputs: </span><span class="si">{</span><span class="o">-</span><span class="n">y_new</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div></blockquote>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">New</span> <span class="n">best</span> <span class="n">at</span> <span class="n">evaluation</span> <span class="mi">43</span><span class="p">:</span>       <span class="n">Inputs</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.18</span>   <span class="mf">0.147</span>  <span class="mf">0.</span>     <span class="mf">0.1909</span> <span class="mf">0.3424</span> <span class="mf">0.7121</span><span class="p">],</span>    <span class="n">Outputs</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">2.1026</span><span class="p">]</span>
-<span class="n">New</span> <span class="n">best</span> <span class="n">at</span> <span class="n">evaluation</span> <span class="mi">46</span><span class="p">:</span>       <span class="n">Inputs</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.2992</span> <span class="mf">0.1852</span> <span class="mf">0.</span>     <span class="mf">0.21</span>   <span class="mf">0.3398</span> <span class="mf">0.6985</span><span class="p">],</span>    <span class="n">Outputs</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">2.18</span><span class="p">]</span>
-<span class="n">New</span> <span class="n">best</span> <span class="n">at</span> <span class="n">evaluation</span> <span class="mi">48</span><span class="p">:</span>       <span class="n">Inputs</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.2597</span> <span class="mf">0.1744</span> <span class="mf">0.</span>     <span class="mf">0.2323</span> <span class="mf">0.3173</span> <span class="mf">0.6544</span><span class="p">],</span>    <span class="n">Outputs</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">2.337</span><span class="p">]</span>
-<span class="n">New</span> <span class="n">best</span> <span class="n">at</span> <span class="n">evaluation</span> <span class="mi">50</span><span class="p">:</span>       <span class="n">Inputs</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.2486</span> <span class="mf">0.1728</span> <span class="mf">0.112</span>  <span class="mf">0.2413</span> <span class="mf">0.2927</span> <span class="mf">0.6674</span><span class="p">],</span>    <span class="n">Outputs</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">2.6599</span><span class="p">]</span>
-<span class="n">New</span> <span class="n">best</span> <span class="n">at</span> <span class="n">evaluation</span> <span class="mi">51</span><span class="p">:</span>       <span class="n">Inputs</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.234</span>  <span class="mf">0.1519</span> <span class="mf">0.3204</span> <span class="mf">0.2624</span> <span class="mf">0.2972</span> <span class="mf">0.6662</span><span class="p">],</span>    <span class="n">Outputs</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">3.1372</span><span class="p">]</span>
-<span class="n">New</span> <span class="n">best</span> <span class="n">at</span> <span class="n">evaluation</span> <span class="mi">52</span><span class="p">:</span>       <span class="n">Inputs</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.2117</span> <span class="mf">0.1087</span> <span class="mf">0.3731</span> <span class="mf">0.313</span>  <span class="mf">0.3146</span> <span class="mf">0.66</span>  <span class="p">],</span>    <span class="n">Outputs</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">3.1906</span><span class="p">]</span>
-<span class="n">New</span> <span class="n">best</span> <span class="n">at</span> <span class="n">evaluation</span> <span class="mi">54</span><span class="p">:</span>       <span class="n">Inputs</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1698</span> <span class="mf">0.1394</span> <span class="mf">0.405</span>  <span class="mf">0.3109</span> <span class="mf">0.2839</span> <span class="mf">0.6623</span><span class="p">],</span>    <span class="n">Outputs</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">3.1964</span><span class="p">]</span>
-<span class="n">New</span> <span class="n">best</span> <span class="n">at</span> <span class="n">evaluation</span> <span class="mi">55</span><span class="p">:</span>       <span class="n">Inputs</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1431</span> <span class="mf">0.1126</span> <span class="mf">0.4022</span> <span class="mf">0.2795</span> <span class="mf">0.3051</span> <span class="mf">0.635</span> <span class="p">],</span>    <span class="n">Outputs</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">3.198</span><span class="p">]</span>
-<span class="n">New</span> <span class="n">best</span> <span class="n">at</span> <span class="n">evaluation</span> <span class="mi">58</span><span class="p">:</span>       <span class="n">Inputs</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.2112</span> <span class="mf">0.1557</span> <span class="mf">0.4745</span> <span class="mf">0.288</span>  <span class="mf">0.3086</span> <span class="mf">0.6555</span><span class="p">],</span>    <span class="n">Outputs</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">3.3158</span><span class="p">]</span>
-<span class="n">New</span> <span class="n">best</span> <span class="n">at</span> <span class="n">evaluation</span> <span class="mi">64</span><span class="p">:</span>       <span class="n">Inputs</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.2013</span> <span class="mf">0.1443</span> <span class="mf">0.4779</span> <span class="mf">0.2734</span> <span class="mf">0.3131</span> <span class="mf">0.6584</span><span class="p">],</span>    <span class="n">Outputs</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">3.3218</span><span class="p">]</span>
-</pre></div>
-</div>
-<p>Finally, we print the overall best solution: We get -3.3218 on evaluation 66
-which approximaties the true optimum of -3.3224 very well.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># results</span>
+
+<span class="c1"># results</span>
 <span class="n">best_iter</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">y_train</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Evaluation: </span><span class="si">{</span><span class="n">best_iter</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> </span><span class="se">\t</span><span class="s2"> Solution: </span><span class="si">{</span><span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="n">y_train</span><span class="p">[</span><span class="n">best_iter</span><span class="p">])</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
+<br/></pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Evaluation</span><span class="p">:</span> <span class="mi">64</span>   <span class="n">Solution</span><span class="p">:</span> <span class="o">-</span><span class="mf">3.3218</span>
-</pre></div>
 </div>
-</section>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+New best at evaluation 35:       Inputs: [0.1645 0.2206 0.3035 0.2072 0.194  0.869 ],    Outputs: [-1.6695]
+New best at evaluation 36:       Inputs: [0.4713 0.7459 1.     0.6095 0.5726 0.    ],    Outputs: [-2.3638]
+New best at evaluation 42:       Inputs: [0.1779 0.0974 0.3987 0.2433 0.2859 0.7401],    Outputs: [-2.9697]
+New best at evaluation 44:       Inputs: [0.414  0.8375 1.     0.5714 0.5749 0.    ],    Outputs: [-2.9842]
+New best at evaluation 45:       Inputs: [0.2113 0.0234 0.4707 0.2358 0.286  0.7096],    Outputs: [-3.0098]
+New best at evaluation 52:       Inputs: [0.3824 0.8989 0.7951 0.5489 0.5283 0.    ],    Outputs: [-3.0416]
+New best at evaluation 57:       Inputs: [0.2381 0.1042 0.4973 0.2776 0.2888 0.6892],    Outputs: [-3.2606]
+New best at evaluation 59:       Inputs: [0.2256 0.0998 0.4559 0.2737 0.2983 0.6449],    Outputs: [-3.297]
+Evaluation: 59   Solution: -3.2970
+</pre></div></div>
+</div>
 </section>
 
         </article>
@@ -335,23 +302,23 @@ which approximaties the true optimum of -3.3224 very well.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="bayesian_optimisation.html">
+          <a class="next-page" href="nubo.acquisition.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">A primer on Bayesian optimisation</div>
+                <div class="title">Acquisition module</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="overview.html">
+          <a class="prev-page" href="constrained_bo.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Overview</div>
+                <div class="title">Constrained Bayesian optimisation</div>
                 
               </div>
             </a>
@@ -373,28 +340,8 @@ which approximaties the true optimum of -3.3224 very well.</p>
         
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            On this page
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">Get started</a><ul>
-<li><a class="reference internal" href="#installing-nubo">Installing NUBO</a></li>
-<li><a class="reference internal" href="#optimising-a-toy-function-with-nubo">Optimising a toy function with NUBO</a></li>
-</ul>
-</li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>

@@ -171,6 +171,7 @@
 <li class="toctree-l1"><a class="reference internal" href="multipoint_sequential.html">Parallel multi-point sequential Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="asynchronous_bo.html">Asynchronous Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constrained_bo.html">Constrained Bayesian optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fixed_noise.html">Bayesian optimisation with known observational noise</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
 <ul>
@@ -225,7 +226,7 @@ and NUBO and is frequently updated.</p>
 <dt><strong>How many initial data points do I need?</strong></dt><dd><p>A rule of thumb for Gaussian process models is to have at least 10 points
 per input dimension. However, empirical evidence shows that reducing this
 to 5 or even 1 point(s) per input dimensions does not result in worse
-solutions for Bayesian optimisation <a class="footnote-reference brackets" href="#id7" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.</p>
+solutions for Bayesian optimisation <a class="footnote-reference brackets" href="#diessner2022" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>.</p>
 </dd>
 </dl>
 </section>
@@ -233,7 +234,7 @@ solutions for Bayesian optimisation <a class="footnote-reference brackets" href=
 <h2>Gaussian process<a class="headerlink" href="#gaussian-process" title="Permalink to this heading">#</a></h2>
 <dl class="simple">
 <dt><strong>What prior mean function and prior covariance kernel should I use?</strong></dt><dd><p>For practical Bayesian optimisation a zero or constant mean function with
-a Matern 5/2 kernel is recommended <a class="footnote-reference brackets" href="#id9" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>. Other kernels, such as the RBF
+a Matern 5/2 kernel is recommended <a class="footnote-reference brackets" href="#snoek2012" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>. Other kernels, such as the RBF
 kernel, might be too smooth to be able to represent realistic experiments
 and simulations.</p>
 </dd>
@@ -244,7 +245,7 @@ noise while the <code class="docutils literal notranslate"><span class="pre">Fix
 you cannot measure the observational noise, the former likelihood is
 recommended. If you have a clear idea of the observational noise the latter
 can also be used. Then, you can decide if you want the Gaussian process to
-also estimate any additional noise besides the observational noise <a class="footnote-reference brackets" href="#id8" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>.</p>
+also estimate any additional noise besides the observational noise <a class="footnote-reference brackets" href="#gramacy2012" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>.</p>
 </dd>
 </dl>
 </section>
@@ -254,42 +255,48 @@ also estimate any additional noise besides the observational noise <a class="foo
 <dt><strong>What acquisition function should I use?</strong></dt><dd><p>NUBO supports two acquisition functions: Expected improvement (EI) and
 upper confidence bound (UCB). While both are widely-used options that have
 proven to give good results, there is empirical evidence that UCB performs
-better on a wider range of synthetic test functions <a class="footnote-reference brackets" href="#id7" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.</p>
+better on a wider range of synthetic test functions <a class="footnote-reference brackets" href="#diessner2022" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>.</p>
 </dd>
 <dt><strong>Should I use analytical or Monte Carlo acquisition functions?</strong></dt><dd><p>We recommend using analytical acquisition functions for sequential
 single-point optimisation problems. Where it is advantageous to evaluate
 potential solutions in parallel Monte Carlo acquisition functions allow the
 computation of batches. Furhtermore, if you want to continue the
 optimisation loop while some potential solutions are still being evaluated,
-Monte Carlo acquisition functions enable asynchronous optimisation <a class="footnote-reference brackets" href="#id9" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>
-<a class="footnote-reference brackets" href="#id10" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>.</p>
+Monte Carlo acquisition functions enable asynchronous optimisation <a class="footnote-reference brackets" href="#snoek2012" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>
+<a class="footnote-reference brackets" href="#wilson2018" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a>.</p>
 </dd>
 <dt><strong>What optimiser should I choose?</strong></dt><dd><p>We recommend L-BFGS-B for analytical acquisition functions and SLSQP for
 constrained analytical acquisition functions. For Monte Carlo acquisition
 functions, the stochastic optimiser Adam should be used if the base samples
 are resampled. If you decide to fix the base samples, deterministic
 optimisers can be used in the same way as for the analytical acquisition
-functions.</p>
+functions. While fixing the base samples could introduce some sampling
+bias, there is empirical evidence that it does not affect the performance
+negatively <a class="footnote-reference brackets" href="#balandat2020" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.</p>
 </dd>
 </dl>
 <hr class="docutils" />
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id7" role="note">
-<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<aside class="footnote brackets" id="balandat2020" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">1</a><span class="fn-bracket">]</span></span>
+<p>M Balandat <em>et al.</em>, “BoTorch: A framework for efficient Monte-CarloBayesian optimization,” <em>Advances in neural information processing systems</em>, vol. 33, 2020.</p>
+</aside>
+<aside class="footnote brackets" id="diessner2022" role="note">
+<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id4">2</a>)</span>
 <p>M Diessner, J O’Connor, A Wynn, S Laizet, Y Guan, K Wilson, and R D Whalley, “Investigating Bayesian optimization for expensive-to-evaluate black box functions: Application in fluid dynamics,” <em>Frontiers in Applied Mathematics and Statistics</em>, 2022.</p>
 </aside>
-<aside class="footnote brackets" id="id8" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">2</a><span class="fn-bracket">]</span></span>
+<aside class="footnote brackets" id="gramacy2012" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
 <p>R B Gramacy, and HKH Lee, “Cases for the nugget in modeling computer experiments,” <em>Statistics and computing</em>, vol. 22, p. 713-722, 2012.</p>
 </aside>
-<aside class="footnote brackets" id="id9" role="note">
-<span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
+<aside class="footnote brackets" id="snoek2012" role="note">
+<span class="label"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id2">1</a>,<a role="doc-backlink" href="#id5">2</a>)</span>
 <p>J Snoek, H Larochelle, and R P Adams, “Practical Bayesian optimization of machine learning algorithms,” <em>Advances in neural information processing systems</em>, vol. 25, 2012.</p>
 </aside>
-<aside class="footnote brackets" id="id10" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">4</a><span class="fn-bracket">]</span></span>
+<aside class="footnote brackets" id="wilson2018" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">5</a><span class="fn-bracket">]</span></span>
 <p>J Wilson, F Hutter, and M Deisenroth, “Maximizing acquisition functions for Bayesian optimization,” <em>Advances in neural information processing systems</em>, vol. 31, 2018.</p>
 </aside>
 </aside>

@@ -21,7 +21,8 @@ Optimising a toy function with NUBO
 -----------------------------------
 First, we set-up the toy function we want to optimise. In this case we choose
 the 6-dimensional Hartmann function, a multi-modal function with one global
-optimum.
+optimum. This synthetic test function acts as a surrogate for a black box
+objective funtion, such as an experiment or a simulation.
 
 .. code-block:: python
 
@@ -117,8 +118,8 @@ which approximaties the true optimum of -3.3224 very well.
 
     # results
     best_iter = int(torch.argmax(y_train))
-    print(f"Evaluation: {best_iter+1} \t Solution: {float(y_train[best_iter]):.4f}")
+    print(f"Evaluation: {best_iter+1} \t Solution: {-float(y_train[best_iter]):.4f}")
 
 ::
 
-    Evaluation: 64   Solution: 3.3218
+    Evaluation: 64   Solution: -3.3218

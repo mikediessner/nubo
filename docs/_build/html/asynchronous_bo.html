@@ -172,6 +172,7 @@
 <li class="toctree-l1"><a class="reference internal" href="multipoint_sequential.html">Parallel multi-point sequential Bayesian optimisation</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Asynchronous Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constrained_bo.html">Constrained Bayesian optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fixed_noise.html">Bayesian optimisation with known observational noise</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
 <ul>
@@ -216,6 +217,9 @@
         <article role="main">
           <section id="Asynchronous-Bayesian-optimisation">
 <h1>Asynchronous Bayesian optimisation<a class="headerlink" href="#Asynchronous-Bayesian-optimisation" title="Permalink to this heading">#</a></h1>
+<p>In this example, NUBO is used for asynchronous optimisation. This means that the optimisation loop is continued while some points are still being evaluated from the objective function. This is particularly useful for situations in which some evaluations take a longer time to complete but you do not want to waste time by waiting for these pending observations. In the script below, we randomly sample a pending point <code class="docutils literal notranslate"><span class="pre">x_pending</span></code> and assume that we are still waiting for its output. While waiting,
+we continue the optimisation loop for 10 iterations with a batch size of 4 each (a total of 40 evaluations) and finds a solution close the true optimum of -3.3224. The <code class="docutils literal notranslate"><span class="pre">Hartmann6D</span></code> synthetic test function acts as a surrogate for a black box objective funtion, such as an experiment or a simulation. Notice that we provide the pending point <code class="docutils literal notranslate"><span class="pre">x_pending</span></code> to the acquisition function <code class="docutils literal notranslate"><span class="pre">MCUpperConfidenceBound</span></code> as an argument. For asynchronous optimisation, Monte Carlo acquisition functions have to
+be used as this process is in general intractable for analytical functions.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -277,7 +281,7 @@
 
 <span class="c1"># results</span>
 <span class="n">best_iter</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">y_train</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Evaluation: </span><span class="si">{</span><span class="n">best_iter</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> </span><span class="se">\t</span><span class="s2"> Solution: </span><span class="si">{</span><span class="nb">float</span><span class="p">(</span><span class="n">y_train</span><span class="p">[</span><span class="n">best_iter</span><span class="p">])</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Evaluation: </span><span class="si">{</span><span class="n">best_iter</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> </span><span class="se">\t</span><span class="s2"> Solution: </span><span class="si">{</span><span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="n">y_train</span><span class="p">[</span><span class="n">best_iter</span><span class="p">])</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <br/></pre></div>
 </div>
 </div>
@@ -286,12 +290,12 @@
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Point pending evaluation: [0.6839 0.9712 0.6219 0.8499 0.501  0.9095]
-New best at evaluation 51:       Inputs: [3.881e-01 6.274e-01 3.000e-04 4.243e-01 2.554e-01 3.000e-04],          Outputs: -1.4441
-New best at evaluation 55:       Inputs: [3.719e-01 8.601e-01 3.000e-04 5.365e-01 2.241e-01 3.100e-03],          Outputs: -2.9207
-New best at evaluation 59:       Inputs: [0.3963 0.9244 0.0608 0.5594 0.1415 0.0038],    Outputs: -2.9958
-New best at evaluation 69:       Inputs: [0.4065 0.8994 0.9944 0.5574 0.1096 0.0139],    Outputs: -3.157
-Evaluation: 69   Solution: 3.1570
+Point pending evaluation: [0.0549 0.4383 0.6114 0.4004 0.3236 0.5762]
+New best at evaluation 46:       Inputs: [0.405  0.9129 0.3675 0.5679 0.2537 0.1028],    Outputs: -2.9641
+New best at evaluation 55:       Inputs: [0.4038 0.9041 0.0098 0.5969 0.0055 0.0098],    Outputs: -3.0195
+New best at evaluation 61:       Inputs: [0.4018 0.8983 0.9631 0.5603 0.0014 0.0146],    Outputs: -3.1585
+New best at evaluation 69:       Inputs: [0.4014 0.896  0.994  0.5616 0.0018 0.0341],    Outputs: -3.184
+Evaluation: 69   Solution: -3.1840
 </pre></div></div>
 </div>
 </section>

@@ -5,8 +5,16 @@ from typing import Optional
 
 
 class DixonPrice(TestFunction):
-    """
-    d-dimensional Dixon-Price function.
+    r"""
+    :math:`d`-dimensional Dixon-Price function.
+
+    The Dixon-Price function is valley-shaped and has one global minimum
+    :math:`f(\boldsymbol x^*) = 0` at :math:`x^*_i = 2^{-\frac{2^i-2}{2^i}}`, 
+    for all :math:`i = 1, ..., d`. It is usually evaluated on the hypercube
+    :math:`\boldsymbol x \in [-10, 10]^d`.
+
+    .. math::
+        f(\boldsymbol x) = (x_1 - 1)^2 + \sum_{i=2}^d i (2x_i^2 - x_{i-1})^2.
 
     Attributes
     ----------

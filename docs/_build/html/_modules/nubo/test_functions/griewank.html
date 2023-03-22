@@ -175,7 +175,7 @@
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../nubo.acquisition.html">Acquisition module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../nubo.models.html">Surrogates module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nubo.models.html">Surrogate module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../nubo.optimisation.html">Optimisation module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../nubo.test_functions.html">Test function module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../nubo.utils.html">Utility module</a></li>
@@ -220,8 +220,16 @@
 
 
 <div class="viewcode-block" id="Griewank"><a class="viewcode-back" href="../../../nubo.test_functions.html#nubo.test_functions.griewank.Griewank">[docs]</a><span class="k">class</span> <span class="nc">Griewank</span><span class="p">(</span><span class="n">TestFunction</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    d-dimensional Griewank function.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :math:`d`-dimensional Griewank function.</span>
+
+<span class="sd">    The Griewank function has many local minima and one global minimum</span>
+<span class="sd">    :math:`f(\boldsymbol x^*) = 0` at :math:`\boldsymbol x^* = (0, ..., 0)`. It</span>
+<span class="sd">    is usually evaluated on the hypercube</span>
+<span class="sd">    :math:`\boldsymbol x \in [-600, 600]^d`.</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        f(\boldsymbol x) = \sum_{i=1}^d \frac{x_i^2}{4000} - \prod_{i=1}^d \cos \left( \frac{x_i}{\sqrt{i}} \right) + 1.</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>

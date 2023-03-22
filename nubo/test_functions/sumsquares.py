@@ -5,8 +5,15 @@ from typing import Optional
 
 
 class SumSquares(TestFunction):
-    """
-    d-dimensional Sum-of-Squares function.
+    r"""
+    :math:`d`-dimensional Sum Squares function.
+
+    The Sum Squares function is bowl-shaped and has one global minimum
+    :math:`f(\boldsymbol x^*) = 0` at :math:`\boldsymbol x^* = (0, ..., 0)`. It
+    is usually evaluated on the hypercube :math:`\boldsymbol x \in [-10, 10]^d`.
+
+    .. math::
+        f(\boldsymbol x) = \sum_{i=1}^d i x_i^2.
 
     Attributes
     ----------

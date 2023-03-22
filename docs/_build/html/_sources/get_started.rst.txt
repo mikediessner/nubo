@@ -45,9 +45,27 @@ points per input dimension resulting in a total of 30 data points.
 
     # training data
     x_train = gen_inputs(num_points=dims*5,
-                        num_dims=dims,
-                        bounds=bounds)
+                         num_dims=dims,
+                         bounds=bounds)
     y_train = func(x_train)
+
+In NUBO, training inputs ``x_train`` should be a two-dimensional
+``torch.Tensor`` (a matrix) where the rows are individual points and the
+columns are individual dimensions. In this example, our training data has size
+30 x 6. The training outputs ``y_train`` should be a one-dimensional
+``torch.Tensor`` (a vector) with one entry for each training input (here
+``y_train`` has size 30). The ``bounds`` of the input space are defined as a
+two-dimensional ``torch.Tensor`` where the first row gives the lower bounds for
+all input dimensions and the second row gives the corresponding upper bounds.
+In the example above, the bounds are given as an attribute of the
+``Hartmann6D`` class. The code snippet below shows how you could set up the
+bounds manually.
+
+.. code-block:: python
+
+    # specify bounds manually
+    bounds = torch.tensor([[0., 0., 0., 0., 0., 0.],
+                           [1., 1., 1., 1., 1., 1.]])
 
 Now, we can prepare the Bayesian optimisation loop. We choose NUBO's
 pre-defined Gaussian process that comes with a constant mean function and a

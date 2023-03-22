@@ -5,8 +5,16 @@ from typing import Optional
 
 
 class Zakharov(TestFunction):
-    """
-    d-dimensional Zakharov function.
+    r"""
+    :math:`d`-dimensional Zakharov function.
+
+    The Zakharov function is plate-shaped and has one global minimum
+    :math:`f(\boldsymbol x^*) = 0` at :math:`\boldsymbol x^* = (0, ..., 0)`.
+    It is usually evaluated on the hypercube
+    :math:`\boldsymbol x \in [-5, 10]^d`.
+
+    .. math::
+        f(\boldsymbol x) = \sum_{i=1}^d x_i^2 + \left( \sum_{i=1}^d 0.5 i x_i \right)^2 + \left( \sum_{i=1}^d 0.5 i x_i \right)^4.
 
     Attributes
     ----------

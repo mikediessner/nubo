@@ -5,8 +5,16 @@ from typing import Optional
 
 
 class Griewank(TestFunction):
-    """
-    d-dimensional Griewank function.
+    r"""
+    :math:`d`-dimensional Griewank function.
+
+    The Griewank function has many local minima and one global minimum
+    :math:`f(\boldsymbol x^*) = 0` at :math:`\boldsymbol x^* = (0, ..., 0)`. It
+    is usually evaluated on the hypercube
+    :math:`\boldsymbol x \in [-600, 600]^d`.
+
+    .. math::
+        f(\boldsymbol x) = \sum_{i=1}^d \frac{x_i^2}{4000} - \prod_{i=1}^d \cos \left( \frac{x_i}{\sqrt{i}} \right) + 1.
 
     Attributes
     ----------

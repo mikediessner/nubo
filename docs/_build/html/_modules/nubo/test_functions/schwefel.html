@@ -175,7 +175,7 @@
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../nubo.acquisition.html">Acquisition module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../nubo.models.html">Surrogates module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nubo.models.html">Surrogate module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../nubo.optimisation.html">Optimisation module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../nubo.test_functions.html">Test function module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../nubo.utils.html">Utility module</a></li>
@@ -220,9 +220,17 @@
 
 
 <div class="viewcode-block" id="Schwefel"><a class="viewcode-back" href="../../../nubo.test_functions.html#nubo.test_functions.schwefel.Schwefel">[docs]</a><span class="k">class</span> <span class="nc">Schwefel</span><span class="p">(</span><span class="n">TestFunction</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    d-dimensional Schwefel function.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :math:`d`-dimensional Schwefel function.</span>
 
+<span class="sd">    The Schwefel function has many local minima and one global minimum</span>
+<span class="sd">    :math:`f(\boldsymbol x^*) = 0` at</span>
+<span class="sd">    :math:`\boldsymbol x^* = (420.9687, ..., 420.9687)`. It is usually </span>
+<span class="sd">    evaluated on the hypercube :math:`\boldsymbol x \in [-500, 500]^d`.</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        f(\boldsymbol x) = 418.9829 d - \sum_{i=1}^d x_i \sin (\sqrt{\lvert x_i \rvert}).</span>
+<span class="sd">    </span>
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
 <span class="sd">    dims : ``int``</span>

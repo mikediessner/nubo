@@ -6,8 +6,18 @@ from torch import Tensor
 
 
 class Ackley(TestFunction):
-    """
-    d-dimensional Ackley function.
+    r"""
+    :math:`d`-dimensional Ackley function.
+
+    The Ackley function has many local minima and one global minimum
+    :math:`f(\boldsymbol x^*) = 0` at :math:`\boldsymbol x^* = (0, ..., 0)`.
+    It is usually evaluated on the hypercube
+    :math:`\boldsymbol x \in [-32.768, 32.768]^d`.
+
+    .. math::
+        f(\boldsymbol x) = -a \exp \left(-b \sqrt{\frac{1}{d} \sum^d_{i=1} x^2_i}\right) - \exp \left( \frac{1}{d} \sum^d_{i=1} \cos(c x_i)\right) + a + \exp(1),
+
+    where :math:`a = 20`, :math:`b = 0.2`, and :math:`c = 2\pi`.
 
     Attributes
     ----------

@@ -5,8 +5,37 @@ from typing import Optional
 
 
 class Hartmann3D(TestFunction):
-    """
+    r"""
     3-dimensional Hartmann function.
+
+    The 3-dimensional Hartmann function has four local minima and one global
+    minimum :math:`f(\boldsymbol x^*) = -3.86278` at
+    :math:`\boldsymbol x^* = (0.114614, 0.555649, 0.852547)`. It is usually
+    evaluated on the hypercube :math:`\boldsymbol x \in (0, 1)^3`.
+
+    .. math::
+        f(\boldsymbol x) = - \sum_{i=1}^4 \alpha_i \exp \left( - \sum_{j=1}^3 A_{ij} (x_j - P_{ij})^2 \right),
+
+    where 
+    
+    .. math::
+        \alpha = (1.0, 1.2, 3.0, 3.2)^T,
+
+    .. math::
+        \boldsymbol A = \begin{pmatrix}
+        3.0 & 10.0 & 30.0 \\
+        0.1 & 10.0 & 35.0 \\
+        3.0 & 10.0 & 30.0 \\
+        0.1 & 10.0 & 35.0
+        \end{pmatrix},
+    
+    .. math::
+        \text{and } \boldsymbol P = 10^{-4} \begin{pmatrix}
+                                            3689 & 1170 & 2673 \\
+                                            4699 & 4387 & 7470 \\
+                                            1091 & 8732 & 5547 \\
+                                            381  & 5743 & 8828
+                                            \end{pmatrix}.
 
     Attributes
     ----------
@@ -88,8 +117,37 @@ class Hartmann3D(TestFunction):
 
 
 class Hartmann6D(TestFunction):
-    """
+    r"""
     6-dimensional Hartmann function.
+
+    The 6-dimensional Hartmann function has six local minima and one global
+    minimum :math:`f(\boldsymbol x^*) = -3.32237` at
+    :math:`\boldsymbol x^* = (0.20169, 0.150011, 0.476874, 0.275332, 0.311652, 0.6573)`.
+    It is usually evaluated on the hypercube :math:`\boldsymbol x \in (0, 1)^6`.
+
+    .. math::
+        f(\boldsymbol x) = - \sum_{i=1}^4 \alpha_i \exp \left( - \sum_{j=1}^6 A_{ij} (x_j - P_{ij})^2 \right),
+
+    where 
+    
+    .. math::
+        \alpha = (1.0, 1.2, 3.0, 3.2)^T,
+
+    .. math::
+        \boldsymbol A = \begin{pmatrix}
+        10.00 &  3.00 & 17.00 &  3.50 &  1.70 &  8.00 \\
+         0.05 & 10.00 & 17.00 &  0.10 &  8.00 & 14.00 \\
+         3.00 &  3.50 &  1.70 & 10.00 & 17.00 &  8.00 \\
+        17.00 &  8.00 &  0.05 & 10.00 &  0.10 & 14.00
+        \end{pmatrix}, 
+    
+    .. math::
+        \text{and } \boldsymbol P = 10^{-4} \begin{pmatrix}
+                                            1312 & 1696 & 5569 &  124 & 8283 & 5886 \\
+                                            2329 & 4135 & 8307 & 3736 & 1004 & 9991 \\
+                                            2348 & 1451 & 3522 & 2883 & 3047 & 6650 \\
+                                            4047 & 8828 & 8732 & 5743 & 1091 &  381
+                                            \end{pmatrix}.
 
     Attributes
     ----------

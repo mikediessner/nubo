@@ -5,9 +5,17 @@ from typing import Optional
 
 
 class Sphere(TestFunction):
-    """
-    d-dimensional Sphere function.
+    r"""
+    :math:`d`-dimensional Sphere function.
 
+    The Sphere function is bowl-shaped and has one global minimum
+    :math:`f(\boldsymbol x^*) = 0` at :math:`\boldsymbol x^* = (0, ..., 0)`. It
+    is usually evaluated on the hypercube
+    :math:`\boldsymbol x \in [-5.12, 5.12]^d`.
+
+    .. math::
+        f(\boldsymbol x) = \sum_{i=1}^d x_i^2.
+    
     Attributes
     ----------
     dims : ``int``

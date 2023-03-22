@@ -175,7 +175,7 @@
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../nubo.acquisition.html">Acquisition module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../nubo.models.html">Surrogates module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nubo.models.html">Surrogate module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../nubo.optimisation.html">Optimisation module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../nubo.test_functions.html">Test function module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../nubo.utils.html">Utility module</a></li>
@@ -221,8 +221,18 @@
 
 
 <div class="viewcode-block" id="Ackley"><a class="viewcode-back" href="../../../nubo.test_functions.html#nubo.test_functions.ackley.Ackley">[docs]</a><span class="k">class</span> <span class="nc">Ackley</span><span class="p">(</span><span class="n">TestFunction</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    d-dimensional Ackley function.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :math:`d`-dimensional Ackley function.</span>
+
+<span class="sd">    The Ackley function has many local minima and one global minimum</span>
+<span class="sd">    :math:`f(\boldsymbol x^*) = 0` at :math:`\boldsymbol x^* = (0, ..., 0)`.</span>
+<span class="sd">    It is usually evaluated on the hypercube</span>
+<span class="sd">    :math:`\boldsymbol x \in [-32.768, 32.768]^d`.</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        f(\boldsymbol x) = -a \exp \left(-b \sqrt{\frac{1}{d} \sum^d_{i=1} x^2_i}\right) - \exp \left( \frac{1}{d} \sum^d_{i=1} \cos(c x_i)\right) + a + \exp(1),</span>
+
+<span class="sd">    where :math:`a = 20`, :math:`b = 0.2`, and :math:`c = 2\pi`.</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>

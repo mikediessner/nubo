@@ -5,8 +5,17 @@ from typing import Optional
 
 
 class Levy(TestFunction):
-    """
-    d-dimensional Levy function.
+    r"""
+    :math:`d`-dimensional Levy function.
+
+    The Levy function has many local minima and one global minimum
+    :math:`f(\boldsymbol x^*) = 0` at :math:`\boldsymbol x^* = (1, ..., 1)`. It
+    is usually evaluated on the hypercube :math:`\boldsymbol x \in [-10, 10]^d`.
+
+    .. math::
+        f(\boldsymbol x) = \sin^2 (\pi w_1) + \sum_{i=1}^{d-1} (w_i - 1)^2 [1 + 10 \sin^2 (\pi w_i + 1)] + (w_d - 1)^2 [1 + \sin^2(2\pi w_d)],
+
+    where :math:`w_i = 1 + \frac{x_i - 1}{4}`, for all :math:`i = 1, ..., d`.
 
     Attributes
     ----------

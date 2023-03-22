@@ -1,5 +1,5 @@
-Surrogates module
-=================
+Surrogate module
+================
 
 .. admonition:: References
    :class: seealso

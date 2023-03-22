@@ -5,9 +5,17 @@ from typing import Optional
 
 
 class Schwefel(TestFunction):
-    """
-    d-dimensional Schwefel function.
+    r"""
+    :math:`d`-dimensional Schwefel function.
 
+    The Schwefel function has many local minima and one global minimum
+    :math:`f(\boldsymbol x^*) = 0` at
+    :math:`\boldsymbol x^* = (420.9687, ..., 420.9687)`. It is usually 
+    evaluated on the hypercube :math:`\boldsymbol x \in [-500, 500]^d`.
+
+    .. math::
+        f(\boldsymbol x) = 418.9829 d - \sum_{i=1}^d x_i \sin (\sqrt{\lvert x_i \rvert}).
+    
     Attributes
     ----------
     dims : ``int``

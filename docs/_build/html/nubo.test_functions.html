@@ -176,7 +176,7 @@
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="nubo.acquisition.html">Acquisition module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nubo.models.html">Surrogates module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nubo.models.html">Surrogate module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nubo.optimisation.html">Optimisation module</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Test function module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nubo.utils.html">Utility module</a></li>
@@ -248,7 +248,16 @@
 <dt class="sig sig-object py" id="nubo.test_functions.ackley.Ackley">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.test_functions.ackley.</span></span><span class="sig-name descname"><span class="pre">Ackley</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimise</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/test_functions/ackley.html#Ackley"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.test_functions.ackley.Ackley" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nubo.test_functions.test_functions.TestFunction" title="nubo.test_functions.test_functions.TestFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">TestFunction</span></code></a></p>
-<p>d-dimensional Ackley function.</p>
+<p><span class="math notranslate nohighlight">\(d\)</span>-dimensional Ackley function.</p>
+<p>The Ackley function has many local minima and one global minimum
+<span class="math notranslate nohighlight">\(f(\boldsymbol x^*) = 0\)</span> at <span class="math notranslate nohighlight">\(\boldsymbol x^* = (0, ..., 0)\)</span>.
+It is usually evaluated on the hypercube
+<span class="math notranslate nohighlight">\(\boldsymbol x \in [-32.768, 32.768]^d\)</span>.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[f(\boldsymbol x) = -a \exp \left(-b \sqrt{\frac{1}{d} \sum^d_{i=1} x^2_i}\right) - \exp \left( \frac{1}{d} \sum^d_{i=1} \cos(c x_i)\right) + a + \exp(1),\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(a = 20\)</span>, <span class="math notranslate nohighlight">\(b = 0.2\)</span>, and <span class="math notranslate nohighlight">\(c = 2\pi\)</span>.</p>
 <dl class="field-list">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
@@ -304,7 +313,15 @@
 <dt class="sig sig-object py" id="nubo.test_functions.dixonprice.DixonPrice">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.test_functions.dixonprice.</span></span><span class="sig-name descname"><span class="pre">DixonPrice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimise</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/test_functions/dixonprice.html#DixonPrice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.test_functions.dixonprice.DixonPrice" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nubo.test_functions.test_functions.TestFunction" title="nubo.test_functions.test_functions.TestFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">TestFunction</span></code></a></p>
-<p>d-dimensional Dixon-Price function.</p>
+<p><span class="math notranslate nohighlight">\(d\)</span>-dimensional Dixon-Price function.</p>
+<p>The Dixon-Price function is valley-shaped and has one global minimum
+<span class="math notranslate nohighlight">\(f(\boldsymbol x^*) = 0\)</span> at <span class="math notranslate nohighlight">\(x^*_i = 2^{-\frac{2^i-2}{2^i}}\)</span>,
+for all <span class="math notranslate nohighlight">\(i = 1, ..., d\)</span>. It is usually evaluated on the hypercube
+<span class="math notranslate nohighlight">\(\boldsymbol x \in [-10, 10]^d\)</span>.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[f(\boldsymbol x) = (x_1 - 1)^2 + \sum_{i=2}^d i (2x_i^2 - x_{i-1})^2.\]</div>
+</div>
 <dl class="field-list">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
@@ -354,7 +371,15 @@
 <dt class="sig sig-object py" id="nubo.test_functions.griewank.Griewank">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.test_functions.griewank.</span></span><span class="sig-name descname"><span class="pre">Griewank</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimise</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/test_functions/griewank.html#Griewank"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.test_functions.griewank.Griewank" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nubo.test_functions.test_functions.TestFunction" title="nubo.test_functions.test_functions.TestFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">TestFunction</span></code></a></p>
-<p>d-dimensional Griewank function.</p>
+<p><span class="math notranslate nohighlight">\(d\)</span>-dimensional Griewank function.</p>
+<p>The Griewank function has many local minima and one global minimum
+<span class="math notranslate nohighlight">\(f(\boldsymbol x^*) = 0\)</span> at <span class="math notranslate nohighlight">\(\boldsymbol x^* = (0, ..., 0)\)</span>. It
+is usually evaluated on the hypercube
+<span class="math notranslate nohighlight">\(\boldsymbol x \in [-600, 600]^d\)</span>.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[f(\boldsymbol x) = \sum_{i=1}^d \frac{x_i^2}{4000} - \prod_{i=1}^d \cos \left( \frac{x_i}{\sqrt{i}} \right) + 1.\]</div>
+</div>
 <dl class="field-list">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
@@ -405,6 +430,37 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.test_functions.hartmann.</span></span><span class="sig-name descname"><span class="pre">Hartmann3D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">noise_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimise</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/test_functions/hartmann.html#Hartmann3D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.test_functions.hartmann.Hartmann3D" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nubo.test_functions.test_functions.TestFunction" title="nubo.test_functions.test_functions.TestFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">TestFunction</span></code></a></p>
 <p>3-dimensional Hartmann function.</p>
+<p>The 3-dimensional Hartmann function has four local minima and one global
+minimum <span class="math notranslate nohighlight">\(f(\boldsymbol x^*) = -3.86278\)</span> at
+<span class="math notranslate nohighlight">\(\boldsymbol x^* = (0.114614, 0.555649, 0.852547)\)</span>. It is usually
+evaluated on the hypercube <span class="math notranslate nohighlight">\(\boldsymbol x \in (0, 1)^3\)</span>.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[f(\boldsymbol x) = - \sum_{i=1}^4 \alpha_i \exp \left( - \sum_{j=1}^3 A_{ij} (x_j - P_{ij})^2 \right),\]</div>
+</div>
+<p>where</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\alpha = (1.0, 1.2, 3.0, 3.2)^T,\]</div>
+</div>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol A = \begin{pmatrix}
+3.0 &amp; 10.0 &amp; 30.0 \\
+0.1 &amp; 10.0 &amp; 35.0 \\
+3.0 &amp; 10.0 &amp; 30.0 \\
+0.1 &amp; 10.0 &amp; 35.0
+\end{pmatrix},\end{split}\]</div>
+</div>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\text{and } \boldsymbol P = 10^{-4} \begin{pmatrix}
+                                    3689 &amp; 1170 &amp; 2673 \\
+                                    4699 &amp; 4387 &amp; 7470 \\
+                                    1091 &amp; 8732 &amp; 5547 \\
+                                    381  &amp; 5743 &amp; 8828
+                                    \end{pmatrix}.\end{split}\]</div>
+</div>
 <dl class="field-list">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
@@ -458,6 +514,37 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.test_functions.hartmann.</span></span><span class="sig-name descname"><span class="pre">Hartmann6D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">noise_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimise</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/test_functions/hartmann.html#Hartmann6D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.test_functions.hartmann.Hartmann6D" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nubo.test_functions.test_functions.TestFunction" title="nubo.test_functions.test_functions.TestFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">TestFunction</span></code></a></p>
 <p>6-dimensional Hartmann function.</p>
+<p>The 6-dimensional Hartmann function has six local minima and one global
+minimum <span class="math notranslate nohighlight">\(f(\boldsymbol x^*) = -3.32237\)</span> at
+<span class="math notranslate nohighlight">\(\boldsymbol x^* = (0.20169, 0.150011, 0.476874, 0.275332, 0.311652, 0.6573)\)</span>.
+It is usually evaluated on the hypercube <span class="math notranslate nohighlight">\(\boldsymbol x \in (0, 1)^6\)</span>.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[f(\boldsymbol x) = - \sum_{i=1}^4 \alpha_i \exp \left( - \sum_{j=1}^6 A_{ij} (x_j - P_{ij})^2 \right),\]</div>
+</div>
+<p>where</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\alpha = (1.0, 1.2, 3.0, 3.2)^T,\]</div>
+</div>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol A = \begin{pmatrix}
+10.00 &amp;  3.00 &amp; 17.00 &amp;  3.50 &amp;  1.70 &amp;  8.00 \\
+ 0.05 &amp; 10.00 &amp; 17.00 &amp;  0.10 &amp;  8.00 &amp; 14.00 \\
+ 3.00 &amp;  3.50 &amp;  1.70 &amp; 10.00 &amp; 17.00 &amp;  8.00 \\
+17.00 &amp;  8.00 &amp;  0.05 &amp; 10.00 &amp;  0.10 &amp; 14.00
+\end{pmatrix},\end{split}\]</div>
+</div>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\text{and } \boldsymbol P = 10^{-4} \begin{pmatrix}
+                                    1312 &amp; 1696 &amp; 5569 &amp;  124 &amp; 8283 &amp; 5886 \\
+                                    2329 &amp; 4135 &amp; 8307 &amp; 3736 &amp; 1004 &amp; 9991 \\
+                                    2348 &amp; 1451 &amp; 3522 &amp; 2883 &amp; 3047 &amp; 6650 \\
+                                    4047 &amp; 8828 &amp; 8732 &amp; 5743 &amp; 1091 &amp;  381
+                                    \end{pmatrix}.\end{split}\]</div>
+</div>
 <dl class="field-list">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
@@ -513,7 +600,15 @@
 <dt class="sig sig-object py" id="nubo.test_functions.levy.Levy">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.test_functions.levy.</span></span><span class="sig-name descname"><span class="pre">Levy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimise</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/test_functions/levy.html#Levy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.test_functions.levy.Levy" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nubo.test_functions.test_functions.TestFunction" title="nubo.test_functions.test_functions.TestFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">TestFunction</span></code></a></p>
-<p>d-dimensional Levy function.</p>
+<p><span class="math notranslate nohighlight">\(d\)</span>-dimensional Levy function.</p>
+<p>The Levy function has many local minima and one global minimum
+<span class="math notranslate nohighlight">\(f(\boldsymbol x^*) = 0\)</span> at <span class="math notranslate nohighlight">\(\boldsymbol x^* = (1, ..., 1)\)</span>. It
+is usually evaluated on the hypercube <span class="math notranslate nohighlight">\(\boldsymbol x \in [-10, 10]^d\)</span>.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[f(\boldsymbol x) = \sin^2 (\pi w_1) + \sum_{i=1}^{d-1} (w_i - 1)^2 [1 + 10 \sin^2 (\pi w_i + 1)] + (w_d - 1)^2 [1 + \sin^2(2\pi w_d)],\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(w_i = 1 + \frac{x_i - 1}{4}\)</span>, for all <span class="math notranslate nohighlight">\(i = 1, ..., d\)</span>.</p>
 <dl class="field-list">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
@@ -563,7 +658,15 @@
 <dt class="sig sig-object py" id="nubo.test_functions.rastrigin.Rastrigin">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.test_functions.rastrigin.</span></span><span class="sig-name descname"><span class="pre">Rastrigin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimise</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/test_functions/rastrigin.html#Rastrigin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.test_functions.rastrigin.Rastrigin" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nubo.test_functions.test_functions.TestFunction" title="nubo.test_functions.test_functions.TestFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">TestFunction</span></code></a></p>
-<p>d-dimensional Rastrigin function.</p>
+<p><span class="math notranslate nohighlight">\(d\)</span>-dimensional Rastrigin function.</p>
+<p>The Rastrigin function has many local minima and one global minimum
+<span class="math notranslate nohighlight">\(f(\boldsymbol x^*) = 0\)</span> at <span class="math notranslate nohighlight">\(\boldsymbol x^* = (0, ..., 0)\)</span>. It
+is usually evaluated on the hypercube
+<span class="math notranslate nohighlight">\(\boldsymbol x \in [-5.12, 5.12]^d\)</span>.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[f(\boldsymbol x) = 10d + \sum_{i-1}^d [x_i^2 - 10 \cos(2 \pi x_i)].\]</div>
+</div>
 <dl class="field-list">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
@@ -613,7 +716,15 @@
 <dt class="sig sig-object py" id="nubo.test_functions.schwefel.Schwefel">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.test_functions.schwefel.</span></span><span class="sig-name descname"><span class="pre">Schwefel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimise</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/test_functions/schwefel.html#Schwefel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.test_functions.schwefel.Schwefel" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nubo.test_functions.test_functions.TestFunction" title="nubo.test_functions.test_functions.TestFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">TestFunction</span></code></a></p>
-<p>d-dimensional Schwefel function.</p>
+<p><span class="math notranslate nohighlight">\(d\)</span>-dimensional Schwefel function.</p>
+<p>The Schwefel function has many local minima and one global minimum
+<span class="math notranslate nohighlight">\(f(\boldsymbol x^*) = 0\)</span> at
+<span class="math notranslate nohighlight">\(\boldsymbol x^* = (420.9687, ..., 420.9687)\)</span>. It is usually
+evaluated on the hypercube <span class="math notranslate nohighlight">\(\boldsymbol x \in [-500, 500]^d\)</span>.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[f(\boldsymbol x) = 418.9829 d - \sum_{i=1}^d x_i \sin (\sqrt{\lvert x_i \rvert}).\]</div>
+</div>
 <dl class="field-list">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
@@ -663,7 +774,15 @@
 <dt class="sig sig-object py" id="nubo.test_functions.sphere.Sphere">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.test_functions.sphere.</span></span><span class="sig-name descname"><span class="pre">Sphere</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimise</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/test_functions/sphere.html#Sphere"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.test_functions.sphere.Sphere" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nubo.test_functions.test_functions.TestFunction" title="nubo.test_functions.test_functions.TestFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">TestFunction</span></code></a></p>
-<p>d-dimensional Sphere function.</p>
+<p><span class="math notranslate nohighlight">\(d\)</span>-dimensional Sphere function.</p>
+<p>The Sphere function is bowl-shaped and has one global minimum
+<span class="math notranslate nohighlight">\(f(\boldsymbol x^*) = 0\)</span> at <span class="math notranslate nohighlight">\(\boldsymbol x^* = (0, ..., 0)\)</span>. It
+is usually evaluated on the hypercube
+<span class="math notranslate nohighlight">\(\boldsymbol x \in [-5.12, 5.12]^d\)</span>.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[f(\boldsymbol x) = \sum_{i=1}^d x_i^2.\]</div>
+</div>
 <dl class="field-list">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
@@ -708,12 +827,19 @@
 
 </section>
 <section id="module-nubo.test_functions.sumsquares">
-<span id="sum-of-squares-function"></span><h2>Sum-of-Squares function<a class="headerlink" href="#module-nubo.test_functions.sumsquares" title="Permalink to this heading">#</a></h2>
+<span id="sum-squares-function"></span><h2>Sum Squares function<a class="headerlink" href="#module-nubo.test_functions.sumsquares" title="Permalink to this heading">#</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="nubo.test_functions.sumsquares.SumSquares">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.test_functions.sumsquares.</span></span><span class="sig-name descname"><span class="pre">SumSquares</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimise</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/test_functions/sumsquares.html#SumSquares"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.test_functions.sumsquares.SumSquares" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nubo.test_functions.test_functions.TestFunction" title="nubo.test_functions.test_functions.TestFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">TestFunction</span></code></a></p>
-<p>d-dimensional Sum-of-Squares function.</p>
+<p><span class="math notranslate nohighlight">\(d\)</span>-dimensional Sum Squares function.</p>
+<p>The Sum Squares function is bowl-shaped and has one global minimum
+<span class="math notranslate nohighlight">\(f(\boldsymbol x^*) = 0\)</span> at <span class="math notranslate nohighlight">\(\boldsymbol x^* = (0, ..., 0)\)</span>. It
+is usually evaluated on the hypercube <span class="math notranslate nohighlight">\(\boldsymbol x \in [-10, 10]^d\)</span>.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[f(\boldsymbol x) = \sum_{i=1}^d i x_i^2.\]</div>
+</div>
 <dl class="field-list">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
@@ -763,7 +889,15 @@
 <dt class="sig sig-object py" id="nubo.test_functions.zakharov.Zakharov">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.test_functions.zakharov.</span></span><span class="sig-name descname"><span class="pre">Zakharov</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimise</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/test_functions/zakharov.html#Zakharov"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.test_functions.zakharov.Zakharov" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nubo.test_functions.test_functions.TestFunction" title="nubo.test_functions.test_functions.TestFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">TestFunction</span></code></a></p>
-<p>d-dimensional Zakharov function.</p>
+<p><span class="math notranslate nohighlight">\(d\)</span>-dimensional Zakharov function.</p>
+<p>The Zakharov function is plate-shaped and has one global minimum
+<span class="math notranslate nohighlight">\(f(\boldsymbol x^*) = 0\)</span> at <span class="math notranslate nohighlight">\(\boldsymbol x^* = (0, ..., 0)\)</span>.
+It is usually evaluated on the hypercube
+<span class="math notranslate nohighlight">\(\boldsymbol x \in [-5, 10]^d\)</span>.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[f(\boldsymbol x) = \sum_{i=1}^d x_i^2 + \left( \sum_{i=1}^d 0.5 i x_i \right)^2 + \left( \sum_{i=1}^d 0.5 i x_i \right)^4.\]</div>
+</div>
 <dl class="field-list">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
@@ -929,7 +1063,7 @@
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#module-nubo.test_functions.sumsquares">Sum-of-Squares function</a><ul>
+<li><a class="reference internal" href="#module-nubo.test_functions.sumsquares">Sum Squares function</a><ul>
 <li><a class="reference internal" href="#nubo.test_functions.sumsquares.SumSquares"><code class="docutils literal notranslate"><span class="pre">SumSquares</span></code></a><ul>
 <li><a class="reference internal" href="#nubo.test_functions.sumsquares.SumSquares.eval"><code class="docutils literal notranslate"><span class="pre">SumSquares.eval()</span></code></a></li>
 </ul>
@@ -959,5 +1093,7 @@
     <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/scripts/furo.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>
 </html>

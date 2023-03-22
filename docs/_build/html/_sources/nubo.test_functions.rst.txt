@@ -78,7 +78,7 @@ Sphere function
    :undoc-members:
    :show-inheritance:
 
-Sum-of-Squares function
+Sum Squares function
 -----------------------
 
 .. automodule:: nubo.test_functions.sumsquares

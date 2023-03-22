@@ -5,9 +5,17 @@ from typing import Optional
 
 
 class Rastrigin(TestFunction):
-    """
-    d-dimensional Rastrigin function.
+    r"""
+    :math:`d`-dimensional Rastrigin function.
 
+    The Rastrigin function has many local minima and one global minimum
+    :math:`f(\boldsymbol x^*) = 0` at :math:`\boldsymbol x^* = (0, ..., 0)`. It
+    is usually evaluated on the hypercube
+    :math:`\boldsymbol x \in [-5.12, 5.12]^d`.
+
+    .. math::
+        f(\boldsymbol x) = 10d + \sum_{i-1}^d [x_i^2 - 10 \cos(2 \pi x_i)].
+    
     Attributes
     ----------
     dims : ``int``

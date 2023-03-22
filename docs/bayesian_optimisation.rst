@@ -14,10 +14,11 @@ detailed picture of Bayesian optimisation than is possible here.
 
 Maximisation problem
 --------------------
-Bayesian optimisation aims to solve the :math:`d`-dimensional maximisation problem
+Bayesian optimisation aims to solve the :math:`d`-dimensional maximisation
+problem
 
 .. math::
-    \boldsymbol  x^* = \arg \max_{\boldsymbol  x \in \mathcal{X}} f(\boldsymbol x)
+    \boldsymbol  x^* = \arg \max_{\boldsymbol  x \in \mathcal{X}} f(\boldsymbol x),
 
 where the input space is usually continuous and bounded by a hyper-rectangle
 :math:`\mathcal{X} \in [a, b]^d` with :math:`a, b \in \mathbb{R}`. The function
@@ -28,8 +29,8 @@ without gaining any further insights into the underlying system. We assume any
 noise :math:`\epsilon` that is introduced when taking measurements to be
 independent and identically distributed Gaussian noise
 :math:`\epsilon \sim \mathcal{N} (0, \sigma^2)` such that
-:math:`y_i = f(\boldsymbol  x_i) + \epsilon`. Hence, a set of :math:`n` pairs of data
-points and corresponding observations is defined as
+:math:`y_i = f(\boldsymbol  x_i) + \epsilon`. Hence, a set of :math:`n` pairs
+of data points and corresponding observations is defined as
 
 .. math::
     \mathcal{D_n} = \{(\boldsymbol x_i, y_i)\}_{i=1}^n
@@ -41,17 +42,22 @@ outputs as vector :math:`\boldsymbol y_n = \{y_i\}_{i=1}^n`.
 Many simulations and experiments in various disciplines can be formulated to
 fit this discription. For example, Bayesian optimisation was used in the field
 of computational fluid dynamics to maximise the drag reduction via active
-control of blowing actuators [#OConnor2023]_ [#Diessner2022]_.
+control of blowing actuators [#Diessner2022]_ [#OConnor2023]_ [#Mahfoze2019]_,
+in chemical engineering for molecular design, drug discovery, molecular
+modeling, electrolyte design, and additive manufacturing [#Wang2022]_, and in
+computer science to fine-tune hyper-parameters of machine learning models
+[#Wu2019]_ or in architecture search for neural networks [#White2021]_.
 
 Bayesian optimisation
 ---------------------
-Bayesian optimisation [#Frazier2018]_ [#Gramacy2020]_ [#Jones1998]_ [#Shahriari2015]_ [#Snoek2012]_ is a surrogate model-based
-optimisation algorithm that aims to maximise the objective function
-:math:`f(\boldsymbol x)` in a minimum number of function evaluations. Usually,
-the objective function does not have a known mathematical expression and every
-function evaluation is expensive. Such problems require a cost-effective and
-sample-efficient optimisation strategy. Bayesian optimisation meets these
-criteria by representing the objective function through a surrogate model
+Bayesian optimisation [#Frazier2018]_ [#Gramacy2020]_ [#Jones1998]_
+[#Shahriari2015]_ [#Snoek2012]_ is a surrogate model-based optimisation
+algorithm that aims to maximise the objective function :math:`f(\boldsymbol x)`
+in a minimum number of function evaluations. Usually, the objective function
+does not have a known mathematical expression and every function evaluation is
+expensive. Such problems require a cost-effective and sample-efficient
+optimisation strategy. Bayesian optimisation meets these criteria by
+representing the objective function through a surrogate model
 :math:`\mathcal{M}`, often a Gaussian process :math:`\mathcal{GP}`. This
 representation can then be used to find the next point that should be evaluated
 by maximising a criterion specified through an acquisition function
@@ -111,16 +117,17 @@ Surrogate model
 ---------------
 A popular choice for the surrogate model :math:`\mathcal{M}` that acts as a
 representation of the objective function :math:`f(\boldsymbol x)` is a Gaussian
-process :math:`\mathcal{GP}` [#Gramacy2020]_ [#Williams2006]_, a flexible non-parametric regression
-model. A Gaussian process is a finite collection of random variables that has a
-joint Gaussian distribution and is defined by a prior mean function
+process :math:`\mathcal{GP}` [#Gramacy2020]_ [#Williams2006]_, a flexible
+non-parametric regression model. A Gaussian process is a finite collection of
+random variables that has a joint Gaussian distribution and is defined by a
+prior mean function
 :math:`\mu_0(\boldsymbol x) : \mathcal{X} \mapsto \mathbb{R}` and a prior 
 covariance kernel 
 :math:`\Sigma_0(\boldsymbol x, \boldsymbol x')  : \mathcal{X} \times \mathcal{X} \mapsto \mathbb{R}`
 resulting in the prior distribution
 
 .. math::
-    f(\boldsymbol X_n) \sim \mathcal{N} (m(\boldsymbol X_n), K(\boldsymbol X_n, \boldsymbol X_n)).
+    f(\boldsymbol X_n) \sim \mathcal{N} (m(\boldsymbol X_n), K(\boldsymbol X_n, \boldsymbol X_n)),
 
 where :math:`m(\boldsymbol X_n)` is the mean vector of size :math:`n` over all
 training inputs and :math:`K(\boldsymbol X_n, \boldsymbol X_n)` is the
@@ -135,7 +142,7 @@ training data :math:`\mathcal{D}_n`
 .. math::
     \mu_n (\boldsymbol X_*) = K(\boldsymbol X_*, \boldsymbol X_n) \left[ K(\boldsymbol X_n, \boldsymbol X_n) + \sigma^2 I \right]^{-1} (\boldsymbol y - m (\boldsymbol X_n)) + m (\boldsymbol X_*)
 .. math::
-    \sigma^2_n (\boldsymbol X_*) = K (\boldsymbol X_*, \boldsymbol X_*) - K(\boldsymbol X_*, \boldsymbol X_n) \left[ K(\boldsymbol X_n, \boldsymbol X_n) + \sigma^2 I \right]^{-1} K(\boldsymbol X_n, \boldsymbol X_*)
+    \sigma^2_n (\boldsymbol X_*) = K (\boldsymbol X_*, \boldsymbol X_*) - K(\boldsymbol X_*, \boldsymbol X_n) \left[ K(\boldsymbol X_n, \boldsymbol X_n) + \sigma^2 I \right]^{-1} K(\boldsymbol X_n, \boldsymbol X_*),
 
 where :math:`m(\boldsymbol X_*)` is the mean vector of size :math:`n_*` over
 all test inputs, :math:`K(\boldsymbol X_*, \boldsymbol X_n)` is the
@@ -156,20 +163,20 @@ below via maximum likelihood estimation (MLE).
 
     .. figure:: gp.gif
 
-NUBO uses the ``GPyTorch`` package [#Gardner2018]_ for surrogate modelling. This is a very
-powerful package that allows the implementation of a wide selection of models
-ranging from exact Gaussian processes to approximate and even deep Gaussian
-processes. Besides maximum likelihood estimation (MLE) ``GPyTorch`` also
-supports maximum a posteriori estimation (MAP) and fully Bayesian estimation
-to estimate the hyper-parameter. It also comes with a rich documentation, many
-practical examples, and a large community.
+NUBO uses the ``GPyTorch`` package [#Gardner2018]_ for surrogate modelling.
+This is a very powerful package that allows the implementation of a wide
+selection of models ranging from exact Gaussian processes to approximate and
+even deep Gaussian processes. Besides maximum likelihood estimation (MLE)
+``GPyTorch`` also supports maximum a posteriori estimation (MAP) and fully
+Bayesian estimation to estimate the hyper-parameter. It also comes with a rich
+documentation, many practical examples, and a large community.
 
-NUBO provides a Gaussian process for
-off-the-shelf use with a constant mean function and a Matern 5/2 covariance
-kernel that due to its flexibility is especially suited for practical
-optimisation [#Snoek2012]_. A tutorial on how to implement a custom Gaussian process to
-use with NUBO can be found in the examples section. For more complex models we
-recommend consulting the ``GPyTorch`` `documentation`_.
+NUBO provides a Gaussian process for off-the-shelf use with a constant mean
+function and a Matern 5/2 covariance kernel that due to its flexibility is
+especially suited for practical optimisation [#Snoek2012]_. A tutorial on how
+to implement a custom Gaussian process to use with NUBO can be found in the
+examples section. For more complex models we recommend consulting the
+``GPyTorch`` `documentation`_.
 
 .. _acquisition:
 
@@ -193,13 +200,14 @@ Analytical acquisition functions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 NUBO supports two of the most popular acquisition functions that are grounded
 in a rich history of theoretical and empirical research. Expected improvement
-(EI) [#Jones1998]_ selects points with the biggest potential of improving on the current
-best observation while upper confidence bound (UCB) [#Srinivas2010]_ takes an optimistic
-view of the posterior uncertainty and assumes it to be true to a user-defined
-level. Expected improvement (EI) is defined as
+(EI) [#Jones1998]_ selects points with the biggest potential of improving on
+the current best observation while upper confidence bound (UCB)
+[#Srinivas2010]_ takes an optimistic view of the posterior uncertainty and
+assumes it to be true to a user-defined level. Expected improvement (EI) is
+defined as
 
 .. math::
-    \alpha_{EI} (\boldsymbol X_*) = \left(\mu_n(\boldsymbol X_*) - y^{best} \right) \Phi(z) + \sigma_n(\boldsymbol X_*) \phi(z)
+    \alpha_{EI} (\boldsymbol X_*) = \left(\mu_n(\boldsymbol X_*) - y^{best} \right) \Phi(z) + \sigma_n(\boldsymbol X_*) \phi(z),
 
 where :math:`z = \frac{\mu_n(\boldsymbol X_*) - y^{best}}{\sigma_n(\boldsymbol X_*)}`,
 :math:`\mu_n(\cdot)` and :math:`\sigma_n(\cdot)` are the mean and the standard
@@ -215,7 +223,7 @@ probability density function of the standard normal distribution.
 The upper confidence bound (UCB) acquisition function can be computed as
 
 .. math::
-    \alpha_{UCB} (\boldsymbol X_*) = \mu_n(\boldsymbol X_*) + \sqrt{\beta} \sigma_n(\boldsymbol X_*)
+    \alpha_{UCB} (\boldsymbol X_*) = \mu_n(\boldsymbol X_*) + \sqrt{\beta} \sigma_n(\boldsymbol X_*),
 
 where :math:`\beta` is a pre-defined trade-off parameter, and
 :math:`\mu_n(\cdot)` and :math:`\sigma_n(\cdot)` are the mean and the standard
@@ -254,7 +262,7 @@ distribution by utilising base samples from a standard normal distribution
     \alpha_{EI}^{MC} (\boldsymbol X_*) = \max \left(ReLU(\mu_n(\boldsymbol X_*) + \boldsymbol L \boldsymbol z - y^{best}) \right)
 
 .. math::
-    \alpha_{UCB}^{MC} (\boldsymbol X_*) = \max \left(\mu_n(\boldsymbol X_*) + \sqrt{\frac{\beta \pi}{2}} \lvert \boldsymbol L \boldsymbol z \rvert \right)
+    \alpha_{UCB}^{MC} (\boldsymbol X_*) = \max \left(\mu_n(\boldsymbol X_*) + \sqrt{\frac{\beta \pi}{2}} \lvert \boldsymbol L \boldsymbol z \rvert \right),
 
 where :math:`\mu_n(\cdot)` is the mean of the predictive distribution of the
 Gaussian process, :math:`\boldsymbol L` is the lower triangular matrix of the
@@ -267,46 +275,51 @@ rectified linear unit function that zeros all values below 0 and leaves the
 rest as is.
 
 Due to the randomness of the Monte Carlo samples, these acquisition functions
-can only be optimised by stochastic optimisers, such as Adam [#Kingma2015]_. However,
-there is some empirical evidence that fixing the base samples for individual
-Bayesian optimisation loops does not affect the performance negatively [#Balandat2020]_.
-This method would allow deterministic optimiser to be used but could
-potentially introduce bias due to sampling randomness. NUBO lets you decide
-which variant you prefer by setting ``fix_base_samples`` and choosing the
-prefered optimiser. Bounded problems can be solved with Adam 
+can only be optimised by stochastic optimisers, such as Adam [#Kingma2015]_.
+However, there is some empirical evidence that fixing the base samples for
+individual Bayesian optimisation loops does not affect the performance
+negatively [#Balandat2020]_. This method would allow deterministic optimiser to
+be used but could potentially introduce bias due to sampling randomness. NUBO
+lets you decide which variant you prefer by setting ``fix_base_samples`` and
+choosing the prefered optimiser. Bounded problems can be solved with Adam 
 (``fix_base_samples = False``) or L-BFGS-B (``fix_base_samples = True``) and
 constraint problems can be solved with SLSQP (``fix_base_samples = True``).
 
-Furthermore, two optimisation strategies for batches are possible [#Wilson2018]_: The
-default is a joint optimisation approach where the acquisition functions are
-optimised over all points of the batch simultaneously. The second option is a
-greedy sequential approach where one point after the other is selected holding
-all previous points fixed until the batch is full. Empirical evidence shows
-that both methods approximate the acquisition successfully. However, the greedy
-approach seems to have a slight edge over the joint strategy for some examples
-[#Wilson2018]_. It also is faster to compute for larger batches.
+Furthermore, two optimisation strategies for batches are possible
+[#Wilson2018]_: The default is a joint optimisation approach where the
+acquisition functions are optimised over all points of the batch
+simultaneously. The second option is a greedy sequential approach where one
+point after the other is selected holding all previous points fixed until the
+batch is full. Empirical evidence shows that both methods approximate the
+acquisition successfully. However, the greedy approach seems to have a slight
+edge over the joint strategy for some examples [#Wilson2018]_. It also is
+faster to compute for larger batches.
 
-Asynchronous optimisation [#Snoek2012]_ leverages the same property as sequential greedy
-optimisation: the pending points that have not yet been evaluated can be added
-to the test points but are treated as fixed. In this way, they affect the joint
-multivariate normal distribution but are not considered directly in the
-optimisation.
+Asynchronous optimisation [#Snoek2012]_ leverages the same property as
+sequential greedy optimisation: the pending points that have not yet been
+evaluated can be added to the test points but are treated as fixed. In this
+way, they affect the joint multivariate normal distribution but are not
+considered directly in the optimisation.
 
 ----
 
 .. _documentation: https://docs.gpytorch.ai/en/stable
 
 .. [#Balandat2020] M Balandat *et al.*, "BoTorch: A framework for efficient Monte-CarloBayesian optimization," *Advances in neural information processing systems*, vol. 33, 2020.
+.. [#Diessner2022] M Diessner, J O'Connor, A Wynn, S Laizet, Y Guan, K Wilson, and R D Whalley, "Investigating Bayesian optimization for expensive-to-evaluate black box functions: Application in fluid dynamics," *Frontiers in Applied Mathematics and Statistics*, 2022. 
 .. [#Frazier2018] P I Frazier, "A tutorial on Bayesian optimization," *arXiv preprint arXiv:1807.02811*, 2018.
 .. [#Gardner2018] J Gardner, G Pleiss, K Q Weinberger, D Bindel, and A G Wilson, "GPyTorch: Blackbox matrix-matrix Gaussian process inference with GPU acceleration," *Advances in neural information processing systems*, vol. 31, 2018.
 .. [#Gramacy2020] R B Gramacy, *Surrogates: Gaussian process modeling, design, and optimization for the applied sciences*, 1st ed. Boca Raton, FL: CRC press, 2020.
 .. [#Jones1998] D R Jones, M Schonlau, and W J Welch, "Efficient global optimization of expensive black-box functions," *Journal of global optimization*, vol. 13, no. 4, p. 566, 1998.
 .. [#Kingma2015] D P Kingma and J Ba, "Adam: A method for stochastic optimization," *Proceedings of the 3rd international conference on learning representations*, 2015.
+.. [#Mahfoze2019] O A Mahfoze, A Moody, A Wynn, R D Whalley, and S Laizet, "Reducing the skin-friction drag of a turbulent boundary-layer flow with low-amplitude wall-normal blowing within a Bayesian optimization framework," *Physical review fluids*, vol. 4, no. 9, 2019.
 .. [#McKay2000] M D McKay, R J Beckman, and W J Conover, "A comparison of three methods for selecting values of input variables in the analysis of output from a computer code," *Technometrics*, vol. 42, no. 1, p. 55-61, 2000.
+.. [#OConnor2023] J O'Connor, M Diessner, K Wilson, R D Whalley, A Wynn, and S Laizet, "Optimisation and analysis of streamwise-varying wall-normal blowing in a turbulent boundary layer," *Flow, Turbulence and Combustion*, 2023.
 .. [#Shahriari2015] B Shahriari, K Swersky, Z Wang, R P Adams, and N De Freitas, "Taking the human out of the loop: A review of Bayesian optimization," *Proceedings of the IEEE*, vol. 104, no. 1, p. 148-175, 2015.
 .. [#Snoek2012] J Snoek, H Larochelle, and R P Adams, "Practical Bayesian optimization of machine learning algorithms," *Advances in neural information processing systems*, vol. 25, 2012.
 .. [#Srinivas2010] N Srinivas, A Krause, S M Kakade, and M Seeger, "Gaussian process optimization in the bandit setting: No regret and experimental design," *Proceedings of the 27th international conference on machine learning*, p. 1015-1022, 2010.
+.. [#Wang2022] K Wang and A W Dowling, "Bayesian optimization for chemical products and functional materials," *Current opinion in chemical engineering*, vol. 36, 2022.
+.. [#White2021] C White, W Neiswanger, and Y Savani, "Bananas: Bayesian optimization with neural architectures for neural architecture search," *Proceedings of the AAAI conference on artificial intelligence*, vol. 35, no. 12, 2021.
 .. [#Williams2006] C K I Williams, and C E Rasmussen, *Gaussian processes for machine learning*, 2nd ed. Cambridge, MA: MIT press, 2006.
 .. [#Wilson2018] J Wilson, F Hutter, and M Deisenroth, "Maximizing acquisition functions for Bayesian optimization," *Advances in neural information processing systems*, vol. 31, 2018.
-.. [#OConnor2023] J O'Connor, M Diessner, K Wilson, R D Whalley, A Wynn, and S Laizet, "Optimisation and analysis of streamwise-varying wall-normal blowing in a turbulent boundary layer," *Flow, Turbulence and Combustion*, 2023.
-.. [#Diessner2022] M Diessner, J O'Connor, A Wynn, S Laizet, Y Guan, K Wilson, and R D Whalley, "Investigating Bayesian optimization for expensive-to-evaluate black box functions: Application in fluid dynamics," *Frontiers in Applied Mathematics and Statistics*, 2022. 
+.. [#Wu2019] J Wu, X Y Chen, H Zhang, L D Xiong, H Lei, and S H Deng, "Hyperparameter optimization for machine learning models based on Bayesian optimization," *Journal of electronic science and technology*, vol. 17, no. 1, p. 26-40, 2019.

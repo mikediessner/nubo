@@ -13,14 +13,14 @@ class GaussianProcess(ExactGP):
     Constant mean function:
 
     .. math::
-        \mu (\boldsymbol x) = c
+        \mu (\boldsymbol x) = c,
 
     where constant :math:`c` is estimated.
 
     Matern 5/2 Kernel:
 
     .. math::
-        \Sigma_0 (\boldsymbol x, \boldsymbol x^\prime) = \sigma_K^2 \left(1 + \sqrt{5}r + \frac{5}{3}r^2 \right) \exp{\left(-\sqrt{5}r \right)}
+        \Sigma_0 (\boldsymbol x, \boldsymbol x^\prime) = \sigma_K^2 \left(1 + \sqrt{5}r + \frac{5}{3}r^2 \right) \exp{\left(-\sqrt{5}r \right)},
 
     where :math:`r = \sqrt{\sum_{m=1}^d \frac{(\boldsymbol x_m - \boldsymbol x^\prime_m)^2}{l^2_m}}`,
     :math:`l` is the length-scale, :math:`\sigma_K^2` is the outputscale, and 

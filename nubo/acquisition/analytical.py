@@ -11,7 +11,7 @@ class ExpectedImprovement(AcquisitionFunction):
     Expected Improvement acquisition function:
 
     .. math::
-        \alpha_{EI} (\boldsymbol X_*) = \left(\mu_n(\boldsymbol X_*) - y^{best} \right) \Phi(z) + \sigma_n(\boldsymbol X_*) \phi(z)
+        \alpha_{EI} (\boldsymbol X_*) = \left(\mu_n(\boldsymbol X_*) - y^{best} \right) \Phi(z) + \sigma_n(\boldsymbol X_*) \phi(z),
 
     where :math:`z = \frac{\mu_n(\boldsymbol X_*) - y^{best}}{\sigma_n(\boldsymbol X_*)}`,
     :math:`\mu_n(\cdot)` and :math:`\sigma_n(\cdot)` are the mean and the
@@ -82,7 +82,7 @@ class UpperConfidenceBound(AcquisitionFunction):
     Upper Confidence Bound acquisition function:
 
     .. math::
-        \alpha_{UCB} (\boldsymbol X_*) = \mu_n(\boldsymbol X_*) + \sqrt{\beta} \sigma_n(\boldsymbol X_*)
+        \alpha_{UCB} (\boldsymbol X_*) = \mu_n(\boldsymbol X_*) + \sqrt{\beta} \sigma_n(\boldsymbol X_*),
 
     where :math:`\beta` is a pre-defined trade-off parameter, and
     :math:`\mu_n(\cdot)` and :math:`\sigma_n(\cdot)` are the mean and the

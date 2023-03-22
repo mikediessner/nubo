@@ -20,26 +20,26 @@ is distributed as an open-source software under the `BSD 3-Clause license`_.
 
 Bayesian optimisation
 ---------------------
-:ref:`Bayesian optimisation <bo>` [#Frazier2018]_ [#Gramacy2020]_ [#Jones1998]_ [#Shahriari2015]_ [#Snoek2012]_ is a surrogate
-model-based optimisation algorithm that aims to maximise an
-:ref:`objective function <objfunc>` in a minimum number of function
-evaluations. The underlying mathematical expression of the objective
-function is usually unknown or non-existent and every function evaluation is
-expensive. Solving such a function requires a cost-effective and
+:ref:`Bayesian optimisation <bo>` [#Frazier2018]_ [#Gramacy2020]_ [#Jones1998]_
+[#Shahriari2015]_ [#Snoek2012]_ is a surrogate model-based optimisation
+algorithm that aims to maximise an :ref:`objective function <objfunc>` in a
+minimum number of function evaluations. The underlying mathematical expression
+of the objective function is usually unknown or non-existent and every function
+evaluation is expensive. Solving such a function requires a cost-effective and
 sample-efficient optimisation strategy. Bayesian optimisation fulfils these
 criteria by representing the objective function through a 
-:ref:`surrogate model <model>`, often a Gaussian process [#Gramacy2020]_ [#Williams2006]_. This
-representation can then be used to find the next point that should be evaluated
-by maximising a criterion specified through an
+:ref:`surrogate model <model>`, often a Gaussian process [#Gramacy2020]_
+[#Williams2006]_. This representation can then be used to find the next point
+that should be evaluated by maximising a criterion specified through an
 :ref:`acquisition function <acquisition>`. A popular criterion is, for
-example, the expected improvement (EI) [#Jones1998]_ that is the expectation of the new
-point returning a better solution than the current best. Bayesian optimisation
-is performed in a loop where training data is used to fit the surrogate model
-before the next point suggested by the acquisition function is evaluated and
-added to the training data itself. The loop than restarts gathering more
-information about the objective function with each iteration. Bayesian
-optimisation is run for as many iterations as the evaluation budget allows,
-until a satisfying solution is found, or unitl a pre-defined stopping
+example, the expected improvement (EI) [#Jones1998]_ that is the expectation of
+the new point returning a better solution than the current best. Bayesian
+optimisation is performed in a loop where training data is used to fit the
+surrogate model before the next point suggested by the acquisition function is
+evaluated and added to the training data itself. The loop than restarts
+gathering more information about the objective function with each iteration.
+Bayesian optimisation is run for as many iterations as the evaluation budget
+allows, until a satisfying solution is found, or unitl a pre-defined stopping
 criterion is met.
 
 .. only:: html
@@ -50,21 +50,22 @@ Contents
 --------
 **Surrogate models**
   NUBO focuses on the use of Gaussian Processes as surrogates for the objective
-  function. Gaussian Processes [#Gramacy2020]_ [#Williams2006]_ are specified through the
-  ``GPyTorch`` package [#Gardner2018]_, a powerful package that allows the implementation
-  of a wide selection of models ranging from exact Gaussian processes to
-  approximate and even deep Gaussian processes. Hyper-parameters can be
-  estimated via maximum likelihood estimation (MLE), maximum a posteriori
-  estimation (MAP) or fully Bayesian estimation.
+  function. Gaussian Processes [#Gramacy2020]_ [#Williams2006]_ are specified
+  through the ``GPyTorch`` package [#Gardner2018]_, a powerful package that
+  allows the implementation of a wide selection of models ranging from exact
+  Gaussian processes to approximate and even deep Gaussian processes.
+  Hyper-parameters can be estimated via maximum likelihood estimation (MLE),
+  maximum a posteriori estimation (MAP) or fully Bayesian estimation.
   
 **Acquisition functions**
   NUBO supports the use of analytical acquisition functions and approximations
-  through Monte Carlo sampling. Analytical expected improvement (EI) [#Jones1998]_ and
-  upper confidence bound (UCB) [#Srinivas2010]_ can be used for sequential single-point
-  problems where results are evaluated after each iteration. Multi-point
-  batches for parallel evaluation or asynchronous problems where the
-  optimnisation algorithm is continued while other points are still being
-  evaluated can be performed via Monte Carlo acquisition functions [#Wilson2018]_.
+  through Monte Carlo sampling. Analytical expected improvement (EI)
+  [#Jones1998]_ and upper confidence bound (UCB) [#Srinivas2010]_ can be used
+  for sequential single-point problems where results are evaluated after each
+  iteration. Multi-point   batches for parallel evaluation or asynchronous
+  problems where the optimnisation algorithm is continued while other points
+  are still being evaluated can be performed via Monte Carlo acquisition
+  functions [#Wilson2018]_.
 
 **Optimisers**
   The deterministic analytical acquisition functions are optimised via
@@ -79,7 +80,8 @@ Contents
 
 **Synthetic test functions**
   NUBO provides ten synthetic test functions that allow validating Bayesian
-  optimisation algorithms before applying them to expensive experiments [#Surjanovic2023]_.
+  optimisation algorithms before applying them to expensive experiments
+  Hyperparameter optimization for machine learning models based on Bayesian optimization[#Surjanovic2023]_.
 
 ----
 

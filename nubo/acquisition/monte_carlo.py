@@ -11,7 +11,7 @@ class MCExpectedImprovement(AcquisitionFunction):
     Monte Carlo Expected Improvement acquisition function:
 
     .. math::
-        \alpha_{EI}^{MC} (\boldsymbol X_*) = \max \left(ReLU(\mu_n(\boldsymbol X_*) + \boldsymbol L \boldsymbol z - y^{best}) \right)
+        \alpha_{EI}^{MC} (\boldsymbol X_*) = \max \left(ReLU(\mu_n(\boldsymbol X_*) + \boldsymbol L \boldsymbol z - y^{best}) \right),
 
     where :math:`\mu_n(\cdot)` is the mean of the predictive distribution of
     the Gaussian process, :math:`\boldsymbol L` is the lower triangular matrix
@@ -127,7 +127,7 @@ class MCUpperConfidenceBound(AcquisitionFunction):
     Monte Carlo Upper Confidence Bound acquisition function:
 
     .. math::
-        \alpha_{UCB}^{MC} (\boldsymbol X_*) = \max \left(\mu_n(\boldsymbol X_*) + \sqrt{\frac{\beta \pi}{2}} \lvert \boldsymbol L \boldsymbol z \rvert \right)
+        \alpha_{UCB}^{MC} (\boldsymbol X_*) = \max \left(\mu_n(\boldsymbol X_*) + \sqrt{\frac{\beta \pi}{2}} \lvert \boldsymbol L \boldsymbol z \rvert \right),
 
     where :math:`\mu_n(\cdot)` is the mean of the predictive distribution of
     the Gaussian process, :math:`\boldsymbol L` is the lower triangular matrix

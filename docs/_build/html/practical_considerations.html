@@ -234,9 +234,9 @@ solutions for Bayesian optimisation <a class="footnote-reference brackets" href=
 <h2>Gaussian process<a class="headerlink" href="#gaussian-process" title="Permalink to this heading">#</a></h2>
 <dl class="simple">
 <dt><strong>What prior mean function and prior covariance kernel should I use?</strong></dt><dd><p>For practical Bayesian optimisation a zero or constant mean function with
-a Matern 5/2 kernel is recommended <a class="footnote-reference brackets" href="#snoek2012" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>. Other kernels, such as the RBF
-kernel, might be too smooth to be able to represent realistic experiments
-and simulations.</p>
+a Matern 5/2 kernel is recommended <a class="footnote-reference brackets" href="#snoek2012" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>. Other kernels, such as
+the RBF kernel, might be too smooth to be able to represent realistic
+experiments and simulations.</p>
 </dd>
 <dt><strong>What likelihood should I specify?</strong></dt><dd><p>For exact Gaussian processes, <code class="docutils literal notranslate"><span class="pre">GPyTorch</span></code> provides two main options that
 differ with regards to their computation of the observational noise
@@ -245,7 +245,8 @@ noise while the <code class="docutils literal notranslate"><span class="pre">Fix
 you cannot measure the observational noise, the former likelihood is
 recommended. If you have a clear idea of the observational noise the latter
 can also be used. Then, you can decide if you want the Gaussian process to
-also estimate any additional noise besides the observational noise <a class="footnote-reference brackets" href="#gramacy2012" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>.</p>
+also estimate any additional noise besides the observational noise
+<a class="footnote-reference brackets" href="#gramacy2012" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>.</p>
 </dd>
 </dl>
 </section>
@@ -262,7 +263,8 @@ single-point optimisation problems. Where it is advantageous to evaluate
 potential solutions in parallel Monte Carlo acquisition functions allow the
 computation of batches. Furhtermore, if you want to continue the
 optimisation loop while some potential solutions are still being evaluated,
-Monte Carlo acquisition functions enable asynchronous optimisation <a class="footnote-reference brackets" href="#snoek2012" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>
+Monte Carlo acquisition functions enable asynchronous optimisation
+<a class="footnote-reference brackets" href="#snoek2012" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>
 <a class="footnote-reference brackets" href="#wilson2018" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a>.</p>
 </dd>
 <dt><strong>What optimiser should I choose?</strong></dt><dd><p>We recommend L-BFGS-B for analytical acquisition functions and SLSQP for

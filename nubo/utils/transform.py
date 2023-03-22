@@ -8,7 +8,7 @@ def standardise(y: Tensor) -> Tensor:
     deviation:
 
     .. math::
-        \hat{\boldsymbol y} = \frac{\boldsymbol y - \mu}{\sigma}
+        \hat{\boldsymbol y} = \frac{\boldsymbol y - \mu}{\sigma},
 
     where :math:`\mu` is the mean and :math:`\sigma` is the standard deviation.
 
@@ -35,7 +35,7 @@ def normalise(x: Tensor, bounds: Tensor) -> Tensor:
     Normalise data to the unit cube :math:`[0, 1]^d`.
 
     .. math::
-        \hat{\boldsymbol x} = \frac{\boldsymbol x - lb}{ub - lb}
+        \hat{\boldsymbol x} = \frac{\boldsymbol x - lb}{ub - lb},
     
     where :math:`lb` are the lower bounds and :math:`ub` are the upper bounds.
 
@@ -63,7 +63,7 @@ def unnormalise(x: Tensor, bounds: Tensor) -> Tensor:
     Revere normalisation to the provided bounds.
     
     .. math::
-        \boldsymbol x = \hat{\boldsymbol x} (ub - lb) + lb
+        \boldsymbol x = \hat{\boldsymbol x} (ub - lb) + lb,
     
     where :math:`lb` are the lower bounds and :math:`ub` are the upper bounds.
 

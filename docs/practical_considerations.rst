@@ -17,9 +17,9 @@ Gaussian process
 ----------------
 **What prior mean function and prior covariance kernel should I use?**
     For practical Bayesian optimisation a zero or constant mean function with
-    a Matern 5/2 kernel is recommended [#Snoek2012]_. Other kernels, such as the RBF
-    kernel, might be too smooth to be able to represent realistic experiments
-    and simulations.
+    a Matern 5/2 kernel is recommended [#Snoek2012]_. Other kernels, such as
+    the RBF kernel, might be too smooth to be able to represent realistic
+    experiments and simulations.
 
 **What likelihood should I specify?**
     For exact Gaussian processes, ``GPyTorch`` provides two main options that
@@ -29,7 +29,8 @@ Gaussian process
     you cannot measure the observational noise, the former likelihood is
     recommended. If you have a clear idea of the observational noise the latter
     can also be used. Then, you can decide if you want the Gaussian process to
-    also estimate any additional noise besides the observational noise [#Gramacy2012]_.
+    also estimate any additional noise besides the observational noise
+    [#Gramacy2012]_.
 
 Acquisition function
 --------------------
@@ -45,7 +46,8 @@ Acquisition function
     potential solutions in parallel Monte Carlo acquisition functions allow the
     computation of batches. Furhtermore, if you want to continue the
     optimisation loop while some potential solutions are still being evaluated,
-    Monte Carlo acquisition functions enable asynchronous optimisation [#Snoek2012]_ 
+    Monte Carlo acquisition functions enable asynchronous optimisation
+    [#Snoek2012]_ 
     [#Wilson2018]_.
 
 **What optimiser should I choose?**

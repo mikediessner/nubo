@@ -251,7 +251,7 @@
 <p>Expected Improvement acquisition function:</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
-\[\alpha_{EI} (\boldsymbol X_*) = \left(\mu_n(\boldsymbol X_*) - y^{best} \right) \Phi(z) + \sigma_n(\boldsymbol X_*) \phi(z)\]</div>
+\[\alpha_{EI} (\boldsymbol X_*) = \left(\mu_n(\boldsymbol X_*) - y^{best} \right) \Phi(z) + \sigma_n(\boldsymbol X_*) \phi(z),\]</div>
 </div>
 <p>where <span class="math notranslate nohighlight">\(z = \frac{\mu_n(\boldsymbol X_*) - y^{best}}{\sigma_n(\boldsymbol X_*)}\)</span>,
 <span class="math notranslate nohighlight">\(\mu_n(\cdot)\)</span> and <span class="math notranslate nohighlight">\(\sigma_n(\cdot)\)</span> are the mean and the
@@ -309,7 +309,7 @@ analytically.</p>
 <p>Upper Confidence Bound acquisition function:</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
-\[\alpha_{UCB} (\boldsymbol X_*) = \mu_n(\boldsymbol X_*) + \sqrt{\beta} \sigma_n(\boldsymbol X_*)\]</div>
+\[\alpha_{UCB} (\boldsymbol X_*) = \mu_n(\boldsymbol X_*) + \sqrt{\beta} \sigma_n(\boldsymbol X_*),\]</div>
 </div>
 <p>where <span class="math notranslate nohighlight">\(\beta\)</span> is a pre-defined trade-off parameter, and
 <span class="math notranslate nohighlight">\(\mu_n(\cdot)\)</span> and <span class="math notranslate nohighlight">\(\sigma_n(\cdot)\)</span> are the mean and the
@@ -373,7 +373,7 @@ standard deviation of the posterior distribution of the Gaussian process.</p>
 <p>Monte Carlo Expected Improvement acquisition function:</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
-\[\alpha_{EI}^{MC} (\boldsymbol X_*) = \max \left(ReLU(\mu_n(\boldsymbol X_*) + \boldsymbol L \boldsymbol z - y^{best}) \right)\]</div>
+\[\alpha_{EI}^{MC} (\boldsymbol X_*) = \max \left(ReLU(\mu_n(\boldsymbol X_*) + \boldsymbol L \boldsymbol z - y^{best}) \right),\]</div>
 </div>
 <p>where <span class="math notranslate nohighlight">\(\mu_n(\cdot)\)</span> is the mean of the predictive distribution of
 the Gaussian process, <span class="math notranslate nohighlight">\(\boldsymbol L\)</span> is the lower triangular matrix
@@ -447,7 +447,7 @@ by averaging Monte Carlo samples.</p>
 <p>Monte Carlo Upper Confidence Bound acquisition function:</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
-\[\alpha_{UCB}^{MC} (\boldsymbol X_*) = \max \left(\mu_n(\boldsymbol X_*) + \sqrt{\frac{\beta \pi}{2}} \lvert \boldsymbol L \boldsymbol z \rvert \right)\]</div>
+\[\alpha_{UCB}^{MC} (\boldsymbol X_*) = \max \left(\mu_n(\boldsymbol X_*) + \sqrt{\frac{\beta \pi}{2}} \lvert \boldsymbol L \boldsymbol z \rvert \right),\]</div>
 </div>
 <p>where <span class="math notranslate nohighlight">\(\mu_n(\cdot)\)</span> is the mean of the predictive distribution of
 the Gaussian process, <span class="math notranslate nohighlight">\(\boldsymbol L\)</span> is the lower triangular matrix

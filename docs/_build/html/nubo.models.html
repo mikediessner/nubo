@@ -242,13 +242,13 @@
 <p>Constant mean function:</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
-\[\mu (\boldsymbol x) = c\]</div>
+\[\mu (\boldsymbol x) = c,\]</div>
 </div>
 <p>where constant <span class="math notranslate nohighlight">\(c\)</span> is estimated.</p>
 <p>Matern 5/2 Kernel:</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
-\[\Sigma_0 (\boldsymbol x, \boldsymbol x^\prime) = \sigma_K^2 \left(1 + \sqrt{5}r + \frac{5}{3}r^2 \right) \exp{\left(-\sqrt{5}r \right)}\]</div>
+\[\Sigma_0 (\boldsymbol x, \boldsymbol x^\prime) = \sigma_K^2 \left(1 + \sqrt{5}r + \frac{5}{3}r^2 \right) \exp{\left(-\sqrt{5}r \right)},\]</div>
 </div>
 <p>where <span class="math notranslate nohighlight">\(r = \sqrt{\sum_{m=1}^d \frac{(\boldsymbol x_m - \boldsymbol x^\prime_m)^2}{l^2_m}}\)</span>,
 <span class="math notranslate nohighlight">\(l\)</span> is the length-scale, <span class="math notranslate nohighlight">\(\sigma_K^2\)</span> is the outputscale, and
@@ -318,7 +318,7 @@ and returns a multivariate normal distribution.</p>
 <span class="sig-prename descclassname"><span class="pre">nubo.models.fit.</span></span><span class="sig-name descname"><span class="pre">fit_gp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GP</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">likelihood</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Likelihood</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/nubo/models/fit.html#fit_gp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.models.fit.fit_gp" title="Permalink to this definition">#</a></dt>
 <dd><p>Estimate hyper-parameters of the Gaussian process <cite>gp</cite> by maximum
 likelihood estimation (MLE) using <code class="docutils literal notranslate"><span class="pre">torch.optim.Adam</span></code> algorithm.</p>
-<p>Maximisesthe log marginal likelihood
+<p>Maximises the log marginal likelihood
 <span class="math notranslate nohighlight">\(\log p(\boldsymbol y \mid \boldsymbol X)\)</span>.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>

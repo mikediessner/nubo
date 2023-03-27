@@ -74,7 +74,7 @@ class ExpectedImprovement(AcquisitionFunction):
         z = (mean - self.y_best)/std
         ei = (mean - self.y_best)*norm.cdf(z) + std*torch.exp(norm.log_prob(z))
 
-        return -ei
+        return -ei.clamp_min(0.)
 
 
 class UpperConfidenceBound(AcquisitionFunction):

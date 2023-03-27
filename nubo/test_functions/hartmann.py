@@ -77,7 +77,7 @@ class Hartmann3D(TestFunction):
         self.noise_std = noise_std
         self.minimise = minimise
 
-        self.a = Tensor([1.0, 1.2, 3.0, 3.2]).T
+        self.a = Tensor([1.0, 1.2, 3.0, 3.2])
         self.A = Tensor([[3.0, 10.0, 30.0],
                          [0.1, 10.0, 35.0],
                          [3.0, 10.0, 30.0],

@@ -47,7 +47,7 @@ class LatinHypercubeSampling:
 
         Returns
         -------
-        ``numpy.ndarray``
+        ``torch.Tensor``
             (size `points` x `dims`) Random Latin hypercube sample.
         """
 
@@ -85,7 +85,7 @@ class LatinHypercubeSampling:
 
         Returns
         -------
-        ``numpy.ndarray``
+        ``torch.Tensor``
             (size `points` x `dims`) Maximin Latin hypercube sample.
         """
 

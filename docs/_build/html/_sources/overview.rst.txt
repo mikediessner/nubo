@@ -88,7 +88,7 @@ Contents
 .. _`experimental fluid dynamics research group`: https://www.experimental-fluid-dynamics.com
 .. _`Newcastle University`: https://www.ncl.ac.uk
 .. _Python: https://www.python.org
-.. _`BSD 3-Clause license`: https://joinup.ec.europa.eu/licence/bsd-3-clause-new-or-revised-license
+.. _`BSD 3-Clause license`: https://github.com/mikediessner/nubo/blob/main/LICENSE.md
 
 .. [#Frazier2018] P I Frazier, "A tutorial on Bayesian optimization," *arXiv preprint arXiv:1807.02811*, 2018.
 .. [#Gardner2018] J Gardner, G Pleiss, K Q Weinberger, D Bindel, and A G Wilson, "GPyTorch: Blackbox matrix-matrix Gaussian process inference with GPU acceleration," *Advances in neural information processing systems*, vol. 31, 2018.

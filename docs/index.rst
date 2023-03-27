@@ -82,4 +82,4 @@ a specific object or function should be used.
 .. _`experimental fluid dynamics research group`: https://www.experimental-fluid-dynamics.com
 .. _`Newcastle University`: https://www.ncl.ac.uk
 .. _Python: https://www.python.org
-.. _`BSD 3-Clause license`: https://joinup.ec.europa.eu/licence/bsd-3-clause-new-or-revised-license
+.. _`BSD 3-Clause license`: https://github.com/mikediessner/nubo/blob/main/LICENSE.md

@@ -1,7 +1,7 @@
 Practical considerations
 ========================
 Below are some critical considerations that should be taken into account when
-deciding on the design of the Bayesian optimisaiton loop with NUBO. This
+deciding on the design of the Bayesian optimisation loop with NUBO. This
 section features some of the most common questions about Bayesian optimisation
 and NUBO and is frequently updated.
 
@@ -44,7 +44,7 @@ Acquisition function
     We recommend using analytical acquisition functions for sequential
     single-point optimisation problems. Where it is advantageous to evaluate
     potential solutions in parallel Monte Carlo acquisition functions allow the
-    computation of batches. Furhtermore, if you want to continue the
+    computation of batches. Furthermore, if you want to continue the
     optimisation loop while some potential solutions are still being evaluated,
     Monte Carlo acquisition functions enable asynchronous optimisation
     [#Snoek2012]_ 
@@ -62,8 +62,8 @@ Acquisition function
 
 ----
 
-.. [#Balandat2020] M Balandat *et al.*, "BoTorch: A framework for efficient Monte-CarloBayesian optimization," *Advances in neural information processing systems*, vol. 33, 2020.
+.. [#Balandat2020] M Balandat *et al.*, "BoTorch: A framework for efficient Monte-Carlo Bayesian optimization," *Advances in neural information processing systems*, vol. 33, 2020.
 .. [#Diessner2022] M Diessner, J O'Connor, A Wynn, S Laizet, Y Guan, K Wilson, and R D Whalley, "Investigating Bayesian optimization for expensive-to-evaluate black box functions: Application in fluid dynamics," *Frontiers in Applied Mathematics and Statistics*, 2022. 
-.. [#Gramacy2012] R B Gramacy, and HKH Lee, "Cases for the nugget in modeling computer experiments," *Statistics and computing*, vol. 22, p. 713-722, 2012.
+.. [#Gramacy2012] R B Gramacy, and H K H Lee, "Cases for the nugget in modeling computer experiments," *Statistics and computing*, vol. 22, p. 713-722, 2012.
 .. [#Snoek2012] J Snoek, H Larochelle, and R P Adams, "Practical Bayesian optimization of machine learning algorithms," *Advances in neural information processing systems*, vol. 25, 2012.
 .. [#Wilson2018] J Wilson, F Hutter, and M Deisenroth, "Maximizing acquisition functions for Bayesian optimization," *Advances in neural information processing systems*, vol. 31, 2018.

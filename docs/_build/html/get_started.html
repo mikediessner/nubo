@@ -217,7 +217,7 @@
           <section id="get-started">
 <span id="id1"></span><h1>Get started<a class="headerlink" href="#get-started" title="Permalink to this heading">#</a></h1>
 <p>This brief introduction will teach you how to install NUBO from the GitHub
-repository and how to set up a Bayeisan optimisation loop to maximise a toy
+repository and how to set up a Bayesian optimisation loop to maximise a toy
 function using NUBO’s pre-defined Gaussian process as the surrogate model.</p>
 <section id="installing-nubo">
 <h2>Installing NUBO<a class="headerlink" href="#installing-nubo" title="Permalink to this heading">#</a></h2>
@@ -233,7 +233,7 @@ virtual environment.</p>
 <p>First, we set-up the toy function we want to optimise. In this case we choose
 the 6-dimensional Hartmann function, a multi-modal function with one global
 optimum. This synthetic test function acts as a surrogate for a black box
-objective funtion, such as an experiment or a simulation.</p>
+objective function, such as an experiment or a simulation.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nubo.test_functions</span> <span class="kn">import</span> <span class="n">Hartmann6D</span>
 
 
@@ -274,15 +274,15 @@ bounds manually.</p>
 </div>
 <p>Now, we can prepare the Bayesian optimisation loop. We choose NUBO’s
 pre-defined Gaussian process that comes with a constant mean function and a
-Matern 5/2 kernel. We also use the Gaussian likelihood to estimate potential
-noise such as observational noise. We estimate its hyper-parameters via maximum
-likelihood estimation (MLE) using the Adam optimiser. For the acquisition
-function, we implement the analytical upper confidence bound (UCB) with
-trade-off parameter <span class="math notranslate nohighlight">\(\beta = 1.96^2\)</span> (corresponding to 95% confidence
-intervals for the Gaussian distribution) and optimise it with the L-BFGS-B
-algorithm using a multi-start approach with five starts. These multiple starts
-ensure that the optimiser does not get stuck in a local optimum. The Bayesian
-optimisation loop is run for 40 iterations giving an evaluation budget of 70.</p>
+Matern 5/2 kernel. We also use the Gaussian likelihood to estimate
+observational noise. We estimate its hyper-parameters via maximum likelihood
+estimation (MLE) using the Adam optimiser. For the acquisition function, we
+implement the analytical upper confidence bound (UCB) with trade-off parameter
+<span class="math notranslate nohighlight">\(\beta = 1.96^2\)</span> (corresponding to 95% confidence intervals for the
+Gaussian distribution) and optimise it with the L-BFGS-B algorithm using a
+multi-start approach with five starts. These multiple starts ensure that the
+optimiser does not get stuck in a local optimum. The Bayesian optimisation loop
+is run for 40 iterations giving an evaluation budget of 70.</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nubo.acquisition</span> <span class="kn">import</span> <span class="n">UpperConfidenceBound</span>
 <span class="kn">from</span> <span class="nn">nubo.models</span> <span class="kn">import</span> <span class="n">GaussianProcess</span><span class="p">,</span> <span class="n">fit_gp</span>

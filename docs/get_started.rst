@@ -3,7 +3,7 @@
 Get started
 ===========
 This brief introduction will teach you how to install NUBO from the GitHub
-repository and how to set up a Bayeisan optimisation loop to maximise a toy
+repository and how to set up a Bayesian optimisation loop to maximise a toy
 function using NUBO's pre-defined Gaussian process as the surrogate model.
 
 Installing NUBO
@@ -22,7 +22,7 @@ Optimising a toy function with NUBO
 First, we set-up the toy function we want to optimise. In this case we choose
 the 6-dimensional Hartmann function, a multi-modal function with one global
 optimum. This synthetic test function acts as a surrogate for a black box
-objective funtion, such as an experiment or a simulation.
+objective function, such as an experiment or a simulation.
 
 .. code-block:: python
 
@@ -69,15 +69,15 @@ bounds manually.
 
 Now, we can prepare the Bayesian optimisation loop. We choose NUBO's
 pre-defined Gaussian process that comes with a constant mean function and a
-Matern 5/2 kernel. We also use the Gaussian likelihood to estimate potential
-noise such as observational noise. We estimate its hyper-parameters via maximum
-likelihood estimation (MLE) using the Adam optimiser. For the acquisition
-function, we implement the analytical upper confidence bound (UCB) with
-trade-off parameter :math:`\beta = 1.96^2` (corresponding to 95% confidence
-intervals for the Gaussian distribution) and optimise it with the L-BFGS-B
-algorithm using a multi-start approach with five starts. These multiple starts
-ensure that the optimiser does not get stuck in a local optimum. The Bayesian
-optimisation loop is run for 40 iterations giving an evaluation budget of 70.
+Matern 5/2 kernel. We also use the Gaussian likelihood to estimate
+observational noise. We estimate its hyper-parameters via maximum likelihood
+estimation (MLE) using the Adam optimiser. For the acquisition function, we
+implement the analytical upper confidence bound (UCB) with trade-off parameter
+:math:`\beta = 1.96^2` (corresponding to 95% confidence intervals for the
+Gaussian distribution) and optimise it with the L-BFGS-B algorithm using a
+multi-start approach with five starts. These multiple starts ensure that the
+optimiser does not get stuck in a local optimum. The Bayesian optimisation loop
+is run for 40 iterations giving an evaluation budget of 70.
 
  .. code-block:: python
 

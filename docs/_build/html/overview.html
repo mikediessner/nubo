@@ -223,7 +223,7 @@ developed and maintained by the <a class="reference external" href="https://www.
 at <a class="reference external" href="https://www.ncl.ac.uk">Newcastle University</a>. NUBO focuses primarly on transparency and user
 experience to make Bayesian optimisation easily accessible to researchers from
 all disciplines. Transparency is ensured by clean and comprehensible code,
-precise references, and thourough documentation. User experience is guaranteed
+precise references, and thorough documentation. User experience is guaranteed
 by a modular and flexible design, easy-to-write syntax, and careful selection
 of Bayesian optimisation algorithms. NUBO allows you to tailor Bayesian
 optimisation to your specific problem by writing the optimisation loop yourself
@@ -248,13 +248,13 @@ criteria by representing the objective function through a
 that should be evaluated by maximising a criterion specified through an
 <a class="reference internal" href="bayesian_optimisation.html#acquisition"><span class="std std-ref">acquisition function</span></a>. A popular criterion is, for
 example, the expected improvement (EI) <a class="footnote-reference brackets" href="#jones1998" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> that is the expectation of
-the new point returning a better solution than the current best. Bayesian
-optimisation is performed in a loop where training data is used to fit the
-surrogate model before the next point suggested by the acquisition function is
-evaluated and added to the training data itself. The loop than restarts
+the new point returning a better solution than the current best observation.
+Bayesian optimisation is performed in a loop where training data is used to fit
+the surrogate model before the next point suggested by the acquisition function
+is evaluated and added to the training data itself. The loop than restarts
 gathering more information about the objective function with each iteration.
 Bayesian optimisation is run for as many iterations as the evaluation budget
-allows, until a satisfying solution is found, or unitl a pre-defined stopping
+allows, until a satisfying solution is found, or until a pre-defined stopping
 criterion is met.</p>
 <figure class="align-default">
 <img alt="_images/bo.gif" src="_images/bo.gif" />
@@ -276,7 +276,7 @@ through Monte Carlo sampling. Analytical expected improvement (EI)
 <a class="footnote-reference brackets" href="#jones1998" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> and upper confidence bound (UCB) <a class="footnote-reference brackets" href="#srinivas2010" id="id13" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a> can be used
 for sequential single-point problems where results are evaluated after each
 iteration. Multi-point   batches for parallel evaluation or asynchronous
-problems where the optimnisation algorithm is continued while other points
+problems where the optimisation algorithm is continued while other points
 are still being evaluated can be performed via Monte Carlo acquisition
 functions <a class="footnote-reference brackets" href="#wilson2018" id="id14" role="doc-noteref"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></a>.</p>
 </dd>
@@ -286,12 +286,12 @@ multi-start SLSQP if the input space is also restricted by constraints. The
 stochastic Monte Carlo acquisition functions that are based on random samples
 are maximised with the stochastic optimiser Adam <a class="footnote-reference brackets" href="#kingma2015" id="id15" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a>.</p>
 </dd>
-<dt><strong>Design of experiments</strong></dt><dd><p>Initial data points can be generated with space-filling experimental designs.
-NUBO supports random or maximin Latin hypercube designs <a class="footnote-reference brackets" href="#mckay2000" id="id16" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a>.</p>
+<dt><strong>Design of experiments</strong></dt><dd><p>Initial data points can be generated with space-filling designs. NUBO
+supports random or maximin Latin hypercube designs <a class="footnote-reference brackets" href="#mckay2000" id="id16" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a>.</p>
 </dd>
 <dt><strong>Synthetic test functions</strong></dt><dd><p>NUBO provides ten synthetic test functions that allow validating Bayesian
 optimisation algorithms before applying them to expensive experiments
-Hyperparameter optimization for machine learning models based on Bayesian optimization[#Surjanovic2023]_.</p>
+<a class="footnote-reference brackets" href="#surjanovic2023" id="id17" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a>.</p>
 </dd>
 </dl>
 <hr class="docutils" />
@@ -331,7 +331,7 @@ Hyperparameter optimization for machine learning models based on Bayesian optimi
 <p>J Snoek, H Larochelle, and R P Adams, “Practical Bayesian optimization of machine learning algorithms,” <em>Advances in neural information processing systems</em>, vol. 25, 2012.</p>
 </aside>
 <aside class="footnote brackets" id="surjanovic2023" role="note">
-<span class="label"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id17">9</a><span class="fn-bracket">]</span></span>
 <p>S Surjanovic and D Bingham, “Virtual library of simulation experiments: Test functions and datasets,” <em>sfu.ca</em>. [Online]. Available: <a class="reference external" href="https://www.sfu.ca/~ssurjano/optimization.html">https://www.sfu.ca/~ssurjano/optimization.html</a>. [Accessed March 11, 2023].</p>
 </aside>
 <aside class="footnote brackets" id="srinivas2010" role="note">

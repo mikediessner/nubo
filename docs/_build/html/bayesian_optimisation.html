@@ -273,14 +273,14 @@ representation can then be used to find the next point that should be evaluated
 by maximising a criterion specified through an acquisition function
 <span class="math notranslate nohighlight">\(\alpha (\cdot)\)</span>. A popular criterion is, for example, the expected
 improvement (EI) that is the expectation of the new point returning a better
-solution than the previous best. Bayesian optimisation is performed in a loop
-where training data <span class="math notranslate nohighlight">\(\mathcal{D}_n\)</span> is used to fit the surrogate model
-before the next point suggested by the acquisition function is evaluated and
-added to the training data itself (see algorithm below). The loop than restarts
-gathering more information about the objective function with each iteration.
-Bayesian optimisation is run for as many iterations as the evaluation budget
-<span class="math notranslate nohighlight">\(N\)</span> allows, until a satisfying solution is found, or unitl a pre-defined
-stopping criterion is met.</p>
+solution than the previous best observation. Bayesian optimisation is performed
+in a loop where training data <span class="math notranslate nohighlight">\(\mathcal{D}_n\)</span> is used to fit the
+surrogate model before the next point suggested by the acquisition function is
+evaluated and added to the training data itself (see algorithm below). The loop
+than restarts gathering more information about the objective function with each
+iteration. Bayesian optimisation is run for as many iterations as the
+evaluation budget <span class="math notranslate nohighlight">\(N\)</span> allows, until a satisfying solution is found, or
+unitl a pre-defined stopping criterion is met.</p>
 <div class="seealso admonition">
 <p class="admonition-title">Algorithm</p>
 <p>Specify evaluation budget <span class="math notranslate nohighlight">\(N\)</span>, number of initial points <span class="math notranslate nohighlight">\(n_0\)</span>, surrogate model <span class="math notranslate nohighlight">\(\mathcal{M}\)</span>, acquisition function <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
@@ -296,7 +296,7 @@ stopping criterion is met.</p>
 <p><strong>end while</strong></p>
 <p>Return point <span class="math notranslate nohighlight">\(\boldsymbol x^*\)</span> with highest observation.</p>
 </div>
-<p>The annimation below illustrates how the Bayesian optimisation algorithm works
+<p>The animation below illustrates how the Bayesian optimisation algorithm works
 on an optimisation loop that runs for 20 iterations. The surrogate model uses
 the available observaions to provide a prediction and its uncertainty (here
 shown as 95% confidence intervals around the prediction). This is our best
@@ -305,7 +305,7 @@ acquisition function to evaluate which point is most likely to improve over the
 current best solution. Maximising the acquisition yields the next candidate
 that is observed from the objective function, i.e. the truth, before it is
 added to the training data and the whole process is repeated again. The
-annimation shows how the surrogate model gets closer to the truth with each
+animation shows how the surrogate model gets closer to the truth with each
 iteration and how the acquisition function explores the input space by
 exploring regions with a high uncertainty and exploits regions with a high
 prediction. This property also called the exploration-exploitation trade-off
@@ -382,18 +382,18 @@ examples section. For more complex models we recommend consulting the
 <section id="acquisition-function">
 <span id="acquisition"></span><h2>Acquisition function<a class="headerlink" href="#acquisition-function" title="Permalink to this heading">#</a></h2>
 <p>Acquisition functions use the posterior distribution of the Gaussian process
-<span class="math notranslate nohighlight">\(\mathcal{GP}\)</span> to compute a criterion that assess if a test point is good
-potential candidate point when evaluated through the objective function
+<span class="math notranslate nohighlight">\(\mathcal{GP}\)</span> to compute a criterion that assess if a test point is a
+good potential candidate point when evaluated through the objective function
 <span class="math notranslate nohighlight">\(f(\boldsymbol x)\)</span>. Thus, maximising the acquisition function suggests
 the test point that based on the current training data <span class="math notranslate nohighlight">\(\mathcal{D_n}\)</span>
 has the highest potential of being the global optimum. To do this, an
 acquisition function <span class="math notranslate nohighlight">\(\alpha (\cdot)\)</span> balances exploration and
 exploitation. The former is characterised by areas with no or only a few
 observed data points where the uncertainty of the Gaussian process is high, and
-the latter by promising areas with a high posterior mean of the Gaussian
-process. This exploration-exploitation trade-off ensures that Bayesian
-optimisation does not converge to the first (potentially local) maximum it
-encounters but gradually explores the full input space.</p>
+the latter by areas where the posterior mean of the Gaussian process is high.
+This exploration-exploitation trade-off ensures that Bayesian optimisation does
+not converge to the first (potentially local) maximum it encounters but
+gradually explores the full input space.</p>
 <section id="analytical-acquisition-functions">
 <h3>Analytical acquisition functions<a class="headerlink" href="#analytical-acquisition-functions" title="Permalink to this heading">#</a></h3>
 <p>NUBO supports two of the most popular acquisition functions that are grounded
@@ -423,7 +423,7 @@ probability density function of the standard normal distribution.</p>
 </div>
 <p>where <span class="math notranslate nohighlight">\(\beta\)</span> is a pre-defined trade-off parameter, and
 <span class="math notranslate nohighlight">\(\mu_n(\cdot)\)</span> and <span class="math notranslate nohighlight">\(\sigma_n(\cdot)\)</span> are the mean and the standard
-deviation of the posterior distribution of the Gaussian process. The annimation
+deviation of the posterior distribution of the Gaussian process. The animation
 below shows how the acquisition would look when <span class="math notranslate nohighlight">\(\beta\)</span> is set to 16. For
 comparison, the posterior uncertainty shown as the 95% confidence interval
 around the posterior mean of the Gaussian process is equal to using
@@ -431,11 +431,11 @@ around the posterior mean of the Gaussian process is equal to using
 <figure class="align-default">
 <img alt="_images/bo_ucb.gif" src="_images/bo_ucb.gif" />
 </figure>
-<p>Both analytical acquisition functions can be computed analytically by
-maximising them with a deterministic optimiser, such as L-BFGS-B for bounded
-unconstraint problems or SLSQP for bounded constraint problems. However, this
-only works for the sequential single-point problems for which every point
-suggested by Bayesian optimisation is observed through the objective function
+<p>Both of these acquisition functions can be computed analytically by maximising
+them with a deterministic optimiser, such as L-BFGS-B for bounded unconstraint
+problems or SLSQP for bounded constraint problems. However, this only works for
+the sequential single-point problems for which every point suggested by
+Bayesian optimisation is observed through the objective function
 <span class="math notranslate nohighlight">\(f( \boldsymbol x)\)</span> immediatley before the optimisation loop is repeated.</p>
 </section>
 <section id="monte-carlo-acquisition-functions">
@@ -484,7 +484,7 @@ simultaneously. The second option is a greedy sequential approach where one
 point after the other is selected holding all previous points fixed until the
 batch is full. Empirical evidence shows that both methods approximate the
 acquisition successfully. However, the greedy approach seems to have a slight
-edge over the joint strategy for some examples <a class="footnote-reference brackets" href="#wilson2018" id="id24" role="doc-noteref"><span class="fn-bracket">[</span>17<span class="fn-bracket">]</span></a>. It also is
+edge over the joint strategy for some examples <a class="footnote-reference brackets" href="#wilson2018" id="id24" role="doc-noteref"><span class="fn-bracket">[</span>17<span class="fn-bracket">]</span></a>. It is also
 faster to compute for larger batches.</p>
 <p>Asynchronous optimisation <a class="footnote-reference brackets" href="#snoek2012" id="id25" role="doc-noteref"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></a> leverages the same property as
 sequential greedy optimisation: the pending points that have not yet been

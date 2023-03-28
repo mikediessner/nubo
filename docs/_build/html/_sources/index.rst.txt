@@ -7,7 +7,7 @@ developed and maintained by the `experimental fluid dynamics research group`_
 at `Newcastle University`_. NUBO focuses primarly on transparency and user
 experience to make Bayesian optimisation easily accessible to researchers from
 all disciplines. Transparency is ensured by clean and comprehensible code,
-precise references, and thourough documentation. User experience is guaranteed
+precise references, and thorough documentation. User experience is guaranteed
 by a modular and flexible design, easy-to-write syntax, and careful selection
 of Bayesian optimisation algorithms. NUBO allows you to tailor Bayesian 
 optimisation to your specific problem by writing the optimisation loop yourself
@@ -46,7 +46,7 @@ Bayesian optimisation journey with NUBO.
 
 Examples
 --------
-The examples section provides guides to some problems that NUBO is capable
+The Examples section provides guides to some problems that NUBO is capable
 of optimising, and shows how to implement :ref:`custom surrogate models <custom_gp>`.
 This boilerplate code is a good starting point when tailoring a Bayesian
 optimisation algorithm to your specfic problem.
@@ -65,7 +65,7 @@ optimisation algorithm to your specfic problem.
 
 Package reference
 -----------------
-The package reference section gives detailed documentation to all of NUBO's
+The Package reference section gives detailed documentation to all of NUBO's
 functionality. This is where you want to go first when you are not sure how 
 a specific object or function should be used.
 

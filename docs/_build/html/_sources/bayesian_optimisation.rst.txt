@@ -63,14 +63,14 @@ representation can then be used to find the next point that should be evaluated
 by maximising a criterion specified through an acquisition function
 :math:`\alpha (\cdot)`. A popular criterion is, for example, the expected
 improvement (EI) that is the expectation of the new point returning a better
-solution than the previous best. Bayesian optimisation is performed in a loop
-where training data :math:`\mathcal{D}_n` is used to fit the surrogate model
-before the next point suggested by the acquisition function is evaluated and
-added to the training data itself (see algorithm below). The loop than restarts
-gathering more information about the objective function with each iteration.
-Bayesian optimisation is run for as many iterations as the evaluation budget
-:math:`N` allows, until a satisfying solution is found, or unitl a pre-defined
-stopping criterion is met.
+solution than the previous best observation. Bayesian optimisation is performed
+in a loop where training data :math:`\mathcal{D}_n` is used to fit the
+surrogate model before the next point suggested by the acquisition function is
+evaluated and added to the training data itself (see algorithm below). The loop
+than restarts gathering more information about the objective function with each
+iteration. Bayesian optimisation is run for as many iterations as the
+evaluation budget :math:`N` allows, until a satisfying solution is found, or
+unitl a pre-defined stopping criterion is met.
 
 .. admonition:: Algorithm
     :class: seealso
@@ -92,7 +92,7 @@ stopping criterion is met.
 
     Return point :math:`\boldsymbol x^*` with highest observation.
 
-The annimation below illustrates how the Bayesian optimisation algorithm works
+The animation below illustrates how the Bayesian optimisation algorithm works
 on an optimisation loop that runs for 20 iterations. The surrogate model uses
 the available observaions to provide a prediction and its uncertainty (here
 shown as 95% confidence intervals around the prediction). This is our best
@@ -101,7 +101,7 @@ acquisition function to evaluate which point is most likely to improve over the
 current best solution. Maximising the acquisition yields the next candidate
 that is observed from the objective function, i.e. the truth, before it is
 added to the training data and the whole process is repeated again. The
-annimation shows how the surrogate model gets closer to the truth with each
+animation shows how the surrogate model gets closer to the truth with each
 iteration and how the acquisition function explores the input space by
 exploring regions with a high uncertainty and exploits regions with a high
 prediction. This property also called the exploration-exploitation trade-off
@@ -183,18 +183,18 @@ examples section. For more complex models we recommend consulting the
 Acquisition function
 --------------------
 Acquisition functions use the posterior distribution of the Gaussian process
-:math:`\mathcal{GP}` to compute a criterion that assess if a test point is good
-potential candidate point when evaluated through the objective function
+:math:`\mathcal{GP}` to compute a criterion that assess if a test point is a 
+good potential candidate point when evaluated through the objective function
 :math:`f(\boldsymbol x)`. Thus, maximising the acquisition function suggests
 the test point that based on the current training data :math:`\mathcal{D_n}`
 has the highest potential of being the global optimum. To do this, an
 acquisition function :math:`\alpha (\cdot)` balances exploration and
 exploitation. The former is characterised by areas with no or only a few
 observed data points where the uncertainty of the Gaussian process is high, and
-the latter by promising areas with a high posterior mean of the Gaussian 
-process. This exploration-exploitation trade-off ensures that Bayesian
-optimisation does not converge to the first (potentially local) maximum it
-encounters but gradually explores the full input space.
+the latter by areas where the posterior mean of the Gaussian process is high.
+This exploration-exploitation trade-off ensures that Bayesian optimisation does
+not converge to the first (potentially local) maximum it encounters but
+gradually explores the full input space.
 
 Analytical acquisition functions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -227,7 +227,7 @@ The upper confidence bound (UCB) acquisition function can be computed as
 
 where :math:`\beta` is a pre-defined trade-off parameter, and
 :math:`\mu_n(\cdot)` and :math:`\sigma_n(\cdot)` are the mean and the standard
-deviation of the posterior distribution of the Gaussian process. The annimation
+deviation of the posterior distribution of the Gaussian process. The animation
 below shows how the acquisition would look when :math:`\beta` is set to 16. For
 comparison, the posterior uncertainty shown as the 95% confidence interval
 around the posterior mean of the Gaussian process is equal to using
@@ -237,11 +237,11 @@ around the posterior mean of the Gaussian process is equal to using
 
     .. figure:: bo_ucb.gif
 
-Both analytical acquisition functions can be computed analytically by
-maximising them with a deterministic optimiser, such as L-BFGS-B for bounded
-unconstraint problems or SLSQP for bounded constraint problems. However, this
-only works for the sequential single-point problems for which every point
-suggested by Bayesian optimisation is observed through the objective function
+Both of these acquisition functions can be computed analytically by maximising
+them with a deterministic optimiser, such as L-BFGS-B for bounded unconstraint
+problems or SLSQP for bounded constraint problems. However, this only works for
+the sequential single-point problems for which every point suggested by
+Bayesian optimisation is observed through the objective function
 :math:`f( \boldsymbol x)` immediatley before the optimisation loop is repeated.
 
 Monte Carlo acquisition functions
@@ -292,7 +292,7 @@ simultaneously. The second option is a greedy sequential approach where one
 point after the other is selected holding all previous points fixed until the
 batch is full. Empirical evidence shows that both methods approximate the
 acquisition successfully. However, the greedy approach seems to have a slight
-edge over the joint strategy for some examples [#Wilson2018]_. It also is
+edge over the joint strategy for some examples [#Wilson2018]_. It is also
 faster to compute for larger batches.
 
 Asynchronous optimisation [#Snoek2012]_ leverages the same property as

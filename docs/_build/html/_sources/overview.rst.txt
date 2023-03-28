@@ -7,7 +7,7 @@ developed and maintained by the `experimental fluid dynamics research group`_
 at `Newcastle University`_. NUBO focuses primarly on transparency and user
 experience to make Bayesian optimisation easily accessible to researchers from
 all disciplines. Transparency is ensured by clean and comprehensible code,
-precise references, and thourough documentation. User experience is guaranteed
+precise references, and thorough documentation. User experience is guaranteed
 by a modular and flexible design, easy-to-write syntax, and careful selection
 of Bayesian optimisation algorithms. NUBO allows you to tailor Bayesian 
 optimisation to your specific problem by writing the optimisation loop yourself
@@ -33,13 +33,13 @@ criteria by representing the objective function through a
 that should be evaluated by maximising a criterion specified through an
 :ref:`acquisition function <acquisition>`. A popular criterion is, for
 example, the expected improvement (EI) [#Jones1998]_ that is the expectation of
-the new point returning a better solution than the current best. Bayesian
-optimisation is performed in a loop where training data is used to fit the
-surrogate model before the next point suggested by the acquisition function is
-evaluated and added to the training data itself. The loop than restarts
+the new point returning a better solution than the current best observation.
+Bayesian optimisation is performed in a loop where training data is used to fit
+the surrogate model before the next point suggested by the acquisition function
+is evaluated and added to the training data itself. The loop than restarts
 gathering more information about the objective function with each iteration.
 Bayesian optimisation is run for as many iterations as the evaluation budget
-allows, until a satisfying solution is found, or unitl a pre-defined stopping
+allows, until a satisfying solution is found, or until a pre-defined stopping
 criterion is met.
 
 .. only:: html
@@ -63,7 +63,7 @@ Contents
   [#Jones1998]_ and upper confidence bound (UCB) [#Srinivas2010]_ can be used
   for sequential single-point problems where results are evaluated after each
   iteration. Multi-point   batches for parallel evaluation or asynchronous
-  problems where the optimnisation algorithm is continued while other points
+  problems where the optimisation algorithm is continued while other points
   are still being evaluated can be performed via Monte Carlo acquisition
   functions [#Wilson2018]_.
 
@@ -75,13 +75,13 @@ Contents
   are maximised with the stochastic optimiser Adam [#Kingma2015]_.  
 
 **Design of experiments**
-  Initial data points can be generated with space-filling experimental designs.
-  NUBO supports random or maximin Latin hypercube designs [#McKay2000]_.
+  Initial data points can be generated with space-filling designs. NUBO
+  supports random or maximin Latin hypercube designs [#McKay2000]_.
 
 **Synthetic test functions**
   NUBO provides ten synthetic test functions that allow validating Bayesian
   optimisation algorithms before applying them to expensive experiments
-  Hyperparameter optimization for machine learning models based on Bayesian optimization[#Surjanovic2023]_.
+  [#Surjanovic2023]_.
 
 ----
 

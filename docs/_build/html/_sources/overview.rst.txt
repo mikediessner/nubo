@@ -69,10 +69,11 @@ Contents
 
 **Optimisers**
   The deterministic analytical acquisition functions are optimised via
-  multi-start L-BFGS-B if the input space is restricted by box bounds or
-  multi-start SLSQP if the input space is also restricted by constraints. The
-  stochastic Monte Carlo acquisition functions that are based on random samples
-  are maximised with the stochastic optimiser Adam [#Kingma2015]_.  
+  multi-start L-BFGS-B [#Zhu1997] if the input space is restricted by box
+  bounds or multi-start SLSQP [#Kraft1994]_ if the input space is also
+  restricted by constraints. The stochastic Monte Carlo acquisition functions
+  that are based on random samples are maximised with the stochastic optimiser
+  Adam [#Kingma2015]_.  
 
 **Design of experiments**
   Initial data points can be generated with space-filling designs. NUBO
@@ -95,6 +96,7 @@ Contents
 .. [#Gramacy2020] R B Gramacy, *Surrogates: Gaussian process modeling, design, and optimization for the applied sciences*, 1st ed. Boca Raton, FL: CRC press, 2020.
 .. [#Jones1998] D R Jones, M Schonlau, and W J Welch, "Efficient global optimization of expensive black-box functions," *Journal of global optimization*, vol. 13, no. 4, p. 566, 1998.
 .. [#Kingma2015] D P Kingma and J Ba, "Adam: A method for stochastic optimization," *Proceedings of the 3rd international conference on learning representations*, 2015.
+.. [#Kraft1994] D Kraft, "Algorithm 733: TOMP-Fortran modules for optimal control calculations," *ACM Transactions on Mathematical Software (TOMS)*, vol. 20, no. 3, p. 262-281, 1994.
 .. [#McKay2000] M D McKay, R J Beckman, and W J Conover, "A comparison of three methods for selecting values of input variables in the analysis of output from a computer code," *Technometrics*, vol. 42, no. 1, p. 55-61, 2000.
 .. [#Shahriari2015] B Shahriari, K Swersky, Z Wang, R P Adams, and N De Freitas, "Taking the human out of the loop: A review of Bayesian optimization," *Proceedings of the IEEE*, vol. 104, no. 1, p. 148-175, 2015.
 .. [#Snoek2012] J Snoek, H Larochelle, and R P Adams, "Practical Bayesian optimization of machine learning algorithms," *Advances in neural information processing systems*, vol. 25, 2012.
@@ -102,3 +104,4 @@ Contents
 .. [#Srinivas2010] N Srinivas, A Krause, S M Kakade, and M Seeger, "Gaussian process optimization in the bandit setting: No regret and experimental design," *Proceedings of the 27th international conference on machine learning*, p. 1015-1022, 2010.
 .. [#Williams2006] C K I Williams, and C E Rasmussen, *Gaussian processes for machine learning*, 2nd ed. Cambridge, MA: MIT press, 2006.
 .. [#Wilson2018] J Wilson, F Hutter, and M Deisenroth, "Maximizing acquisition functions for Bayesian optimization," *Advances in neural information processing systems*, vol. 31, 2018.
+.. [#Zhu1997] C Zhu, R H Byrd, P Lu, J Nocedal, "Algorithm 778: L-BFGS-B: Fortran subroutines for large-scale bound-constrained optimization," *ACM Transactions on mathematical software (TOMS)*, vol. 23, no.4, p. 550-560, 1997.

@@ -238,11 +238,12 @@ around the posterior mean of the Gaussian process is equal to using
     .. figure:: bo_ucb.gif
 
 Both of these acquisition functions can be computed analytically by maximising
-them with a deterministic optimiser, such as L-BFGS-B for bounded unconstraint
-problems or SLSQP for bounded constraint problems. However, this only works for
-the sequential single-point problems for which every point suggested by
-Bayesian optimisation is observed through the objective function
-:math:`f( \boldsymbol x)` immediatley before the optimisation loop is repeated.
+them with a deterministic optimiser, such as L-BFGS-B [#Zhu1997]_ for bounded
+unconstraint problems or SLSQP [#Kraft1994]_ for bounded constraint problems.
+However, this only works for the sequential single-point problems for which
+every point suggested by Bayesian optimisation is observed through the
+objective function :math:`f( \boldsymbol x)` immediatley before the
+optimisation loop is repeated.
 
 Monte Carlo acquisition functions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -312,6 +313,7 @@ considered directly in the optimisation.
 .. [#Gramacy2020] R B Gramacy, *Surrogates: Gaussian process modeling, design, and optimization for the applied sciences*, 1st ed. Boca Raton, FL: CRC press, 2020.
 .. [#Jones1998] D R Jones, M Schonlau, and W J Welch, "Efficient global optimization of expensive black-box functions," *Journal of global optimization*, vol. 13, no. 4, p. 566, 1998.
 .. [#Kingma2015] D P Kingma and J Ba, "Adam: A method for stochastic optimization," *Proceedings of the 3rd international conference on learning representations*, 2015.
+.. [#Kraft1994] D Kraft, "Algorithm 733: TOMP-Fortran modules for optimal control calculations," *ACM Transactions on Mathematical Software (TOMS)*, vol. 20, no. 3, p. 262-281, 1994.
 .. [#Mahfoze2019] O A Mahfoze, A Moody, A Wynn, R D Whalley, and S Laizet, "Reducing the skin-friction drag of a turbulent boundary-layer flow with low-amplitude wall-normal blowing within a Bayesian optimization framework," *Physical review fluids*, vol. 4, no. 9, 2019.
 .. [#McKay2000] M D McKay, R J Beckman, and W J Conover, "A comparison of three methods for selecting values of input variables in the analysis of output from a computer code," *Technometrics*, vol. 42, no. 1, p. 55-61, 2000.
 .. [#OConnor2023] J O'Connor, M Diessner, K Wilson, R D Whalley, A Wynn, and S Laizet, "Optimisation and analysis of streamwise-varying wall-normal blowing in a turbulent boundary layer," *Flow, Turbulence and Combustion*, 2023.
@@ -323,3 +325,4 @@ considered directly in the optimisation.
 .. [#Williams2006] C K I Williams, and C E Rasmussen, *Gaussian processes for machine learning*, 2nd ed. Cambridge, MA: MIT press, 2006.
 .. [#Wilson2018] J Wilson, F Hutter, and M Deisenroth, "Maximizing acquisition functions for Bayesian optimization," *Advances in neural information processing systems*, vol. 31, 2018.
 .. [#Wu2019] J Wu, X Y Chen, H Zhang, L D Xiong, H Lei, and S H Deng, "Hyperparameter optimization for machine learning models based on Bayesian optimization," *Journal of electronic science and technology*, vol. 17, no. 1, p. 26-40, 2019.
+.. [#Zhu1997] C Zhu, R H Byrd, P Lu, J Nocedal, "Algorithm 778: L-BFGS-B: Fortran subroutines for large-scale bound-constrained optimization," *ACM Transactions on mathematical software (TOMS)*, vol. 23, no.4, p. 550-560, 1997.

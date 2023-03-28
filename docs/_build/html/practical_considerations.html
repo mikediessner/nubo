@@ -234,7 +234,7 @@ solutions for Bayesian optimisation <a class="footnote-reference brackets" href=
 <h2>Gaussian process<a class="headerlink" href="#gaussian-process" title="Permalink to this heading">#</a></h2>
 <dl class="simple">
 <dt><strong>What prior mean function and prior covariance kernel should I use?</strong></dt><dd><p>For practical Bayesian optimisation a zero or constant mean function with
-a Matern 5/2 kernel is recommended <a class="footnote-reference brackets" href="#snoek2012" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>. Other kernels, such as
+a Matern 5/2 kernel is recommended <a class="footnote-reference brackets" href="#snoek2012" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a>. Other kernels, such as
 the RBF kernel, might be too smooth to be able to represent realistic
 experiments and simulations.</p>
 </dd>
@@ -253,10 +253,11 @@ also estimate any additional noise besides the observational noise
 <section id="acquisition-function">
 <h2>Acquisition function<a class="headerlink" href="#acquisition-function" title="Permalink to this heading">#</a></h2>
 <dl class="simple">
-<dt><strong>What acquisition function should I use?</strong></dt><dd><p>NUBO supports two acquisition functions: Expected improvement (EI) and
-upper confidence bound (UCB). While both are widely-used options that have
-proven to give good results, there is empirical evidence that UCB performs
-better on a wider range of synthetic test functions <a class="footnote-reference brackets" href="#diessner2022" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>.</p>
+<dt><strong>What acquisition function should I use?</strong></dt><dd><p>NUBO supports two acquisition functions: Expected improvement (EI)
+<a class="footnote-reference brackets" href="#jones1998" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> and upper confidence bound (UCB) <a class="footnote-reference brackets" href="#srinivas2010" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a>. While both
+are widely-used options that have proven to give good results, there is
+empirical evidence that UCB performs better on a wider range of synthetic
+test functions <a class="footnote-reference brackets" href="#diessner2022" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>.</p>
 </dd>
 <dt><strong>Should I use analytical or Monte Carlo acquisition functions?</strong></dt><dd><p>We recommend using analytical acquisition functions for sequential
 single-point optimisation problems. Where it is advantageous to evaluate
@@ -264,42 +265,61 @@ potential solutions in parallel Monte Carlo acquisition functions allow the
 computation of batches. Furthermore, if you want to continue the
 optimisation loop while some potential solutions are still being evaluated,
 Monte Carlo acquisition functions enable asynchronous optimisation
-<a class="footnote-reference brackets" href="#snoek2012" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>
-<a class="footnote-reference brackets" href="#wilson2018" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a>.</p>
+<a class="footnote-reference brackets" href="#snoek2012" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#wilson2018" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a>.</p>
 </dd>
-<dt><strong>What optimiser should I choose?</strong></dt><dd><p>We recommend L-BFGS-B for analytical acquisition functions and SLSQP for
-constrained analytical acquisition functions. For Monte Carlo acquisition
-functions, the stochastic optimiser Adam should be used if the base samples
-are resampled. If you decide to fix the base samples, deterministic
-optimisers can be used in the same way as for the analytical acquisition
-functions. While fixing the base samples could introduce some sampling
-bias, there is empirical evidence that it does not affect the performance
-negatively <a class="footnote-reference brackets" href="#balandat2020" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.</p>
+<dt><strong>What optimiser should I choose?</strong></dt><dd><p>We recommend L-BFGS-B <a class="footnote-reference brackets" href="#zhu1997" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a> for analytical acquisition functions and
+SLSQP <a class="footnote-reference brackets" href="#kraft1994" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a> for constrained analytical acquisition functions. For
+Monte Carlo acquisition functions, the stochastic optimiser Adam
+<a class="footnote-reference brackets" href="#kingma2015" id="id11" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a> should be used if the base samples are resampled. If you
+decide to fix the base samples, deterministic optimisers can be used in the
+same way as for the analytical acquisition functions. While fixing the base
+samples could introduce some sampling bias, there is empirical evidence
+that it does not affect the performance negatively <a class="footnote-reference brackets" href="#balandat2020" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.</p>
 </dd>
 </dl>
 <hr class="docutils" />
 <aside class="footnote-list brackets">
 <aside class="footnote brackets" id="balandat2020" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">1</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id12">1</a><span class="fn-bracket">]</span></span>
 <p>M Balandat <em>et al.</em>, “BoTorch: A framework for efficient Monte-Carlo Bayesian optimization,” <em>Advances in neural information processing systems</em>, vol. 33, 2020.</p>
 </aside>
 <aside class="footnote brackets" id="diessner2022" role="note">
 <span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
-<span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id4">2</a>)</span>
+<span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id6">2</a>)</span>
 <p>M Diessner, J O’Connor, A Wynn, S Laizet, Y Guan, K Wilson, and R D Whalley, “Investigating Bayesian optimization for expensive-to-evaluate black box functions: Application in fluid dynamics,” <em>Frontiers in Applied Mathematics and Statistics</em>, 2022.</p>
 </aside>
 <aside class="footnote brackets" id="gramacy2012" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
 <p>R B Gramacy, and H K H Lee, “Cases for the nugget in modeling computer experiments,” <em>Statistics and computing</em>, vol. 22, p. 713-722, 2012.</p>
 </aside>
+<aside class="footnote brackets" id="jones1998" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">4</a><span class="fn-bracket">]</span></span>
+<p>D R Jones, M Schonlau, and W J Welch, “Efficient global optimization of expensive black-box functions,” <em>Journal of global optimization</em>, vol. 13, no. 4, p. 566, 1998.</p>
+</aside>
+<aside class="footnote brackets" id="kingma2015" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id11">5</a><span class="fn-bracket">]</span></span>
+<p>D P Kingma and J Ba, “Adam: A method for stochastic optimization,” <em>Proceedings of the 3rd international conference on learning representations</em>, 2015.</p>
+</aside>
+<aside class="footnote brackets" id="kraft1994" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">6</a><span class="fn-bracket">]</span></span>
+<p>D Kraft, “Algorithm 733: TOMP-Fortran modules for optimal control calculations,” <em>ACM Transactions on Mathematical Software (TOMS)</em>, vol. 20, no. 3, p. 262-281, 1994.</p>
+</aside>
 <aside class="footnote brackets" id="snoek2012" role="note">
-<span class="label"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></span>
-<span class="backrefs">(<a role="doc-backlink" href="#id2">1</a>,<a role="doc-backlink" href="#id5">2</a>)</span>
+<span class="label"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id2">1</a>,<a role="doc-backlink" href="#id7">2</a>)</span>
 <p>J Snoek, H Larochelle, and R P Adams, “Practical Bayesian optimization of machine learning algorithms,” <em>Advances in neural information processing systems</em>, vol. 25, 2012.</p>
 </aside>
+<aside class="footnote brackets" id="srinivas2010" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">8</a><span class="fn-bracket">]</span></span>
+<p>N Srinivas, A Krause, S M Kakade, and M Seeger, “Gaussian process optimization in the bandit setting: No regret and experimental design,” <em>Proceedings of the 27th international conference on machine learning</em>, p. 1015-1022, 2010.</p>
+</aside>
 <aside class="footnote brackets" id="wilson2018" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">5</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">9</a><span class="fn-bracket">]</span></span>
 <p>J Wilson, F Hutter, and M Deisenroth, “Maximizing acquisition functions for Bayesian optimization,” <em>Advances in neural information processing systems</em>, vol. 31, 2018.</p>
+</aside>
+<aside class="footnote brackets" id="zhu1997" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id9">10</a><span class="fn-bracket">]</span></span>
+<p>C Zhu, R H Byrd, P Lu, J Nocedal, “Algorithm 778: L-BFGS-B: Fortran subroutines for large-scale bound-constrained optimization,” <em>ACM Transactions on mathematical software (TOMS)</em>, vol. 23, no.4, p. 550-560, 1997.</p>
 </aside>
 </aside>
 </section>

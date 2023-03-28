@@ -63,7 +63,7 @@ def sequential(func: Callable,
     # sequential optimisation loop
     for i in range(batch_size):
         if method == "L-BFGS-B":
-            x_new, f_x_new = lbfgsb(func, bounds, num_starts, num_samples **kwargs)
+            x_new, f_x_new = lbfgsb(func, bounds, num_starts, num_samples, **kwargs)
         elif method == "SLSQP":
             x_new, f_x_new = slsqp(func, bounds, constraints, num_starts, num_samples, **kwargs)
         elif method == "Adam":

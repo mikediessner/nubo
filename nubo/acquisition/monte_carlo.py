@@ -8,7 +8,7 @@ from typing import Optional
 
 class MCExpectedImprovement(AcquisitionFunction):
     r"""
-    Monte Carlo Expected Improvement acquisition function:
+    Monte Carlo expected improvement acquisition function:
 
     .. math::
         \alpha_{EI}^{MC} (\boldsymbol X_*) = \max \left(ReLU(\mu_n(\boldsymbol X_*) + \boldsymbol L \boldsymbol z - y^{best}) \right),
@@ -21,7 +21,6 @@ class MCExpectedImprovement(AcquisitionFunction):
     :math:`\mathcal{N} (0, 1)`, :math:`y^{best}` is the current best
     observation, and :math:`ReLU (\cdot)` is the rectified linear unit function
     that zeros all values below 0 and leaves the rest as is.
-
     Attributes
     ----------
     gp : ``gpytorch.models.GP``
@@ -79,20 +78,23 @@ class MCExpectedImprovement(AcquisitionFunction):
 
     def eval(self, x: Tensor) -> Tensor:
         """
-        Computes the (negative) Expected Improvement for some test points `x`
-        by averaging Monte Carlo samples.
+        Computes the (negative) expected improvement for some test point `x` by
+        averaging Monte Carlo samples.
 
         Parameters
         ----------
         x : ``torch.Tensor``
-            (size n x d) Test points.
-
+            (size 1 x d) Test point.
         Returns
         -------
         ``torch.Tensor``
-            (size n) (Negative) Expected Imrpovement of `x`.
+            (size 1) (Negative) expected improvement of `x`.
         """
-        
+
+        # check that only one point is queried
+        if x.size(0) != 1:
+            raise ValueError("Only one point (size 1 x d) can be computed at a time.")
+
         # reshape tensor to (batch_size x dims)
         x = torch.reshape(x, (-1, self.dims))
 
@@ -121,10 +123,9 @@ class MCExpectedImprovement(AcquisitionFunction):
         
         return -ei
 
-
 class MCUpperConfidenceBound(AcquisitionFunction):
     r"""
-    Monte Carlo Upper Confidence Bound acquisition function:
+    Monte Carlo upper confidence bound acquisition function:
 
     .. math::
         \alpha_{UCB}^{MC} (\boldsymbol X_*) = \max \left(\mu_n(\boldsymbol X_*) + \sqrt{\frac{\beta \pi}{2}} \lvert \boldsymbol L \boldsymbol z \rvert \right),
@@ -198,19 +199,23 @@ class MCUpperConfidenceBound(AcquisitionFunction):
 
     def eval(self, x: Tensor) -> Tensor:
         """
-        Computes the (negative) Upper Confidence Bound for some test points
-        `x` by averaging Monte Carlo samples.
+        Computes the (negative) upper confidence bound for some test point `x`
+        by averaging Monte Carlo samples.
 
         Parameters
         ----------
         x : ``torch.Tensor``
-            (size n x d) Test points.
+            (size 1 x d) Test point.
 
         Returns
         -------
         ``torch.Tensor``
-            (size n) (Negative) Upper Confidence Bound of `x`.
+            (size 1) (Negative) upper confidence bound of `x`.
         """
+
+        # check that only one point is queried
+        if x.size(0) != 1:
+            raise ValueError("Only one point (size 1 x d) can be computed at a time.")
 
         # reshape tensor to (batch_size x dims)
         x = torch.reshape(x, (-1, self.dims))

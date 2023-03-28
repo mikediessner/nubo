@@ -8,7 +8,7 @@ from typing import Optional
 
 class ExpectedImprovement(AcquisitionFunction):
     r"""
-    Expected Improvement acquisition function:
+    Expected improvement acquisition function:
 
     .. math::
         \alpha_{EI} (\boldsymbol X_*) = \left(\mu_n(\boldsymbol X_*) - y^{best} \right) \Phi(z) + \sigma_n(\boldsymbol X_*) \phi(z),
@@ -45,20 +45,24 @@ class ExpectedImprovement(AcquisitionFunction):
         
     def eval(self, x: Tensor) -> Tensor:
         """
-        Computes the (negative) Expected Improvement for some test points `x`
+        Computes the (negative) expected improvement for some test point `x`
         analytically.
 
         Parameters
         ----------
         x : ``torch.Tensor``
-            (size n x d) Test points.
+            (size 1 x d) Test point.
 
         Returns
         -------
         ``torch.Tensor``
-            (size n) (Negative) Expected Imrpovement of `x`.
+            (size 1) (Negative) expected improvement of `x`.
         """
 
+        # check that only one point is queried
+        if x.size(0) != 1:
+            raise ValueError("Only one point (size 1 x d) can be computed at a time.")
+        
         # set Gaussian Process to eval mode
         self.gp.eval()
 
@@ -79,7 +83,7 @@ class ExpectedImprovement(AcquisitionFunction):
 
 class UpperConfidenceBound(AcquisitionFunction):
     r"""
-    Upper Confidence Bound acquisition function:
+    Upper confidence bound acquisition function:
 
     .. math::
         \alpha_{UCB} (\boldsymbol X_*) = \mu_n(\boldsymbol X_*) + \sqrt{\beta} \sigma_n(\boldsymbol X_*),
@@ -113,19 +117,23 @@ class UpperConfidenceBound(AcquisitionFunction):
 
     def eval(self, x: Tensor) -> Tensor:
         """
-        Computes the (negative) Upper Confidence Bound for some test points
+        Computes the (negative) upper confidence bound for some test point
         `x` analytically.
 
         Parameters
         ----------
         x : ``torch.Tensor``
-            (size n x d) Test points.
+            (size 1 x d) Test point.
 
         Returns
         -------
         ``torch.Tensor``
-            (size n) (Negative) Upper Confidence Bound of `x`.
+            (size 1) (Negative) upper confidence bound of `x`.
         """
+
+        # check that only one point is queried
+        if x.size(0) != 1:
+            raise ValueError("Only one point (size 1 x d) can be computed at a time.")
         
         # set Gaussian Process to eval mode
         self.gp.eval()

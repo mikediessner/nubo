@@ -81,6 +81,9 @@ def sequential(func: Callable,
         else:
             func.x_pending = x_new
 
+        # reset fixed base samples
+        func.base_samples = None
+
     return batch_result, batch_func_result
 
 

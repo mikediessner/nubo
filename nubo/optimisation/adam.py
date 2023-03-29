@@ -127,4 +127,4 @@ def adam(func: Callable,
     best_result =  torch.reshape(results[best_i, :], (1, -1))
     best_func_result = func_results[best_i]
 
-    return best_result, best_func_result
+    return best_result, torch.reshape(best_func_result, (1,))

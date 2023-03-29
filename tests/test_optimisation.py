@@ -12,7 +12,7 @@ class TestCandidateGeneration(unittest.TestCase):
 
     def test_gen_candidates(self):
         """
-        Test that a n x d torch.Tensor is returned that sticks to the bounds.
+        Test that a (n, d) torch.Tensor is returned that sticks to the bounds.
         """
 
         # inputs
@@ -33,7 +33,7 @@ class TestCandidateGeneration(unittest.TestCase):
 
         # test
         self.assertIsInstance(points, torch.Tensor)
-        self.assertEqual(points.size(), (n, 3))
+        self.assertEqual(points.size(), torch.Size([n, 3]))
         self.assertTrue(torch.min(points[:, 0]) >= lb[0] and torch.max(points[:, 0] <= ub[0]))
         self.assertTrue(torch.min(points[:, 1]) >= lb[1] and torch.max(points[:, 1] <= ub[1]))
         self.assertTrue(torch.min(points[:, 2]) >= lb[2] and torch.max(points[:, 2] <= ub[2]))
@@ -43,8 +43,8 @@ class TestLBFGSB(unittest.TestCase):
 
     def test_lbfgsb(self):
         """
-        Test that L-BGFGS-B returns inputs as a 1 x dims torch.Tensor and ouput
-        as a () torch.Tensor.
+        Test that L-BGFGS-B returns inputs as a (1, dims) torch.Tensor and
+        ouput as a (1, ) torch.Tensor.
         """
 
         # inputs
@@ -63,16 +63,16 @@ class TestLBFGSB(unittest.TestCase):
         # test
         self.assertIsInstance(x, torch.Tensor)
         self.assertIsInstance(f_x, torch.Tensor)
-        self.assertEqual(x.size(), (1, 2))
-        self.assertEqual(f_x.size(), ())
+        self.assertEqual(x.size(), torch.Size([1, 2]))
+        self.assertEqual(f_x.size(), torch.Size([1]))
 
 
 class TestSLSQP(unittest.TestCase):
 
     def test_slsqp_one_constraint(self):
         """
-        Test that SLSQP returns inputs as a 1 x dims torch.Tensor and ouput as
-        a () torch.Tensor with one constraint.
+        Test that SLSQP returns inputs as a (1, d) torch.Tensor and ouput as a
+        (1, ) torch.Tensor with one constraint.
         """
 
         # inputs
@@ -92,13 +92,13 @@ class TestSLSQP(unittest.TestCase):
         # test
         self.assertIsInstance(x, torch.Tensor)
         self.assertIsInstance(f_x, torch.Tensor)
-        self.assertEqual(x.size(), (1, 2))
-        self.assertEqual(f_x.size(), ())
+        self.assertEqual(x.size(), torch.Size([1, 2]))
+        self.assertEqual(f_x.size(), torch.Size([1]))
     
     def test_slsqp_two_constraints(self):
         """
-        Test that SLSQP returns inputs as a 1 x dims torch.Tensor and ouput as
-        a () torch.Tensor with two constraints.
+        Test that SLSQP returns inputs as a (1, d) torch.Tensor and ouput as a
+        (1, ) torch.Tensor with two constraints.
         """
 
         # inputs
@@ -119,16 +119,16 @@ class TestSLSQP(unittest.TestCase):
         # test
         self.assertIsInstance(x, torch.Tensor)
         self.assertIsInstance(f_x, torch.Tensor)
-        self.assertEqual(x.size(), (1, 2))
-        self.assertEqual(f_x.size(), ())
+        self.assertEqual(x.size(), torch.Size([1, 2]))
+        self.assertEqual(f_x.size(), torch.Size([1]))
 
 
 class TestAdam(unittest.TestCase):
 
     def test_adam(self):
         """
-        Test that Adam returns inputs as a 1 x dims torch.Tensor and ouput as a
-        () torch.Tensor.
+        Test that Adam returns inputs as a (1, d) torch.Tensor and ouput as a
+        (1, ) torch.Tensor.
         """
 
         # inputs
@@ -147,22 +147,22 @@ class TestAdam(unittest.TestCase):
         # test
         self.assertIsInstance(x, torch.Tensor)
         self.assertIsInstance(f_x, torch.Tensor)
-        self.assertEqual(x.size(), (1, 2))
-        self.assertEqual(f_x.size(), ())
+        self.assertEqual(x.size(), torch.Size([1, 2]))
+        self.assertEqual(f_x.size(), torch.Size([1]))
 
 
 class TestJoint(unittest.TestCase):
 
     def test_joint_adam(self):
         """
-        Test that Adam returns inputs as a 1 x dims torch.Tensor and ouput as a
-        () torch.Tensor.
+        Test that Adam returns inputs as a (q, d) torch.Tensor and ouput as a
+        (1, ) torch.Tensor for jointly computed batches.
         """
 
         # inputs
         n = 20
         d = 2
-        m = 4
+        q = 4
         X = torch.rand((n, d), dtype=torch.float64)
         y = torch.sum(X**2, axis=1)
         bounds = torch.tensor([[-5., -5.], [5., 5.]])
@@ -172,27 +172,55 @@ class TestJoint(unittest.TestCase):
         acq = MCUpperConfidenceBound(gp=gp, beta=1.96**2, samples=32)
         
         # run code
-        x, f_x = joint(func=acq, method="Adam", batch_size=m, bounds=bounds, num_starts=1)
+        x, f_x = joint(func=acq, method="Adam", batch_size=q, bounds=bounds, num_starts=1)
 
         # test
         self.assertIsInstance(x, torch.Tensor)
         self.assertIsInstance(f_x, torch.Tensor)
-        self.assertEqual(x.size(), (m, 2))
-        self.assertEqual(f_x.size(), ()) # ?????
+        self.assertEqual(x.size(), torch.Size([q, 2]))
+        self.assertEqual(f_x.size(), torch.Size([1]))
 
+    def test_joint_lbfgsb(self):
+        """
+        Test that L-BFGS-B returns inputs as a (q, d) torch.Tensor and ouput as
+        a (1, ) torch.Tensor for jointly computed batches with fixed base
+        samples.
+        """
+
+        # inputs
+        n = 20
+        d = 2
+        q = 4
+        X = torch.rand((n, d), dtype=torch.float64)
+        y = torch.sum(X**2, axis=1)
+        bounds = torch.tensor([[-5., -5.], [5., 5.]])
+        likelihood = GaussianLikelihood()
+        gp = GaussianProcess(X, y, likelihood=likelihood)
+        fit_gp(X, y, gp=gp, likelihood=likelihood)
+        acq = MCUpperConfidenceBound(gp=gp, beta=1.96**2, samples=32, fix_base_samples=True)
+        
+        # run code
+        x, f_x = joint(func=acq, method="L-BFGS-B", batch_size=q, bounds=bounds, num_starts=1)
+
+        # test
+        self.assertIsInstance(x, torch.Tensor)
+        self.assertIsInstance(f_x, torch.Tensor)
+        self.assertEqual(x.size(), torch.Size([q, 2]))
+        self.assertEqual(f_x.size(), torch.Size([1]))
+    
 
 class TestSequential(unittest.TestCase):
 
     def test_sequential_adam(self):
         """
-        Test that Adam returns inputs as a 1 x dims torch.Tensor and ouput as a
-        () torch.Tensor.
+        Test that Adam returns inputs as a (q, d) torch.Tensor and ouput as a
+        (1, ) torch.Tensor for sequentially computed batches.
         """
 
         # inputs
         n = 20
         d = 2
-        m = 4
+        q = 4
         X = torch.rand((n, d), dtype=torch.float64)
         y = torch.sum(X**2, axis=1)
         bounds = torch.tensor([[-5., -5.], [5., 5.]])
@@ -202,68 +230,70 @@ class TestSequential(unittest.TestCase):
         acq = MCUpperConfidenceBound(gp=gp, beta=1.96**2, samples=32)
         
         # run code
-        x, f_x = sequential(func=acq, method="Adam", batch_size=m, bounds=bounds, num_starts=1)
+        x, f_x = sequential(func=acq, method="Adam", batch_size=q, bounds=bounds, num_starts=1)
 
         # test
         self.assertIsInstance(x, torch.Tensor)
         self.assertIsInstance(f_x, torch.Tensor)
-        self.assertEqual(x.size(), (m, 2))
-        self.assertEqual(f_x.size(), (m, ))
+        self.assertEqual(x.size(), torch.Size([q, 2]))
+        self.assertEqual(f_x.size(), torch.Size([q]))
     
-    # def test_sequential_lbfgsb(self):
-    #     """
-    #     Test that L-BFGS-B returns inputs as a 1 x dims torch.Tensor and ouput
-    #     as a () torch.Tensor.
-    #     """
+    def test_sequential_lbfgsb(self):
+        """
+        Test that L-BFGS-B returns inputs as a (q, d) torch.Tensor and ouput as
+        a (1, ) torch.Tensor for sequentially computed batches with fixed base
+        samples.
+        """
 
-    #     # inputs
-    #     n = 20
-    #     d = 2
-    #     m = 4
-    #     X = torch.rand((n, d), dtype=torch.float64)
-    #     y = torch.sum(X**2, axis=1)
-    #     bounds = torch.tensor([[-5., -5.], [5., 5.]])
-    #     likelihood = GaussianLikelihood()
-    #     gp = GaussianProcess(X, y, likelihood=likelihood)
-    #     fit_gp(X, y, gp=gp, likelihood=likelihood)
-    #     acq = MCUpperConfidenceBound(gp=gp, beta=1.96**2, samples=32, fix_base_samples=True)
+        # inputs
+        n = 20
+        d = 2
+        q = 4
+        X = torch.rand((n, d), dtype=torch.float64)
+        y = torch.sum(X**2, axis=1)
+        bounds = torch.tensor([[-5., -5.], [5., 5.]])
+        likelihood = GaussianLikelihood()
+        gp = GaussianProcess(X, y, likelihood=likelihood)
+        fit_gp(X, y, gp=gp, likelihood=likelihood)
+        acq = MCUpperConfidenceBound(gp=gp, beta=1.96**2, samples=32, fix_base_samples=True)
         
-    #     # run code
-    #     x, f_x = sequential(func=acq, method="L-BFGS-B", batch_size=m, bounds=bounds, num_starts=1)
+        # run code
+        x, f_x = sequential(func=acq, method="L-BFGS-B", batch_size=q, bounds=bounds, num_starts=1)
 
-    #     # test
-    #     self.assertIsInstance(x, torch.Tensor)
-    #     self.assertIsInstance(f_x, torch.Tensor)
-    #     self.assertEqual(x.size(), (m, 2))
-    #     self.assertEqual(f_x.size(), (m, ))
+        # test
+        self.assertIsInstance(x, torch.Tensor)
+        self.assertIsInstance(f_x, torch.Tensor)
+        self.assertEqual(x.size(), torch.Size([q, 2]))
+        self.assertEqual(f_x.size(), torch.Size([q]))
     
-    # def test_sequential_slsqp(self):
-    #     """
-    #     Test that SLSQP returns inputs as a 1 x dims torch.Tensor and ouput as
-    #     a () torch.Tensor.
-    #     """
+    def test_sequential_slsqp(self):
+        """
+        Test that SLSQP returns inputs as a (q, d) torch.Tensor and ouput as
+        a (1, ) torch.Tensor for sequentially computed batches with fixed base
+        samples and one constraint.
+        """
 
-    #     # inputs
-    #     n = 20
-    #     d = 2
-    #     m = 4
-    #     X = torch.rand((n, d), dtype=torch.float64)
-    #     y = torch.sum(X**2, axis=1)
-    #     bounds = torch.tensor([[-5., -5.], [5., 5.]])
-    #     constraint = {"type": "ineq", "fun": lambda x: 5.0 - x[0]}
-    #     likelihood = GaussianLikelihood()
-    #     gp = GaussianProcess(X, y, likelihood=likelihood)
-    #     fit_gp(X, y, gp=gp, likelihood=likelihood)
-    #     acq = MCUpperConfidenceBound(gp=gp, beta=1.96**2, samples=32, fix_base_samples=True)
+        # inputs
+        n = 20
+        d = 2
+        q = 4
+        X = torch.rand((n, d), dtype=torch.float64)
+        y = torch.sum(X**2, axis=1)
+        bounds = torch.tensor([[-5., -5.], [5., 5.]])
+        constraint = {"type": "ineq", "fun": lambda x: 5.0 - x[0]}
+        likelihood = GaussianLikelihood()
+        gp = GaussianProcess(X, y, likelihood=likelihood)
+        fit_gp(X, y, gp=gp, likelihood=likelihood)
+        acq = MCUpperConfidenceBound(gp=gp, beta=1.96**2, samples=32, fix_base_samples=True)
         
-    #     # run code
-    #     x, f_x = sequential(func=acq, method="SLSQP", batch_size=m, bounds=bounds, constraints=constraint, num_starts=1)
+        # run code
+        x, f_x = sequential(func=acq, method="SLSQP", batch_size=q, bounds=bounds, constraints=constraint, num_starts=1)
 
-    #     # test
-    #     self.assertIsInstance(x, torch.Tensor)
-    #     self.assertIsInstance(f_x, torch.Tensor)
-    #     self.assertEqual(x.size(), (m, 2))
-    #     self.assertEqual(f_x.size(), (m, ))
+        # test
+        self.assertIsInstance(x, torch.Tensor)
+        self.assertIsInstance(f_x, torch.Tensor)
+        self.assertEqual(x.size(), torch.Size([q, 2]))
+        self.assertEqual(f_x.size(), torch.Size([q]))
 
 
 if __name__ == "__main__":

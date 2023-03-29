@@ -91,10 +91,6 @@ class MCExpectedImprovement(AcquisitionFunction):
             (size 1) (Negative) expected improvement of `x`.
         """
 
-        # check that only one point is queried
-        if x.size(0) != 1:
-            raise ValueError("Only one point (size 1 x d) can be computed at a time.")
-
         # reshape tensor to (batch_size x dims)
         x = torch.reshape(x, (-1, self.dims))
 
@@ -119,7 +115,7 @@ class MCExpectedImprovement(AcquisitionFunction):
         # compute Expected Improvement
         ei = torch.clamp(samples - self.y_best, min=0)
         ei = ei.max(dim=1).values
-        ei = ei.mean(dim=0) # average samples
+        ei = ei.mean(dim=0, keepdim=True) # average samples
         
         return -ei
 
@@ -213,10 +209,6 @@ class MCUpperConfidenceBound(AcquisitionFunction):
             (size 1) (Negative) upper confidence bound of `x`.
         """
 
-        # check that only one point is queried
-        if x.size(0) != 1:
-            raise ValueError("Only one point (size 1 x d) can be computed at a time.")
-
         # reshape tensor to (batch_size x dims)
         x = torch.reshape(x, (-1, self.dims))
 
@@ -241,6 +233,6 @@ class MCUpperConfidenceBound(AcquisitionFunction):
         # compute Upper Confidence Bound
         ucb = mean + self.beta_coeff * torch.abs(samples - mean)
         ucb = ucb.max(dim=1).values
-        ucb = ucb.mean(dim=0) # average samples
+        ucb = ucb.mean(dim=0, keepdim=True) # average samples
 
         return -ucb

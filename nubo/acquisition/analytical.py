@@ -77,8 +77,9 @@ class ExpectedImprovement(AcquisitionFunction):
         norm = Normal(torch.tensor([0.0]), torch.tensor([1.0]))
         z = (mean - self.y_best)/std
         ei = (mean - self.y_best)*norm.cdf(z) + std*torch.exp(norm.log_prob(z))
+        ei = ei.clamp_min(0.)
 
-        return -ei.clamp_min(0.)
+        return -ei
 
 
 class UpperConfidenceBound(AcquisitionFunction):

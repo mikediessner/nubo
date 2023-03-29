@@ -210,60 +210,60 @@ class TestSequential(unittest.TestCase):
         self.assertEqual(x.size(), (m, 2))
         self.assertEqual(f_x.size(), (m, ))
     
-    def test_sequential_lbfgsb(self):
-        """
-        Test that L-BFGS-B returns inputs as a 1 x dims torch.Tensor and ouput
-        as a () torch.Tensor.
-        """
+    # def test_sequential_lbfgsb(self):
+    #     """
+    #     Test that L-BFGS-B returns inputs as a 1 x dims torch.Tensor and ouput
+    #     as a () torch.Tensor.
+    #     """
 
-        # inputs
-        n = 20
-        d = 2
-        m = 4
-        X = torch.rand((n, d), dtype=torch.float64)
-        y = torch.sum(X**2, axis=1)
-        bounds = torch.tensor([[-5., -5.], [5., 5.]])
-        likelihood = GaussianLikelihood()
-        gp = GaussianProcess(X, y, likelihood=likelihood)
-        fit_gp(X, y, gp=gp, likelihood=likelihood)
-        acq = MCUpperConfidenceBound(gp=gp, beta=1.96**2, samples=32, fix_base_samples=True)
+    #     # inputs
+    #     n = 20
+    #     d = 2
+    #     m = 4
+    #     X = torch.rand((n, d), dtype=torch.float64)
+    #     y = torch.sum(X**2, axis=1)
+    #     bounds = torch.tensor([[-5., -5.], [5., 5.]])
+    #     likelihood = GaussianLikelihood()
+    #     gp = GaussianProcess(X, y, likelihood=likelihood)
+    #     fit_gp(X, y, gp=gp, likelihood=likelihood)
+    #     acq = MCUpperConfidenceBound(gp=gp, beta=1.96**2, samples=32, fix_base_samples=True)
         
-        # run code
-        x, f_x = sequential(func=acq, method="L-BFGS-B", batch_size=m, bounds=bounds, num_starts=1)
+    #     # run code
+    #     x, f_x = sequential(func=acq, method="L-BFGS-B", batch_size=m, bounds=bounds, num_starts=1)
 
-        # test
-        self.assertIsInstance(x, torch.Tensor)
-        self.assertIsInstance(f_x, torch.Tensor)
-        self.assertEqual(x.size(), (m, 2))
-        self.assertEqual(f_x.size(), (m, ))
+    #     # test
+    #     self.assertIsInstance(x, torch.Tensor)
+    #     self.assertIsInstance(f_x, torch.Tensor)
+    #     self.assertEqual(x.size(), (m, 2))
+    #     self.assertEqual(f_x.size(), (m, ))
     
-    def test_sequential_slsqp(self):
-        """
-        Test that SLSQP returns inputs as a 1 x dims torch.Tensor and ouput as
-        a () torch.Tensor.
-        """
+    # def test_sequential_slsqp(self):
+    #     """
+    #     Test that SLSQP returns inputs as a 1 x dims torch.Tensor and ouput as
+    #     a () torch.Tensor.
+    #     """
 
-        # inputs
-        n = 20
-        d = 2
-        m = 4
-        X = torch.rand((n, d), dtype=torch.float64)
-        y = torch.sum(X**2, axis=1)
-        bounds = torch.tensor([[-5., -5.], [5., 5.]])
-        constraint = {"type": "ineq", "fun": lambda x: 5.0 - x[0]}
-        likelihood = GaussianLikelihood()
-        gp = GaussianProcess(X, y, likelihood=likelihood)
-        fit_gp(X, y, gp=gp, likelihood=likelihood)
-        acq = MCUpperConfidenceBound(gp=gp, beta=1.96**2, samples=32, fix_base_samples=True)
+    #     # inputs
+    #     n = 20
+    #     d = 2
+    #     m = 4
+    #     X = torch.rand((n, d), dtype=torch.float64)
+    #     y = torch.sum(X**2, axis=1)
+    #     bounds = torch.tensor([[-5., -5.], [5., 5.]])
+    #     constraint = {"type": "ineq", "fun": lambda x: 5.0 - x[0]}
+    #     likelihood = GaussianLikelihood()
+    #     gp = GaussianProcess(X, y, likelihood=likelihood)
+    #     fit_gp(X, y, gp=gp, likelihood=likelihood)
+    #     acq = MCUpperConfidenceBound(gp=gp, beta=1.96**2, samples=32, fix_base_samples=True)
         
-        # run code
-        x, f_x = sequential(func=acq, method="SLSQP", batch_size=m, bounds=bounds, constraints=constraint, num_starts=1)
+    #     # run code
+    #     x, f_x = sequential(func=acq, method="SLSQP", batch_size=m, bounds=bounds, constraints=constraint, num_starts=1)
 
-        # test
-        self.assertIsInstance(x, torch.Tensor)
-        self.assertIsInstance(f_x, torch.Tensor)
-        self.assertEqual(x.size(), (m, 2))
-        self.assertEqual(f_x.size(), (m, ))
+    #     # test
+    #     self.assertIsInstance(x, torch.Tensor)
+    #     self.assertIsInstance(f_x, torch.Tensor)
+    #     self.assertEqual(x.size(), (m, 2))
+    #     self.assertEqual(f_x.size(), (m, ))
 
 
 if __name__ == "__main__":

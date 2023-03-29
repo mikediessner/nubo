@@ -48,7 +48,8 @@ def slsqp(func: Callable,
     
     # generate candidates
     candidates = gen_candidates(func, bounds, num_starts, num_samples)
-
+    candidates = candidates.numpy()
+    
     # initialise objects for results
     results = torch.zeros((num_starts, dims))
     func_results = torch.zeros(num_starts)

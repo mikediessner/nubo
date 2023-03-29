@@ -45,6 +45,7 @@ def lbfgsb(func: Callable,
     
     # generate candidates
     candidates = gen_candidates(func, bounds, num_starts, num_samples)
+    candidates = candidates.numpy()
 
     # initialise objects for results
     results = torch.zeros((num_starts, dims))
@@ -52,8 +53,7 @@ def lbfgsb(func: Callable,
     
     # iteratively optimise over candidates
     for i in range(num_starts):
-        candidate = candidates[i]
-        result = minimize(func, x0=candidate, method="L-BFGS-B", bounds=opt_bounds, **kwargs)
+        result = minimize(func, x0=candidates[i], method="L-BFGS-B", bounds=opt_bounds, **kwargs)
         results[i, :] = torch.from_numpy(result["x"].reshape(1, -1))
         func_results[i] = float(result["fun"])
 

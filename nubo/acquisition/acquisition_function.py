@@ -18,17 +18,22 @@ class AcquisitionFunction:
 
         Parameters
         ----------
-        x : ``torch.Tesor` or ``numpy.ndarray`
+        x : ``torch.Tensor`` or ``numpy.ndarray``
             (size 1 x d) Test point.
+        
+        Returns
+        -------
+        ``torch.Tensor`` or ``float``
+            (size 1 or ``float``) Acquisition.
         """
 
         if isinstance(x, ndarray):
-            x = torch.from_numpy(x).unsqueeze(0)
+            x = torch.from_numpy(x)
             acq = self.eval(x)
-            acq = acq.squeeze().detach().numpy()
+            acq = float(acq)
         elif isinstance(x, Tensor):
             acq = self.eval(x)
         else:
-            ValueError("x must be np.ndarray or torch.Tensor")
+            raise ValueError("x must be np.ndarray or torch.Tensor")
 
         return acq

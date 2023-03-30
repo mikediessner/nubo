@@ -123,7 +123,7 @@ def adam(func: Callable,
         func_results[i] = fun
     
     # select best candidate
-    best_i = torch.argmax(func_results)
+    best_i = torch.argmin(func_results)
     best_result =  torch.reshape(results[best_i, :], (1, -1))
     best_func_result = func_results[best_i]
 

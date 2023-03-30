@@ -61,7 +61,7 @@ def slsqp(func: Callable,
         func_results[i] = float(result["fun"])
     
     # select best candidate
-    best_i = torch.argmax(func_results)
+    best_i = torch.argmin(func_results)
     best_result =  torch.reshape(results[best_i, :], (1, -1))
     best_func_result = torch.reshape(func_results[best_i], (1,))
 

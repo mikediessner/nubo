@@ -106,6 +106,20 @@ with maximum likelihood estimation (MLE) using ``torch``'s Adam optimiser.
     # fit Gaussian process
     fit_gp(x_train, y_train, gp=gp, likelihood=likelihood, lr=0.1, steps=200)
 
+The estimated parameters of the Gaussian process can be viewed as follows:
+
+.. code-block:: python
+
+    print(f"Covariance kernel output-scale: {gp.covar_module.outputscale.item()}")
+    print(f"Covariance kernel length-scale: {gp.covar_module.base_kernel.lengthscale.detach()}")
+    print(f"Estimated noise/nugget: {likelihood.noise.item()}")
+
+::
+
+    Covariance kernel output-scale: 0.1160
+    Covariance kernel length-scale: tensor([[3.1205, 0.2160, 4.9657, 0.4887, 0.2444, 0.4630]])
+    Estimated noise/nugget: 0.0079
+
 Make predictions for test points
 --------------------------------
 With the fitted Gaussian process in hand, we can easily predict the mean and
@@ -137,7 +151,7 @@ process specified above.
 
 ::
 
-    Mean: tensor([ 0.2188,  0.1616, -0.0127,  0.0252, -0.0069], dtype=torch.float64)
-    Variance: tensor([0.0136, 0.0191, 0.0252, 0.0164, 0.0343], dtype=torch.float64)
+    Mean: tensor([ 0.4491, -0.0391,  0.6764,  0.3965,  0.3495], dtype=torch.float64)
+    Variance: tensor([0.0318, 0.0294, 0.0374, 0.0173, 0.0194], dtype=torch.float64) 
 
 .. _documentation: https://docs.gpytorch.ai/en/stable

@@ -223,7 +223,7 @@
 
 <div class="viewcode-block" id="ExpectedImprovement"><a class="viewcode-back" href="../../../nubo.acquisition.html#nubo.acquisition.analytical.ExpectedImprovement">[docs]</a><span class="k">class</span> <span class="nc">ExpectedImprovement</span><span class="p">(</span><span class="n">AcquisitionFunction</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Expected Improvement acquisition function:</span>
+<span class="sd">    Expected improvement acquisition function:</span>
 
 <span class="sd">    .. math::</span>
 <span class="sd">        \alpha_{EI} (\boldsymbol X_*) = \left(\mu_n(\boldsymbol X_*) - y^{best} \right) \Phi(z) + \sigma_n(\boldsymbol X_*) \phi(z),</span>
@@ -260,20 +260,24 @@
         
 <div class="viewcode-block" id="ExpectedImprovement.eval"><a class="viewcode-back" href="../../../nubo.acquisition.html#nubo.acquisition.analytical.ExpectedImprovement.eval">[docs]</a>    <span class="k">def</span> <span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Computes the (negative) Expected Improvement for some test points `x`</span>
+<span class="sd">        Computes the (negative) expected improvement for some test point `x`</span>
 <span class="sd">        analytically.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        x : ``torch.Tensor``</span>
-<span class="sd">            (size n x d) Test points.</span>
+<span class="sd">            (size 1 x d) Test point.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        ``torch.Tensor``</span>
-<span class="sd">            (size n) (Negative) Expected Imrpovement of `x`.</span>
+<span class="sd">            (size 1) (Negative) expected improvement of `x`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
+        <span class="c1"># check that only one point is queried</span>
+        <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Only one point (size 1 x d) can be computed at a time.&quot;</span><span class="p">)</span>
+        
         <span class="c1"># set Gaussian Process to eval mode</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gp</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
 
@@ -288,13 +292,14 @@
         <span class="n">norm</span> <span class="o">=</span> <span class="n">Normal</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mf">0.0</span><span class="p">]),</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mf">1.0</span><span class="p">]))</span>
         <span class="n">z</span> <span class="o">=</span> <span class="p">(</span><span class="n">mean</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_best</span><span class="p">)</span><span class="o">/</span><span class="n">std</span>
         <span class="n">ei</span> <span class="o">=</span> <span class="p">(</span><span class="n">mean</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_best</span><span class="p">)</span><span class="o">*</span><span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="o">+</span> <span class="n">std</span><span class="o">*</span><span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">norm</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">z</span><span class="p">))</span>
+        <span class="n">ei</span> <span class="o">=</span> <span class="n">ei</span><span class="o">.</span><span class="n">clamp_min</span><span class="p">(</span><span class="mf">0.</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="o">-</span><span class="n">ei</span><span class="o">.</span><span class="n">clamp_min</span><span class="p">(</span><span class="mf">0.</span><span class="p">)</span></div></div>
+        <span class="k">return</span> <span class="o">-</span><span class="n">ei</span></div></div>
 
 
 <div class="viewcode-block" id="UpperConfidenceBound"><a class="viewcode-back" href="../../../nubo.acquisition.html#nubo.acquisition.analytical.UpperConfidenceBound">[docs]</a><span class="k">class</span> <span class="nc">UpperConfidenceBound</span><span class="p">(</span><span class="n">AcquisitionFunction</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Upper Confidence Bound acquisition function:</span>
+<span class="sd">    Upper confidence bound acquisition function:</span>
 
 <span class="sd">    .. math::</span>
 <span class="sd">        \alpha_{UCB} (\boldsymbol X_*) = \mu_n(\boldsymbol X_*) + \sqrt{\beta} \sigma_n(\boldsymbol X_*),</span>
@@ -328,19 +333,23 @@
 
 <div class="viewcode-block" id="UpperConfidenceBound.eval"><a class="viewcode-back" href="../../../nubo.acquisition.html#nubo.acquisition.analytical.UpperConfidenceBound.eval">[docs]</a>    <span class="k">def</span> <span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Computes the (negative) Upper Confidence Bound for some test points</span>
+<span class="sd">        Computes the (negative) upper confidence bound for some test point</span>
 <span class="sd">        `x` analytically.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        x : ``torch.Tensor``</span>
-<span class="sd">            (size n x d) Test points.</span>
+<span class="sd">            (size 1 x d) Test point.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        ``torch.Tensor``</span>
-<span class="sd">            (size n) (Negative) Upper Confidence Bound of `x`.</span>
+<span class="sd">            (size 1) (Negative) upper confidence bound of `x`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># check that only one point is queried</span>
+        <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Only one point (size 1 x d) can be computed at a time.&quot;</span><span class="p">)</span>
         
         <span class="c1"># set Gaussian Process to eval mode</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gp</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>

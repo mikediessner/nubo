@@ -278,7 +278,7 @@
     <span class="c1"># sequential optimisation loop</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">batch_size</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;L-BFGS-B&quot;</span><span class="p">:</span>
-            <span class="n">x_new</span><span class="p">,</span> <span class="n">f_x_new</span> <span class="o">=</span> <span class="n">lbfgsb</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">bounds</span><span class="p">,</span> <span class="n">num_starts</span><span class="p">,</span> <span class="n">num_samples</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">x_new</span><span class="p">,</span> <span class="n">f_x_new</span> <span class="o">=</span> <span class="n">lbfgsb</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">bounds</span><span class="p">,</span> <span class="n">num_starts</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;SLSQP&quot;</span><span class="p">:</span>
             <span class="n">x_new</span><span class="p">,</span> <span class="n">f_x_new</span> <span class="o">=</span> <span class="n">slsqp</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">bounds</span><span class="p">,</span> <span class="n">constraints</span><span class="p">,</span> <span class="n">num_starts</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;Adam&quot;</span><span class="p">:</span>
@@ -295,6 +295,9 @@
             <span class="n">func</span><span class="o">.</span><span class="n">x_pending</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">func</span><span class="o">.</span><span class="n">x_pending</span><span class="p">,</span> <span class="n">x_new</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">func</span><span class="o">.</span><span class="n">x_pending</span> <span class="o">=</span> <span class="n">x_new</span>
+
+        <span class="c1"># reset fixed base samples</span>
+        <span class="n">func</span><span class="o">.</span><span class="n">base_samples</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">return</span> <span class="n">batch_result</span><span class="p">,</span> <span class="n">batch_func_result</span></div>
 

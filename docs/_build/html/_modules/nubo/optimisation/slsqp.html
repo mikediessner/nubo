@@ -263,7 +263,8 @@
     
     <span class="c1"># generate candidates</span>
     <span class="n">candidates</span> <span class="o">=</span> <span class="n">gen_candidates</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">bounds</span><span class="p">,</span> <span class="n">num_starts</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">)</span>
-
+    <span class="n">candidates</span> <span class="o">=</span> <span class="n">candidates</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+    
     <span class="c1"># initialise objects for results</span>
     <span class="n">results</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_starts</span><span class="p">,</span> <span class="n">dims</span><span class="p">))</span>
     <span class="n">func_results</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_starts</span><span class="p">)</span>
@@ -277,7 +278,7 @@
     <span class="c1"># select best candidate</span>
     <span class="n">best_i</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">func_results</span><span class="p">)</span>
     <span class="n">best_result</span> <span class="o">=</span>  <span class="n">torch</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="n">best_i</span><span class="p">,</span> <span class="p">:],</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
-    <span class="n">best_func_result</span> <span class="o">=</span> <span class="n">func_results</span><span class="p">[</span><span class="n">best_i</span><span class="p">]</span>
+    <span class="n">best_func_result</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">func_results</span><span class="p">[</span><span class="n">best_i</span><span class="p">],</span> <span class="p">(</span><span class="mi">1</span><span class="p">,))</span>
 
     <span class="k">return</span> <span class="n">best_result</span><span class="p">,</span> <span class="n">best_func_result</span></div>
 </pre></div>

@@ -248,7 +248,7 @@
 <dt class="sig sig-object py" id="nubo.acquisition.analytical.ExpectedImprovement">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.acquisition.analytical.</span></span><span class="sig-name descname"><span class="pre">ExpectedImprovement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GP</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_best</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/acquisition/analytical.html#ExpectedImprovement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.acquisition.analytical.ExpectedImprovement" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nubo.acquisition.acquisition_function.AcquisitionFunction" title="nubo.acquisition.acquisition_function.AcquisitionFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">AcquisitionFunction</span></code></a></p>
-<p>Expected Improvement acquisition function:</p>
+<p>Expected improvement acquisition function:</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
 \[\alpha_{EI} (\boldsymbol X_*) = \left(\mu_n(\boldsymbol X_*) - y^{best} \right) \Phi(z) + \sigma_n(\boldsymbol X_*) \phi(z),\]</div>
@@ -274,7 +274,7 @@ probability density function of the standard normal distribution.</p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#nubo.acquisition.analytical.ExpectedImprovement.eval" title="nubo.acquisition.analytical.ExpectedImprovement.eval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval</span></code></a>(x)</p></td>
-<td><p>Computes the (negative) Expected Improvement for some test points <cite>x</cite> analytically.</p></td>
+<td><p>Computes the (negative) expected improvement for some test point <cite>x</cite> analytically.</p></td>
 </tr>
 </tbody>
 </table>
@@ -282,18 +282,18 @@ probability density function of the standard normal distribution.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="nubo.acquisition.analytical.ExpectedImprovement.eval">
 <span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/acquisition/analytical.html#ExpectedImprovement.eval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.acquisition.analytical.ExpectedImprovement.eval" title="Permalink to this definition">#</a></dt>
-<dd><p>Computes the (negative) Expected Improvement for some test points <cite>x</cite>
+<dd><p>Computes the (negative) expected improvement for some test point <cite>x</cite>
 analytically.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>x</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x d) Test points.</p>
+<dt><strong>x</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 1 x d) Test point.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></dt><dd><p>(size n) (Negative) Expected Imrpovement of <cite>x</cite>.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></dt><dd><p>(size 1) (Negative) expected improvement of <cite>x</cite>.</p>
 </dd>
 </dl>
 </dd>
@@ -306,7 +306,7 @@ analytically.</p>
 <dt class="sig sig-object py" id="nubo.acquisition.analytical.UpperConfidenceBound">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.acquisition.analytical.</span></span><span class="sig-name descname"><span class="pre">UpperConfidenceBound</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GP</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/acquisition/analytical.html#UpperConfidenceBound"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.acquisition.analytical.UpperConfidenceBound" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nubo.acquisition.acquisition_function.AcquisitionFunction" title="nubo.acquisition.acquisition_function.AcquisitionFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">AcquisitionFunction</span></code></a></p>
-<p>Upper Confidence Bound acquisition function:</p>
+<p>Upper confidence bound acquisition function:</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
 \[\alpha_{UCB} (\boldsymbol X_*) = \mu_n(\boldsymbol X_*) + \sqrt{\beta} \sigma_n(\boldsymbol X_*),\]</div>
@@ -329,7 +329,7 @@ standard deviation of the posterior distribution of the Gaussian process.</p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#nubo.acquisition.analytical.UpperConfidenceBound.eval" title="nubo.acquisition.analytical.UpperConfidenceBound.eval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval</span></code></a>(x)</p></td>
-<td><p>Computes the (negative) Upper Confidence Bound for some test points <cite>x</cite> analytically.</p></td>
+<td><p>Computes the (negative) upper confidence bound for some test point <cite>x</cite> analytically.</p></td>
 </tr>
 </tbody>
 </table>
@@ -337,18 +337,18 @@ standard deviation of the posterior distribution of the Gaussian process.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="nubo.acquisition.analytical.UpperConfidenceBound.eval">
 <span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/acquisition/analytical.html#UpperConfidenceBound.eval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.acquisition.analytical.UpperConfidenceBound.eval" title="Permalink to this definition">#</a></dt>
-<dd><p>Computes the (negative) Upper Confidence Bound for some test points
+<dd><p>Computes the (negative) upper confidence bound for some test point
 <cite>x</cite> analytically.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>x</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x d) Test points.</p>
+<dt><strong>x</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 1 x d) Test point.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></dt><dd><p>(size n) (Negative) Upper Confidence Bound of <cite>x</cite>.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></dt><dd><p>(size 1) (Negative) upper confidence bound of <cite>x</cite>.</p>
 </dd>
 </dl>
 </dd>
@@ -370,7 +370,7 @@ standard deviation of the posterior distribution of the Gaussian process.</p>
 <dt class="sig sig-object py" id="nubo.acquisition.monte_carlo.MCExpectedImprovement">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.acquisition.monte_carlo.</span></span><span class="sig-name descname"><span class="pre">MCExpectedImprovement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GP</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_best</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_pending</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">512</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fix_base_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/acquisition/monte_carlo.html#MCExpectedImprovement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.acquisition.monte_carlo.MCExpectedImprovement" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nubo.acquisition.acquisition_function.AcquisitionFunction" title="nubo.acquisition.acquisition_function.AcquisitionFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">AcquisitionFunction</span></code></a></p>
-<p>Monte Carlo Expected Improvement acquisition function:</p>
+<p>Monte Carlo expected improvement acquisition function:</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
 \[\alpha_{EI}^{MC} (\boldsymbol X_*) = \max \left(ReLU(\mu_n(\boldsymbol X_*) + \boldsymbol L \boldsymbol z - y^{best}) \right),\]</div>
@@ -382,37 +382,92 @@ of the Cholesky decomposition of the covariance matrix
 <span class="math notranslate nohighlight">\(\boldsymbol z\)</span> are samples from the standard normal distribution
 <span class="math notranslate nohighlight">\(\mathcal{N} (0, 1)\)</span>, <span class="math notranslate nohighlight">\(y^{best}\)</span> is the current best
 observation, and <span class="math notranslate nohighlight">\(ReLU (\cdot)\)</span> is the rectified linear unit function
-that zeros all values below 0 and leaves the rest as is.</p>
-<dl class="field-list">
-<dt class="field-odd">Attributes<span class="colon">:</span></dt>
-<dd class="field-odd"><dl>
-<dt><strong>gp</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">gpytorch.models.GP</span></code></span></dt><dd><p>Gaussian Process model.</p>
+that zeros all values below 0 and leaves the rest as is.
+.. attribute:: gp</p>
+<blockquote>
+<div><p>Gaussian Process model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">gpytorch.models.GP</span></code></p>
 </dd>
-<dt><strong>y_best</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 1) Best output of training data.</p>
+</dl>
+</div></blockquote>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nubo.acquisition.monte_carlo.MCExpectedImprovement.y_best">
+<span class="sig-name descname"><span class="pre">y_best</span></span><a class="headerlink" href="#nubo.acquisition.monte_carlo.MCExpectedImprovement.y_best" title="Permalink to this definition">#</a></dt>
+<dd><p>(size 1) Best output of training data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></p>
 </dd>
-<dt><strong>x_pending</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x d) Training inputs of currently pending points.</p>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nubo.acquisition.monte_carlo.MCExpectedImprovement.x_pending">
+<span class="sig-name descname"><span class="pre">x_pending</span></span><a class="headerlink" href="#nubo.acquisition.monte_carlo.MCExpectedImprovement.x_pending" title="Permalink to this definition">#</a></dt>
+<dd><p>(size n x d) Training inputs of currently pending points.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></p>
 </dd>
-<dt><strong>samples</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code></span></dt><dd><p>Number of Monte Carlo samples, default is 512.</p>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nubo.acquisition.monte_carlo.MCExpectedImprovement.samples">
+<span class="sig-name descname"><span class="pre">samples</span></span><a class="headerlink" href="#nubo.acquisition.monte_carlo.MCExpectedImprovement.samples" title="Permalink to this definition">#</a></dt>
+<dd><p>Number of Monte Carlo samples, default is 512.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p>
 </dd>
-<dt><strong>fix_base_samples</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">bool</span></code></span></dt><dd><p>Whether base samples used to compute Monte Carlo samples of
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nubo.acquisition.monte_carlo.MCExpectedImprovement.fix_base_samples">
+<span class="sig-name descname"><span class="pre">fix_base_samples</span></span><a class="headerlink" href="#nubo.acquisition.monte_carlo.MCExpectedImprovement.fix_base_samples" title="Permalink to this definition">#</a></dt>
+<dd><p>Whether base samples used to compute Monte Carlo samples of
 acquisition function should be fixed for the optimisation step.
 If false (default) stochastic optimizer (Adam) have to be used. If
 true deterministic optimizer (L-BFGS-B, SLSQP) can be used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
 </dd>
-<dt><strong>base_samples</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">NoneType</span></code> or <code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>Base samples used to compute Monte Carlo samples drawn if
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nubo.acquisition.monte_carlo.MCExpectedImprovement.base_samples">
+<span class="sig-name descname"><span class="pre">base_samples</span></span><a class="headerlink" href="#nubo.acquisition.monte_carlo.MCExpectedImprovement.base_samples" title="Permalink to this definition">#</a></dt>
+<dd><p>Base samples used to compute Monte Carlo samples drawn if
 <cite>fix_base_samples</cite> is true.</p>
-</dd>
-<dt><strong>dims</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code></span></dt><dd><p>Number of input dimensions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">NoneType</span></code> or <code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nubo.acquisition.monte_carlo.MCExpectedImprovement.dims">
+<span class="sig-name descname"><span class="pre">dims</span></span><a class="headerlink" href="#nubo.acquisition.monte_carlo.MCExpectedImprovement.dims" title="Permalink to this definition">#</a></dt>
+<dd><p>Number of input dimensions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p>
 </dd>
 </dl>
+</dd></dl>
+
 <p class="rubric">Methods</p>
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#nubo.acquisition.monte_carlo.MCExpectedImprovement.eval" title="nubo.acquisition.monte_carlo.MCExpectedImprovement.eval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval</span></code></a>(x)</p></td>
-<td><p>Computes the (negative) Expected Improvement for some test points <cite>x</cite> by averaging Monte Carlo samples.</p></td>
+<td><p>Computes the (negative) expected improvement for some test point <cite>x</cite> by averaging Monte Carlo samples.</p></td>
 </tr>
 </tbody>
 </table>
@@ -420,18 +475,16 @@ true deterministic optimizer (L-BFGS-B, SLSQP) can be used.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="nubo.acquisition.monte_carlo.MCExpectedImprovement.eval">
 <span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/acquisition/monte_carlo.html#MCExpectedImprovement.eval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.acquisition.monte_carlo.MCExpectedImprovement.eval" title="Permalink to this definition">#</a></dt>
-<dd><p>Computes the (negative) Expected Improvement for some test points <cite>x</cite>
-by averaging Monte Carlo samples.</p>
+<dd><p>Computes the (negative) expected improvement for some test point <cite>x</cite> by
+averaging Monte Carlo samples.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>x</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x d) Test points.</p>
+<dt><strong>x</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 1 x d) Test point.</p>
 </dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></dt><dd><p>(size n) (Negative) Expected Imrpovement of <cite>x</cite>.</p>
+<dt><strong>Returns</strong></dt><dd></dd>
+<dt><strong>——-</strong></dt><dd></dd>
+<dt><strong>``torch.Tensor``</strong></dt><dd><p>(size 1) (Negative) expected improvement of <cite>x</cite>.</p>
 </dd>
 </dl>
 </dd>
@@ -444,7 +497,7 @@ by averaging Monte Carlo samples.</p>
 <dt class="sig sig-object py" id="nubo.acquisition.monte_carlo.MCUpperConfidenceBound">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.acquisition.monte_carlo.</span></span><span class="sig-name descname"><span class="pre">MCUpperConfidenceBound</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GP</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_pending</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">512</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fix_base_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/acquisition/monte_carlo.html#MCUpperConfidenceBound"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.acquisition.monte_carlo.MCUpperConfidenceBound" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nubo.acquisition.acquisition_function.AcquisitionFunction" title="nubo.acquisition.acquisition_function.AcquisitionFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">AcquisitionFunction</span></code></a></p>
-<p>Monte Carlo Upper Confidence Bound acquisition function:</p>
+<p>Monte Carlo upper confidence bound acquisition function:</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
 \[\alpha_{UCB}^{MC} (\boldsymbol X_*) = \max \left(\mu_n(\boldsymbol X_*) + \sqrt{\frac{\beta \pi}{2}} \lvert \boldsymbol L \boldsymbol z \rvert \right),\]</div>
@@ -484,7 +537,7 @@ true deterministic optimizer (L-BFGS-B, SLSQP) can be used.</p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#nubo.acquisition.monte_carlo.MCUpperConfidenceBound.eval" title="nubo.acquisition.monte_carlo.MCUpperConfidenceBound.eval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval</span></code></a>(x)</p></td>
-<td><p>Computes the (negative) Upper Confidence Bound for some test points <cite>x</cite> by averaging Monte Carlo samples.</p></td>
+<td><p>Computes the (negative) upper confidence bound for some test point <cite>x</cite> by averaging Monte Carlo samples.</p></td>
 </tr>
 </tbody>
 </table>
@@ -492,18 +545,18 @@ true deterministic optimizer (L-BFGS-B, SLSQP) can be used.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="nubo.acquisition.monte_carlo.MCUpperConfidenceBound.eval">
 <span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/acquisition/monte_carlo.html#MCUpperConfidenceBound.eval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.acquisition.monte_carlo.MCUpperConfidenceBound.eval" title="Permalink to this definition">#</a></dt>
-<dd><p>Computes the (negative) Upper Confidence Bound for some test points
-<cite>x</cite> by averaging Monte Carlo samples.</p>
+<dd><p>Computes the (negative) upper confidence bound for some test point <cite>x</cite>
+by averaging Monte Carlo samples.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>x</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x d) Test points.</p>
+<dt><strong>x</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 1 x d) Test point.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></dt><dd><p>(size n) (Negative) Upper Confidence Bound of <cite>x</cite>.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></dt><dd><p>(size 1) (Negative) upper confidence bound of <cite>x</cite>.</p>
 </dd>
 </dl>
 </dd>
@@ -588,6 +641,12 @@ true deterministic optimizer (L-BFGS-B, SLSQP) can be used.</p>
 </li>
 <li><a class="reference internal" href="#monte-carlo-aquisition-functions">Monte Carlo aquisition functions</a><ul>
 <li><a class="reference internal" href="#nubo.acquisition.monte_carlo.MCExpectedImprovement"><code class="docutils literal notranslate"><span class="pre">MCExpectedImprovement</span></code></a><ul>
+<li><a class="reference internal" href="#nubo.acquisition.monte_carlo.MCExpectedImprovement.y_best"><code class="docutils literal notranslate"><span class="pre">MCExpectedImprovement.y_best</span></code></a></li>
+<li><a class="reference internal" href="#nubo.acquisition.monte_carlo.MCExpectedImprovement.x_pending"><code class="docutils literal notranslate"><span class="pre">MCExpectedImprovement.x_pending</span></code></a></li>
+<li><a class="reference internal" href="#nubo.acquisition.monte_carlo.MCExpectedImprovement.samples"><code class="docutils literal notranslate"><span class="pre">MCExpectedImprovement.samples</span></code></a></li>
+<li><a class="reference internal" href="#nubo.acquisition.monte_carlo.MCExpectedImprovement.fix_base_samples"><code class="docutils literal notranslate"><span class="pre">MCExpectedImprovement.fix_base_samples</span></code></a></li>
+<li><a class="reference internal" href="#nubo.acquisition.monte_carlo.MCExpectedImprovement.base_samples"><code class="docutils literal notranslate"><span class="pre">MCExpectedImprovement.base_samples</span></code></a></li>
+<li><a class="reference internal" href="#nubo.acquisition.monte_carlo.MCExpectedImprovement.dims"><code class="docutils literal notranslate"><span class="pre">MCExpectedImprovement.dims</span></code></a></li>
 <li><a class="reference internal" href="#nubo.acquisition.monte_carlo.MCExpectedImprovement.eval"><code class="docutils literal notranslate"><span class="pre">MCExpectedImprovement.eval()</span></code></a></li>
 </ul>
 </li>

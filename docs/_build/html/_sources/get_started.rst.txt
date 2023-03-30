@@ -118,19 +118,15 @@ is run for 40 iterations giving an evaluation budget of 70.
 
 ::
 
-    New best at evaluation 43:       Inputs: [0.18   0.147  0.     0.1909 0.3424 0.7121],    Outputs: [-2.1026]
-    New best at evaluation 46:       Inputs: [0.2992 0.1852 0.     0.21   0.3398 0.6985],    Outputs: [-2.18]
-    New best at evaluation 48:       Inputs: [0.2597 0.1744 0.     0.2323 0.3173 0.6544],    Outputs: [-2.337]
-    New best at evaluation 50:       Inputs: [0.2486 0.1728 0.112  0.2413 0.2927 0.6674],    Outputs: [-2.6599]
-    New best at evaluation 51:       Inputs: [0.234  0.1519 0.3204 0.2624 0.2972 0.6662],    Outputs: [-3.1372]
-    New best at evaluation 52:       Inputs: [0.2117 0.1087 0.3731 0.313  0.3146 0.66  ],    Outputs: [-3.1906]
-    New best at evaluation 54:       Inputs: [0.1698 0.1394 0.405  0.3109 0.2839 0.6623],    Outputs: [-3.1964]
-    New best at evaluation 55:       Inputs: [0.1431 0.1126 0.4022 0.2795 0.3051 0.635 ],    Outputs: [-3.198]
-    New best at evaluation 58:       Inputs: [0.2112 0.1557 0.4745 0.288  0.3086 0.6555],    Outputs: [-3.3158]
-    New best at evaluation 64:       Inputs: [0.2013 0.1443 0.4779 0.2734 0.3131 0.6584],    Outputs: [-3.3218]
+    New best at evaluation 43: 	 Inputs: [0.3949 1.     1.     0.7699 0.0393 0.0369], 	 Outputs: [-1.9498]
+    New best at evaluation 52: 	 Inputs: [0.2581 0.3436 0.5644 0.2322 0.3715 0.8276], 	 Outputs: [-2.1738]
+    New best at evaluation 56: 	 Inputs: [0.4257 1.     1.     0.6889 0.094  0.003 ], 	 Outputs: [-2.4506]
+    New best at evaluation 59: 	 Inputs: [0.2707 0.2744 0.5454 0.2384 0.3474 0.7427], 	 Outputs: [-2.8153]
+    New best at evaluation 60: 	 Inputs: [0.3071 0.2052 0.4839 0.265  0.3319 0.6998], 	 Outputs: [-3.091]
+    New best at evaluation 69: 	 Inputs: [0.2485 0.1512 0.4608 0.291  0.3224 0.6786], 	 Outputs: [-3.2718]
 
-Finally, we print the overall best solution: We get -3.3218 on evaluation 66
-which approximaties the true optimum of -3.3224 very well.
+Finally, we print the overall best solution: We get -3.2718 on evaluation 69
+which approximaties the true optimum of -3.3224.
 
 .. code-block:: python
 
@@ -140,4 +136,21 @@ which approximaties the true optimum of -3.3224 very well.
 
 ::
 
-    Evaluation: 64   Solution: -3.3218
+    Evaluation: 69 	 Solution: 3.2718
+
+The estimated parameters of the Gaussian process can be viewed as follows:
+
+.. code-block:: python
+
+    # estimated parameters
+    print(f"Mean function constant: {gp.mean_module.constant}")
+    print(f"Covariance kernel output-scale: {gp.covar_module.outputscale}")
+    print(f"Covariance kernel length-scale: {gp.covar_module.base_kernel.lengthscale}")
+    print(f"Estimated noise/nugget: {likelihood.noise}")
+
+::
+
+    Mean function constant: 0.1855
+    Covariance kernel output-scale: 0.3659
+    Covariance kernel length-scale: tensor([[0.3780, 0.4826, 0.6710, 0.3035, 0.3445, 0.3133]])
+    Estimated noise/nugget: 0.0009

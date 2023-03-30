@@ -28,7 +28,7 @@ class AcquisitionFunction:
         """
 
         if isinstance(x, ndarray):
-            x = torch.from_numpy(x)
+            x = torch.from_numpy(x).reshape(1, -1)
             acq = self.eval(x)
             acq = float(acq)
         elif isinstance(x, Tensor):

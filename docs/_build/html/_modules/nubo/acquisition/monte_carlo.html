@@ -223,7 +223,7 @@
 
 <div class="viewcode-block" id="MCExpectedImprovement"><a class="viewcode-back" href="../../../nubo.acquisition.html#nubo.acquisition.monte_carlo.MCExpectedImprovement">[docs]</a><span class="k">class</span> <span class="nc">MCExpectedImprovement</span><span class="p">(</span><span class="n">AcquisitionFunction</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Monte Carlo Expected Improvement acquisition function:</span>
+<span class="sd">    Monte Carlo expected improvement acquisition function:</span>
 
 <span class="sd">    .. math::</span>
 <span class="sd">        \alpha_{EI}^{MC} (\boldsymbol X_*) = \max \left(ReLU(\mu_n(\boldsymbol X_*) + \boldsymbol L \boldsymbol z - y^{best}) \right),</span>
@@ -236,7 +236,6 @@
 <span class="sd">    :math:`\mathcal{N} (0, 1)`, :math:`y^{best}` is the current best</span>
 <span class="sd">    observation, and :math:`ReLU (\cdot)` is the rectified linear unit function</span>
 <span class="sd">    that zeros all values below 0 and leaves the rest as is.</span>
-
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
 <span class="sd">    gp : ``gpytorch.models.GP``</span>
@@ -294,20 +293,19 @@
 
 <div class="viewcode-block" id="MCExpectedImprovement.eval"><a class="viewcode-back" href="../../../nubo.acquisition.html#nubo.acquisition.monte_carlo.MCExpectedImprovement.eval">[docs]</a>    <span class="k">def</span> <span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Computes the (negative) Expected Improvement for some test points `x`</span>
-<span class="sd">        by averaging Monte Carlo samples.</span>
+<span class="sd">        Computes the (negative) expected improvement for some test point `x` by</span>
+<span class="sd">        averaging Monte Carlo samples.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        x : ``torch.Tensor``</span>
-<span class="sd">            (size n x d) Test points.</span>
-
+<span class="sd">            (size 1 x d) Test point.</span>
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        ``torch.Tensor``</span>
-<span class="sd">            (size n) (Negative) Expected Imrpovement of `x`.</span>
+<span class="sd">            (size 1) (Negative) expected improvement of `x`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        
+
         <span class="c1"># reshape tensor to (batch_size x dims)</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dims</span><span class="p">))</span>
 
@@ -332,14 +330,13 @@
         <span class="c1"># compute Expected Improvement</span>
         <span class="n">ei</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">samples</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_best</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
         <span class="n">ei</span> <span class="o">=</span> <span class="n">ei</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
-        <span class="n">ei</span> <span class="o">=</span> <span class="n">ei</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># average samples</span>
+        <span class="n">ei</span> <span class="o">=</span> <span class="n">ei</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># average samples</span>
         
         <span class="k">return</span> <span class="o">-</span><span class="n">ei</span></div></div>
 
-
 <div class="viewcode-block" id="MCUpperConfidenceBound"><a class="viewcode-back" href="../../../nubo.acquisition.html#nubo.acquisition.monte_carlo.MCUpperConfidenceBound">[docs]</a><span class="k">class</span> <span class="nc">MCUpperConfidenceBound</span><span class="p">(</span><span class="n">AcquisitionFunction</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Monte Carlo Upper Confidence Bound acquisition function:</span>
+<span class="sd">    Monte Carlo upper confidence bound acquisition function:</span>
 
 <span class="sd">    .. math::</span>
 <span class="sd">        \alpha_{UCB}^{MC} (\boldsymbol X_*) = \max \left(\mu_n(\boldsymbol X_*) + \sqrt{\frac{\beta \pi}{2}} \lvert \boldsymbol L \boldsymbol z \rvert \right),</span>
@@ -413,18 +410,18 @@
 
 <div class="viewcode-block" id="MCUpperConfidenceBound.eval"><a class="viewcode-back" href="../../../nubo.acquisition.html#nubo.acquisition.monte_carlo.MCUpperConfidenceBound.eval">[docs]</a>    <span class="k">def</span> <span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Computes the (negative) Upper Confidence Bound for some test points</span>
-<span class="sd">        `x` by averaging Monte Carlo samples.</span>
+<span class="sd">        Computes the (negative) upper confidence bound for some test point `x`</span>
+<span class="sd">        by averaging Monte Carlo samples.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        x : ``torch.Tensor``</span>
-<span class="sd">            (size n x d) Test points.</span>
+<span class="sd">            (size 1 x d) Test point.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        ``torch.Tensor``</span>
-<span class="sd">            (size n) (Negative) Upper Confidence Bound of `x`.</span>
+<span class="sd">            (size 1) (Negative) upper confidence bound of `x`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># reshape tensor to (batch_size x dims)</span>
@@ -451,7 +448,7 @@
         <span class="c1"># compute Upper Confidence Bound</span>
         <span class="n">ucb</span> <span class="o">=</span> <span class="n">mean</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_coeff</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">samples</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span>
         <span class="n">ucb</span> <span class="o">=</span> <span class="n">ucb</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
-        <span class="n">ucb</span> <span class="o">=</span> <span class="n">ucb</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># average samples</span>
+        <span class="n">ucb</span> <span class="o">=</span> <span class="n">ucb</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># average samples</span>
 
         <span class="k">return</span> <span class="o">-</span><span class="n">ucb</span></div></div>
 </pre></div>

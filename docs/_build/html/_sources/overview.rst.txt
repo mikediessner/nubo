@@ -3,8 +3,8 @@ Overview
 NUBO, short for Newcastle University Bayesian optimisation, is a Bayesian
 optimisation framework for the optimisation of expensive-to-evaluate black box
 functions, such as physical experiments and computer simulations. It is
-developed and maintained by the `experimental fluid dynamics research group`_
-at `Newcastle University`_. NUBO focuses primarly on transparency and user
+developed and maintained by the `Fluid Dynamics Lab`_ at
+`Newcastle University`_. NUBO focuses primarly on transparency and user
 experience to make Bayesian optimisation easily accessible to researchers from
 all disciplines. Transparency is ensured by clean and comprehensible code,
 precise references, and thorough documentation. User experience is guaranteed
@@ -86,7 +86,7 @@ Contents
 
 ----
 
-.. _`experimental fluid dynamics research group`: https://www.experimental-fluid-dynamics.com
+.. _`Fluid Dynamics Lab`: https://www.experimental-fluid-dynamics.com
 .. _`Newcastle University`: https://www.ncl.ac.uk
 .. _Python: https://www.python.org
 .. _`BSD 3-Clause license`: https://github.com/mikediessner/nubo/blob/main/LICENSE.md

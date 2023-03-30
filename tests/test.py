@@ -1,49 +1,25 @@
 import torch
+from torch import Tensor
 
-a = torch.tensor(1)
-print(a)
-print(type(a))
-print(a.size())
-import numpy as np
-a = 1.0
-print(a.shape)
-b = a.reshape(1)
-print(b)
-print(type(b))
-print(b.size())
-print(b.reshape([]).size())
 
-# x_test = torch.tensor([[1., 2., 3.],
-#                        [4., 5., 6.],
-#                        [7., 8., 9.]])
+dims = 3
+bounds = Tensor([[0.0, ] * dims, [1.0, ] * dims])
+optimum = {"inputs": Tensor([[0.114614, 0.555649, 0.852547]]), 
+                "ouput": Tensor([[-3.86278]])}
 
-# x_pending = torch.tensor([[0., 0., 0.],
-#                           [1., 1., 1.]])
+a = Tensor([1.0, 1.2, 3.0, 3.2])
+A = Tensor([[3.0, 10.0, 30.0],
+                    [0.1, 10.0, 35.0],
+                    [3.0, 10.0, 30.0],
+                    [0.1, 10.0, 35.0]])
+P = 10**-4 * Tensor([[3689.0, 1170.0, 2673.0],
+                            [4699.0, 4387.0, 7470.0],
+                            [1091.0, 8732.0, 5547.0],
+                            [ 381.0, 5743.0, 8828.0]])
 
-# x_test = x_test.unsqueeze(1)
-# x_pending = x_pending.tile((3, 1, 1))
-# x_test = torch.cat([x_test, x_pending], dim=1)
 
-# from gpytorch.distributions import MultivariateNormal
+x = Tensor([[0.5, 0.5, 0.5]])
+# compute output
+y = -torch.sum(a * torch.exp(-torch.sum(A * (x - P)**2, dim=-1)), dim=-1)
 
-# means = torch.tensor([[1., 2., 3.],
-#                       [10., 20., 30.]])
-# cov = torch.tensor([[[1., 0., 0.],
-#                      [0., 1., 0.],
-#                      [0., 0., 1.]],
-                     
-#                     [[1., 0., 0.],
-#                      [0., 1., 0.],
-#                      [0., 0., 1.]]])
-# mvn = MultivariateNormal(means, cov)
-
-# samples = mvn.rsample(torch.Size([10]))
-# print(samples)
-# print(samples.size())
-
-# ei = samples - torch.tensor([[5., 5., 5.]])
-# print(ei)
-# ei = ei.max(dim=2).values
-# print(ei)
-# ei = ei.mean(dim=0)
-# print(ei)
+print (y)

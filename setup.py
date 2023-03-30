@@ -1,12 +1,10 @@
 from setuptools import setup, find_packages
 
 
-VERSION = "0.1.0"
-DESCRIPTION = "Bayesian optimisation framework (Newcastle University)"
-LONG_DESCRIPTION = """Bayesian optimisation framework including Gaussian
-                    process regression models, acquisition functions,
-                    optimisation algorithms and benchmark functions. Developed
-                    as part of project INTEL at Newcastle University."""
+VERSION = "1.0.0"
+DESCRIPTION = "Bayesian optimisation framework"
+LONG_DESCRIPTION = """Bayesian optimisation framework for the optimisation of
+                      expensive-to-evaluate black box functions."""
 
 # Setting up
 setup(
@@ -18,11 +16,10 @@ setup(
         long_description=LONG_DESCRIPTION,
         url="https://github.com/mikediessner/nubo",
         packages=find_packages(),
-        install_requires=["torch", "gpytorch", "numpy", "scipy", "matplotlib"],
+        install_requires=["torch", "gpytorch", "scipy"],
         keywords=["Optimisation", "Bayesian optimisation", "Gaussian process",
                   "Acquisition function", "black box functions"],
         classifiers=[
-            "Development Status :: 4 - Beta",
             "Intended Audience :: Science/Research",
             "Programming Language :: Python :: 3",
         ]

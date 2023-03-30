@@ -20,3 +20,7 @@ in [Python](https://www.python.org) but does not require expert knowledge to
 optimise your simulations and experiments. NUBO is distributed as an
 open-source software under the
 [BSD 3-Clause license](https://joinup.ec.europa.eu/licence/bsd-3-clause-new-or-revised-license).
+
+ > Thanks for considering NUBO. If you have any questions, comments, or issues
+ > feel free to email us at m.diessner2@newcastle.ac.uk. Any feedback is highly
+ > appreciated and will help make NUBO better in the future.

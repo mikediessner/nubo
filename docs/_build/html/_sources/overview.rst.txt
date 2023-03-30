@@ -18,6 +18,13 @@ unnecessary large number of options. The package is written in Python_ but does
 not require expert knowledge to optimise your simulations and experiments. NUBO
 is distributed as an open-source software under the `BSD 3-Clause license`_.
 
+.. admonition:: Contact
+   :class: seealso
+
+   Thanks for considering NUBO. If you have any questions, comments, or issues
+   feel free to email us at m.diessner2@newcastle.ac.uk. Any feedback is highly
+   appreciated and will help make NUBO better in the future.
+
 Bayesian optimisation
 ---------------------
 :ref:`Bayesian optimisation <bo>` [#Frazier2018]_ [#Gramacy2020]_ [#Jones1998]_

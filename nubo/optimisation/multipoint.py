@@ -106,7 +106,7 @@ def joint(func: Callable,
     func : ``Callable``
         Function to optimise.
     method : ``str``
-        One of "L-BFGS-B", "SLSQP", or "Adam".
+        One of "L-BFGS-B" or "Adam".
     batch_size : ``int``
         Number of points to return.
     bounds : ``torch.Tensor``

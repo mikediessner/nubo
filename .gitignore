@@ -2,3 +2,5 @@ __pycache__
 env/
 nubo.egg-info/
 .DS_Store
+plots/
+full_requirements.txt

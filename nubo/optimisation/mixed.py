@@ -2,7 +2,7 @@ import torch
 from torch import Tensor
 import itertools
 from typing import Tuple, Optional, Callable, Any
-from nubo.optimisation import lbfgsb, slsqp, adam
+from nubo.optimisation import lbfgsb, slsqp, adam_mixed
 
 
 def mixed(func: Callable,
@@ -50,7 +50,7 @@ def mixed(func: Callable,
     best_func_result : ``torch.Tensor``
         (size 1) Minimiser output.
     """
-    
+
     # get discrete dimensions and values
     discrete_dims = list(discrete.keys())
     discrete_values = list(discrete.values())
@@ -76,7 +76,7 @@ def mixed(func: Callable,
         elif method == "SLSQP":
             results[i], func_results[i] = slsqp(func, fixed_bounds, constraints, num_starts, num_samples, **kwargs)
         elif method == "Adam":
-            results[i], func_results[i] = adam(func, fixed_bounds, lr, steps, num_starts, num_samples, **kwargs)
+            results[i], func_results[i] = adam_mixed(func, fixed_bounds, lr, steps, num_starts, num_samples, **kwargs)
         else:
             raise NotImplementedError("Method must be one of L-BFGS-B, SLSQP or Adam.")
 

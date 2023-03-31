@@ -118,25 +118,29 @@ def multi_joint(func: Callable,
     if method not in ["L-BFGS-B", "Adam"]:
         raise NotImplementedError("Method must be one of L-BFGS-B or Adam.")
 
+    dims = bounds.size(1)
+
     # extend bounds to full batch
     full_bounds = torch.tile(bounds, (1, batch_size))
 
-    # exetend discrete dims
-    full_discrete = discrete
+    # continuous parameter space
+    if not isinstance(discrete, dict):
+        if method == "L-BFGS-B":
+            batch_result, batch_func_result = lbfgsb(func, full_bounds, num_starts, num_samples, **kwargs)
+        elif method == "Adam":
+            batch_result, batch_func_result = adam(func, full_bounds, lr, steps, num_starts, num_samples, **kwargs)
 
-    # joint optimisation loop
-    for i in range(batch_size):
+    # mixed parameter space
+    else:
+        # exetend discrete dims
+        discrete_dims = list(discrete.keys())
+        discrete_values = list(discrete.values())
+        full_discrete = {}
+        for i in range(batch_size):
+            for value, key in enumerate(discrete_dims):
+                full_discrete[key+i*dims] = discrete_values[value]
 
-        # continuous parameter space
-        if not isinstance(discrete, dict):
-            if method == "L-BFGS-B":
-                batch_result, batch_func_result = lbfgsb(func, full_bounds, num_starts, num_samples, **kwargs)
-            elif method == "Adam":
-                batch_result, batch_func_result = adam(func, full_bounds, lr, steps, num_starts, num_samples, **kwargs)
-    
-        # mixed parameter space
-        else:
-            batch_result, batch_func_result = mixed(func, method, bounds, full_discrete, None, lr, steps, num_starts, num_samples, **kwargs)
+        batch_result, batch_func_result = mixed(func, method, full_bounds, full_discrete, None, lr, steps, num_starts, num_samples, **kwargs)
 
     batch_result = torch.reshape(batch_result, (batch_size, -1))
 
@@ -177,7 +181,6 @@ def multi_sequential(func: Callable,
     discrete : ``dict``
         Possible values for all discrete inputs in the shape {dim1: [values1],
         dim2: [values2], etc.}, e.g. {0: [1., 2., 3.], 3: [-0.1, -0.2, 100.]}.
-
     lr : ``float``, optional
         Learning rate of ``torch.optim.Adam`` algorithm, default is 0.1.
     steps : ``int``, optional

@@ -13,7 +13,6 @@ def _adam(func: callable,
           **kwargs: Any) -> Tuple[Tensor, Tensor]:
     """
     Adam optimiser.
-
     Parameters
     ----------
     x : ``torch.Tensor``
@@ -28,7 +27,6 @@ def _adam(func: callable,
         Number of samples from which to draw the starts, default is 100.
     **kwargs : ``Any``
         Keyword argument passed to ``torch.optim.Adam``.
-
     Returns
     -------
     x : ``torch.Tensor``
@@ -76,7 +74,6 @@ def adam(func: Callable,
     function and scaling results. Picks the best `num_starts` points from a
     total `num_samples` Latin hypercube samples to initialise the optimser.
     Returns the best result.
-
     Parameters
     ----------
     func : ``Callable``
@@ -93,7 +90,6 @@ def adam(func: Callable,
         Number of samples from which to draw the starts, default is 100.
     **kwargs : ``Any``
         Keyword argument passed to ``torch.optim.Adam``.
-
     Returns
     -------
     best_result : ``torch.Tensor``
@@ -122,6 +118,129 @@ def adam(func: Callable,
         results[i, :] = unnormalise(torch.sigmoid(x), bounds) # transfrom results to bounds
         func_results[i] = fun
     
+    # select best candidate
+    best_i = torch.argmin(func_results)
+    best_result =  torch.reshape(results[best_i, :], (1, -1))
+    best_func_result = func_results[best_i]
+
+    return best_result, torch.reshape(best_func_result, (1,))
+
+
+def _adam_mixed(func: callable,
+          x: Tensor,
+          bounds: Tensor,
+          lr: Optional[float]=0.1,
+          steps: Optional[int]=200,
+          **kwargs: Any) -> Tuple[Tensor, Tensor]:
+    """
+    Adam optimiser.
+
+    Parameters
+    ----------
+    x : ``torch.Tensor``
+        (size 1 x d) Initial starting point of ``torch.optim.Adam`` algorithm.
+    bounds : ``torch.Tensor``
+        (size 2 x d) Optimisation bounds of input space.
+    lr : ``float``, optional
+        Learning rate of ``torch.optim.Adam`` algorithm, default is 0.1.
+    steps : ``int``, optional
+        Optimisation steps of ``torch.optim.Adam`` algorithm, default is 200.
+    num_starts : ``int``
+        Number of start for multi-start optimisation, default is 10.
+    num_samples : ``int``
+        Number of samples from which to draw the starts, default is 100.
+    **kwargs : ``Any``
+        Keyword argument passed to ``torch.optim.Adam``.
+
+    Returns
+    -------
+    x : ``torch.Tensor``
+        (size 1 x d) Minimiser input.
+    loss : ``torch.Tensor``
+        (size 1) Minimiser output.
+    """
+
+    x.requires_grad_(True)
+
+    # specify Adam
+    adam = Adam([x], lr=lr, **kwargs)
+
+    # fit Gaussian process
+    for i in range(steps):
+
+        # set gradients from previous iteration equal to 0
+        adam.zero_grad()
+        
+        # calculate loss
+        loss = func(x)
+
+        # backpropagate gradients
+        loss.backward()
+
+        # take next optimisation step
+        adam.step()
+
+        # enforce bounds
+        with torch.no_grad():
+            x[:] = x.clamp(min=bounds[0, :], max=bounds[1, :])
+  
+    return x.detach(), loss
+
+
+def adam_mixed(func: Callable,
+               bounds: Tensor,
+               lr: Optional[float]=0.1,
+               steps: Optional[int]=200,
+               num_starts: Optional[int]=10,
+               num_samples: Optional[int]=100,
+               **kwargs: Any) -> Tuple[Tensor, Tensor]:
+    """
+    Multi-start Adam optimiser using the ``torch.optim.Adam`` implementation
+    from ``PyTorch``.
+    
+    Used for maximising Monte Carlo acquisition function when base samples are
+    not fixed. Picks the best `num_starts` points from a total `num_samples`
+    Latin hypercube samples to initialise the optimser. Returns the best
+    result.
+
+    Parameters
+    ----------
+    func : ``Callable``
+        Function to optimise.
+    bounds : ``torch.Tensor``
+        (size 2 x d) Optimisation bounds of input space.
+    lr : ``float``, optional
+        Learning rate of ``torch.optim.Adam`` algorithm, default is 0.1.
+    steps : ``int``, optional
+        Optimisation steps of ``torch.optim.Adam`` algorithm, default is 200.
+    num_starts : ``int``, optional
+        Number of start for multi-start optimisation, default is 10.
+    num_samples : ``int``, optional
+        Number of samples from which to draw the starts, default is 100.
+    **kwargs : ``Any``
+        Keyword argument passed to ``torch.optim.Adam``.
+
+    Returns
+    -------
+    best_result : ``torch.Tensor``
+        (size 1 x d) Minimiser input.
+    best_func_result : ``torch.Tensor``
+        (size 1) Minimiser output.
+    """
+    
+    dims = bounds.size(1)
+
+    # generate candidates and transfrom to real numbers
+    candidates = gen_candidates(func, bounds, num_starts, num_samples)
+
+    # initialise objects for results
+    results = torch.zeros((num_starts, dims))
+    func_results = torch.zeros(num_starts)
+
+    # iteratively optimise over candidates
+    for i in range(num_starts):
+        results[i, :], func_results[i] = _adam_mixed(func, x=candidates[i], bounds=bounds, lr=lr, steps=steps, **kwargs)
+        
     # select best candidate
     best_i = torch.argmin(func_results)
     best_result =  torch.reshape(results[best_i, :], (1, -1))

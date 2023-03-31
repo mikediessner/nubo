@@ -150,10 +150,10 @@ The estimated parameters of the Gaussian process can be viewed as follows:
 .. code-block:: python
 
     # estimated parameters
-    print(f"Mean function constant: {gp.mean_module.constant}")
-    print(f"Covariance kernel output-scale: {gp.covar_module.outputscale}")
-    print(f"Covariance kernel length-scale: {gp.covar_module.base_kernel.lengthscale}")
-    print(f"Estimated noise/nugget: {likelihood.noise}")
+    print(f"Mean function constant: {gp.mean_module.constant.item()}")
+    print(f"Covariance kernel output-scale: {gp.covar_module.outputscale.item()}")
+    print(f"Covariance kernel length-scale: {gp.covar_module.base_kernel.lengthscale.detach()}")
+    print(f"Estimated noise/nugget: {likelihood.noise.item()}")
 
 ::
 

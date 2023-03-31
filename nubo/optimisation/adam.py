@@ -13,6 +13,7 @@ def _adam(func: callable,
           **kwargs: Any) -> Tuple[Tensor, Tensor]:
     """
     Adam optimiser.
+
     Parameters
     ----------
     x : ``torch.Tensor``
@@ -27,6 +28,7 @@ def _adam(func: callable,
         Number of samples from which to draw the starts, default is 100.
     **kwargs : ``Any``
         Keyword argument passed to ``torch.optim.Adam``.
+
     Returns
     -------
     x : ``torch.Tensor``
@@ -74,6 +76,7 @@ def adam(func: Callable,
     function and scaling results. Picks the best `num_starts` points from a
     total `num_samples` Latin hypercube samples to initialise the optimser.
     Returns the best result.
+
     Parameters
     ----------
     func : ``Callable``
@@ -90,6 +93,7 @@ def adam(func: Callable,
         Number of samples from which to draw the starts, default is 100.
     **kwargs : ``Any``
         Keyword argument passed to ``torch.optim.Adam``.
+
     Returns
     -------
     best_result : ``torch.Tensor``
@@ -133,7 +137,7 @@ def _adam_mixed(func: callable,
           steps: Optional[int]=200,
           **kwargs: Any) -> Tuple[Tensor, Tensor]:
     """
-    Adam optimiser.
+    Adam optimiser for mixed parameters.
 
     Parameters
     ----------
@@ -199,8 +203,9 @@ def adam_mixed(func: Callable,
     from ``PyTorch``.
     
     Used for maximising Monte Carlo acquisition function when base samples are
-    not fixed. Picks the best `num_starts` points from a total `num_samples`
-    Latin hypercube samples to initialise the optimser. Returns the best
+    not fixed. Bounds are enforced by clamping where values exceed them. Picks
+    the best `num_starts` points from a total `num_samples` Latin hypercube
+    samples to initialise the optimser. Returns the best
     result.
 
     Parameters

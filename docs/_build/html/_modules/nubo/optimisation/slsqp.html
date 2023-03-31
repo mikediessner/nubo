@@ -276,7 +276,7 @@
         <span class="n">func_results</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;fun&quot;</span><span class="p">])</span>
     
     <span class="c1"># select best candidate</span>
-    <span class="n">best_i</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">func_results</span><span class="p">)</span>
+    <span class="n">best_i</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">func_results</span><span class="p">)</span>
     <span class="n">best_result</span> <span class="o">=</span>  <span class="n">torch</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="n">best_i</span><span class="p">,</span> <span class="p">:],</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
     <span class="n">best_func_result</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">func_results</span><span class="p">[</span><span class="n">best_i</span><span class="p">],</span> <span class="p">(</span><span class="mi">1</span><span class="p">,))</span>
 

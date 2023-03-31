@@ -118,14 +118,21 @@ is run for 40 iterations giving an evaluation budget of 70.
 
 ::
 
-    New best at evaluation 43: 	 Inputs: [0.3949 1.     1.     0.7699 0.0393 0.0369], 	 Outputs: [-1.9498]
-    New best at evaluation 52: 	 Inputs: [0.2581 0.3436 0.5644 0.2322 0.3715 0.8276], 	 Outputs: [-2.1738]
-    New best at evaluation 56: 	 Inputs: [0.4257 1.     1.     0.6889 0.094  0.003 ], 	 Outputs: [-2.4506]
-    New best at evaluation 59: 	 Inputs: [0.2707 0.2744 0.5454 0.2384 0.3474 0.7427], 	 Outputs: [-2.8153]
-    New best at evaluation 60: 	 Inputs: [0.3071 0.2052 0.4839 0.265  0.3319 0.6998], 	 Outputs: [-3.091]
-    New best at evaluation 69: 	 Inputs: [0.2485 0.1512 0.4608 0.291  0.3224 0.6786], 	 Outputs: [-3.2718]
+    New best at evaluation 31: 	 Inputs: [0.477  0.0444 0.0736 0.2914 0.3603 0.7323], 	 Outputs: [-1.9494]
+    New best at evaluation 34: 	 Inputs: [0.4453 0.0418 0.0483 0.3164 0.3478 0.6925], 	 Outputs: [-2.0684]
+    New best at evaluation 39: 	 Inputs: [0.4127 0.1638 0.     0.277  0.3385 0.679 ], 	 Outputs: [-2.1595]
+    New best at evaluation 40: 	 Inputs: [0.3715 0.1565 0.     0.3261 0.3372 0.7126], 	 Outputs: [-2.1843]
+    New best at evaluation 41: 	 Inputs: [0.3589 0.134  0.3895 0.2927 0.3222 0.7003], 	 Outputs: [-2.9809]
+    New best at evaluation 42: 	 Inputs: [0.2754 0.1478 0.425  0.2529 0.3054 0.6874], 	 Outputs: [-3.2027]
+    New best at evaluation 46: 	 Inputs: [0.1473 0.1864 0.427  0.2906 0.2993 0.666 ], 	 Outputs: [-3.2302]
+    New best at evaluation 51: 	 Inputs: [0.1764 0.1303 0.4576 0.3022 0.3029 0.6827], 	 Outputs: [-3.2657]
+    New best at evaluation 52: 	 Inputs: [0.2016 0.1447 0.4616 0.2798 0.3018 0.6716], 	 Outputs: [-3.31]
+    New best at evaluation 53: 	 Inputs: [0.2063 0.144  0.465  0.2787 0.3138 0.6519], 	 Outputs: [-3.3192]
+    New best at evaluation 58: 	 Inputs: [0.205  0.1516 0.4686 0.2725 0.3137 0.6614], 	 Outputs: [-3.3206]
+    New best at evaluation 66: 	 Inputs: [0.2096 0.142  0.4767 0.2757 0.3112 0.6573], 	 Outputs: [-3.3209]
+    New best at evaluation 70: 	 Inputs: [0.2076 0.1527 0.4728 0.2802 0.3109 0.6594], 	 Outputs: [-3.321]
 
-Finally, we print the overall best solution: We get -3.2718 on evaluation 69
+Finally, we print the overall best solution: We get -3.3210 on evaluation 70
 which approximaties the true optimum of -3.3224.
 
 .. code-block:: python
@@ -136,7 +143,7 @@ which approximaties the true optimum of -3.3224.
 
 ::
 
-    Evaluation: 69 	 Solution: 3.2718
+    Evaluation: 70 	 Solution: 3.3210
 
 The estimated parameters of the Gaussian process can be viewed as follows:
 
@@ -150,7 +157,7 @@ The estimated parameters of the Gaussian process can be viewed as follows:
 
 ::
 
-    Mean function constant: 0.1855
-    Covariance kernel output-scale: 0.3659
-    Covariance kernel length-scale: tensor([[0.3780, 0.4826, 0.6710, 0.3035, 0.3445, 0.3133]])
-    Estimated noise/nugget: 0.0009
+    Mean function constant: 0.1073
+    Covariance kernel output-scale: 0.2943
+    Covariance kernel length-scale: tensor([[0.5552, 0.5305, 0.6730, 0.3610, 0.2741, 0.3786]])
+    Estimated noise/nugget: 0.0001

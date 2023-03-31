@@ -217,9 +217,10 @@
         <article role="main">
           <section id="Constrained-Bayesian-optimisation">
 <h1>Constrained Bayesian optimisation<a class="headerlink" href="#Constrained-Bayesian-optimisation" title="Permalink to this heading">#</a></h1>
-<p>In this example, NUBO is used to maximise a function where the input space is bounded and constrained. The whole process is not to different from the unconstrained case. We only need to choose a different optimiser that allows the use of constraints when maximising the acquisition function <code class="docutils literal notranslate"><span class="pre">UpperConfidenceBound</span></code>. NUBO uses the <code class="docutils literal notranslate"><span class="pre">slsqp</span></code> optimiser that can be provided with a dictionary or a tuple of dictionaries that specify one or multiple constraints. We specify two constraints to showcase
-the two different options: equality constraints and inequality constraints. Equality constraints require the constraint to be 0 while the result is non-negative for inequality constraints. Our first constraint <code class="docutils literal notranslate"><span class="pre">{'type':</span> <span class="pre">'ineq',</span> <span class="pre">'fun':</span> <span class="pre">lambda</span> <span class="pre">x:</span> <span class="pre">0.5</span> <span class="pre">-</span> <span class="pre">x[0]</span> <span class="pre">-</span> <span class="pre">x[1]}</span></code> is an inequality constraint and requires the sum of the first two inputs to be smaller or equal to 0.5. The second constraint <code class="docutils literal notranslate"><span class="pre">{'type':</span> <span class="pre">'eq',</span> <span class="pre">'fun':</span> <span class="pre">lambda</span> <span class="pre">x:</span> <span class="pre">1.2442</span> <span class="pre">-</span> <span class="pre">x[3]</span> <span class="pre">-</span> <span class="pre">x[4]</span> <span class="pre">-</span> <span class="pre">x[5]}</span></code> is an equality constraint specifying that
-the sum of the last three inputs needs to be equal to 1.2442. The <code class="docutils literal notranslate"><span class="pre">Hartmann6D</span></code> synthetic test function acts as a surrogate for a black box objective funtion, such as an experiment or a simulation. The optimisation loop is run for 40 iterations and finds a solution close the true optimum of -3.3224.</p>
+<p>In this example, NUBO is used to maximise a function where the input space is bounded and constrained. The whole process is not to different from the unconstrained case. We only need to choose a different optimiser that allows the use of constraints when maximising the acquisition function <code class="docutils literal notranslate"><span class="pre">UpperConfidenceBound</span></code>. NUBO uses the SLSQP optimiser that can be provided with a dictionary or a tuple of dictionaries that specify one or multiple constraints. We specify two constraints to showcase the
+two different options: equality constraints and inequality constraints. Equality constraints require the constraint to be 0 while the result is non-negative for inequality constraints. Our first constraint <code class="docutils literal notranslate"><span class="pre">{'type':</span> <span class="pre">'ineq',</span> <span class="pre">'fun':</span> <span class="pre">lambda</span> <span class="pre">x:</span> <span class="pre">0.5</span> <span class="pre">-</span> <span class="pre">x[0]</span> <span class="pre">-</span> <span class="pre">x[1]}</span></code> is an inequality constraint and requires the sum of the first two inputs to be smaller or equal to 0.5. The second constraint <code class="docutils literal notranslate"><span class="pre">{'type':</span> <span class="pre">'eq',</span> <span class="pre">'fun':</span> <span class="pre">lambda</span> <span class="pre">x:</span> <span class="pre">1.2442</span> <span class="pre">-</span> <span class="pre">x[3]</span> <span class="pre">-</span> <span class="pre">x[4]</span> <span class="pre">-</span> <span class="pre">x[5]}</span></code> is an equality constraint specifying that the
+sum of the last three inputs needs to be equal to 1.2442. The <code class="docutils literal notranslate"><span class="pre">Hartmann6D</span></code> synthetic test function acts as a surrogate for a black box objective funtion, such as an experiment or a simulation. The optimisation loop is run for 40 iterations and finds a solution close the true optimum of -3.3224. Important: Generating initial input points with a Latin hypercube might not work for real problems as they will not consider the constraints but only the bounds. In these situations, other methods or
+selecting initial points by hand might be preferable. The purpose of this example is solely the demonstration of how NUBO handles constraints and constrained optimisation.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -227,7 +228,7 @@ the sum of the last three inputs needs to be equal to 1.2442. The <code class="d
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">nubo.acquisition</span> <span class="kn">import</span> <span class="n">ExpectedImprovement</span><span class="p">,</span> <span class="n">UpperConfidenceBound</span>
 <span class="kn">from</span> <span class="nn">nubo.models</span> <span class="kn">import</span> <span class="n">GaussianProcess</span><span class="p">,</span> <span class="n">fit_gp</span>
-<span class="kn">from</span> <span class="nn">nubo.optimisation</span> <span class="kn">import</span> <span class="n">slsqp</span>
+<span class="kn">from</span> <span class="nn">nubo.optimisation</span> <span class="kn">import</span> <span class="n">single</span>
 <span class="kn">from</span> <span class="nn">nubo.test_functions</span> <span class="kn">import</span> <span class="n">Hartmann6D</span>
 <span class="kn">from</span> <span class="nn">nubo.utils</span> <span class="kn">import</span> <span class="n">gen_inputs</span>
 <span class="kn">from</span> <span class="nn">gpytorch.likelihoods</span> <span class="kn">import</span> <span class="n">GaussianLikelihood</span>
@@ -265,7 +266,7 @@ the sum of the last three inputs needs to be equal to 1.2442. The <code class="d
             <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;eq&#39;</span><span class="p">,</span> <span class="s1">&#39;fun&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">1.2442</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">5</span><span class="p">]})</span>
 
     <span class="c1"># optimise acquisition function</span>
-    <span class="n">x_new</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">slsqp</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">acq</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">,</span> <span class="n">constraints</span><span class="o">=</span><span class="n">cons</span><span class="p">,</span> <span class="n">num_starts</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">x_new</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">single</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">acq</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;SLSQP&quot;</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">,</span> <span class="n">constraints</span><span class="o">=</span><span class="n">cons</span><span class="p">,</span> <span class="n">num_starts</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
     <span class="c1"># evaluate new point</span>
     <span class="n">y_new</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">x_new</span><span class="p">)</span>
@@ -289,14 +290,17 @@ the sum of the last three inputs needs to be equal to 1.2442. The <code class="d
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-New best at evaluation 37:       Inputs: [0.4483 0.0517 0.5663 0.1706 0.2303 0.8434],    Outputs: [-1.6074]
-New best at evaluation 40:       Inputs: [0.5    0.     0.5532 0.2166 0.2412 0.7863],    Outputs: [-1.7706]
-New best at evaluation 41:       Inputs: [0.5    0.     0.5418 0.2447 0.2495 0.75  ],    Outputs: [-1.9743]
-New best at evaluation 42:       Inputs: [0.     0.0682 0.4714 0.245  0.2697 0.7296],    Outputs: [-2.5711]
-New best at evaluation 43:       Inputs: [0.     0.15   0.4106 0.2629 0.2785 0.7028],    Outputs: [-2.7138]
-New best at evaluation 45:       Inputs: [0.     0.1429 0.4903 0.2798 0.2942 0.6702],    Outputs: [-2.8218]
-New best at evaluation 47:       Inputs: [0.1973 0.1472 0.4738 0.2753 0.313  0.6559],    Outputs: [-3.3218]
-Evaluation: 47   Solution: -3.3218
+New best at evaluation 40:       Inputs: [0.2699 0.     0.2734 0.2569 0.3897 0.5977],    Outputs: [-2.4334]
+New best at evaluation 41:       Inputs: [0.2803 0.2137 0.293  0.3056 0.3629 0.5757],    Outputs: [-2.6996]
+New best at evaluation 45:       Inputs: [0.2548 0.1987 0.2919 0.2775 0.3478 0.6189],    Outputs: [-2.9417]
+New best at evaluation 50:       Inputs: [0.3511 0.1489 0.3001 0.2755 0.3184 0.6503],    Outputs: [-2.9475]
+New best at evaluation 51:       Inputs: [0.2964 0.2036 0.4317 0.2867 0.3155 0.642 ],    Outputs: [-3.1666]
+New best at evaluation 52:       Inputs: [0.2068 0.1493 0.4381 0.301  0.2881 0.655 ],    Outputs: [-3.2668]
+New best at evaluation 54:       Inputs: [0.2156 0.115  0.4715 0.2642 0.3085 0.6714],    Outputs: [-3.2964]
+New best at evaluation 57:       Inputs: [0.1959 0.1574 0.4968 0.2744 0.3097 0.6601],    Outputs: [-3.3173]
+New best at evaluation 60:       Inputs: [0.2112 0.1458 0.4709 0.2797 0.3103 0.6541],    Outputs: [-3.3201]
+New best at evaluation 66:       Inputs: [0.2039 0.142  0.4717 0.2785 0.3116 0.6541],    Outputs: [-3.3209]
+Evaluation: 66   Solution: -3.3209
 </pre></div></div>
 </div>
 </section>

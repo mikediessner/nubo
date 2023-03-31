@@ -9,7 +9,7 @@
       "source": [
         "# Sequential single-point Bayesian optimisation\n",
         "\n",
-        "In this example, NUBO is used for sequential single-point optimisation. The `Hartmann6D` synthetic test function acts as a surrogate for a black box objective funtion, such as an experiment or a simulation. We use the analytical acquisiton function `UpperConfidenceBound` with $\\beta = 1.96^2$ corresponding to the 95% confidence interval of the Gaussian distribution. We optimise this acquisition function with the `lbfgsb()` algorithm with 5 starts to avoid getting stuck in a local maximum. The optimisation loop is run for 40 iterations and finds a solution close the true optimum of -3.3224."
+        "In this example, NUBO is used for sequential single-point optimisation. The `Hartmann6D` synthetic test function acts as a surrogate for a black box objective funtion, such as an experiment or a simulation. We use the analytical acquisiton function `UpperConfidenceBound` with $\\beta = 1.96^2$ corresponding to the 95% confidence interval of the Gaussian distribution. We optimise this acquisition function with the L-BFGS-B algorithm with 5 starts to avoid getting stuck in a local maximum. The optimisation loop is run for 40 iterations and finds a solution close the true optimum of -3.3224."
       ]
     },
     {
@@ -23,19 +23,13 @@
           "name": "stdout",
           "output_type": "stream",
           "text": [
-            "New best at evaluation 33: \t Inputs: [0.1247 0.     0.634  0.2347 0.257  0.4351], \t Outputs: [-1.7711]\n",
-            "New best at evaluation 37: \t Inputs: [0.1196 0.0298 0.2002 0.2853 0.3047 0.5265], \t Outputs: [-2.3202]\n",
-            "New best at evaluation 38: \t Inputs: [0.1407 0.     0.2125 0.2922 0.3278 0.6806], \t Outputs: [-2.6529]\n",
-            "New best at evaluation 40: \t Inputs: [0.1356 0.     0.3436 0.3205 0.3754 0.6734], \t Outputs: [-2.6605]\n",
-            "New best at evaluation 44: \t Inputs: [0.1756 0.     0.351  0.3389 0.3135 0.637 ], \t Outputs: [-2.8567]\n",
-            "New best at evaluation 45: \t Inputs: [0.1758 0.     0.4007 0.2858 0.2995 0.6475], \t Outputs: [-3.0165]\n",
-            "New best at evaluation 46: \t Inputs: [0.1803 0.1282 0.4165 0.2719 0.299  0.6528], \t Outputs: [-3.2702]\n",
-            "New best at evaluation 50: \t Inputs: [0.205  0.1713 0.4946 0.2829 0.3034 0.6497], \t Outputs: [-3.3072]\n",
-            "New best at evaluation 54: \t Inputs: [0.2177 0.1405 0.474  0.2793 0.2996 0.6665], \t Outputs: [-3.3091]\n",
-            "New best at evaluation 55: \t Inputs: [0.2128 0.1415 0.4793 0.2709 0.3187 0.6467], \t Outputs: [-3.314]\n",
-            "New best at evaluation 56: \t Inputs: [0.1959 0.1521 0.4704 0.281  0.3138 0.6611], \t Outputs: [-3.3199]\n",
-            "New best at evaluation 58: \t Inputs: [0.2003 0.1573 0.4749 0.2769 0.3109 0.6575], \t Outputs: [-3.3216]\n",
-            "Evaluation: 58 \t Solution: -3.3216\n"
+            "New best at evaluation 36: \t Inputs: [0.3965 1.     1.     0.6047 0.2086 0.0744], \t Outputs: [-2.7826]\n",
+            "New best at evaluation 38: \t Inputs: [0.4048 1.     1.     0.58   0.1023 0.0234], \t Outputs: [-2.8559]\n",
+            "New best at evaluation 42: \t Inputs: [0.4123 0.8905 1.     0.5833 0.     0.0325], \t Outputs: [-3.1857]\n",
+            "New best at evaluation 48: \t Inputs: [0.396  0.8896 1.     0.5694 0.     0.0367], \t Outputs: [-3.1883]\n",
+            "New best at evaluation 50: \t Inputs: [0.4044 0.8807 1.     0.5761 0.     0.0376], \t Outputs: [-3.1942]\n",
+            "New best at evaluation 52: \t Inputs: [0.4061 0.8784 1.     0.576  0.1186 0.0378], \t Outputs: [-3.1989]\n",
+            "Evaluation: 52 \t Solution: -3.1989\n"
           ]
         }
       ],
@@ -43,7 +37,7 @@
         "import torch\n",
         "from nubo.acquisition import ExpectedImprovement, UpperConfidenceBound\n",
         "from nubo.models import GaussianProcess, fit_gp\n",
-        "from nubo.optimisation import lbfgsb\n",
+        "from nubo.optimisation import single\n",
         "from nubo.test_functions import Hartmann6D\n",
         "from nubo.utils import gen_inputs\n",
         "from gpytorch.likelihoods import GaussianLikelihood\n",
@@ -77,7 +71,7 @@
         "    acq = UpperConfidenceBound(gp=gp, beta=1.96**2)\n",
         "\n",
         "    # optimise acquisition function\n",
-        "    x_new, _ = lbfgsb(func=acq, bounds=bounds, num_starts=5)\n",
+        "    x_new, _ = single(func=acq, method=\"L-BFGS-B\", bounds=bounds, num_starts=5)\n",
         "\n",
         "    # evaluate new point\n",
         "    y_new = func(x_new)\n",

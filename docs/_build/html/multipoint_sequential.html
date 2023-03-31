@@ -217,9 +217,9 @@
         <article role="main">
           <section id="Parallel-multi-point-sequential-Bayesian-optimisation">
 <h1>Parallel multi-point sequential Bayesian optimisation<a class="headerlink" href="#Parallel-multi-point-sequential-Bayesian-optimisation" title="Permalink to this heading">#</a></h1>
-<p>In this example, NUBO is used to perform multi-point optimisation that allows the candidates to be evaluated from the objective function in parallel. Multi-point optimisation is implemented in NUBO through Monte Carlo acquisition functions. The script below uses the <code class="docutils literal notranslate"><span class="pre">MCUpperConfidenceBound</span></code> acquisition function with 512 samples and resamples the base samples (default). Each batch of 4 is found sequentialy with the <code class="docutils literal notranslate"><span class="pre">sequential()</span></code> function by optimising the acquisition function with the
-stochastic Adam optimiser. Note that the number of restarts is set to 1 for demonstration only. In practice you should consider a multi-start approach to prevent getting stuck in a local optimum. We could also fix the base samples in <code class="docutils literal notranslate"><span class="pre">MCUpperConfidenceBound</span></code> and use a deterministic optimiser, such as <code class="docutils literal notranslate"><span class="pre">lbfgsb()</span></code> or <code class="docutils literal notranslate"><span class="pre">slsqp()</span></code>. The <code class="docutils literal notranslate"><span class="pre">Hartmann6D</span></code> synthetic test function acts as a surrogate for a black box objective funtion, such as an experiment or a simulation. The optimisation loop is run
-for 10 iterations returning batches of 4 each (a total of 40 evaluations) and finds a solution close the true optimum of -3.3224.</p>
+<p>In this example, NUBO is used to perform multi-point optimisation that allows the candidates to be evaluated from the objective function in parallel. Multi-point optimisation is implemented in NUBO through Monte Carlo acquisition functions. The script below uses the <code class="docutils literal notranslate"><span class="pre">MCUpperConfidenceBound</span></code> acquisition function with 512 samples and resamples the base samples (default). Each batch of 4 is found sequentialy with the <code class="docutils literal notranslate"><span class="pre">multi_sequential()</span></code> function by optimising the acquisition function with the
+stochastic Adam optimiser. Note that the number of restarts is set to 1 for demonstration only. In practice you should consider a multi-start approach to prevent getting stuck in a local optimum. We could also fix the base samples in <code class="docutils literal notranslate"><span class="pre">MCUpperConfidenceBound</span></code> and use a deterministic optimiser, such as L-BFGS-B or SLSQP. The <code class="docutils literal notranslate"><span class="pre">Hartmann6D</span></code> synthetic test function acts as a surrogate for a black box objective funtion, such as an experiment or a simulation. The optimisation loop is run for 10
+iterations returning batches of 4 each (a total of 40 evaluations) and finds a solution close the true optimum of -3.3224.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -227,7 +227,7 @@ for 10 iterations returning batches of 4 each (a total of 40 evaluations) and fi
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">nubo.acquisition</span> <span class="kn">import</span> <span class="n">MCExpectedImprovement</span><span class="p">,</span> <span class="n">MCUpperConfidenceBound</span>
 <span class="kn">from</span> <span class="nn">nubo.models</span> <span class="kn">import</span> <span class="n">GaussianProcess</span><span class="p">,</span> <span class="n">fit_gp</span>
-<span class="kn">from</span> <span class="nn">nubo.optimisation</span> <span class="kn">import</span> <span class="n">sequential</span>
+<span class="kn">from</span> <span class="nn">nubo.optimisation</span> <span class="kn">import</span> <span class="n">multi_sequential</span>
 <span class="kn">from</span> <span class="nn">nubo.test_functions</span> <span class="kn">import</span> <span class="n">Hartmann6D</span>
 <span class="kn">from</span> <span class="nn">nubo.utils</span> <span class="kn">import</span> <span class="n">gen_inputs</span>
 <span class="kn">from</span> <span class="nn">gpytorch.likelihoods</span> <span class="kn">import</span> <span class="n">GaussianLikelihood</span>
@@ -261,7 +261,7 @@ for 10 iterations returning batches of 4 each (a total of 40 evaluations) and fi
     <span class="n">acq</span> <span class="o">=</span> <span class="n">MCUpperConfidenceBound</span><span class="p">(</span><span class="n">gp</span><span class="o">=</span><span class="n">gp</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">1.96</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">samples</span><span class="o">=</span><span class="mi">512</span><span class="p">)</span>
 
     <span class="c1"># optimise acquisition function</span>
-    <span class="n">x_new</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">sequential</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">acq</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;Adam&quot;</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">num_starts</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">x_new</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">multi_sequential</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">acq</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;Adam&quot;</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">num_starts</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
     <span class="c1"># evaluate new point</span>
     <span class="n">y_new</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">x_new</span><span class="p">)</span>
@@ -286,12 +286,13 @@ for 10 iterations returning batches of 4 each (a total of 40 evaluations) and fi
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-New best at evaluation 31:       Inputs: [0.2376 0.0057 0.6379 0.1616 0.3322 0.6163],    Outputs: -2.4684
-New best at evaluation 37:       Inputs: [1.686e-01 5.000e-04 4.184e-01 2.062e-01 3.457e-01 5.791e-01],          Outputs: -2.7252
-New best at evaluation 46:       Inputs: [0.2303 0.     0.4441 0.3053 0.2899 0.6732],    Outputs: -3.0165
-New best at evaluation 47:       Inputs: [0.2088 0.0903 0.4907 0.3055 0.3147 0.6268],    Outputs: -3.2279
-New best at evaluation 51:       Inputs: [0.1872 0.1524 0.475  0.2819 0.3088 0.6426],    Outputs: -3.3123
-Evaluation: 51   Solution: -3.3123
+New best at evaluation 31:       Inputs: [0.3487 0.7475 0.8996 0.5506 0.5202 0.1044],    Outputs: -2.4199
+New best at evaluation 43:       Inputs: [0.3364 0.7636 0.8507 0.5472 0.5597 0.0467],    Outputs: -2.5693
+New best at evaluation 51:       Inputs: [0.3677 0.8093 0.968  0.5548 0.3805 0.0176],    Outputs: -2.9473
+New best at evaluation 55:       Inputs: [3.770e-01 8.706e-01 9.928e-01 5.756e-01 8.700e-03 8.000e-04],          Outputs: -3.0891
+New best at evaluation 63:       Inputs: [0.4021 0.8817 0.9896 0.5661 0.001  0.0443],    Outputs: -3.1908
+New best at evaluation 67:       Inputs: [0.4077 0.8731 0.9979 0.5741 0.0034 0.0394],    Outputs: -3.1919
+Evaluation: 67   Solution: -3.1919
 </pre></div></div>
 </div>
 </section>

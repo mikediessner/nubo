@@ -216,6 +216,197 @@
         <article role="main">
           <section id="optimisation-module">
 <h1>Optimisation module<a class="headerlink" href="#optimisation-module" title="Permalink to this heading">#</a></h1>
+<section id="module-nubo.optimisation.singlepoint">
+<span id="single-point-optimisation"></span><h2>Single-point optimisation<a class="headerlink" href="#module-nubo.optimisation.singlepoint" title="Permalink to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="nubo.optimisation.singlepoint.single">
+<span class="sig-prename descclassname"><span class="pre">nubo.optimisation.singlepoint.</span></span><span class="sig-name descname"><span class="pre">single</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constraints</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">discrete</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_starts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/nubo/optimisation/singlepoint.html#single"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.optimisation.singlepoint.single" title="Permalink to this definition">#</a></dt>
+<dd><p>Single-point optimisation.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>func</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">Callable</span></code></span></dt><dd><p>Function to optimise.</p>
+</dd>
+<dt><strong>method</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">str</span></code></span></dt><dd><p>One of “L-BFGS-B” or “Adam”.</p>
+</dd>
+<dt><strong>bounds</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 2 x d) Optimisation bounds of input space.</p>
+</dd>
+<dt><strong>discrete</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">dict</span></code></span></dt><dd><p>Possible values for all discrete inputs in the shape {dim1: [values1],
+dim2: [values2], etc.}, e.g. {0: [1., 2., 3.], 3: [-0.1, -0.2, 100.]}.</p>
+</dd>
+<dt><strong>lr</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">float</span></code>, optional</span></dt><dd><p>Learning rate of <code class="docutils literal notranslate"><span class="pre">torch.optim.Adam</span></code> algorithm, default is 0.1.</p>
+</dd>
+<dt><strong>steps</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code>, optional</span></dt><dd><p>Optimisation steps of <code class="docutils literal notranslate"><span class="pre">torch.optim.Adam</span></code> algorithm, default is 200.</p>
+</dd>
+<dt><strong>num_starts</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code>, optional</span></dt><dd><p>Number of start for multi-start optimisation, default is 10.</p>
+</dd>
+<dt><strong>num_samples</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code>, optional</span></dt><dd><p>Number of samples from which to draw the starts, default is 100.</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">Any</span></code></span></dt><dd><p>Keyword argument passed to <code class="docutils literal notranslate"><span class="pre">torch.optim.Adam</span></code> or
+<code class="docutils literal notranslate"><span class="pre">scipy.optimize.minimze</span></code>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl>
+<dt><strong>best_result</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 1 x d) Minimiser inputs.</p>
+</dd>
+<dt><strong>best_func_result</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 1) Minimiser output.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="multi-point-optimisation">
+<h2>Multi-point optimisation<a class="headerlink" href="#multi-point-optimisation" title="Permalink to this heading">#</a></h2>
+<div class="seealso admonition">
+<p class="admonition-title">References</p>
+<ul class="simple">
+<li><p>J Wilson, F Hutter, and M Deisenroth, “Maximizing acquisition functions for Bayesian optimization,” <em>Advances in neural information processing systems</em>, vol. 31, 2018.</p></li>
+</ul>
+</div>
+<span class="target" id="module-nubo.optimisation.multipoint"></span><dl class="py function">
+<dt class="sig sig-object py" id="nubo.optimisation.multipoint.multi_joint">
+<span class="sig-prename descclassname"><span class="pre">nubo.optimisation.multipoint.</span></span><span class="sig-name descname"><span class="pre">multi_joint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">discrete</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_starts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/nubo/optimisation/multipoint.html#multi_joint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.optimisation.multipoint.multi_joint" title="Permalink to this definition">#</a></dt>
+<dd><p>Joint optimisation loop for Monte Carlo acquisition functions.</p>
+<p>Computes all points of a batch at once.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>func</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">Callable</span></code></span></dt><dd><p>Function to optimise.</p>
+</dd>
+<dt><strong>method</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">str</span></code></span></dt><dd><p>One of “L-BFGS-B” or “Adam”.</p>
+</dd>
+<dt><strong>batch_size</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code></span></dt><dd><p>Number of points to return.</p>
+</dd>
+<dt><strong>bounds</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 2 x d) Optimisation bounds of input space.</p>
+</dd>
+<dt><strong>discrete</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">dict</span></code></span></dt><dd><p>Possible values for all discrete inputs in the shape {dim1: [values1],
+dim2: [values2], etc.}, e.g. {0: [1., 2., 3.], 3: [-0.1, -0.2, 100.]}.</p>
+</dd>
+<dt><strong>lr</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">float</span></code>, optional</span></dt><dd><p>Learning rate of <code class="docutils literal notranslate"><span class="pre">torch.optim.Adam</span></code> algorithm, default is 0.1.</p>
+</dd>
+<dt><strong>steps</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code>, optional</span></dt><dd><p>Optimisation steps of <code class="docutils literal notranslate"><span class="pre">torch.optim.Adam</span></code> algorithm, default is 200.</p>
+</dd>
+<dt><strong>num_starts</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code>, optional</span></dt><dd><p>Number of start for multi-start optimisation, default is 10.</p>
+</dd>
+<dt><strong>num_samples</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code>, optional</span></dt><dd><p>Number of samples from which to draw the starts, default is 100.</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">Any</span></code></span></dt><dd><p>Keyword argument passed to <code class="docutils literal notranslate"><span class="pre">torch.optim.Adam</span></code> or
+<code class="docutils literal notranslate"><span class="pre">scipy.optimize.minimze</span></code>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl>
+<dt><strong>batch_result</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(sizq <cite>batch_size</cite> x d) Batch inputs.</p>
+</dd>
+<dt><strong>batch_func_result</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size <cite>batch_size</cite>) Batch outputs.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nubo.optimisation.multipoint.multi_sequential">
+<span class="sig-prename descclassname"><span class="pre">nubo.optimisation.multipoint.</span></span><span class="sig-name descname"><span class="pre">multi_sequential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constraints</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">discrete</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_starts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/nubo/optimisation/multipoint.html#multi_sequential"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.optimisation.multipoint.multi_sequential" title="Permalink to this definition">#</a></dt>
+<dd><p>Sequential greedy optimisation loop for Monte Carlo acquisition functions.</p>
+<p>Computes one point after the other for a batch always keeping previous
+points fixed, i.e. compute point 1, compute point 2 holding point 1 fixed,
+compute point 3 holding point 1 and 2 fixed and so on until the batch is
+full.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>func</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">Callable</span></code></span></dt><dd><p>Function to optimise.</p>
+</dd>
+<dt><strong>method</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">str</span></code></span></dt><dd><p>One of “L-BFGS-B”, “SLSQP”, or “Adam”.</p>
+</dd>
+<dt><strong>batch_size</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code></span></dt><dd><p>Number of points to return.</p>
+</dd>
+<dt><strong>bounds</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 2 x d) Optimisation bounds of input space.</p>
+</dd>
+<dt><strong>constraints</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">dict</span></code> or <code class="docutils literal notranslate"><span class="pre">list</span></code> of <code class="docutils literal notranslate"><span class="pre">dict</span></code>, optional</span></dt><dd><p>Optimisation constraints.</p>
+</dd>
+<dt><strong>discrete</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">dict</span></code></span></dt><dd><p>Possible values for all discrete inputs in the shape {dim1: [values1],
+dim2: [values2], etc.}, e.g. {0: [1., 2., 3.], 3: [-0.1, -0.2, 100.]}.</p>
+</dd>
+<dt><strong>lr</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">float</span></code>, optional</span></dt><dd><p>Learning rate of <code class="docutils literal notranslate"><span class="pre">torch.optim.Adam</span></code> algorithm, default is 0.1.</p>
+</dd>
+<dt><strong>steps</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code>, optional</span></dt><dd><p>Optimisation steps of <code class="docutils literal notranslate"><span class="pre">torch.optim.Adam</span></code> algorithm, default is 200.</p>
+</dd>
+<dt><strong>num_starts</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code>, optional</span></dt><dd><p>Number of start for multi-start optimisation, default is 10.</p>
+</dd>
+<dt><strong>num_samples</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code>, optional</span></dt><dd><p>Number of samples from which to draw the starts, default is 100.</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">Any</span></code></span></dt><dd><p>Keyword argument passed to <code class="docutils literal notranslate"><span class="pre">torch.optim.Adam</span></code> or
+<code class="docutils literal notranslate"><span class="pre">scipy.optimize.minimze</span></code>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl>
+<dt><strong>batch_result</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size <cite>batch_size</cite> x d) Batch inputs.</p>
+</dd>
+<dt><strong>batch_func_result</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size <cite>batch_size</cite>) Batch outputs.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nubo.optimisation.mixed">
+<span id="mixed-optimisation"></span><h2>Mixed optimisation<a class="headerlink" href="#module-nubo.optimisation.mixed" title="Permalink to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="nubo.optimisation.mixed.mixed">
+<span class="sig-prename descclassname"><span class="pre">nubo.optimisation.mixed.</span></span><span class="sig-name descname"><span class="pre">mixed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">discrete</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constraints</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_starts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/nubo/optimisation/mixed.html#mixed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.optimisation.mixed.mixed" title="Permalink to this definition">#</a></dt>
+<dd><p>Mixed optimisation with continuous and discrete inputs.</p>
+<p>Optimises the acquisition function over all continuous input dimensions by
+fixing a combination of the discrete inputs. Returns the best result over
+all possible discrete combinations.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>func</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">Callable</span></code></span></dt><dd><p>Function to optimise.</p>
+</dd>
+<dt><strong>method</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">str</span></code></span></dt><dd><p>One of “L-BFGS-B”, “SLSQP”, or “Adam”.</p>
+</dd>
+<dt><strong>bounds</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 2 x d) Optimisation bounds of input space.</p>
+</dd>
+<dt><strong>discrete</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">dict</span></code></span></dt><dd><p>Possible values for all discrete inputs in the shape {dim1: [values1],
+dim2: [values2], etc.}, e.g. {0: [1., 2., 3.], 3: [-0.1, -0.2, 100.]}.</p>
+</dd>
+<dt><strong>constraints</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">dict</span></code> or <code class="docutils literal notranslate"><span class="pre">list</span></code> of <code class="docutils literal notranslate"><span class="pre">dict</span></code>, optional</span></dt><dd><p>Optimisation constraints.</p>
+</dd>
+<dt><strong>lr</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">float</span></code>, optional</span></dt><dd><p>Learning rate of <code class="docutils literal notranslate"><span class="pre">torch.optim.Adam</span></code> algorithm, default is 0.1.</p>
+</dd>
+<dt><strong>steps</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code>, optional</span></dt><dd><p>Optimisation steps of <code class="docutils literal notranslate"><span class="pre">torch.optim.Adam</span></code> algorithm, default is 200.</p>
+</dd>
+<dt><strong>num_starts</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code>, optional</span></dt><dd><p>Number of start for multi-start optimisation, default is 10.</p>
+</dd>
+<dt><strong>num_samples</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code>, optional</span></dt><dd><p>Number of samples from which to draw the starts, default is 100.</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">Any</span></code></span></dt><dd><p>Keyword argument passed to <code class="docutils literal notranslate"><span class="pre">torch.optim.Adam</span></code> or
+<code class="docutils literal notranslate"><span class="pre">scipy.optimize.minimze</span></code>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl>
+<dt><strong>best_result</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 1 x d) Minimiser inputs.</p>
+</dd>
+<dt><strong>best_func_result</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 1) Minimiser output.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
 <section id="deterministic-optimisers">
 <h2>Deterministic optimisers<a class="headerlink" href="#deterministic-optimisers" title="Permalink to this heading">#</a></h2>
 <div class="seealso admonition">
@@ -346,75 +537,22 @@ Returns the best result.</p>
 </dl>
 </dd></dl>
 
-</section>
-<section id="multi-point-optimisation">
-<h2>Multi-point optimisation<a class="headerlink" href="#multi-point-optimisation" title="Permalink to this heading">#</a></h2>
-<div class="seealso admonition">
-<p class="admonition-title">References</p>
-<ul class="simple">
-<li><p>J Wilson, F Hutter, and M Deisenroth, “Maximizing acquisition functions for Bayesian optimization,” <em>Advances in neural information processing systems</em>, vol. 31, 2018.</p></li>
-</ul>
-</div>
-<span class="target" id="module-nubo.optimisation.multipoint"></span><dl class="py function">
-<dt class="sig sig-object py" id="nubo.optimisation.multipoint.joint">
-<span class="sig-prename descclassname"><span class="pre">nubo.optimisation.multipoint.</span></span><span class="sig-name descname"><span class="pre">joint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_starts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/nubo/optimisation/multipoint.html#joint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.optimisation.multipoint.joint" title="Permalink to this definition">#</a></dt>
-<dd><p>Joint optimisation loop for Monte Carlo acquisition functions.</p>
-<p>Computes all points of a batch at once.</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl>
-<dt><strong>func</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">Callable</span></code></span></dt><dd><p>Function to optimise.</p>
-</dd>
-<dt><strong>method</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">str</span></code></span></dt><dd><p>One of “L-BFGS-B”, “SLSQP”, or “Adam”.</p>
-</dd>
-<dt><strong>batch_size</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code></span></dt><dd><p>Number of points to return.</p>
-</dd>
-<dt><strong>bounds</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 2 x d) Optimisation bounds of input space.</p>
-</dd>
-<dt><strong>lr</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">float</span></code>, optional</span></dt><dd><p>Learning rate of <code class="docutils literal notranslate"><span class="pre">torch.optim.Adam</span></code> algorithm, default is 0.1.</p>
-</dd>
-<dt><strong>steps</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code>, optional</span></dt><dd><p>Optimisation steps of <code class="docutils literal notranslate"><span class="pre">torch.optim.Adam</span></code> algorithm, default is 200.</p>
-</dd>
-<dt><strong>num_starts</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code>, optional</span></dt><dd><p>Number of start for multi-start optimisation, default is 10.</p>
-</dd>
-<dt><strong>num_samples</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code>, optional</span></dt><dd><p>Number of samples from which to draw the starts, default is 100.</p>
-</dd>
-<dt><strong>**kwargs</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">Any</span></code></span></dt><dd><p>Keyword argument passed to <code class="docutils literal notranslate"><span class="pre">torch.optim.Adam</span></code> or
-<code class="docutils literal notranslate"><span class="pre">scipy.optimize.minimze</span></code>.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl>
-<dt><strong>batch_result</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(sizq <cite>batch_size</cite> x d) Batch inputs.</p>
-</dd>
-<dt><strong>batch_func_result</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size <cite>batch_size</cite>) Batch outputs.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py function">
-<dt class="sig sig-object py" id="nubo.optimisation.multipoint.sequential">
-<span class="sig-prename descclassname"><span class="pre">nubo.optimisation.multipoint.</span></span><span class="sig-name descname"><span class="pre">sequential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constraints</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_starts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/nubo/optimisation/multipoint.html#sequential"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.optimisation.multipoint.sequential" title="Permalink to this definition">#</a></dt>
-<dd><p>Sequential greedy optimisation loop for Monte Carlo acquisition functions.</p>
-<p>Computes one point after the other for a batch always keeping previous
-points fixed, i.e. compute point 1, compute point 2 holding point 1 fixed,
-compute point 3 holding point 1 and 2 fixed and so on until the batch is
-full.</p>
+<dt class="sig sig-object py" id="nubo.optimisation.adam.adam_mixed">
+<span class="sig-prename descclassname"><span class="pre">nubo.optimisation.adam.</span></span><span class="sig-name descname"><span class="pre">adam_mixed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_starts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/nubo/optimisation/adam.html#adam_mixed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.optimisation.adam.adam_mixed" title="Permalink to this definition">#</a></dt>
+<dd><p>Multi-start Adam optimiser using the <code class="docutils literal notranslate"><span class="pre">torch.optim.Adam</span></code> implementation
+from <code class="docutils literal notranslate"><span class="pre">PyTorch</span></code>.</p>
+<p>Used for maximising Monte Carlo acquisition function when base samples are
+not fixed. Bounds are enforced by clamping where values exceed them. Picks
+the best <cite>num_starts</cite> points from a total <cite>num_samples</cite> Latin hypercube
+samples to initialise the optimser. Returns the best
+result.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
 <dt><strong>func</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">Callable</span></code></span></dt><dd><p>Function to optimise.</p>
 </dd>
-<dt><strong>method</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">str</span></code></span></dt><dd><p>One of “L-BFGS-B”, “SLSQP”, or “Adam”.</p>
-</dd>
-<dt><strong>batch_size</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code></span></dt><dd><p>Number of points to return.</p>
-</dd>
 <dt><strong>bounds</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 2 x d) Optimisation bounds of input space.</p>
-</dd>
-<dt><strong>constraints</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">dict</span></code> or <code class="docutils literal notranslate"><span class="pre">list</span></code> of <code class="docutils literal notranslate"><span class="pre">dict</span></code>, optional</span></dt><dd><p>Optimisation constraints.</p>
 </dd>
 <dt><strong>lr</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">float</span></code>, optional</span></dt><dd><p>Learning rate of <code class="docutils literal notranslate"><span class="pre">torch.optim.Adam</span></code> algorithm, default is 0.1.</p>
 </dd>
@@ -424,16 +562,15 @@ full.</p>
 </dd>
 <dt><strong>num_samples</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code>, optional</span></dt><dd><p>Number of samples from which to draw the starts, default is 100.</p>
 </dd>
-<dt><strong>**kwargs</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">Any</span></code></span></dt><dd><p>Keyword argument passed to <code class="docutils literal notranslate"><span class="pre">torch.optim.Adam</span></code> or
-<code class="docutils literal notranslate"><span class="pre">scipy.optimize.minimze</span></code>.</p>
+<dt><strong>**kwargs</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">Any</span></code></span></dt><dd><p>Keyword argument passed to <code class="docutils literal notranslate"><span class="pre">torch.optim.Adam</span></code>.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl>
-<dt><strong>batch_result</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size <cite>batch_size</cite> x d) Batch inputs.</p>
+<dt><strong>best_result</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 1 x d) Minimiser input.</p>
 </dd>
-<dt><strong>batch_func_result</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size <cite>batch_size</cite>) Batch outputs.</p>
+<dt><strong>best_func_result</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 1) Minimiser output.</p>
 </dd>
 </dl>
 </dd>
@@ -529,6 +666,19 @@ hypercube design.</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Optimisation module</a><ul>
+<li><a class="reference internal" href="#module-nubo.optimisation.singlepoint">Single-point optimisation</a><ul>
+<li><a class="reference internal" href="#nubo.optimisation.singlepoint.single"><code class="docutils literal notranslate"><span class="pre">single()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#multi-point-optimisation">Multi-point optimisation</a><ul>
+<li><a class="reference internal" href="#nubo.optimisation.multipoint.multi_joint"><code class="docutils literal notranslate"><span class="pre">multi_joint()</span></code></a></li>
+<li><a class="reference internal" href="#nubo.optimisation.multipoint.multi_sequential"><code class="docutils literal notranslate"><span class="pre">multi_sequential()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-nubo.optimisation.mixed">Mixed optimisation</a><ul>
+<li><a class="reference internal" href="#nubo.optimisation.mixed.mixed"><code class="docutils literal notranslate"><span class="pre">mixed()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#deterministic-optimisers">Deterministic optimisers</a><ul>
 <li><a class="reference internal" href="#nubo.optimisation.lbfgsb.lbfgsb"><code class="docutils literal notranslate"><span class="pre">lbfgsb()</span></code></a></li>
 <li><a class="reference internal" href="#nubo.optimisation.slsqp.slsqp"><code class="docutils literal notranslate"><span class="pre">slsqp()</span></code></a></li>
@@ -536,11 +686,7 @@ hypercube design.</p>
 </li>
 <li><a class="reference internal" href="#stochastic-optimisers">Stochastic optimisers</a><ul>
 <li><a class="reference internal" href="#nubo.optimisation.adam.adam"><code class="docutils literal notranslate"><span class="pre">adam()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#multi-point-optimisation">Multi-point optimisation</a><ul>
-<li><a class="reference internal" href="#nubo.optimisation.multipoint.joint"><code class="docutils literal notranslate"><span class="pre">joint()</span></code></a></li>
-<li><a class="reference internal" href="#nubo.optimisation.multipoint.sequential"><code class="docutils literal notranslate"><span class="pre">sequential()</span></code></a></li>
+<li><a class="reference internal" href="#nubo.optimisation.adam.adam_mixed"><code class="docutils literal notranslate"><span class="pre">adam_mixed()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-nubo.optimisation.utils">Optimisation utilities</a><ul>

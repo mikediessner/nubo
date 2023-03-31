@@ -216,101 +216,19 @@
 <span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">Tensor</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Any</span>
-<span class="kn">from</span> <span class="nn">nubo.optimisation</span> <span class="kn">import</span> <span class="n">lbfgsb</span><span class="p">,</span> <span class="n">slsqp</span><span class="p">,</span> <span class="n">adam</span>
+<span class="kn">from</span> <span class="nn">nubo.optimisation</span> <span class="kn">import</span> <span class="n">lbfgsb</span><span class="p">,</span> <span class="n">slsqp</span><span class="p">,</span> <span class="n">adam</span><span class="p">,</span> <span class="n">mixed</span>
 
 
-<div class="viewcode-block" id="sequential"><a class="viewcode-back" href="../../../nubo.optimisation.html#nubo.optimisation.multipoint.sequential">[docs]</a><span class="k">def</span> <span class="nf">sequential</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> 
-               <span class="n">method</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
-               <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> 
-               <span class="n">bounds</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span>
-               <span class="n">constraints</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-               <span class="n">lr</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-               <span class="n">steps</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> 
-               <span class="n">num_starts</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-               <span class="n">num_samples</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> 
-               <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Sequential greedy optimisation loop for Monte Carlo acquisition functions.</span>
-
-<span class="sd">    Computes one point after the other for a batch always keeping previous</span>
-<span class="sd">    points fixed, i.e. compute point 1, compute point 2 holding point 1 fixed,</span>
-<span class="sd">    compute point 3 holding point 1 and 2 fixed and so on until the batch is</span>
-<span class="sd">    full.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    func : ``Callable``</span>
-<span class="sd">        Function to optimise.</span>
-<span class="sd">    method : ``str``</span>
-<span class="sd">        One of &quot;L-BFGS-B&quot;, &quot;SLSQP&quot;, or &quot;Adam&quot;.</span>
-<span class="sd">    batch_size : ``int``</span>
-<span class="sd">        Number of points to return.</span>
-<span class="sd">    bounds : ``torch.Tensor``</span>
-<span class="sd">        (size 2 x d) Optimisation bounds of input space.</span>
-<span class="sd">    constraints : ``dict`` or ``list`` of ``dict``, optional</span>
-<span class="sd">        Optimisation constraints.</span>
-<span class="sd">    lr : ``float``, optional</span>
-<span class="sd">        Learning rate of ``torch.optim.Adam`` algorithm, default is 0.1.</span>
-<span class="sd">    steps : ``int``, optional</span>
-<span class="sd">        Optimisation steps of ``torch.optim.Adam`` algorithm, default is 200.</span>
-<span class="sd">    num_starts : ``int``, optional</span>
-<span class="sd">        Number of start for multi-start optimisation, default is 10.</span>
-<span class="sd">    num_samples : ``int``, optional</span>
-<span class="sd">        Number of samples from which to draw the starts, default is 100.</span>
-<span class="sd">    **kwargs : ``Any``</span>
-<span class="sd">        Keyword argument passed to ``torch.optim.Adam`` or</span>
-<span class="sd">        ``scipy.optimize.minimze``.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    batch_result : ``torch.Tensor``</span>
-<span class="sd">        (size `batch_size` x d) Batch inputs.</span>
-<span class="sd">    batch_func_result : ``torch.Tensor``</span>
-<span class="sd">        (size `batch_size`) Batch outputs.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">dims</span> <span class="o">=</span> <span class="n">bounds</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-
-    <span class="c1"># initialise tensors for results</span>
-    <span class="n">batch_result</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="n">dims</span><span class="p">))</span>
-    <span class="n">batch_func_result</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">batch_size</span><span class="p">)</span>
-
-    <span class="c1"># sequential optimisation loop</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">batch_size</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;L-BFGS-B&quot;</span><span class="p">:</span>
-            <span class="n">x_new</span><span class="p">,</span> <span class="n">f_x_new</span> <span class="o">=</span> <span class="n">lbfgsb</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">bounds</span><span class="p">,</span> <span class="n">num_starts</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;SLSQP&quot;</span><span class="p">:</span>
-            <span class="n">x_new</span><span class="p">,</span> <span class="n">f_x_new</span> <span class="o">=</span> <span class="n">slsqp</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">bounds</span><span class="p">,</span> <span class="n">constraints</span><span class="p">,</span> <span class="n">num_starts</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;Adam&quot;</span><span class="p">:</span>
-            <span class="n">x_new</span><span class="p">,</span> <span class="n">f_x_new</span> <span class="o">=</span> <span class="n">adam</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">bounds</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="n">steps</span><span class="p">,</span> <span class="n">num_starts</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Method must be one of L-BFGS-B, SLSQP or Adam.&quot;</span><span class="p">)</span>
-        
-        <span class="c1"># add new point to results</span>
-        <span class="n">batch_result</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">batch_result</span><span class="p">,</span> <span class="n">x_new</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-        <span class="n">batch_func_result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">f_x_new</span><span class="p">)</span>
-
-        <span class="c1"># add new point to pending points</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">x_pending</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">):</span>
-            <span class="n">func</span><span class="o">.</span><span class="n">x_pending</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">func</span><span class="o">.</span><span class="n">x_pending</span><span class="p">,</span> <span class="n">x_new</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">func</span><span class="o">.</span><span class="n">x_pending</span> <span class="o">=</span> <span class="n">x_new</span>
-
-        <span class="c1"># reset fixed base samples</span>
-        <span class="n">func</span><span class="o">.</span><span class="n">base_samples</span> <span class="o">=</span> <span class="kc">None</span>
-
-    <span class="k">return</span> <span class="n">batch_result</span><span class="p">,</span> <span class="n">batch_func_result</span></div>
-
-
-<div class="viewcode-block" id="joint"><a class="viewcode-back" href="../../../nubo.optimisation.html#nubo.optimisation.multipoint.joint">[docs]</a><span class="k">def</span> <span class="nf">joint</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
-          <span class="n">method</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-          <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-          <span class="n">bounds</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span>
-          <span class="n">lr</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-          <span class="n">steps</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-          <span class="n">num_starts</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-          <span class="n">num_samples</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-          <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">]:</span>
+<div class="viewcode-block" id="multi_joint"><a class="viewcode-back" href="../../../nubo.optimisation.html#nubo.optimisation.multipoint.multi_joint">[docs]</a><span class="k">def</span> <span class="nf">multi_joint</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
+                <span class="n">method</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                <span class="n">bounds</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span>
+                <span class="n">discrete</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">lr</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+                <span class="n">steps</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+                <span class="n">num_starts</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                <span class="n">num_samples</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+                <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Joint optimisation loop for Monte Carlo acquisition functions.</span>
 <span class="sd">    </span>
@@ -321,11 +239,14 @@
 <span class="sd">    func : ``Callable``</span>
 <span class="sd">        Function to optimise.</span>
 <span class="sd">    method : ``str``</span>
-<span class="sd">        One of &quot;L-BFGS-B&quot;, &quot;SLSQP&quot;, or &quot;Adam&quot;.</span>
+<span class="sd">        One of &quot;L-BFGS-B&quot; or &quot;Adam&quot;.</span>
 <span class="sd">    batch_size : ``int``</span>
 <span class="sd">        Number of points to return.</span>
 <span class="sd">    bounds : ``torch.Tensor``</span>
 <span class="sd">        (size 2 x d) Optimisation bounds of input space.</span>
+<span class="sd">    discrete : ``dict``</span>
+<span class="sd">        Possible values for all discrete inputs in the shape {dim1: [values1],</span>
+<span class="sd">        dim2: [values2], etc.}, e.g. {0: [1., 2., 3.], 3: [-0.1, -0.2, 100.]}.</span>
 <span class="sd">    lr : ``float``, optional</span>
 <span class="sd">        Learning rate of ``torch.optim.Adam`` algorithm, default is 0.1.</span>
 <span class="sd">    steps : ``int``, optional</span>
@@ -346,19 +267,129 @@
 <span class="sd">        (size `batch_size`) Batch outputs.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="k">if</span> <span class="n">method</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;L-BFGS-B&quot;</span><span class="p">,</span> <span class="s2">&quot;Adam&quot;</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Method must be one of L-BFGS-B or Adam.&quot;</span><span class="p">)</span>
+
+    <span class="n">dims</span> <span class="o">=</span> <span class="n">bounds</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
     <span class="c1"># extend bounds to full batch</span>
     <span class="n">full_bounds</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">bounds</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">))</span>
 
-    <span class="c1"># joint optimisation loop</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">batch_size</span><span class="p">):</span>
+    <span class="c1"># continuous parameter space</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">discrete</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;L-BFGS-B&quot;</span><span class="p">:</span>
             <span class="n">batch_result</span><span class="p">,</span> <span class="n">batch_func_result</span> <span class="o">=</span> <span class="n">lbfgsb</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">full_bounds</span><span class="p">,</span> <span class="n">num_starts</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;Adam&quot;</span><span class="p">:</span>
             <span class="n">batch_result</span><span class="p">,</span> <span class="n">batch_func_result</span> <span class="o">=</span> <span class="n">adam</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">full_bounds</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="n">steps</span><span class="p">,</span> <span class="n">num_starts</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Method must be one of L-BFGS-B or Adam.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># mixed parameter space</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># exetend discrete dims</span>
+        <span class="n">discrete_dims</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">discrete</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">discrete_values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">discrete</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+        <span class="n">full_discrete</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">batch_size</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">value</span><span class="p">,</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">discrete_dims</span><span class="p">):</span>
+                <span class="n">full_discrete</span><span class="p">[</span><span class="n">key</span><span class="o">+</span><span class="n">i</span><span class="o">*</span><span class="n">dims</span><span class="p">]</span> <span class="o">=</span> <span class="n">discrete_values</span><span class="p">[</span><span class="n">value</span><span class="p">]</span>
+
+        <span class="n">batch_result</span><span class="p">,</span> <span class="n">batch_func_result</span> <span class="o">=</span> <span class="n">mixed</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">full_bounds</span><span class="p">,</span> <span class="n">full_discrete</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="n">steps</span><span class="p">,</span> <span class="n">num_starts</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="n">batch_result</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">batch_result</span><span class="p">,</span> <span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">batch_result</span><span class="p">,</span> <span class="n">batch_func_result</span></div>
+
+
+<div class="viewcode-block" id="multi_sequential"><a class="viewcode-back" href="../../../nubo.optimisation.html#nubo.optimisation.multipoint.multi_sequential">[docs]</a><span class="k">def</span> <span class="nf">multi_sequential</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> 
+                     <span class="n">method</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
+                     <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> 
+                     <span class="n">bounds</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span>
+                     <span class="n">constraints</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span> <span class="o">|</span> <span class="nb">list</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                     <span class="n">discrete</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                     <span class="n">lr</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+                     <span class="n">steps</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> 
+                     <span class="n">num_starts</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                     <span class="n">num_samples</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> 
+                     <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sequential greedy optimisation loop for Monte Carlo acquisition functions.</span>
+
+<span class="sd">    Computes one point after the other for a batch always keeping previous</span>
+<span class="sd">    points fixed, i.e. compute point 1, compute point 2 holding point 1 fixed,</span>
+<span class="sd">    compute point 3 holding point 1 and 2 fixed and so on until the batch is</span>
+<span class="sd">    full.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    func : ``Callable``</span>
+<span class="sd">        Function to optimise.</span>
+<span class="sd">    method : ``str``</span>
+<span class="sd">        One of &quot;L-BFGS-B&quot;, &quot;SLSQP&quot;, or &quot;Adam&quot;.</span>
+<span class="sd">    batch_size : ``int``</span>
+<span class="sd">        Number of points to return.</span>
+<span class="sd">    bounds : ``torch.Tensor``</span>
+<span class="sd">        (size 2 x d) Optimisation bounds of input space.</span>
+<span class="sd">    constraints : ``dict`` or ``list`` of ``dict``, optional</span>
+<span class="sd">        Optimisation constraints.</span>
+<span class="sd">    discrete : ``dict``</span>
+<span class="sd">        Possible values for all discrete inputs in the shape {dim1: [values1],</span>
+<span class="sd">        dim2: [values2], etc.}, e.g. {0: [1., 2., 3.], 3: [-0.1, -0.2, 100.]}.</span>
+<span class="sd">    lr : ``float``, optional</span>
+<span class="sd">        Learning rate of ``torch.optim.Adam`` algorithm, default is 0.1.</span>
+<span class="sd">    steps : ``int``, optional</span>
+<span class="sd">        Optimisation steps of ``torch.optim.Adam`` algorithm, default is 200.</span>
+<span class="sd">    num_starts : ``int``, optional</span>
+<span class="sd">        Number of start for multi-start optimisation, default is 10.</span>
+<span class="sd">    num_samples : ``int``, optional</span>
+<span class="sd">        Number of samples from which to draw the starts, default is 100.</span>
+<span class="sd">    **kwargs : ``Any``</span>
+<span class="sd">        Keyword argument passed to ``torch.optim.Adam`` or</span>
+<span class="sd">        ``scipy.optimize.minimze``.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    batch_result : ``torch.Tensor``</span>
+<span class="sd">        (size `batch_size` x d) Batch inputs.</span>
+<span class="sd">    batch_func_result : ``torch.Tensor``</span>
+<span class="sd">        (size `batch_size`) Batch outputs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">method</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;L-BFGS-B&quot;</span><span class="p">,</span> <span class="s2">&quot;SLSQP&quot;</span><span class="p">,</span> <span class="s2">&quot;Adam&quot;</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Method must be one of L-BFGS-B, SLSQP or Adam.&quot;</span><span class="p">)</span>
+    
+    <span class="n">dims</span> <span class="o">=</span> <span class="n">bounds</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># initialise tensors for results</span>
+    <span class="n">batch_result</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="n">dims</span><span class="p">))</span>
+    <span class="n">batch_func_result</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">batch_size</span><span class="p">)</span>
+
+    <span class="c1"># sequential optimisation loop</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">batch_size</span><span class="p">):</span>
+
+        <span class="c1"># continuous parameter space</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">discrete</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;L-BFGS-B&quot;</span><span class="p">:</span>
+                <span class="n">x_new</span><span class="p">,</span> <span class="n">f_x_new</span> <span class="o">=</span> <span class="n">lbfgsb</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">bounds</span><span class="p">,</span> <span class="n">num_starts</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;SLSQP&quot;</span><span class="p">:</span>
+                <span class="n">x_new</span><span class="p">,</span> <span class="n">f_x_new</span> <span class="o">=</span> <span class="n">slsqp</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">bounds</span><span class="p">,</span> <span class="n">constraints</span><span class="p">,</span> <span class="n">num_starts</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;Adam&quot;</span><span class="p">:</span>
+                <span class="n">x_new</span><span class="p">,</span> <span class="n">f_x_new</span> <span class="o">=</span> <span class="n">adam</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">bounds</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="n">steps</span><span class="p">,</span> <span class="n">num_starts</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="c1"># mixed parameter space</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">x_new</span><span class="p">,</span> <span class="n">f_x_new</span> <span class="o">=</span> <span class="n">mixed</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">bounds</span><span class="p">,</span> <span class="n">discrete</span><span class="p">,</span> <span class="n">constraints</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="n">steps</span><span class="p">,</span> <span class="n">num_starts</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="c1"># add new point to results</span>
+        <span class="n">batch_result</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">batch_result</span><span class="p">,</span> <span class="n">x_new</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">batch_func_result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">f_x_new</span><span class="p">)</span>
+
+        <span class="c1"># add new point to pending points</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">x_pending</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">):</span>
+            <span class="n">func</span><span class="o">.</span><span class="n">x_pending</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">func</span><span class="o">.</span><span class="n">x_pending</span><span class="p">,</span> <span class="n">x_new</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">func</span><span class="o">.</span><span class="n">x_pending</span> <span class="o">=</span> <span class="n">x_new</span>
+
+        <span class="c1"># reset fixed base samples</span>
+        <span class="n">func</span><span class="o">.</span><span class="n">base_samples</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">return</span> <span class="n">batch_result</span><span class="p">,</span> <span class="n">batch_func_result</span></div>
 </pre></div>

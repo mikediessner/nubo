@@ -76,7 +76,7 @@ Contents
 
 **Optimisers**
   The deterministic analytical acquisition functions are optimised via
-  multi-start L-BFGS-B [#Zhu1997] if the input space is restricted by box
+  multi-start L-BFGS-B [#Zhu1997]_ if the input space is restricted by box
   bounds or multi-start SLSQP [#Kraft1994]_ if the input space is also
   restricted by constraints. The stochastic Monte Carlo acquisition functions
   that are based on random samples are maximised with the stochastic optimiser

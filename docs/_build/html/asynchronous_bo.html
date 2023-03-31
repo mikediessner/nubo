@@ -227,7 +227,7 @@ be used as this process is in general intractable for analytical functions.</p>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">nubo.acquisition</span> <span class="kn">import</span> <span class="n">MCExpectedImprovement</span><span class="p">,</span> <span class="n">MCUpperConfidenceBound</span>
 <span class="kn">from</span> <span class="nn">nubo.models</span> <span class="kn">import</span> <span class="n">GaussianProcess</span><span class="p">,</span> <span class="n">fit_gp</span>
-<span class="kn">from</span> <span class="nn">nubo.optimisation</span> <span class="kn">import</span> <span class="n">joint</span>
+<span class="kn">from</span> <span class="nn">nubo.optimisation</span> <span class="kn">import</span> <span class="n">multi_joint</span>
 <span class="kn">from</span> <span class="nn">nubo.test_functions</span> <span class="kn">import</span> <span class="n">Hartmann6D</span>
 <span class="kn">from</span> <span class="nn">nubo.utils</span> <span class="kn">import</span> <span class="n">gen_inputs</span>
 <span class="kn">from</span> <span class="nn">gpytorch.likelihoods</span> <span class="kn">import</span> <span class="n">GaussianLikelihood</span>
@@ -265,7 +265,7 @@ be used as this process is in general intractable for analytical functions.</p>
     <span class="n">acq</span> <span class="o">=</span> <span class="n">MCUpperConfidenceBound</span><span class="p">(</span><span class="n">gp</span><span class="o">=</span><span class="n">gp</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">1.96</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">x_pending</span><span class="o">=</span><span class="n">x_pending</span><span class="p">,</span> <span class="n">samples</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
 
     <span class="c1"># optimise acquisition function</span>
-    <span class="n">x_new</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">joint</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">acq</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;Adam&quot;</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">num_starts</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">x_new</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">multi_joint</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">acq</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;Adam&quot;</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">num_starts</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
     <span class="c1"># evaluate new point</span>
     <span class="n">y_new</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">x_new</span><span class="p">)</span>
@@ -290,12 +290,13 @@ be used as this process is in general intractable for analytical functions.</p>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Point pending evaluation: [0.0549 0.4383 0.6114 0.4004 0.3236 0.5762]
-New best at evaluation 46:       Inputs: [0.405  0.9129 0.3675 0.5679 0.2537 0.1028],    Outputs: -2.9641
-New best at evaluation 55:       Inputs: [0.4038 0.9041 0.0098 0.5969 0.0055 0.0098],    Outputs: -3.0195
-New best at evaluation 61:       Inputs: [0.4018 0.8983 0.9631 0.5603 0.0014 0.0146],    Outputs: -3.1585
-New best at evaluation 69:       Inputs: [0.4014 0.896  0.994  0.5616 0.0018 0.0341],    Outputs: -3.184
-Evaluation: 69   Solution: -3.1840
+Point pending evaluation: [0.1874 0.0246 0.4963 0.5481 0.5602 0.5434]
+New best at evaluation 35:       Inputs: [0.4185 0.9953 0.9987 0.4276 0.5028 0.0036],    Outputs: -2.2505
+New best at evaluation 48:       Inputs: [0.403  0.9975 0.0053 0.4634 0.0037 0.0044],    Outputs: -2.4121
+New best at evaluation 53:       Inputs: [4.010e-01 8.998e-01 9.766e-01 4.932e-01 1.000e-04 5.000e-04],          Outputs: -2.926
+New best at evaluation 56:       Inputs: [4.135e-01 8.917e-01 9.949e-01 5.736e-01 7.400e-03 2.000e-04],          Outputs: -3.1253
+New best at evaluation 61:       Inputs: [0.4098 0.8883 0.9959 0.5746 0.01   0.0463],    Outputs: -3.1903
+Evaluation: 61   Solution: -3.1903
 </pre></div></div>
 </div>
 </section>

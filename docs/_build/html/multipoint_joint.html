@@ -217,8 +217,8 @@
         <article role="main">
           <section id="Parallel-multi-point-joint-Bayesian-optimisation">
 <h1>Parallel multi-point joint Bayesian optimisation<a class="headerlink" href="#Parallel-multi-point-joint-Bayesian-optimisation" title="Permalink to this heading">#</a></h1>
-<p>In this example, NUBO is used to perform multi-point optimisation that allows the candidates to be evaluated from the objective function in parallel. Multi-point optimisation is implemented in NUBO through Monte Carlo acquisition functions. The script below uses the <code class="docutils literal notranslate"><span class="pre">MCUpperConfidenceBound</span></code> acquisition function with 512 samples and resamples the base samples (default). Each batch of 4 is found jointly with the <code class="docutils literal notranslate"><span class="pre">joint()</span></code> function by optimising the acquisition function with the stochastic Adam
-optimiser. Note that the number of restarts is set to 1 for demonstration only. In practice you should consider a multi-start approach to prevent getting stuck in a local optimum. We could also fix the base samples in <code class="docutils literal notranslate"><span class="pre">MCUpperConfidenceBound</span></code> and use a deterministic optimiser, such as <code class="docutils literal notranslate"><span class="pre">lbfgsb()</span></code> or <code class="docutils literal notranslate"><span class="pre">slsqp()</span></code>. The <code class="docutils literal notranslate"><span class="pre">Hartmann6D</span></code> synthetic test function acts as a surrogate for a black box objective funtion, such as an experiment or a simulation. The optimisation loop is run for 10 iterations
+<p>In this example, NUBO is used to perform multi-point optimisation that allows the candidates to be evaluated from the objective function in parallel. Multi-point optimisation is implemented in NUBO through Monte Carlo acquisition functions. The script below uses the <code class="docutils literal notranslate"><span class="pre">MCUpperConfidenceBound</span></code> acquisition function with 512 samples and resamples the base samples (default). Each batch of 4 is found jointly with the <code class="docutils literal notranslate"><span class="pre">multi_joint()</span></code> function by optimising the acquisition function with the
+stochastic Adam optimiser. Note that the number of restarts is set to 1 for demonstration only. In practice you should consider a multi-start approach to prevent getting stuck in a local optimum. We could also fix the base samples in <code class="docutils literal notranslate"><span class="pre">MCUpperConfidenceBound</span></code> and use a deterministic optimiser, such as “L-BFGS-B”. The <code class="docutils literal notranslate"><span class="pre">Hartmann6D</span></code> synthetic test function acts as a surrogate for a black box objective funtion, such as an experiment or a simulation. The optimisation loop is run for 10 iterations
 returning batches of 4 each (a total of 40 evaluations) and finds a solution close the true optimum of -3.3224.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -227,7 +227,7 @@ returning batches of 4 each (a total of 40 evaluations) and finds a solution clo
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">nubo.acquisition</span> <span class="kn">import</span> <span class="n">MCExpectedImprovement</span><span class="p">,</span> <span class="n">MCUpperConfidenceBound</span>
 <span class="kn">from</span> <span class="nn">nubo.models</span> <span class="kn">import</span> <span class="n">GaussianProcess</span><span class="p">,</span> <span class="n">fit_gp</span>
-<span class="kn">from</span> <span class="nn">nubo.optimisation</span> <span class="kn">import</span> <span class="n">joint</span>
+<span class="kn">from</span> <span class="nn">nubo.optimisation</span> <span class="kn">import</span> <span class="n">multi_joint</span>
 <span class="kn">from</span> <span class="nn">nubo.test_functions</span> <span class="kn">import</span> <span class="n">Hartmann6D</span>
 <span class="kn">from</span> <span class="nn">nubo.utils</span> <span class="kn">import</span> <span class="n">gen_inputs</span>
 <span class="kn">from</span> <span class="nn">gpytorch.likelihoods</span> <span class="kn">import</span> <span class="n">GaussianLikelihood</span>
@@ -261,7 +261,7 @@ returning batches of 4 each (a total of 40 evaluations) and finds a solution clo
     <span class="n">acq</span> <span class="o">=</span> <span class="n">MCUpperConfidenceBound</span><span class="p">(</span><span class="n">gp</span><span class="o">=</span><span class="n">gp</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">1.96</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">samples</span><span class="o">=</span><span class="mi">512</span><span class="p">)</span>
 
     <span class="c1"># optimise acquisition function</span>
-    <span class="n">x_new</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">joint</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">acq</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;Adam&quot;</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">num_starts</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">x_new</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">multi_joint</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">acq</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;Adam&quot;</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">num_starts</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
     <span class="c1"># evaluate new point</span>
     <span class="n">y_new</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">x_new</span><span class="p">)</span>
@@ -286,12 +286,10 @@ returning batches of 4 each (a total of 40 evaluations) and finds a solution clo
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-New best at evaluation 48:       Inputs: [0.4443 0.998  0.9991 0.4944 0.0011 0.0014],    Outputs: -2.5744
-New best at evaluation 51:       Inputs: [0.4193 0.999  0.007  0.5327 0.3317 0.001 ],    Outputs: -2.6472
-New best at evaluation 55:       Inputs: [0.4018 0.9807 0.9782 0.5658 0.0677 0.004 ],    Outputs: -2.9121
-New best at evaluation 64:       Inputs: [0.3981 0.8256 0.9986 0.5637 0.0301 0.0038],    Outputs: -3.0573
-New best at evaluation 68:       Inputs: [0.3953 0.8471 0.9827 0.5702 0.2094 0.0021],    Outputs: -3.1034
-Evaluation: 68   Solution: -3.1034
+New best at evaluation 44:       Inputs: [0.3957 0.8149 0.1248 0.5297 0.0373 0.0101],    Outputs: -2.9052
+New best at evaluation 55:       Inputs: [0.4088 0.8735 0.9928 0.5549 0.0142 0.0588],    Outputs: -3.162
+New best at evaluation 60:       Inputs: [0.4068 0.8819 0.9951 0.5724 0.004  0.0335],    Outputs: -3.1936
+Evaluation: 60   Solution: -3.1936
 </pre></div></div>
 </div>
 </section>

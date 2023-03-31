@@ -3,4 +3,5 @@ from .lbfgsb import lbfgsb
 from .slsqp import slsqp
 from .adam import adam, adam_mixed
 from .mixed import mixed
-from .strategy import single, multi_joint, multi_sequential
+from .singlepoint import single
+from .multipoint import multi_joint, multi_sequential

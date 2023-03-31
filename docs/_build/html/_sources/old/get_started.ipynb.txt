@@ -85,19 +85,26 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "New best at evaluation 43: \t Inputs: [0.3949 1.     1.     0.7699 0.0393 0.0369], \t Outputs: [-1.9498]\n",
-      "New best at evaluation 52: \t Inputs: [0.2581 0.3436 0.5644 0.2322 0.3715 0.8276], \t Outputs: [-2.1738]\n",
-      "New best at evaluation 56: \t Inputs: [0.4257 1.     1.     0.6889 0.094  0.003 ], \t Outputs: [-2.4506]\n",
-      "New best at evaluation 59: \t Inputs: [0.2707 0.2744 0.5454 0.2384 0.3474 0.7427], \t Outputs: [-2.8153]\n",
-      "New best at evaluation 60: \t Inputs: [0.3071 0.2052 0.4839 0.265  0.3319 0.6998], \t Outputs: [-3.091]\n",
-      "New best at evaluation 69: \t Inputs: [0.2485 0.1512 0.4608 0.291  0.3224 0.6786], \t Outputs: [-3.2718]\n"
+      "New best at evaluation 31: \t Inputs: [0.477  0.0444 0.0736 0.2914 0.3603 0.7323], \t Outputs: [-1.9494]\n",
+      "New best at evaluation 34: \t Inputs: [0.4453 0.0418 0.0483 0.3164 0.3478 0.6925], \t Outputs: [-2.0684]\n",
+      "New best at evaluation 39: \t Inputs: [0.4127 0.1638 0.     0.277  0.3385 0.679 ], \t Outputs: [-2.1595]\n",
+      "New best at evaluation 40: \t Inputs: [0.3715 0.1565 0.     0.3261 0.3372 0.7126], \t Outputs: [-2.1843]\n",
+      "New best at evaluation 41: \t Inputs: [0.3589 0.134  0.3895 0.2927 0.3222 0.7003], \t Outputs: [-2.9809]\n",
+      "New best at evaluation 42: \t Inputs: [0.2754 0.1478 0.425  0.2529 0.3054 0.6874], \t Outputs: [-3.2027]\n",
+      "New best at evaluation 46: \t Inputs: [0.1473 0.1864 0.427  0.2906 0.2993 0.666 ], \t Outputs: [-3.2302]\n",
+      "New best at evaluation 51: \t Inputs: [0.1764 0.1303 0.4576 0.3022 0.3029 0.6827], \t Outputs: [-3.2657]\n",
+      "New best at evaluation 52: \t Inputs: [0.2016 0.1447 0.4616 0.2798 0.3018 0.6716], \t Outputs: [-3.31]\n",
+      "New best at evaluation 53: \t Inputs: [0.2063 0.144  0.465  0.2787 0.3138 0.6519], \t Outputs: [-3.3192]\n",
+      "New best at evaluation 58: \t Inputs: [0.205  0.1516 0.4686 0.2725 0.3137 0.6614], \t Outputs: [-3.3206]\n",
+      "New best at evaluation 66: \t Inputs: [0.2096 0.142  0.4767 0.2757 0.3112 0.6573], \t Outputs: [-3.3209]\n",
+      "New best at evaluation 70: \t Inputs: [0.2076 0.1527 0.4728 0.2802 0.3109 0.6594], \t Outputs: [-3.321]\n"
      ]
     }
    ],
    "source": [
     "from nubo.acquisition import UpperConfidenceBound\n",
     "from nubo.models import GaussianProcess, fit_gp\n",
-    "from nubo.optimisation import lbfgsb\n",
+    "from nubo.optimisation import single\n",
     "from gpytorch.likelihoods import GaussianLikelihood\n",
     "\n",
     "\n",
@@ -117,7 +124,7 @@
     "    acq = UpperConfidenceBound(gp=gp, beta=1.96**2)\n",
     "\n",
     "    # optimise acquisition function\n",
-    "    x_new, _ = lbfgsb(func=acq, bounds=bounds, num_starts=5)\n",
+    "    x_new, _ = single(func=acq, method=\"L-BFGS-B\", bounds=bounds, num_starts=5)\n",
     "\n",
     "    # evaluate new point\n",
     "    y_new = func(x_new)\n",
@@ -136,7 +143,7 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "Finally, we print the overall best solution: We get -3.2718 on evaluation 69 which approximaties the true optimum of -3.3224."
+    "Finally, we print the overall best solution: We get -3.321 on evaluation 70 which approximaties the true optimum of -3.3224."
    ]
   },
   {
@@ -148,7 +155,7 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "Evaluation: 69 \t Solution: 3.2718\n"
+      "Evaluation: 70 \t Solution: 3.3210\n"
      ]
     }
    ],
@@ -175,10 +182,10 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "Mean function constant: 0.18545642495155334\n",
-      "Covariance kernel output-scale: 0.36589178442955017\n",
-      "Covariance kernel length-scale: tensor([[0.3780, 0.4826, 0.6710, 0.3035, 0.3445, 0.3133]])\n",
-      "Estimated noise / nugget: 0.0008741075871512294\n"
+      "Mean function constant: 0.10733954608440399\n",
+      "Covariance kernel output-scale: 0.2942888140678406\n",
+      "Covariance kernel length-scale: tensor([[0.5552, 0.5305, 0.6730, 0.3610, 0.2741, 0.3786]])\n",
+      "Estimated noise/nugget: 0.000116478513518814\n"
      ]
     }
    ],
@@ -206,7 +213,7 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.11.2"
+   "version": "3.10.10"
   },
   "orig_nbformat": 4,
   "vscode": {

@@ -217,7 +217,7 @@
         <article role="main">
           <section id="Sequential-single-point-Bayesian-optimisation">
 <h1>Sequential single-point Bayesian optimisation<a class="headerlink" href="#Sequential-single-point-Bayesian-optimisation" title="Permalink to this heading">#</a></h1>
-<p>In this example, NUBO is used for sequential single-point optimisation. The <code class="docutils literal notranslate"><span class="pre">Hartmann6D</span></code> synthetic test function acts as a surrogate for a black box objective funtion, such as an experiment or a simulation. We use the analytical acquisiton function <code class="docutils literal notranslate"><span class="pre">UpperConfidenceBound</span></code> with <span class="math notranslate nohighlight">\(\beta = 1.96^2\)</span> corresponding to the 95% confidence interval of the Gaussian distribution. We optimise this acquisition function with the <code class="docutils literal notranslate"><span class="pre">lbfgsb()</span></code> algorithm with 5 starts to avoid getting stuck in a local
+<p>In this example, NUBO is used for sequential single-point optimisation. The <code class="docutils literal notranslate"><span class="pre">Hartmann6D</span></code> synthetic test function acts as a surrogate for a black box objective funtion, such as an experiment or a simulation. We use the analytical acquisiton function <code class="docutils literal notranslate"><span class="pre">UpperConfidenceBound</span></code> with <span class="math notranslate nohighlight">\(\beta = 1.96^2\)</span> corresponding to the 95% confidence interval of the Gaussian distribution. We optimise this acquisition function with the L-BFGS-B algorithm with 5 starts to avoid getting stuck in a local
 maximum. The optimisation loop is run for 40 iterations and finds a solution close the true optimum of -3.3224.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -226,7 +226,7 @@ maximum. The optimisation loop is run for 40 iterations and finds a solution clo
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">nubo.acquisition</span> <span class="kn">import</span> <span class="n">ExpectedImprovement</span><span class="p">,</span> <span class="n">UpperConfidenceBound</span>
 <span class="kn">from</span> <span class="nn">nubo.models</span> <span class="kn">import</span> <span class="n">GaussianProcess</span><span class="p">,</span> <span class="n">fit_gp</span>
-<span class="kn">from</span> <span class="nn">nubo.optimisation</span> <span class="kn">import</span> <span class="n">lbfgsb</span>
+<span class="kn">from</span> <span class="nn">nubo.optimisation</span> <span class="kn">import</span> <span class="n">single</span>
 <span class="kn">from</span> <span class="nn">nubo.test_functions</span> <span class="kn">import</span> <span class="n">Hartmann6D</span>
 <span class="kn">from</span> <span class="nn">nubo.utils</span> <span class="kn">import</span> <span class="n">gen_inputs</span>
 <span class="kn">from</span> <span class="nn">gpytorch.likelihoods</span> <span class="kn">import</span> <span class="n">GaussianLikelihood</span>
@@ -260,7 +260,7 @@ maximum. The optimisation loop is run for 40 iterations and finds a solution clo
     <span class="n">acq</span> <span class="o">=</span> <span class="n">UpperConfidenceBound</span><span class="p">(</span><span class="n">gp</span><span class="o">=</span><span class="n">gp</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">1.96</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
     <span class="c1"># optimise acquisition function</span>
-    <span class="n">x_new</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">lbfgsb</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">acq</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">,</span> <span class="n">num_starts</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">x_new</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">single</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">acq</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;L-BFGS-B&quot;</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">,</span> <span class="n">num_starts</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
     <span class="c1"># evaluate new point</span>
     <span class="n">y_new</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">x_new</span><span class="p">)</span>
@@ -284,19 +284,13 @@ maximum. The optimisation loop is run for 40 iterations and finds a solution clo
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-New best at evaluation 33:       Inputs: [0.1247 0.     0.634  0.2347 0.257  0.4351],    Outputs: [-1.7711]
-New best at evaluation 37:       Inputs: [0.1196 0.0298 0.2002 0.2853 0.3047 0.5265],    Outputs: [-2.3202]
-New best at evaluation 38:       Inputs: [0.1407 0.     0.2125 0.2922 0.3278 0.6806],    Outputs: [-2.6529]
-New best at evaluation 40:       Inputs: [0.1356 0.     0.3436 0.3205 0.3754 0.6734],    Outputs: [-2.6605]
-New best at evaluation 44:       Inputs: [0.1756 0.     0.351  0.3389 0.3135 0.637 ],    Outputs: [-2.8567]
-New best at evaluation 45:       Inputs: [0.1758 0.     0.4007 0.2858 0.2995 0.6475],    Outputs: [-3.0165]
-New best at evaluation 46:       Inputs: [0.1803 0.1282 0.4165 0.2719 0.299  0.6528],    Outputs: [-3.2702]
-New best at evaluation 50:       Inputs: [0.205  0.1713 0.4946 0.2829 0.3034 0.6497],    Outputs: [-3.3072]
-New best at evaluation 54:       Inputs: [0.2177 0.1405 0.474  0.2793 0.2996 0.6665],    Outputs: [-3.3091]
-New best at evaluation 55:       Inputs: [0.2128 0.1415 0.4793 0.2709 0.3187 0.6467],    Outputs: [-3.314]
-New best at evaluation 56:       Inputs: [0.1959 0.1521 0.4704 0.281  0.3138 0.6611],    Outputs: [-3.3199]
-New best at evaluation 58:       Inputs: [0.2003 0.1573 0.4749 0.2769 0.3109 0.6575],    Outputs: [-3.3216]
-Evaluation: 58   Solution: -3.3216
+New best at evaluation 36:       Inputs: [0.3965 1.     1.     0.6047 0.2086 0.0744],    Outputs: [-2.7826]
+New best at evaluation 38:       Inputs: [0.4048 1.     1.     0.58   0.1023 0.0234],    Outputs: [-2.8559]
+New best at evaluation 42:       Inputs: [0.4123 0.8905 1.     0.5833 0.     0.0325],    Outputs: [-3.1857]
+New best at evaluation 48:       Inputs: [0.396  0.8896 1.     0.5694 0.     0.0367],    Outputs: [-3.1883]
+New best at evaluation 50:       Inputs: [0.4044 0.8807 1.     0.5761 0.     0.0376],    Outputs: [-3.1942]
+New best at evaluation 52:       Inputs: [0.4061 0.8784 1.     0.576  0.1186 0.0378],    Outputs: [-3.1989]
+Evaluation: 52   Solution: -3.1989
 </pre></div></div>
 </div>
 </section>

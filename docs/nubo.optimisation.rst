@@ -1,6 +1,35 @@
 Optimisation module
 ====================
 
+Single-point optimisation
+-------------------------
+
+.. automodule:: nubo.optimisation.singlepoint
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Multi-point optimisation
+------------------------
+
+.. admonition:: References
+   :class: seealso
+   
+   - J Wilson, F Hutter, and M Deisenroth, "Maximizing acquisition functions for Bayesian optimization," *Advances in neural information processing systems*, vol. 31, 2018.
+
+.. automodule:: nubo.optimisation.multipoint
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Mixed optimisation
+------------------
+
+.. automodule:: nubo.optimisation.mixed
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Deterministic optimisers
 ------------------------
 
@@ -29,19 +58,6 @@ Stochastic optimisers
    - A Paszke, *et al.*, "PyTorch: An imperative style, high-performance deep learning library," *In advances in neural information processing systems*, vol. 32, 2019.
 
 .. automodule:: nubo.optimisation.adam
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Multi-point optimisation
-------------------------
-
-.. admonition:: References
-   :class: seealso
-   
-   - J Wilson, F Hutter, and M Deisenroth, "Maximizing acquisition functions for Bayesian optimization," *Advances in neural information processing systems*, vol. 31, 2018.
-
-.. automodule:: nubo.optimisation.multipoint
    :members:
    :undoc-members:
    :show-inheritance:

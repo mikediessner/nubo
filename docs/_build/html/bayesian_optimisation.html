@@ -486,7 +486,8 @@ point after the other is selected holding all previous points fixed until the
 batch is full. Empirical evidence shows that both methods approximate the
 acquisition successfully. However, the greedy approach seems to have a slight
 edge over the joint strategy for some examples <a class="footnote-reference brackets" href="#wilson2018" id="id26" role="doc-noteref"><span class="fn-bracket">[</span>18<span class="fn-bracket">]</span></a>. It is also
-faster to compute for larger batches.</p>
+faster to compute for larger batches. At the moment, constrained optimisation
+with SLSQP is only supported for the sequential strategy.</p>
 <p>Asynchronous optimisation <a class="footnote-reference brackets" href="#snoek2012" id="id27" role="doc-noteref"><span class="fn-bracket">[</span>13<span class="fn-bracket">]</span></a> leverages the same property as
 sequential greedy optimisation: the pending points that have not yet been
 evaluated can be added to the test points but are treated as fixed. In this

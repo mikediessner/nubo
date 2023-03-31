@@ -17,6 +17,10 @@ def mixed(func: Callable,
           **kwargs: Any) -> Tuple[Tensor, Tensor]:
     """
     Mixed optimisation with continuous and discrete inputs.
+
+    Optimises the acquisition function over all continuous input dimensions by
+    fixing a combination of the discrete inputs. Returns the best result over
+    all possible discrete combinations.
     
     Parameters
     ----------

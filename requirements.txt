@@ -1,3 +1,4 @@
 torch
 gpytorch
 scipy
+numpy

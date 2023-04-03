@@ -17,7 +17,9 @@ def multi_joint(func: Callable,
     """
     Joint optimisation loop for Monte Carlo acquisition functions.
     
-    Computes all points of a batch at once.
+    Optimises Monte Carlo acquisition functions to return multi-point batches
+    for parallel evaluation. Computes all points of a batch at once. Minimises
+    `func`.
 
     Parameters
     ----------
@@ -98,10 +100,11 @@ def multi_sequential(func: Callable,
     """
     Sequential greedy optimisation loop for Monte Carlo acquisition functions.
 
-    Computes one point after the other for a batch always keeping previous
-    points fixed, i.e. compute point 1, compute point 2 holding point 1 fixed,
-    compute point 3 holding point 1 and 2 fixed and so on until the batch is
-    full.
+    Optimises Monte Carlo acquisition functions to return multi-point batches
+    for parallel evaluation. Computes one point after the other for a batch
+    always keeping previous points fixed, i.e. compute point 1, compute point 2
+    holding point 1 fixed, compute point 3 holding point 1 and 2 fixed and so
+    on until the batch is full. Minimises `func`.
 
     Parameters
     ----------

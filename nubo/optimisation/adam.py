@@ -12,7 +12,7 @@ def _adam(func: callable,
           steps: Optional[int]=200,
           **kwargs: Any) -> Tuple[Tensor, Tensor]:
     """
-    Adam optimiser.
+    Adam optimiser. Minimises `func`.
 
     Parameters
     ----------
@@ -61,21 +61,21 @@ def _adam(func: callable,
 
 
 def adam(func: Callable,
-               bounds: Tensor,
-               lr: Optional[float]=0.1,
-               steps: Optional[int]=200,
-               num_starts: Optional[int]=10,
-               num_samples: Optional[int]=100,
-               **kwargs: Any) -> Tuple[Tensor, Tensor]:
+         bounds: Tensor,
+         lr: Optional[float]=0.1,
+         steps: Optional[int]=200,
+         num_starts: Optional[int]=10,
+         num_samples: Optional[int]=100,
+         **kwargs: Any) -> Tuple[Tensor, Tensor]:
     """
     Multi-start Adam optimiser using the ``torch.optim.Adam`` implementation
     from ``PyTorch``.
     
-    Used for maximising Monte Carlo acquisition function when base samples are
+    Used for optimising Monte Carlo acquisition function when base samples are
     not fixed. Bounds are enforced by transforming `func` with the sigmoid
     function and scaling results. Picks the best `num_starts` points from a
     total `num_samples` Latin hypercube samples to initialise the optimser.
-    Returns the best result.
+    Returns the best result. Minimises `func`.
 
     Parameters
     ----------
@@ -137,7 +137,7 @@ def _adam_mixed(func: callable,
           steps: Optional[int]=200,
           **kwargs: Any) -> Tuple[Tensor, Tensor]:
     """
-    Adam optimiser for mixed parameters.
+    Adam optimiser for mixed parameters. Minimises `func`.
 
     Parameters
     ----------
@@ -202,11 +202,11 @@ def adam_mixed(func: Callable,
     Multi-start Adam optimiser using the ``torch.optim.Adam`` implementation
     from ``PyTorch``.
     
-    Used for maximising Monte Carlo acquisition function when base samples are
+    Used for optimising Monte Carlo acquisition function when base samples are
     not fixed. Bounds are enforced by clamping where values exceed them. Picks
     the best `num_starts` points from a total `num_samples` Latin hypercube
-    samples to initialise the optimser. Returns the best
-    result.
+    samples to initialise the optimser. Returns the best result. Minimises
+    `func`.
 
     Parameters
     ----------

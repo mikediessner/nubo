@@ -17,12 +17,15 @@ def single(func: Callable,
     """
     Single-point optimisation.
 
+    Optimises the acquisition function with the L-BFGS-B, SLSQP, or Adam
+    optimiser. Minimises `func`.
+
     Parameters
     ----------
     func : ``Callable``
         Function to optimise.
     method : ``str``
-        One of "L-BFGS-B" or "Adam".
+        One of "L-BFGS-B", "SLSQP", or "Adam".
     bounds : ``torch.Tensor``
         (size 2 x d) Optimisation bounds of input space.
     discrete : ``dict``

@@ -18,9 +18,9 @@ def mixed(func: Callable,
     """
     Mixed optimisation with continuous and discrete inputs.
 
-    Optimises the acquisition function over all continuous input dimensions by
-    fixing a combination of the discrete inputs. Returns the best result over
-    all possible discrete combinations.
+    Optimises the acquisition over all continuous input dimensions by fixing a
+    combination of the discrete inputs. Returns the best result over all
+    possible discrete combinations. Minimises `func`.
     
     Parameters
     ----------

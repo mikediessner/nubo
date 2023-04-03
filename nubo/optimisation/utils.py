@@ -41,8 +41,8 @@ def gen_candidates(func: Callable,
     for n in range(num_samples):
         samples_res[n] = func(samples[n, :].reshape(1, -1))
 
-    # select best candidates
-    _, best_i = torch.topk(-samples_res, num_candidates)
+    # select best candidates (smallest output)
+    _, best_i = torch.topk(samples_res, num_candidates, largest=False)
     candidates = samples[best_i]
     
     return candidates

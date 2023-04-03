@@ -26,6 +26,7 @@ objective function, such as an experiment or a simulation.
 
 .. code-block:: python
 
+    import torch
     from nubo.test_functions import Hartmann6D
 
 
@@ -41,7 +42,6 @@ points per input dimension resulting in a total of 30 data points.
 
 .. code-block:: python
 
-    import torch
     from nubo.utils import gen_inputs
 
 

@@ -234,7 +234,9 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Joint optimisation loop for Monte Carlo acquisition functions.</span>
 <span class="sd">    </span>
-<span class="sd">    Computes all points of a batch at once.</span>
+<span class="sd">    Optimises Monte Carlo acquisition functions to return multi-point batches</span>
+<span class="sd">    for parallel evaluation. Computes all points of a batch at once. Minimises</span>
+<span class="sd">    `func`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -315,10 +317,11 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Sequential greedy optimisation loop for Monte Carlo acquisition functions.</span>
 
-<span class="sd">    Computes one point after the other for a batch always keeping previous</span>
-<span class="sd">    points fixed, i.e. compute point 1, compute point 2 holding point 1 fixed,</span>
-<span class="sd">    compute point 3 holding point 1 and 2 fixed and so on until the batch is</span>
-<span class="sd">    full.</span>
+<span class="sd">    Optimises Monte Carlo acquisition functions to return multi-point batches</span>
+<span class="sd">    for parallel evaluation. Computes one point after the other for a batch</span>
+<span class="sd">    always keeping previous points fixed, i.e. compute point 1, compute point 2</span>
+<span class="sd">    holding point 1 fixed, compute point 3 holding point 1 and 2 fixed and so</span>
+<span class="sd">    on until the batch is full. Minimises `func`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>

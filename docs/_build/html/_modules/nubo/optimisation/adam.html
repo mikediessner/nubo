@@ -229,7 +229,7 @@
           <span class="n">steps</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
           <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Adam optimiser.</span>
+<span class="sd">    Adam optimiser. Minimises `func`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -278,21 +278,21 @@
 
 
 <div class="viewcode-block" id="adam"><a class="viewcode-back" href="../../../nubo.optimisation.html#nubo.optimisation.adam.adam">[docs]</a><span class="k">def</span> <span class="nf">adam</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
-               <span class="n">bounds</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span>
-               <span class="n">lr</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-               <span class="n">steps</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
-               <span class="n">num_starts</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-               <span class="n">num_samples</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-               <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">]:</span>
+         <span class="n">bounds</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span>
+         <span class="n">lr</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+         <span class="n">steps</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+         <span class="n">num_starts</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+         <span class="n">num_samples</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+         <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Multi-start Adam optimiser using the ``torch.optim.Adam`` implementation</span>
 <span class="sd">    from ``PyTorch``.</span>
 <span class="sd">    </span>
-<span class="sd">    Used for maximising Monte Carlo acquisition function when base samples are</span>
+<span class="sd">    Used for optimising Monte Carlo acquisition function when base samples are</span>
 <span class="sd">    not fixed. Bounds are enforced by transforming `func` with the sigmoid</span>
 <span class="sd">    function and scaling results. Picks the best `num_starts` points from a</span>
 <span class="sd">    total `num_samples` Latin hypercube samples to initialise the optimser.</span>
-<span class="sd">    Returns the best result.</span>
+<span class="sd">    Returns the best result. Minimises `func`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -354,7 +354,7 @@
           <span class="n">steps</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
           <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Adam optimiser for mixed parameters.</span>
+<span class="sd">    Adam optimiser for mixed parameters. Minimises `func`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -419,11 +419,11 @@
 <span class="sd">    Multi-start Adam optimiser using the ``torch.optim.Adam`` implementation</span>
 <span class="sd">    from ``PyTorch``.</span>
 <span class="sd">    </span>
-<span class="sd">    Used for maximising Monte Carlo acquisition function when base samples are</span>
+<span class="sd">    Used for optimising Monte Carlo acquisition function when base samples are</span>
 <span class="sd">    not fixed. Bounds are enforced by clamping where values exceed them. Picks</span>
 <span class="sd">    the best `num_starts` points from a total `num_samples` Latin hypercube</span>
-<span class="sd">    samples to initialise the optimser. Returns the best</span>
-<span class="sd">    result.</span>
+<span class="sd">    samples to initialise the optimser. Returns the best result. Minimises</span>
+<span class="sd">    `func`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>

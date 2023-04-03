@@ -258,8 +258,8 @@
     <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_samples</span><span class="p">):</span>
         <span class="n">samples_res</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">samples</span><span class="p">[</span><span class="n">n</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
 
-    <span class="c1"># select best candidates</span>
-    <span class="n">_</span><span class="p">,</span> <span class="n">best_i</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">topk</span><span class="p">(</span><span class="o">-</span><span class="n">samples_res</span><span class="p">,</span> <span class="n">num_candidates</span><span class="p">)</span>
+    <span class="c1"># select best candidates (smallest output)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">best_i</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">topk</span><span class="p">(</span><span class="n">samples_res</span><span class="p">,</span> <span class="n">num_candidates</span><span class="p">,</span> <span class="n">largest</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">candidates</span> <span class="o">=</span> <span class="n">samples</span><span class="p">[</span><span class="n">best_i</span><span class="p">]</span>
     
     <span class="k">return</span> <span class="n">candidates</span></div>

@@ -234,12 +234,15 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Single-point optimisation.</span>
 
+<span class="sd">    Optimises the acquisition function with the L-BFGS-B, SLSQP, or Adam</span>
+<span class="sd">    optimiser. Minimises `func`.</span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    func : ``Callable``</span>
 <span class="sd">        Function to optimise.</span>
 <span class="sd">    method : ``str``</span>
-<span class="sd">        One of &quot;L-BFGS-B&quot; or &quot;Adam&quot;.</span>
+<span class="sd">        One of &quot;L-BFGS-B&quot;, &quot;SLSQP&quot;, or &quot;Adam&quot;.</span>
 <span class="sd">    bounds : ``torch.Tensor``</span>
 <span class="sd">        (size 2 x d) Optimisation bounds of input space.</span>
 <span class="sd">    discrete : ``dict``</span>

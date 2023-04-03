@@ -236,7 +236,8 @@ virtual environment.</p>
 the 6-dimensional Hartmann function, a multi-modal function with one global
 optimum. This synthetic test function acts as a surrogate for a black box
 objective function, such as an experiment or a simulation.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nubo.test_functions</span> <span class="kn">import</span> <span class="n">Hartmann6D</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">nubo.test_functions</span> <span class="kn">import</span> <span class="n">Hartmann6D</span>
 
 
 <span class="c1"># test function</span>
@@ -249,8 +250,7 @@ objective function, such as an experiment or a simulation.</p>
 </div>
 <p>Then, we generate some initial training data. We decide to generate 5 data
 points per input dimension resulting in a total of 30 data points.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">from</span> <span class="nn">nubo.utils</span> <span class="kn">import</span> <span class="n">gen_inputs</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nubo.utils</span> <span class="kn">import</span> <span class="n">gen_inputs</span>
 
 
 <span class="c1"># training data</span>

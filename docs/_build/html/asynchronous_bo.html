@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Constrained Bayesian optimisation" href="constrained_bo.html" /><link rel="prev" title="Parallel multi-point sequential Bayesian optimisation" href="multipoint_sequential.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Constrained single-point Bayesian optimisation" href="constrained_bo.html" /><link rel="prev" title="Parallel multi-point Bayesian optimisation with fixed base samples" href="multipoint_fixed.html" />
 
     <link rel="shortcut icon" href="_static/favicon.ico"/><!-- Generated with Sphinx 6.1.3 and Furo 2022.12.07 -->
         <title>Asynchronous Bayesian optimisation - NUBO</title>
@@ -170,8 +170,10 @@
 <li class="toctree-l1"><a class="reference internal" href="singlepoint.html">Sequential single-point Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multipoint_joint.html">Parallel multi-point joint Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multipoint_sequential.html">Parallel multi-point sequential Bayesian optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multipoint_fixed.html">Parallel multi-point Bayesian optimisation with fixed base samples</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Asynchronous Bayesian optimisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="constrained_bo.html">Constrained Bayesian optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constrained_bo.html">Constrained single-point Bayesian optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixed_parameters.html">Bayesian optimisation with continuous and discrete parameters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fixed_noise.html">Bayesian optimisation with known observational noise</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
@@ -235,8 +237,10 @@ be used as this process is in general intractable for analytical functions.</p>
 
 <span class="c1"># test function</span>
 <span class="n">func</span> <span class="o">=</span> <span class="n">Hartmann6D</span><span class="p">(</span><span class="n">minimise</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">dims</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">dims</span>
-<span class="n">bounds</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">bounds</span>
+<span class="n">dims</span> <span class="o">=</span> <span class="mi">6</span>
+
+<span class="c1"># specify bounds</span>
+<span class="n">bounds</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]])</span>
 
 <span class="c1"># training data</span>
 <span class="n">x_train</span> <span class="o">=</span> <span class="n">gen_inputs</span><span class="p">(</span><span class="n">num_points</span><span class="o">=</span><span class="n">dims</span><span class="o">*</span><span class="mi">5</span><span class="p">,</span>
@@ -261,8 +265,8 @@ be used as this process is in general intractable for analytical functions.</p>
     <span class="n">fit_gp</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">gp</span><span class="o">=</span><span class="n">gp</span><span class="p">,</span> <span class="n">likelihood</span><span class="o">=</span><span class="n">likelihood</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
 
     <span class="c1"># specify acquisition function</span>
-    <span class="c1"># acq = MCExpectedImprovement(gp=gp, y_best=torch.max(y_train), x_pending=x_pending, samples=256)</span>
-    <span class="n">acq</span> <span class="o">=</span> <span class="n">MCUpperConfidenceBound</span><span class="p">(</span><span class="n">gp</span><span class="o">=</span><span class="n">gp</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">1.96</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">x_pending</span><span class="o">=</span><span class="n">x_pending</span><span class="p">,</span> <span class="n">samples</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
+    <span class="c1"># acq = MCExpectedImprovement(gp=gp, y_best=torch.max(y_train), x_pending=x_pending, samples=512)</span>
+    <span class="n">acq</span> <span class="o">=</span> <span class="n">MCUpperConfidenceBound</span><span class="p">(</span><span class="n">gp</span><span class="o">=</span><span class="n">gp</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">1.96</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">x_pending</span><span class="o">=</span><span class="n">x_pending</span><span class="p">,</span> <span class="n">samples</span><span class="o">=</span><span class="mi">512</span><span class="p">)</span>
 
     <span class="c1"># optimise acquisition function</span>
     <span class="n">x_new</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">multi_joint</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">acq</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;Adam&quot;</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">num_starts</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
@@ -311,18 +315,18 @@ Evaluation: 61   Solution: -3.1903
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Constrained Bayesian optimisation</div>
+                <div class="title">Constrained single-point Bayesian optimisation</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="multipoint_sequential.html">
+          <a class="prev-page" href="multipoint_fixed.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Parallel multi-point sequential Bayesian optimisation</div>
+                <div class="title">Parallel multi-point Bayesian optimisation with fixed base samples</div>
                 
               </div>
             </a>

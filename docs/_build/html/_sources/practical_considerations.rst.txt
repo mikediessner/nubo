@@ -60,6 +60,13 @@ Acquisition function
     samples could introduce some sampling bias, there is empirical evidence
     that it does not affect the performance negatively [#Balandat2020]_.
 
+**How is a mixed parameter space with continuous and discrete variables optimised?**
+    NUBO supports the optimisation over a mixed parameter space by fixing a
+    combination of the discrete inputs and optimising over the remaining
+    continuous inputs. The best point found over all possible discrete
+    combinations is used. While this avoids issues due to rounding, it can be
+    time-consuming for many discrete dimensions and possible values.
+
 ----
 
 .. [#Baker2021] E Baker, "Emulation of Stochastic Computer Models with an Application to Building Design," Ph.D. dissertation, Department of Mathematics, Univ. Exeter, Exeter, 2021.

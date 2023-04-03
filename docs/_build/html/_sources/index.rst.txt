@@ -66,8 +66,10 @@ optimisation algorithm to your specfic problem.
    singlepoint.ipynb
    multipoint_joint.ipynb
    multipoint_sequential.ipynb
+   multipoint_fixed.ipynb
    asynchronous_bo.ipynb
    constrained_bo.ipynb
+   mixed_parameters.ipynb
    fixed_noise.ipynb
 
 Package reference

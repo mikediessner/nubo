@@ -169,8 +169,10 @@
 <li class="toctree-l1"><a class="reference internal" href="singlepoint.html">Sequential single-point Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multipoint_joint.html">Parallel multi-point joint Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multipoint_sequential.html">Parallel multi-point sequential Bayesian optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multipoint_fixed.html">Parallel multi-point Bayesian optimisation with fixed base samples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="asynchronous_bo.html">Asynchronous Bayesian optimisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="constrained_bo.html">Constrained Bayesian optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constrained_bo.html">Constrained single-point Bayesian optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixed_parameters.html">Bayesian optimisation with continuous and discrete parameters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fixed_noise.html">Bayesian optimisation with known observational noise</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
@@ -310,8 +312,12 @@ iteration and how the acquisition function explores the input space by
 exploring regions with a high uncertainty and exploits regions with a high
 prediction. This property also called the exploration-exploitation trade-off
 is a corner stone of the acquisition functions provided in NUBO.</p>
-<figure class="align-default">
+<figure class="align-default" id="id28">
 <img alt="_images/bo.gif" src="_images/bo.gif" />
+<figcaption>
+<p><span class="caption-text">Figure 1: Bayesian optimisation of a 1D toy function with a budget of
+20 evaluations.</span><a class="headerlink" href="#id28" title="Permalink to this image">#</a></p>
+</figcaption>
 </figure>
 </section>
 <section id="surrogate-model">
@@ -362,8 +368,12 @@ below via maximum likelihood estimation (MLE).</p>
 <div class="math notranslate nohighlight">
 \[\log p(\boldsymbol y_n \mid \boldsymbol X_n) = -\frac{1}{2} (\boldsymbol y_n - m(\boldsymbol X_n))^T [K(\boldsymbol X_n, \boldsymbol X_n) + \sigma^2 I]^{-1} (\boldsymbol y_n - m(\boldsymbol X_n)) - \frac{1}{2} \log \lvert K(\boldsymbol X_n, \boldsymbol X_n) + \sigma^2 I \rvert - \frac{n}{2} \log 2 \pi\]</div>
 </div>
-<figure class="align-default">
+<figure class="align-default" id="id29">
 <img alt="_images/gp.gif" src="_images/gp.gif" />
+<figcaption>
+<p><span class="caption-text">Figure 2: Change of Gaussian process model (prediction and
+corresponding uncertainty) over 20 iterations.</span><a class="headerlink" href="#id29" title="Permalink to this image">#</a></p>
+</figcaption>
 </figure>
 <p>NUBO uses the <code class="docutils literal notranslate"><span class="pre">GPyTorch</span></code> package <a class="footnote-reference brackets" href="#gardner2018" id="id15" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> for surrogate modelling.
 This is a very powerful package that allows the implementation of a wide
@@ -413,8 +423,13 @@ deviation of the posterior distribution of the Gaussian process,
 <span class="math notranslate nohighlight">\(y^{best}\)</span> is the current best observation, and <span class="math notranslate nohighlight">\(\Phi (\cdot)\)</span> and
 <span class="math notranslate nohighlight">\(\phi  (\cdot)\)</span> are the cumulative distribution function and the
 probability density function of the standard normal distribution.</p>
-<figure class="align-default">
+<figure class="align-default" id="id30">
 <img alt="_images/bo_ei.gif" src="_images/bo_ei.gif" />
+<figcaption>
+<p><span class="caption-text">Figure 3: Bayesian optimisation using the analytical expected
+improvement acquisition function of a 1D toy function with a budget of
+20 evaluations.</span><a class="headerlink" href="#id30" title="Permalink to this image">#</a></p>
+</figcaption>
 </figure>
 <p>The upper confidence bound (UCB) acquisition function can be computed as</p>
 <div class="math-wrapper docutils container">
@@ -428,8 +443,13 @@ below shows how the acquisition would look when <span class="math notranslate no
 comparison, the posterior uncertainty shown as the 95% confidence interval
 around the posterior mean of the Gaussian process is equal to using
 <span class="math notranslate nohighlight">\(\beta = 1.96^2\)</span>.</p>
-<figure class="align-default">
+<figure class="align-default" id="id31">
 <img alt="_images/bo_ucb.gif" src="_images/bo_ucb.gif" />
+<figcaption>
+<p><span class="caption-text">Figure 4: Bayesian optimisation using the analytical upper confidence
+bound acquisition function of a 1D toy function with a budget of
+20 evaluations.</span><a class="headerlink" href="#id31" title="Permalink to this image">#</a></p>
+</figcaption>
 </figure>
 <p>Both of these acquisition functions can be computed analytically by maximising
 them with a deterministic optimiser, such as L-BFGS-B <a class="footnote-reference brackets" href="#zhu1997" id="id19" role="doc-noteref"><span class="fn-bracket">[</span>20<span class="fn-bracket">]</span></a> for bounded
@@ -493,6 +513,13 @@ sequential greedy optimisation: the pending points that have not yet been
 evaluated can be added to the test points but are treated as fixed. In this
 way, they affect the joint multivariate normal distribution but are not
 considered directly in the optimisation.</p>
+<figure class="align-default" id="id32">
+<a class="reference external image-reference" href="file:///Users/mikediessner/Git/nubo/docs/_build/html/_images/flowchart.png"><img alt="_images/flowchart.png" src="_images/flowchart.png" /></a>
+<figcaption>
+<p><span class="caption-text">Figure 5: Flowchart to determine what Bayesian optimisation algorithm is recommended.
+Click to expand.</span><a class="headerlink" href="#id32" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <hr class="docutils" />
 <aside class="footnote-list brackets">
 <aside class="footnote brackets" id="balandat2020" role="note">

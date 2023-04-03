@@ -170,8 +170,10 @@
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Sequential single-point Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multipoint_joint.html">Parallel multi-point joint Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multipoint_sequential.html">Parallel multi-point sequential Bayesian optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multipoint_fixed.html">Parallel multi-point Bayesian optimisation with fixed base samples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="asynchronous_bo.html">Asynchronous Bayesian optimisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="constrained_bo.html">Constrained Bayesian optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constrained_bo.html">Constrained single-point Bayesian optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixed_parameters.html">Bayesian optimisation with continuous and discrete parameters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fixed_noise.html">Bayesian optimisation with known observational noise</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
@@ -234,8 +236,10 @@ maximum. The optimisation loop is run for 40 iterations and finds a solution clo
 
 <span class="c1"># test function</span>
 <span class="n">func</span> <span class="o">=</span> <span class="n">Hartmann6D</span><span class="p">(</span><span class="n">minimise</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">dims</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">dims</span>
-<span class="n">bounds</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">bounds</span>
+<span class="n">dims</span> <span class="o">=</span> <span class="mi">6</span>
+
+<span class="c1"># specify bounds</span>
+<span class="n">bounds</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]])</span>
 
 <span class="c1"># training data</span>
 <span class="n">x_train</span> <span class="o">=</span> <span class="n">gen_inputs</span><span class="p">(</span><span class="n">num_points</span><span class="o">=</span><span class="n">dims</span><span class="o">*</span><span class="mi">5</span><span class="p">,</span>

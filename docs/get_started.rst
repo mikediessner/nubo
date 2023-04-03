@@ -31,8 +31,10 @@ objective function, such as an experiment or a simulation.
 
     # test function
     func = Hartmann6D(minimise=False)
-    dims = func.dims
-    bounds = func.bounds
+    dims = 6
+
+    # specify bounds
+    bounds = torch.tensor([[0., 0., 0., 0., 0., 0.], [1., 1., 1., 1., 1., 1.]])
 
 Then, we generate some initial training data. We decide to generate 5 data
 points per input dimension resulting in a total of 30 data points.

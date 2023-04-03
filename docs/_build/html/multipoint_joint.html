@@ -170,8 +170,10 @@
 <li class="toctree-l1"><a class="reference internal" href="singlepoint.html">Sequential single-point Bayesian optimisation</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Parallel multi-point joint Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multipoint_sequential.html">Parallel multi-point sequential Bayesian optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multipoint_fixed.html">Parallel multi-point Bayesian optimisation with fixed base samples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="asynchronous_bo.html">Asynchronous Bayesian optimisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="constrained_bo.html">Constrained Bayesian optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constrained_bo.html">Constrained single-point Bayesian optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixed_parameters.html">Bayesian optimisation with continuous and discrete parameters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fixed_noise.html">Bayesian optimisation with known observational noise</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
@@ -218,8 +220,7 @@
           <section id="Parallel-multi-point-joint-Bayesian-optimisation">
 <h1>Parallel multi-point joint Bayesian optimisation<a class="headerlink" href="#Parallel-multi-point-joint-Bayesian-optimisation" title="Permalink to this heading">#</a></h1>
 <p>In this example, NUBO is used to perform multi-point optimisation that allows the candidates to be evaluated from the objective function in parallel. Multi-point optimisation is implemented in NUBO through Monte Carlo acquisition functions. The script below uses the <code class="docutils literal notranslate"><span class="pre">MCUpperConfidenceBound</span></code> acquisition function with 512 samples and resamples the base samples (default). Each batch of 4 is found jointly with the <code class="docutils literal notranslate"><span class="pre">multi_joint()</span></code> function by optimising the acquisition function with the
-stochastic Adam optimiser. Note that the number of restarts is set to 1 for demonstration only. In practice you should consider a multi-start approach to prevent getting stuck in a local optimum. We could also fix the base samples in <code class="docutils literal notranslate"><span class="pre">MCUpperConfidenceBound</span></code> and use a deterministic optimiser, such as L-BFGS-B. The <code class="docutils literal notranslate"><span class="pre">Hartmann6D</span></code> synthetic test function acts as a surrogate for a black box objective funtion, such as an experiment or a simulation. The optimisation loop is run for 10 iterations
-returning batches of 4 each (a total of 40 evaluations) and finds a solution close the true optimum of -3.3224.</p>
+stochastic Adam optimiser. We could also fix the base samples in <code class="docutils literal notranslate"><span class="pre">MCUpperConfidenceBound</span></code> and use a deterministic optimiser, such as L-BFGS-B. The <code class="docutils literal notranslate"><span class="pre">Hartmann6D</span></code> synthetic test function acts as a surrogate for a black box objective funtion, such as an experiment or a simulation. The optimisation loop is run for 10 iterations returning batches of 4 each (a total of 40 evaluations) and finds a solution close the true optimum of -3.3224.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -235,8 +236,10 @@ returning batches of 4 each (a total of 40 evaluations) and finds a solution clo
 
 <span class="c1"># test function</span>
 <span class="n">func</span> <span class="o">=</span> <span class="n">Hartmann6D</span><span class="p">(</span><span class="n">minimise</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">dims</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">dims</span>
-<span class="n">bounds</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">bounds</span>
+<span class="n">dims</span> <span class="o">=</span> <span class="mi">6</span>
+
+<span class="c1"># specify bounds</span>
+<span class="n">bounds</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]])</span>
 
 <span class="c1"># training data</span>
 <span class="n">x_train</span> <span class="o">=</span> <span class="n">gen_inputs</span><span class="p">(</span><span class="n">num_points</span><span class="o">=</span><span class="n">dims</span><span class="o">*</span><span class="mi">5</span><span class="p">,</span>
@@ -257,7 +260,7 @@ returning batches of 4 each (a total of 40 evaluations) and finds a solution clo
     <span class="n">fit_gp</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">gp</span><span class="o">=</span><span class="n">gp</span><span class="p">,</span> <span class="n">likelihood</span><span class="o">=</span><span class="n">likelihood</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
 
     <span class="c1"># specify acquisition function</span>
-    <span class="c1"># acq = MCExpectedImprovement(gp=gp, y_best=torch.max(y_train), samples=256)</span>
+    <span class="c1"># acq = MCExpectedImprovement(gp=gp, y_best=torch.max(y_train), samples=512)</span>
     <span class="n">acq</span> <span class="o">=</span> <span class="n">MCUpperConfidenceBound</span><span class="p">(</span><span class="n">gp</span><span class="o">=</span><span class="n">gp</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">1.96</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">samples</span><span class="o">=</span><span class="mi">512</span><span class="p">)</span>
 
     <span class="c1"># optimise acquisition function</span>

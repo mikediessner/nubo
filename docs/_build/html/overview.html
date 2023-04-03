@@ -169,8 +169,10 @@
 <li class="toctree-l1"><a class="reference internal" href="singlepoint.html">Sequential single-point Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multipoint_joint.html">Parallel multi-point joint Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multipoint_sequential.html">Parallel multi-point sequential Bayesian optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multipoint_fixed.html">Parallel multi-point Bayesian optimisation with fixed base samples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="asynchronous_bo.html">Asynchronous Bayesian optimisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="constrained_bo.html">Constrained Bayesian optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constrained_bo.html">Constrained single-point Bayesian optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixed_parameters.html">Bayesian optimisation with continuous and discrete parameters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fixed_noise.html">Bayesian optimisation with known observational noise</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
@@ -262,8 +264,12 @@ gathering more information about the objective function with each iteration.
 Bayesian optimisation is run for as many iterations as the evaluation budget
 allows, until a satisfying solution is found, or until a pre-defined stopping
 criterion is met.</p>
-<figure class="align-default">
+<figure class="align-default" id="id20">
 <img alt="_images/bo.gif" src="_images/bo.gif" />
+<figcaption>
+<p><span class="caption-text">Figure 1: Bayesian optimisation of a 1D toy function with a budget of
+20 evaluations.</span><a class="headerlink" href="#id20" title="Permalink to this image">#</a></p>
+</figcaption>
 </figure>
 </section>
 <section id="contents">
@@ -291,7 +297,8 @@ multi-start L-BFGS-B <a class="footnote-reference brackets" href="#zhu1997" id="
 bounds or multi-start SLSQP <a class="footnote-reference brackets" href="#kraft1994" id="id16" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a> if the input space is also
 restricted by constraints. The stochastic Monte Carlo acquisition functions
 that are based on random samples are maximised with the stochastic optimiser
-Adam <a class="footnote-reference brackets" href="#kingma2015" id="id17" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a>.</p>
+Adam <a class="footnote-reference brackets" href="#kingma2015" id="id17" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a>. NUBO also supports optimisation of mixed parameter space
+(continuous and discrete).</p>
 </dd>
 <dt><strong>Design of experiments</strong></dt><dd><p>Initial data points can be generated with space-filling designs. NUBO
 supports random or maximin Latin hypercube designs <a class="footnote-reference brackets" href="#mckay2000" id="id18" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a>.</p>
@@ -301,6 +308,13 @@ optimisation algorithms before applying them to expensive experiments
 <a class="footnote-reference brackets" href="#surjanovic2023" id="id19" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a>.</p>
 </dd>
 </dl>
+<figure class="align-default" id="id21">
+<a class="reference external image-reference" href="file:///Users/mikediessner/Git/nubo/docs/_build/html/_images/flowchart.png"><img alt="_images/flowchart.png" src="_images/flowchart.png" /></a>
+<figcaption>
+<p><span class="caption-text">Figure 2: Flowchart to determine what Bayesian optimisation algorithm is recommended.
+Click to expand.</span><a class="headerlink" href="#id21" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <hr class="docutils" />
 <aside class="footnote-list brackets">
 <aside class="footnote brackets" id="frazier2018" role="note">

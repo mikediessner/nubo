@@ -7,7 +7,7 @@
    "source": [
     "# Parallel multi-point sequential Bayesian optimisation\n",
     "\n",
-    "In this example, NUBO is used to perform multi-point optimisation that allows the candidates to be evaluated from the objective function in parallel. Multi-point optimisation is implemented in NUBO through Monte Carlo acquisition functions. The script below uses the `MCUpperConfidenceBound` acquisition function with 512 samples and resamples the base samples (default). Each batch of 4 is found sequentialy with the `multi_sequential()` function by optimising the acquisition function with the stochastic Adam optimiser. Note that the number of restarts is set to 1 for demonstration only. In practice you should consider a multi-start approach to prevent getting stuck in a local optimum. We could also fix the base samples in `MCUpperConfidenceBound` and use a deterministic optimiser, such as L-BFGS-B or SLSQP. The `Hartmann6D` synthetic test function acts as a surrogate for a black box objective funtion, such as an experiment or a simulation. The optimisation loop is run for 10 iterations returning batches of 4 each (a total of 40 evaluations) and finds a solution close the true optimum of -3.3224."
+    "In this example, NUBO is used to perform multi-point optimisation that allows the candidates to be evaluated from the objective function in parallel. Multi-point optimisation is implemented in NUBO through Monte Carlo acquisition functions. The script below uses the `MCUpperConfidenceBound` acquisition function with 512 samples and resamples the base samples (default). Each batch of 4 is found sequentialy with the `multi_sequential()` function by optimising the acquisition function with the stochastic Adam optimiser. We could also fix the base samples in `MCUpperConfidenceBound` and use a deterministic optimiser, such as L-BFGS-B or SLSQP. The `Hartmann6D` synthetic test function acts as a surrogate for a black box objective funtion, such as an experiment or a simulation. The optimisation loop is run for 10 iterations returning batches of 4 each (a total of 40 evaluations) and finds a solution close the true optimum of -3.3224."
    ]
   },
   {
@@ -41,8 +41,10 @@
     "\n",
     "# test function\n",
     "func = Hartmann6D(minimise=False)\n",
-    "dims = func.dims\n",
-    "bounds = func.bounds\n",
+    "dims = 6\n",
+    "\n",
+    "# specify bounds\n",
+    "bounds = torch.tensor([[0., 0., 0., 0., 0., 0.], [1., 1., 1., 1., 1., 1.]])\n",
     "\n",
     "# training data\n",
     "x_train = gen_inputs(num_points=dims*5,\n",
@@ -63,7 +65,7 @@
     "    fit_gp(x_train, y_train, gp=gp, likelihood=likelihood, lr=0.1, steps=200)\n",
     "\n",
     "    # specify acquisition function\n",
-    "    # acq = MCExpectedImprovement(gp=gp, y_best=torch.max(y_train), samples=256)\n",
+    "    # acq = MCExpectedImprovement(gp=gp, y_best=torch.max(y_train), samples=512)\n",
     "    acq = MCUpperConfidenceBound(gp=gp, beta=1.96**2, samples=512)\n",
     "\n",
     "    # optimise acquisition function\n",

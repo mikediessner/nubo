@@ -169,8 +169,10 @@
 <li class="toctree-l1"><a class="reference internal" href="singlepoint.html">Sequential single-point Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multipoint_joint.html">Parallel multi-point joint Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multipoint_sequential.html">Parallel multi-point sequential Bayesian optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multipoint_fixed.html">Parallel multi-point Bayesian optimisation with fixed base samples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="asynchronous_bo.html">Asynchronous Bayesian optimisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="constrained_bo.html">Constrained Bayesian optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constrained_bo.html">Constrained single-point Bayesian optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixed_parameters.html">Bayesian optimisation with continuous and discrete parameters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fixed_noise.html">Bayesian optimisation with known observational noise</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
@@ -275,6 +277,12 @@ decide to fix the base samples, deterministic optimisers can be used in the
 same way as for the analytical acquisition functions. While fixing the base
 samples could introduce some sampling bias, there is empirical evidence
 that it does not affect the performance negatively <a class="footnote-reference brackets" href="#balandat2020" id="id15" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>.</p>
+</dd>
+<dt><strong>How is a mixed parameter space with continuous and discrete variables optimised?</strong></dt><dd><p>NUBO supports the optimisation over a mixed parameter space by fixing a
+combination of the discrete inputs and optimising over the remaining
+continuous inputs. The best point found over all possible discrete
+combinations is used. While this avoids issues due to rounding, it can be
+time-consuming for many discrete dimensions and possible values.</p>
 </dd>
 </dl>
 <hr class="docutils" />

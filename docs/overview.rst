@@ -53,6 +53,10 @@ criterion is met.
 
     .. figure:: bo.gif
 
+        Figure 1: Bayesian optimisation of a 1D toy function with a budget of
+        20 evaluations.
+
+
 Contents
 --------
 **Surrogate models**
@@ -80,7 +84,8 @@ Contents
   bounds or multi-start SLSQP [#Kraft1994]_ if the input space is also
   restricted by constraints. The stochastic Monte Carlo acquisition functions
   that are based on random samples are maximised with the stochastic optimiser
-  Adam [#Kingma2015]_.  
+  Adam [#Kingma2015]_. NUBO also supports optimisation of mixed parameter space
+  (continuous and discrete).
 
 **Design of experiments**
   Initial data points can be generated with space-filling designs. NUBO
@@ -90,6 +95,12 @@ Contents
   NUBO provides ten synthetic test functions that allow validating Bayesian
   optimisation algorithms before applying them to expensive experiments
   [#Surjanovic2023]_.
+
+.. figure:: flowchart.png
+  :target: file:///Users/mikediessner/Git/nubo/docs/_build/html/_images/flowchart.png
+  
+  Figure 2: Flowchart to determine what Bayesian optimisation algorithm is recommended.
+  Click to expand.
 
 ----
 

@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Bayesian optimisation with known observational noise" href="fixed_noise.html" /><link rel="prev" title="Asynchronous Bayesian optimisation" href="asynchronous_bo.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Bayesian optimisation with continuous and discrete parameters" href="mixed_parameters.html" /><link rel="prev" title="Asynchronous Bayesian optimisation" href="asynchronous_bo.html" />
 
     <link rel="shortcut icon" href="_static/favicon.ico"/><!-- Generated with Sphinx 6.1.3 and Furo 2022.12.07 -->
-        <title>Constrained Bayesian optimisation - NUBO</title>
+        <title>Constrained single-point Bayesian optimisation - NUBO</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css" />
@@ -170,8 +170,10 @@
 <li class="toctree-l1"><a class="reference internal" href="singlepoint.html">Sequential single-point Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multipoint_joint.html">Parallel multi-point joint Bayesian optimisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multipoint_sequential.html">Parallel multi-point sequential Bayesian optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multipoint_fixed.html">Parallel multi-point Bayesian optimisation with fixed base samples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="asynchronous_bo.html">Asynchronous Bayesian optimisation</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Constrained Bayesian optimisation</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Constrained single-point Bayesian optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixed_parameters.html">Bayesian optimisation with continuous and discrete parameters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fixed_noise.html">Bayesian optimisation with known observational noise</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
@@ -215,8 +217,8 @@
           </label>
         </div>
         <article role="main">
-          <section id="Constrained-Bayesian-optimisation">
-<h1>Constrained Bayesian optimisation<a class="headerlink" href="#Constrained-Bayesian-optimisation" title="Permalink to this heading">#</a></h1>
+          <section id="Constrained-single-point-Bayesian-optimisation">
+<h1>Constrained single-point Bayesian optimisation<a class="headerlink" href="#Constrained-single-point-Bayesian-optimisation" title="Permalink to this heading">#</a></h1>
 <p>In this example, NUBO is used to maximise a function where the input space is bounded and constrained. The whole process is not to different from the unconstrained case. We only need to choose a different optimiser that allows the use of constraints when maximising the acquisition function <code class="docutils literal notranslate"><span class="pre">UpperConfidenceBound</span></code>. NUBO uses the SLSQP optimiser that can be provided with a dictionary or a tuple of dictionaries that specify one or multiple constraints. We specify two constraints to showcase the
 two different options: equality constraints and inequality constraints. Equality constraints require the constraint to be 0 while the result is non-negative for inequality constraints. Our first constraint <code class="docutils literal notranslate"><span class="pre">{'type':</span> <span class="pre">'ineq',</span> <span class="pre">'fun':</span> <span class="pre">lambda</span> <span class="pre">x:</span> <span class="pre">0.5</span> <span class="pre">-</span> <span class="pre">x[0]</span> <span class="pre">-</span> <span class="pre">x[1]}</span></code> is an inequality constraint and requires the sum of the first two inputs to be smaller or equal to 0.5. The second constraint <code class="docutils literal notranslate"><span class="pre">{'type':</span> <span class="pre">'eq',</span> <span class="pre">'fun':</span> <span class="pre">lambda</span> <span class="pre">x:</span> <span class="pre">1.2442</span> <span class="pre">-</span> <span class="pre">x[3]</span> <span class="pre">-</span> <span class="pre">x[4]</span> <span class="pre">-</span> <span class="pre">x[5]}</span></code> is an equality constraint specifying that the
 sum of the last three inputs needs to be equal to 1.2442. The <code class="docutils literal notranslate"><span class="pre">Hartmann6D</span></code> synthetic test function acts as a surrogate for a black box objective funtion, such as an experiment or a simulation. The optimisation loop is run for 40 iterations and finds a solution close the true optimum of -3.3224. Important: Generating initial input points with a Latin hypercube might not work for real problems as they will not consider the constraints but only the bounds. In these situations, other methods or
@@ -236,8 +238,12 @@ selecting initial points by hand might be preferable. The purpose of this exampl
 
 <span class="c1"># test function</span>
 <span class="n">func</span> <span class="o">=</span> <span class="n">Hartmann6D</span><span class="p">(</span><span class="n">minimise</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">dims</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">dims</span>
-<span class="n">bounds</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">bounds</span>
+<span class="n">dims</span> <span class="o">=</span> <span class="mi">6</span>
+
+<span class="c1"># specify bounds and constraints</span>
+<span class="n">bounds</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]])</span>
+<span class="n">cons</span> <span class="o">=</span> <span class="p">({</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;ineq&#39;</span><span class="p">,</span> <span class="s1">&#39;fun&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">0.5</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]},</span>
+        <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;eq&#39;</span><span class="p">,</span> <span class="s1">&#39;fun&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">1.2442</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">5</span><span class="p">]})</span>
 
 <span class="c1"># training data</span>
 <span class="n">x_train</span> <span class="o">=</span> <span class="n">gen_inputs</span><span class="p">(</span><span class="n">num_points</span><span class="o">=</span><span class="n">dims</span><span class="o">*</span><span class="mi">5</span><span class="p">,</span>
@@ -260,10 +266,6 @@ selecting initial points by hand might be preferable. The purpose of this exampl
     <span class="c1"># specify acquisition function</span>
     <span class="c1"># acq = ExpectedImprovement(gp=gp, y_best=torch.max(y_train))</span>
     <span class="n">acq</span> <span class="o">=</span> <span class="n">UpperConfidenceBound</span><span class="p">(</span><span class="n">gp</span><span class="o">=</span><span class="n">gp</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">1.96</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-
-    <span class="c1"># define constraints</span>
-    <span class="n">cons</span> <span class="o">=</span> <span class="p">({</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;ineq&#39;</span><span class="p">,</span> <span class="s1">&#39;fun&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">0.5</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]},</span>
-            <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;eq&#39;</span><span class="p">,</span> <span class="s1">&#39;fun&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">1.2442</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">5</span><span class="p">]})</span>
 
     <span class="c1"># optimise acquisition function</span>
     <span class="n">x_new</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">single</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">acq</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;SLSQP&quot;</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">,</span> <span class="n">constraints</span><span class="o">=</span><span class="n">cons</span><span class="p">,</span> <span class="n">num_starts</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
@@ -310,12 +312,12 @@ Evaluation: 66   Solution: -3.3209
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="fixed_noise.html">
+          <a class="next-page" href="mixed_parameters.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Bayesian optimisation with known observational noise</div>
+                <div class="title">Bayesian optimisation with continuous and discrete parameters</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>

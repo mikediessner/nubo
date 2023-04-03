@@ -111,6 +111,9 @@ is a corner stone of the acquisition functions provided in NUBO.
 
     .. figure:: bo.gif
 
+        Figure 1: Bayesian optimisation of a 1D toy function with a budget of
+        20 evaluations.
+
 .. _model:
 
 Surrogate model
@@ -162,6 +165,9 @@ below via maximum likelihood estimation (MLE).
 .. only:: html
 
     .. figure:: gp.gif
+
+        Figure 2: Change of Gaussian process model (prediction and
+        corresponding uncertainty) over 20 iterations.
 
 NUBO uses the ``GPyTorch`` package [#Gardner2018]_ for surrogate modelling.
 This is a very powerful package that allows the implementation of a wide
@@ -219,6 +225,10 @@ probability density function of the standard normal distribution.
 .. only:: html
 
     .. figure:: bo_ei.gif
+        
+        Figure 3: Bayesian optimisation using the analytical expected
+        improvement acquisition function of a 1D toy function with a budget of
+        20 evaluations.
 
 The upper confidence bound (UCB) acquisition function can be computed as
 
@@ -236,6 +246,10 @@ around the posterior mean of the Gaussian process is equal to using
 .. only:: html
 
     .. figure:: bo_ucb.gif
+
+        Figure 4: Bayesian optimisation using the analytical upper confidence
+        bound acquisition function of a 1D toy function with a budget of
+        20 evaluations. 
 
 Both of these acquisition functions can be computed analytically by maximising
 them with a deterministic optimiser, such as L-BFGS-B [#Zhu1997]_ for bounded
@@ -302,6 +316,12 @@ sequential greedy optimisation: the pending points that have not yet been
 evaluated can be added to the test points but are treated as fixed. In this
 way, they affect the joint multivariate normal distribution but are not
 considered directly in the optimisation.
+
+.. figure:: flowchart.png
+  :target: file:///Users/mikediessner/Git/nubo/docs/_build/html/_images/flowchart.png
+  
+  Figure 5: Flowchart to determine what Bayesian optimisation algorithm is recommended.
+  Click to expand.
 
 ----
 

@@ -16,7 +16,7 @@ setup(
         long_description=LONG_DESCRIPTION,
         url="https://github.com/mikediessner/nubo",
         packages=find_packages(),
-        install_requires=["torch", "gpytorch", "scipy"],
+        install_requires=["torch", "gpytorch", "scipy", "numpy"],
         keywords=["Optimisation", "Bayesian optimisation", "Gaussian process",
                   "Acquisition function", "black box functions"],
         classifiers=[

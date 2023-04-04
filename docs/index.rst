@@ -49,7 +49,7 @@ Bayesian optimisation journey with NUBO.
    bayesian_optimisation
    practical_considerations
    citation
-   Github <http://github.com/mikediessner/nubo>
+   GitHub <http://github.com/mikediessner/nubo>
 
 Examples
 --------

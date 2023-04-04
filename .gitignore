@@ -4,3 +4,4 @@ nubo.egg-info/
 .DS_Store
 plots/
 full_requirements.txt
+.ipynb_checkpoints/

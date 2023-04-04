@@ -9,7 +9,7 @@ BibTex::
 
     @article{nubo2022,
       title = {Investigating Bayesian optimization for expensive-to-evaluate black box functions: Application in fluid dynamics},
-      author = {Diessner, Mike and O'Connor, Joe and Wynn, Andrew and Laizet, Sylvain and Guan, Yu and Wilson, Kevin and Whalley, Richard D},
+      author = {Diessner, Mike and O'Connor, Joseph and Wynn, Andrew and Laizet, Sylvain and Guan, Yu and Wilson, Kevin and Whalley, Richard D},
       journal = {Frontiers in Applied Mathematics and Statistics},
       volume = {8},
       year = {2022}

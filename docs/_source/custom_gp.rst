@@ -2,8 +2,8 @@
 
 Custom Gaussian process
 =======================
-This notebook gives a introduction to specifying custom Gaussian processes with
-``GPyTorch`` that can be used with NUBO.
+This notebook gives an introduction to specifying custom Gaussian processes
+with ```GPyTorch`` that can be used with NUBO.
 
 Define Gaussian process
 -----------------------

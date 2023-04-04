@@ -44,11 +44,11 @@ Bayesian optimisation journey with NUBO.
    :maxdepth: 1
    :caption: NUBO:
 
-   overview
-   get_started
-   bayesian_optimisation
-   practical_considerations
-   citation
+   overview.rst
+   get_started.rst
+   bayesian_optimisation.rst
+   practical_considerations.rst
+   citation.rst
    GitHub <http://github.com/mikediessner/nubo>
 
 Examples
@@ -62,7 +62,7 @@ optimisation algorithm to your specfic problem.
    :maxdepth: 1
    :caption: Examples:
 
-   custom_gp.ipynb
+   custom_gp.rst
    singlepoint.ipynb
    multipoint_joint.ipynb
    multipoint_sequential.ipynb
@@ -82,11 +82,11 @@ a specific object or function should be used.
    :maxdepth: 1
    :caption: Package reference:
 
-   nubo.acquisition
-   nubo.models
-   nubo.optimisation
-   nubo.test_functions
-   nubo.utils
+   nubo.acquisition.rst
+   nubo.models.rst
+   nubo.optimisation.rst
+   nubo.test_functions.rst
+   nubo.utils.rst
 
 .. _`Fluid Dynamics Lab`: https://www.experimental-fluid-dynamics.com
 .. _`Newcastle University`: https://www.ncl.ac.uk

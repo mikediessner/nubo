@@ -9,7 +9,7 @@
 project = 'NUBO'
 copyright = '2023, Mike Diessner'
 author = 'Mike Diessner'
-release = '0.0.1'
+release = '1.0.0'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -26,7 +26,6 @@ extensions = [
 
 source_suffix = ['.rst', '.md']
 
-templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 
@@ -35,7 +34,6 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 html_theme = 'furo'
-html_static_path = ['_static']
 html_title = 'NUBO'
 pygments_style = "default"
 pygments_dark_style = "monokai"

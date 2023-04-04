@@ -290,7 +290,7 @@ is run for 40 iterations giving an evaluation budget of 70.</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nubo.acquisition</span> <span class="kn">import</span> <span class="n">UpperConfidenceBound</span>
 <span class="kn">from</span> <span class="nn">nubo.models</span> <span class="kn">import</span> <span class="n">GaussianProcess</span><span class="p">,</span> <span class="n">fit_gp</span>
-<span class="kn">from</span> <span class="nn">nubo.optimisation</span> <span class="kn">import</span> <span class="n">lbfgsb</span>
+<span class="kn">from</span> <span class="nn">nubo.optimisation</span> <span class="kn">import</span> <span class="n">single</span>
 <span class="kn">from</span> <span class="nn">gpytorch.likelihoods</span> <span class="kn">import</span> <span class="n">GaussianLikelihood</span>
 
 
@@ -310,7 +310,7 @@ is run for 40 iterations giving an evaluation budget of 70.</p>
     <span class="n">acq</span> <span class="o">=</span> <span class="n">UpperConfidenceBound</span><span class="p">(</span><span class="n">gp</span><span class="o">=</span><span class="n">gp</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">1.96</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
     <span class="c1"># optimise acquisition function</span>
-    <span class="n">x_new</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">lbfgsb</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">acq</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">,</span> <span class="n">num_starts</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">x_new</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">single</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">acq</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;L-BFGS-B&quot;</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">,</span> <span class="n">num_starts</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
     <span class="c1"># evaluate new point</span>
     <span class="n">y_new</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">x_new</span><span class="p">)</span>

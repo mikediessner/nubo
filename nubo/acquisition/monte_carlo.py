@@ -21,6 +21,7 @@ class MCExpectedImprovement(AcquisitionFunction):
     :math:`\mathcal{N} (0, 1)`, :math:`y^{best}` is the current best
     observation, and :math:`ReLU (\cdot)` is the rectified linear unit function
     that zeros all values below 0 and leaves the rest as is.
+    
     Attributes
     ----------
     gp : ``gpytorch.models.GP``

@@ -384,86 +384,31 @@ of the Cholesky decomposition of the covariance matrix
 <span class="math notranslate nohighlight">\(\boldsymbol z\)</span> are samples from the standard normal distribution
 <span class="math notranslate nohighlight">\(\mathcal{N} (0, 1)\)</span>, <span class="math notranslate nohighlight">\(y^{best}\)</span> is the current best
 observation, and <span class="math notranslate nohighlight">\(ReLU (\cdot)\)</span> is the rectified linear unit function
-that zeros all values below 0 and leaves the rest as is.
-.. attribute:: gp</p>
-<blockquote>
-<div><p>Gaussian Process model.</p>
-<dl class="field-list simple">
-<dt class="field-odd">type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">gpytorch.models.GP</span></code></p>
+that zeros all values below 0 and leaves the rest as is.</p>
+<dl class="field-list">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>gp</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">gpytorch.models.GP</span></code></span></dt><dd><p>Gaussian Process model.</p>
 </dd>
-</dl>
-</div></blockquote>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="nubo.acquisition.monte_carlo.MCExpectedImprovement.y_best">
-<span class="sig-name descname"><span class="pre">y_best</span></span><a class="headerlink" href="#nubo.acquisition.monte_carlo.MCExpectedImprovement.y_best" title="Permalink to this definition">#</a></dt>
-<dd><p>(size 1) Best output of training data.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></p>
+<dt><strong>y_best</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 1) Best output of training data.</p>
 </dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="nubo.acquisition.monte_carlo.MCExpectedImprovement.x_pending">
-<span class="sig-name descname"><span class="pre">x_pending</span></span><a class="headerlink" href="#nubo.acquisition.monte_carlo.MCExpectedImprovement.x_pending" title="Permalink to this definition">#</a></dt>
-<dd><p>(size n x d) Training inputs of currently pending points.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></p>
+<dt><strong>x_pending</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x d) Training inputs of currently pending points.</p>
 </dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="nubo.acquisition.monte_carlo.MCExpectedImprovement.samples">
-<span class="sig-name descname"><span class="pre">samples</span></span><a class="headerlink" href="#nubo.acquisition.monte_carlo.MCExpectedImprovement.samples" title="Permalink to this definition">#</a></dt>
-<dd><p>Number of Monte Carlo samples, default is 512.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p>
+<dt><strong>samples</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code></span></dt><dd><p>Number of Monte Carlo samples, default is 512.</p>
 </dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="nubo.acquisition.monte_carlo.MCExpectedImprovement.fix_base_samples">
-<span class="sig-name descname"><span class="pre">fix_base_samples</span></span><a class="headerlink" href="#nubo.acquisition.monte_carlo.MCExpectedImprovement.fix_base_samples" title="Permalink to this definition">#</a></dt>
-<dd><p>Whether base samples used to compute Monte Carlo samples of
+<dt><strong>fix_base_samples</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">bool</span></code></span></dt><dd><p>Whether base samples used to compute Monte Carlo samples of
 acquisition function should be fixed for the optimisation step.
 If false (default) stochastic optimizer (Adam) have to be used. If
 true deterministic optimizer (L-BFGS-B, SLSQP) can be used.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
 </dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="nubo.acquisition.monte_carlo.MCExpectedImprovement.base_samples">
-<span class="sig-name descname"><span class="pre">base_samples</span></span><a class="headerlink" href="#nubo.acquisition.monte_carlo.MCExpectedImprovement.base_samples" title="Permalink to this definition">#</a></dt>
-<dd><p>Base samples used to compute Monte Carlo samples drawn if
+<dt><strong>base_samples</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">NoneType</span></code> or <code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>Base samples used to compute Monte Carlo samples drawn if
 <cite>fix_base_samples</cite> is true.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">NoneType</span></code> or <code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></p>
+</dd>
+<dt><strong>dims</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code></span></dt><dd><p>Number of input dimensions.</p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="nubo.acquisition.monte_carlo.MCExpectedImprovement.dims">
-<span class="sig-name descname"><span class="pre">dims</span></span><a class="headerlink" href="#nubo.acquisition.monte_carlo.MCExpectedImprovement.dims" title="Permalink to this definition">#</a></dt>
-<dd><p>Number of input dimensions.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p>
 </dd>
 </dl>
-</dd></dl>
-
 <p class="rubric">Methods</p>
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
@@ -643,12 +588,6 @@ by averaging Monte Carlo samples.</p>
 </li>
 <li><a class="reference internal" href="#monte-carlo-aquisition-functions">Monte Carlo aquisition functions</a><ul>
 <li><a class="reference internal" href="#nubo.acquisition.monte_carlo.MCExpectedImprovement"><code class="docutils literal notranslate"><span class="pre">MCExpectedImprovement</span></code></a><ul>
-<li><a class="reference internal" href="#nubo.acquisition.monte_carlo.MCExpectedImprovement.y_best"><code class="docutils literal notranslate"><span class="pre">MCExpectedImprovement.y_best</span></code></a></li>
-<li><a class="reference internal" href="#nubo.acquisition.monte_carlo.MCExpectedImprovement.x_pending"><code class="docutils literal notranslate"><span class="pre">MCExpectedImprovement.x_pending</span></code></a></li>
-<li><a class="reference internal" href="#nubo.acquisition.monte_carlo.MCExpectedImprovement.samples"><code class="docutils literal notranslate"><span class="pre">MCExpectedImprovement.samples</span></code></a></li>
-<li><a class="reference internal" href="#nubo.acquisition.monte_carlo.MCExpectedImprovement.fix_base_samples"><code class="docutils literal notranslate"><span class="pre">MCExpectedImprovement.fix_base_samples</span></code></a></li>
-<li><a class="reference internal" href="#nubo.acquisition.monte_carlo.MCExpectedImprovement.base_samples"><code class="docutils literal notranslate"><span class="pre">MCExpectedImprovement.base_samples</span></code></a></li>
-<li><a class="reference internal" href="#nubo.acquisition.monte_carlo.MCExpectedImprovement.dims"><code class="docutils literal notranslate"><span class="pre">MCExpectedImprovement.dims</span></code></a></li>
 <li><a class="reference internal" href="#nubo.acquisition.monte_carlo.MCExpectedImprovement.eval"><code class="docutils literal notranslate"><span class="pre">MCExpectedImprovement.eval()</span></code></a></li>
 </ul>
 </li>

@@ -9,7 +9,7 @@ Define Gaussian process
 -----------------------
 A Gaussian process is defined by its mean function and its covariance kernel.
 Both are specified in the ``__init__()`` method of the ``GaussianProcess``
-class below and can easily be swapped out by the desired function or kernel.
+class below and can easily be replaced by the desired function or kernel.
 While ``GPyTorch`` offers many different options, the most common choices are
 the zero mean or constant mean function and the Matern or RBF kernel. Some
 kernels, such as the Matern and the RBF kernel, are only defined for a certain
@@ -88,10 +88,10 @@ likelihood assumes a constant homoskedastic observation noise and estimates the
 noise parameter :math:`\sigma^2` from the data. Second, there is the 
 ``FixedNoiseGaussianLikelihood``. Use this option when you know or can measure
 the observation noise of your objective function. In this case, you can still
-decide if you want to estimate any additional noise besides or not. This
-example continues with the full estimation of the noise level. NUBO has the
-convenience function ``fit_gp()`` that maximises the log marginal likelihood
-with maximum likelihood estimation (MLE) using ``torch``'s Adam optimiser.
+decide if you want to estimate any additional noise. This example continues
+with the full estimation of the noise level. NUBO has the convenience function
+``fit_gp()`` that maximises the log marginal likelihood with maximum likelihood
+estimation (MLE) using ``torch``'s Adam optimiser.
 
 .. code-block:: python
 

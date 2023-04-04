@@ -85,7 +85,7 @@ is run for 40 iterations giving an evaluation budget of 70.
 
     from nubo.acquisition import UpperConfidenceBound
     from nubo.models import GaussianProcess, fit_gp
-    from nubo.optimisation import lbfgsb
+    from nubo.optimisation import single
     from gpytorch.likelihoods import GaussianLikelihood
 
 
@@ -105,7 +105,7 @@ is run for 40 iterations giving an evaluation budget of 70.
         acq = UpperConfidenceBound(gp=gp, beta=1.96**2)
 
         # optimise acquisition function
-        x_new, _ = lbfgsb(func=acq, bounds=bounds, num_starts=5)
+        x_new, _ = single(func=acq, method="L-BFGS-B", bounds=bounds, num_starts=5)
 
         # evaluate new point
         y_new = func(x_new)

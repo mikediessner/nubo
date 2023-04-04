@@ -224,7 +224,7 @@
 <h2>Define Gaussian process<a class="headerlink" href="#define-gaussian-process" title="Permalink to this heading">#</a></h2>
 <p>A Gaussian process is defined by its mean function and its covariance kernel.
 Both are specified in the <code class="docutils literal notranslate"><span class="pre">__init__()</span></code> method of the <code class="docutils literal notranslate"><span class="pre">GaussianProcess</span></code>
-class below and can easily be swapped out by the desired function or kernel.
+class below and can easily be replaced by the desired function or kernel.
 While <code class="docutils literal notranslate"><span class="pre">GPyTorch</span></code> offers many different options, the most common choices are
 the zero mean or constant mean function and the Matern or RBF kernel. Some
 kernels, such as the Matern and the RBF kernel, are only defined for a certain
@@ -301,10 +301,10 @@ likelihood assumes a constant homoskedastic observation noise and estimates the
 noise parameter <span class="math notranslate nohighlight">\(\sigma^2\)</span> from the data. Second, there is the
 <code class="docutils literal notranslate"><span class="pre">FixedNoiseGaussianLikelihood</span></code>. Use this option when you know or can measure
 the observation noise of your objective function. In this case, you can still
-decide if you want to estimate any additional noise besides or not. This
-example continues with the full estimation of the noise level. NUBO has the
-convenience function <code class="docutils literal notranslate"><span class="pre">fit_gp()</span></code> that maximises the log marginal likelihood
-with maximum likelihood estimation (MLE) using <code class="docutils literal notranslate"><span class="pre">torch</span></code>’s Adam optimiser.</p>
+decide if you want to estimate any additional noise. This example continues
+with the full estimation of the noise level. NUBO has the convenience function
+<code class="docutils literal notranslate"><span class="pre">fit_gp()</span></code> that maximises the log marginal likelihood with maximum likelihood
+estimation (MLE) using <code class="docutils literal notranslate"><span class="pre">torch</span></code>’s Adam optimiser.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nubo.models</span> <span class="kn">import</span> <span class="n">fit_gp</span>
 <span class="kn">from</span> <span class="nn">gpytorch.likelihoods</span> <span class="kn">import</span> <span class="n">GaussianLikelihood</span><span class="p">,</span> <span class="n">FixedNoiseGaussianLikelihood</span>
 

@@ -13,6 +13,13 @@ General
     to 5 or even 1 point(s) per input dimensions does not result in worse
     solutions for Bayesian optimisation [#Diessner2022]_.
 
+**How does NUBO optimise a mixed parameter space with continuous and discrete variables?**
+    NUBO supports the optimisation over a mixed parameter space by fixing a
+    combination of the discrete inputs and optimising over the remaining
+    continuous inputs. The best point found over all possible discrete
+    combinations is used. While this avoids issues due to rounding, it can be
+    time-consuming for many discrete dimensions and possible values.
+
 Gaussian process
 ----------------
 **What prior mean function and prior covariance kernel should I use?**
@@ -59,13 +66,6 @@ Acquisition function
     same way as for the analytical acquisition functions. While fixing the base
     samples could introduce some sampling bias, there is empirical evidence
     that it does not affect the performance negatively [#Balandat2020]_.
-
-**How is a mixed parameter space with continuous and discrete variables optimised?**
-    NUBO supports the optimisation over a mixed parameter space by fixing a
-    combination of the discrete inputs and optimising over the remaining
-    continuous inputs. The best point found over all possible discrete
-    combinations is used. While this avoids issues due to rounding, it can be
-    time-consuming for many discrete dimensions and possible values.
 
 ----
 

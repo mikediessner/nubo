@@ -318,7 +318,7 @@ way, they affect the joint multivariate normal distribution but are not
 considered directly in the optimisation.
 
 .. figure:: flowchart.png
-  :target: https://github.com/mikediessner/nubo/tree/main/docs/_build/html/_images/flowchart.png
+  :target: https://mikediessner.github.io/nubo/_build/html/_images/flowchart.png
   
   Figure 5: Flowchart to determine what Bayesian optimisation algorithm is recommended.
   Click to expand.

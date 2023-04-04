@@ -4,7 +4,7 @@ NUBO, short for Newcastle University Bayesian optimisation, is a Bayesian
 optimisation framework for the optimisation of expensive-to-evaluate black box
 functions, such as physical experiments and computer simulations. It is
 developed and maintained by the `Fluid Dynamics Lab`_ at
-`Newcastle University`_. NUBO focuses primarly on transparency and user
+`Newcastle University`_. NUBO focuses primarily on transparency and user
 experience to make Bayesian optimisation easily accessible to researchers from
 all disciplines. Transparency is ensured by clean and comprehensible code,
 precise references, and thorough documentation. User experience is guaranteed
@@ -16,7 +16,7 @@ sufficiently tested and proven to perform well are included in NUBO. This
 ensures that the package remains compact and does not overwhelm with an
 unnecessary large number of options. The package is written in Python_ but does
 not require expert knowledge to optimise your simulations and experiments. NUBO
-is distributed as an open-source software under the `BSD 3-Clause license`_.
+is distributed as an open-source software under the `BSD 3-Clause licence`_.
 
 .. admonition:: Contact
    :class: seealso
@@ -43,10 +43,10 @@ example, the expected improvement (EI) [#Jones1998]_ that is the expectation of
 the new point returning a better solution than the current best observation.
 Bayesian optimisation is performed in a loop where training data is used to fit
 the surrogate model before the next point suggested by the acquisition function
-is evaluated and added to the training data itself. The loop than restarts
+is evaluated and added to the training data itself. The loop then restarts
 gathering more information about the objective function with each iteration.
 Bayesian optimisation is run for as many iterations as the evaluation budget
-allows, until a satisfying solution is found, or until a pre-defined stopping
+allows, until a satisfying solution is found, or until a predefined stopping
 criterion is met.
 
 .. only:: html
@@ -107,7 +107,7 @@ Contents
 .. _`Fluid Dynamics Lab`: https://www.experimental-fluid-dynamics.com
 .. _`Newcastle University`: https://www.ncl.ac.uk
 .. _Python: https://www.python.org
-.. _`BSD 3-Clause license`: https://github.com/mikediessner/nubo/blob/main/LICENSE.md
+.. _`BSD 3-Clause licence`: https://github.com/mikediessner/nubo/blob/main/LICENSE.md
 
 .. [#Frazier2018] P I Frazier, "A tutorial on Bayesian optimization," *arXiv preprint arXiv:1807.02811*, 2018.
 .. [#Gardner2018] J Gardner, G Pleiss, K Q Weinberger, D Bindel, and A G Wilson, "GPyTorch: Blackbox matrix-matrix Gaussian process inference with GPU acceleration," *Advances in neural information processing systems*, vol. 31, 2018.

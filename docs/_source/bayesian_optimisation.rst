@@ -67,10 +67,10 @@ solution than the previous best observation. Bayesian optimisation is performed
 in a loop where training data :math:`\mathcal{D}_n` is used to fit the
 surrogate model before the next point suggested by the acquisition function is
 evaluated and added to the training data itself (see algorithm below). The loop
-than restarts gathering more information about the objective function with each
+then restarts gathering more information about the objective function with each
 iteration. Bayesian optimisation is run for as many iterations as the
 evaluation budget :math:`N` allows, until a satisfying solution is found, or
-unitl a pre-defined stopping criterion is met.
+unitl a predefined stopping criterion is met.
 
 .. admonition:: Algorithm
     :class: seealso

@@ -5,10 +5,10 @@
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Get started" href="get_started.html" /><link rel="prev" title="NUBO: A transparent Python package for Bayesian optimisation" href="index.html" />
 
-    <link rel="shortcut icon" href="_static/favicon.ico"/><!-- Generated with Sphinx 6.1.3 and Furo 2022.12.07 -->
+    <link rel="shortcut icon" href="_static/favicon.ico"/><!-- Generated with Sphinx 6.1.3 and Furo 2023.03.27 -->
         <title>Overview - NUBO</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
@@ -222,19 +222,20 @@
 optimisation framework for the optimisation of expensive-to-evaluate black box
 functions, such as physical experiments and computer simulations. It is
 developed and maintained by the <a class="reference external" href="https://www.experimental-fluid-dynamics.com">Fluid Dynamics Lab</a> at
-<a class="reference external" href="https://www.ncl.ac.uk">Newcastle University</a>. NUBO focuses primarly on transparency and user
+<a class="reference external" href="https://www.ncl.ac.uk">Newcastle University</a>. NUBO focuses primarily on transparency and user
 experience to make Bayesian optimisation easily accessible to researchers from
 all disciplines. Transparency is ensured by clean and comprehensible code,
-precise references, and thorough documentation. User experience is guaranteed
+precise references, and thorough documentation. User experience is ensured
 by a modular and flexible design, easy-to-write syntax, and careful selection
 of Bayesian optimisation algorithms. NUBO allows you to tailor Bayesian
 optimisation to your specific problem by writing the optimisation loop yourself
 using the provided building blocks. Only algorithms and methods that are
-sufficiently tested and proven to perform well are included in NUBO. This
-ensures that the package remains compact and does not overwhelm with an
-unnecessary large number of options. The package is written in <a class="reference external" href="https://www.python.org">Python</a> but does
-not require expert knowledge to optimise your simulations and experiments. NUBO
-is distributed as an open-source software under the <a class="reference external" href="https://github.com/mikediessner/nubo/blob/main/LICENSE.md">BSD 3-Clause license</a>.</p>
+sufficiently tested and validated to perform well are included in NUBO. This
+ensures that the package remains compact and does not overwhelm the user with
+an unnecessary large number of options. The package is written in <a class="reference external" href="https://www.python.org">Python</a> but
+does not require expert knowledge of Python to optimise your simulations and
+experiments. NUBO is distributed as an open-source software under the
+<a class="reference external" href="https://github.com/mikediessner/nubo/blob/main/LICENSE.md">BSD 3-Clause licence</a>.</p>
 <div class="seealso admonition">
 <p class="admonition-title">Contact</p>
 <p>Thanks for considering NUBO. If you have any questions, comments, or issues
@@ -252,17 +253,17 @@ evaluation is expensive. Solving such a function requires a cost-effective and
 sample-efficient optimisation strategy. Bayesian optimisation fulfils these
 criteria by representing the objective function through a
 <a class="reference internal" href="bayesian_optimisation.html#model"><span class="std std-ref">surrogate model</span></a>, often a Gaussian process <a class="footnote-reference brackets" href="#gramacy2020" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>
-<a class="footnote-reference brackets" href="#williams2006" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></a>. This representation can then be used to find the next point
+<a class="footnote-reference brackets" href="#williams2006" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></a>. This representation can be used to find the next point
 that should be evaluated by maximising a criterion specified through an
 <a class="reference internal" href="bayesian_optimisation.html#acquisition"><span class="std std-ref">acquisition function</span></a>. A popular criterion is, for
-example, the expected improvement (EI) <a class="footnote-reference brackets" href="#jones1998" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> that is the expectation of
-the new point returning a better solution than the current best observation.
+example, the expected improvement (EI) <a class="footnote-reference brackets" href="#jones1998" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>, that is the expectation
+that the new point returns a better solution than the current best point.
 Bayesian optimisation is performed in a loop where training data is used to fit
 the surrogate model before the next point suggested by the acquisition function
-is evaluated and added to the training data itself. The loop than restarts
-gathering more information about the objective function with each iteration.
-Bayesian optimisation is run for as many iterations as the evaluation budget
-allows, until a satisfying solution is found, or until a pre-defined stopping
+is evaluated and added to the training data. The loop restarts and gathers more
+information about the objective function with each iteration. Bayesian
+optimisation is run for as many iterations as the evaluation budget allows,
+until a satisfactory solution is found, or until a predefined stopping
 criterion is met.</p>
 <figure class="align-default" id="id20">
 <img alt="_images/bo.gif" src="_images/bo.gif" />
@@ -287,9 +288,9 @@ maximum a posteriori estimation (MAP) or fully Bayesian estimation.</p>
 through Monte Carlo sampling. Analytical expected improvement (EI)
 <a class="footnote-reference brackets" href="#jones1998" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> and upper confidence bound (UCB) <a class="footnote-reference brackets" href="#srinivas2010" id="id13" role="doc-noteref"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></a> can be used
 for sequential single-point problems where results are evaluated after each
-iteration. Multi-point   batches for parallel evaluation or asynchronous
-problems where the optimisation algorithm is continued while other points
-are still being evaluated can be performed via Monte Carlo acquisition
+iteration. Multi-point batches for parallel evaluation or asynchronous
+problems, where the optimisation algorithm is continued while other points
+are still being evaluated, can be performed via Monte Carlo acquisition
 functions <a class="footnote-reference brackets" href="#wilson2018" id="id14" role="doc-noteref"><span class="fn-bracket">[</span>13<span class="fn-bracket">]</span></a>.</p>
 </dd>
 <dt><strong>Optimisers</strong></dt><dd><p>The deterministic analytical acquisition functions are optimised via
@@ -300,10 +301,10 @@ that are based on random samples are maximised with the stochastic optimiser
 Adam <a class="footnote-reference brackets" href="#kingma2015" id="id17" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a>. NUBO also supports optimisation of mixed parameter space
 (continuous and discrete).</p>
 </dd>
-<dt><strong>Design of experiments</strong></dt><dd><p>Initial data points can be generated with space-filling designs. NUBO
-supports random or maximin Latin hypercube designs <a class="footnote-reference brackets" href="#mckay2000" id="id18" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a>.</p>
+<dt><strong>Design of experiments</strong></dt><dd><p>Initial training data points can be generated with space-filling designs.
+NUBO supports random or maximin Latin hypercube designs <a class="footnote-reference brackets" href="#mckay2000" id="id18" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a>.</p>
 </dd>
-<dt><strong>Synthetic test functions</strong></dt><dd><p>NUBO provides ten synthetic test functions that allow validating Bayesian
+<dt><strong>Synthetic test functions</strong></dt><dd><p>NUBO provides ten synthetic test functions that allow validation of Bayesian
 optimisation algorithms before applying them to expensive experiments
 <a class="footnote-reference brackets" href="#surjanovic2023" id="id19" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a>.</p>
 </dd>
@@ -311,8 +312,8 @@ optimisation algorithms before applying them to expensive experiments
 <figure class="align-default" id="id21">
 <a class="reference external image-reference" href="https://mikediessner.github.io/nubo/_build/html/_images/flowchart.png"><img alt="_images/flowchart.png" src="_images/flowchart.png" /></a>
 <figcaption>
-<p><span class="caption-text">Figure 2: Flowchart to determine what Bayesian optimisation algorithm is recommended.
-Click to expand.</span><a class="headerlink" href="#id21" title="Permalink to this image">#</a></p>
+<p><span class="caption-text">Figure 2: Flowchart to determine what Bayesian optimisation algorithm is
+recommended. Click to expand.</span><a class="headerlink" href="#id21" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <hr class="docutils" />

@@ -5,10 +5,10 @@
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="A primer on Bayesian optimisation" href="bayesian_optimisation.html" /><link rel="prev" title="Overview" href="overview.html" />
 
-    <link rel="shortcut icon" href="_static/favicon.ico"/><!-- Generated with Sphinx 6.1.3 and Furo 2022.12.07 -->
+    <link rel="shortcut icon" href="_static/favicon.ico"/><!-- Generated with Sphinx 6.1.3 and Furo 2023.03.27 -->
         <title>Get started - NUBO</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
@@ -218,9 +218,9 @@
         <article role="main">
           <section id="get-started">
 <span id="id1"></span><h1>Get started<a class="headerlink" href="#get-started" title="Permalink to this heading">#</a></h1>
-<p>This brief introduction will teach you how to install NUBO from the GitHub
-repository and how to set up a Bayesian optimisation loop to maximise a toy
-function using NUBO’s pre-defined Gaussian process as the surrogate model.</p>
+<p>This brief introduction will teach you in detail how to install NUBO from the
+GitHub repository and how to set up a Bayesian optimisation loop to maximise a
+toy function using NUBO’s pre-defined Gaussian process as the surrogate model.</p>
 <section id="installing-nubo">
 <h2>Installing NUBO<a class="headerlink" href="#installing-nubo" title="Permalink to this heading">#</a></h2>
 <p>Install NUBO and all its dependencies directly from the GitHub repository using
@@ -234,7 +234,7 @@ virtual environment.</p>
 <h2>Optimising a toy function with NUBO<a class="headerlink" href="#optimising-a-toy-function-with-nubo" title="Permalink to this heading">#</a></h2>
 <p>First, we set-up the toy function we want to optimise. In this case we choose
 the 6-dimensional Hartmann function, a multi-modal function with one global
-optimum. This synthetic test function acts as a surrogate for a black box
+optimum. This synthetic test function acts as a substitute for a black box
 objective function, such as an experiment or a simulation.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">nubo.test_functions</span> <span class="kn">import</span> <span class="n">Hartmann6D</span>
@@ -261,7 +261,7 @@ points per input dimension resulting in a total of 30 data points.</p>
 </pre></div>
 </div>
 <p>In NUBO, training inputs <code class="docutils literal notranslate"><span class="pre">x_train</span></code> should be a two-dimensional
-<code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code> (a matrix) where the rows are individual points and the
+<code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code> (a matrix), where the rows are individual points and the
 columns are individual dimensions. In this example, our training data has size
 30 x 6. The training outputs <code class="docutils literal notranslate"><span class="pre">y_train</span></code> should be a one-dimensional
 <code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code> (a vector) with one entry for each training input (here
@@ -276,17 +276,18 @@ bounds manually.</p>
                        <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]])</span>
 </pre></div>
 </div>
-<p>Now, we can prepare the Bayesian optimisation loop. We choose NUBO’s
-pre-defined Gaussian process that comes with a constant mean function and a
-Matern 5/2 kernel. We also use the Gaussian likelihood to estimate
-observational noise. We estimate its hyper-parameters via maximum likelihood
+<p>Now we can prepare the Bayesian optimisation loop. We choose NUBO’s predefined
+Gaussian process that by default has a constant mean function and a Matern 5/2
+kernel. We also use the Gaussian likelihood to estimate observational noise. We
+estimate the Gaussian processes hyper-parameters via maximum likelihood
 estimation (MLE) using the Adam optimiser. For the acquisition function, we
 implement the analytical upper confidence bound (UCB) with trade-off parameter
 <span class="math notranslate nohighlight">\(\beta = 1.96^2\)</span> (corresponding to 95% confidence intervals for the
 Gaussian distribution) and optimise it with the L-BFGS-B algorithm using a
-multi-start approach with five starts. These multiple starts ensure that the
-optimiser does not get stuck in a local optimum. The Bayesian optimisation loop
-is run for 40 iterations giving an evaluation budget of 70.</p>
+multi-start approach with five starts. These multiple starts help to ensure
+that the optimiser does not get stuck in a local optimum. The Bayesian
+optimisation loop is run for 40 iterations, giving a total evaluation budget of
+70.</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nubo.acquisition</span> <span class="kn">import</span> <span class="n">UpperConfidenceBound</span>
 <span class="kn">from</span> <span class="nn">nubo.models</span> <span class="kn">import</span> <span class="n">GaussianProcess</span><span class="p">,</span> <span class="n">fit_gp</span>
@@ -340,14 +341,14 @@ is run for 40 iterations giving an evaluation budget of 70.</p>
 <span class="n">New</span> <span class="n">best</span> <span class="n">at</span> <span class="n">evaluation</span> <span class="mi">70</span><span class="p">:</span>   <span class="n">Inputs</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.2076</span> <span class="mf">0.1527</span> <span class="mf">0.4728</span> <span class="mf">0.2802</span> <span class="mf">0.3109</span> <span class="mf">0.6594</span><span class="p">],</span>    <span class="n">Outputs</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">3.321</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>Finally, we print the overall best solution: We get -3.3210 on evaluation 70
+<p>Finally, we print the overall best solution: we get -3.3210 on evaluation 70,
 which approximaties the true optimum of -3.3224.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># results</span>
 <span class="n">best_iter</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">y_train</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Evaluation: </span><span class="si">{</span><span class="n">best_iter</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> </span><span class="se">\t</span><span class="s2"> Solution: </span><span class="si">{</span><span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="n">y_train</span><span class="p">[</span><span class="n">best_iter</span><span class="p">])</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Evaluation</span><span class="p">:</span> <span class="mi">70</span>       <span class="n">Solution</span><span class="p">:</span> <span class="mf">3.3210</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Evaluation</span><span class="p">:</span> <span class="mi">70</span>       <span class="n">Solution</span><span class="p">:</span> <span class="o">-</span><span class="mf">3.3210</span>
 </pre></div>
 </div>
 <p>The estimated parameters of the Gaussian process can be viewed as follows:</p>

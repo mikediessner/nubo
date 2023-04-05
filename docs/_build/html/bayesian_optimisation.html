@@ -5,10 +5,10 @@
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Practical considerations" href="practical_considerations.html" /><link rel="prev" title="Get started" href="get_started.html" />
 
-    <link rel="shortcut icon" href="_static/favicon.ico"/><!-- Generated with Sphinx 6.1.3 and Furo 2022.12.07 -->
+    <link rel="shortcut icon" href="_static/favicon.ico"/><!-- Generated with Sphinx 6.1.3 and Furo 2023.03.27 -->
         <title>A primer on Bayesian optimisation - NUBO</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
@@ -219,7 +219,7 @@
           <section id="a-primer-on-bayesian-optimisation">
 <span id="bo"></span><h1>A primer on Bayesian optimisation<a class="headerlink" href="#a-primer-on-bayesian-optimisation" title="Permalink to this heading">#</a></h1>
 <p>The following introduction aims to give a concise explanation of the Bayesian
-optimisation algorithm and its element, such as the surrogate model and the
+optimisation algorithm and its element, including the surrogate model and
 acquisition functions. While this introduction covers all critical details and
 will be sufficient to get started with Bayesian optimisation and understand how
 NUBO works, it should not be considered as exhaustive. Where appropriate,
@@ -236,7 +236,7 @@ problem</p>
 <p>where the input space is usually continuous and bounded by a hyper-rectangle
 <span class="math notranslate nohighlight">\(\mathcal{X} \in [a, b]^d\)</span> with <span class="math notranslate nohighlight">\(a, b \in \mathbb{R}\)</span>. The function
 <span class="math notranslate nohighlight">\(f(\boldsymbol x)\)</span> is most commonly a derivative-free
-expensive-to-evaluate black box problem that only allows inputs
+expensive-to-evaluate black box function that only allows inputs
 <span class="math notranslate nohighlight">\(\boldsymbol x_i\)</span> to be queried and outputs <span class="math notranslate nohighlight">\(y_i\)</span> to be observed
 without gaining any further insights into the underlying system. We assume any
 noise <span class="math notranslate nohighlight">\(\epsilon\)</span> that is introduced when taking measurements to be
@@ -273,16 +273,16 @@ representing the objective function through a surrogate model
 <span class="math notranslate nohighlight">\(\mathcal{M}\)</span>, often a Gaussian process <span class="math notranslate nohighlight">\(\mathcal{GP}\)</span>. This
 representation can then be used to find the next point that should be evaluated
 by maximising a criterion specified through an acquisition function
-<span class="math notranslate nohighlight">\(\alpha (\cdot)\)</span>. A popular criterion is, for example, the expected
-improvement (EI) that is the expectation of the new point returning a better
-solution than the previous best observation. Bayesian optimisation is performed
-in a loop where training data <span class="math notranslate nohighlight">\(\mathcal{D}_n\)</span> is used to fit the
-surrogate model before the next point suggested by the acquisition function is
-evaluated and added to the training data itself (see algorithm below). The loop
-than restarts gathering more information about the objective function with each
-iteration. Bayesian optimisation is run for as many iterations as the
-evaluation budget <span class="math notranslate nohighlight">\(N\)</span> allows, until a satisfying solution is found, or
-unitl a pre-defined stopping criterion is met.</p>
+<span class="math notranslate nohighlight">\(\alpha (\cdot)\)</span>. A popular criterion is, the expected improvement (EI);
+that is the expectation of the new point returning a better output value than
+the best point to date. Bayesian optimisation is performed in a loop, where
+training data <span class="math notranslate nohighlight">\(\mathcal{D}_n\)</span> is used to fit the surrogate model before
+the next point suggested by the acquisition function is evaluated and added to
+the training data (see the algorithm below). The process then restarts and
+gathers more information about the objective function with each iteration.
+Bayesian optimisation is run for as many iterations as the evaluation budget
+<span class="math notranslate nohighlight">\(N\)</span> allows, until a satisfactory solution is found, or unitl a predefined
+stopping criterion is met.</p>
 <div class="seealso admonition">
 <p class="admonition-title">Algorithm</p>
 <p>Specify evaluation budget <span class="math notranslate nohighlight">\(N\)</span>, number of initial points <span class="math notranslate nohighlight">\(n_0\)</span>, surrogate model <span class="math notranslate nohighlight">\(\mathcal{M}\)</span>, acquisition function <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
@@ -302,16 +302,16 @@ unitl a pre-defined stopping criterion is met.</p>
 on an optimisation loop that runs for 20 iterations. The surrogate model uses
 the available observaions to provide a prediction and its uncertainty (here
 shown as 95% confidence intervals around the prediction). This is our best
-guess of the underlying objective function. This guess is than used in the
-acquisition function to evaluate which point is most likely to improve over the
-current best solution. Maximising the acquisition yields the next candidate
-that is observed from the objective function, i.e. the truth, before it is
-added to the training data and the whole process is repeated again. The
-animation shows how the surrogate model gets closer to the truth with each
-iteration and how the acquisition function explores the input space by
-exploring regions with a high uncertainty and exploits regions with a high
-prediction. This property also called the exploration-exploitation trade-off
-is a corner stone of the acquisition functions provided in NUBO.</p>
+estimate of the underlying objective function. This estimate is then used in
+the acquisition function to evaluate which point is most likely to improve over
+the current best solution. Maximising the acquisition function yields the next
+candidate to be observed from the objective function, before it is added to the
+training data and the whole process is repeated again. The animation shows how
+the surrogate model gets closer to the truth with each iteration and how the
+acquisition function explores the input space by exploring regions with high
+uncertainty and exploits regions with a high prediction. This property, also
+called the exploration-exploitation trade-off, is a corner stone of the
+acquisition functions provided in NUBO.</p>
 <figure class="align-default" id="id28">
 <img alt="_images/bo.gif" src="_images/bo.gif" />
 <figcaption>
@@ -360,8 +360,8 @@ all test inputs, <span class="math notranslate nohighlight">\(K(\boldsymbol X_*,
 <span class="math notranslate nohighlight">\(n \times n_*\)</span>, and <span class="math notranslate nohighlight">\(K(\boldsymbol X_*, \boldsymbol X_*)\)</span> is the
 <span class="math notranslate nohighlight">\(n_* \times n_*\)</span> covariance matrix between training inputs
 <span class="math notranslate nohighlight">\(\boldsymbol X_n\)</span> and test inputs <span class="math notranslate nohighlight">\(\boldsymbol X_*\)</span>.</p>
-<p>Hyper-parameters of the Gaussian process, such as any parameters <span class="math notranslate nohighlight">\(\theta\)</span>
-in the mean function and the covariance kernel or the noise variance
+<p>Hyper-parameters of the Gaussian process, such as parameters <span class="math notranslate nohighlight">\(\theta\)</span>
+in the mean function and the covariance kernel and the noise variance
 <span class="math notranslate nohighlight">\(\sigma^2\)</span>, can be estimated by maximising the log marginal likelihood
 below via maximum likelihood estimation (MLE).</p>
 <div class="math-wrapper docutils container">
@@ -383,7 +383,7 @@ even deep Gaussian processes. Besides maximum likelihood estimation (MLE)
 Bayesian estimation to estimate the hyper-parameter. It also comes with a rich
 documentation, many practical examples, and a large community.</p>
 <p>NUBO provides a Gaussian process for off-the-shelf use with a constant mean
-function and a Matern 5/2 covariance kernel that due to its flexibility is
+function and a Matern 5/2 covariance kernel that, due to its flexibility, is
 especially suited for practical optimisation <a class="footnote-reference brackets" href="#snoek2012" id="id16" role="doc-noteref"><span class="fn-bracket">[</span>13<span class="fn-bracket">]</span></a>. A tutorial on how
 to implement a custom Gaussian process to use with NUBO can be found in the
 examples section. For more complex models we recommend consulting the
@@ -393,23 +393,23 @@ examples section. For more complex models we recommend consulting the
 <span id="acquisition"></span><h2>Acquisition function<a class="headerlink" href="#acquisition-function" title="Permalink to this heading">#</a></h2>
 <p>Acquisition functions use the posterior distribution of the Gaussian process
 <span class="math notranslate nohighlight">\(\mathcal{GP}\)</span> to compute a criterion that assess if a test point is a
-good potential candidate point when evaluated through the objective function
+good potential candidate point to evaluate via the objective function
 <span class="math notranslate nohighlight">\(f(\boldsymbol x)\)</span>. Thus, maximising the acquisition function suggests
-the test point that based on the current training data <span class="math notranslate nohighlight">\(\mathcal{D_n}\)</span>
-has the highest potential of being the global optimum. To do this, an
-acquisition function <span class="math notranslate nohighlight">\(\alpha (\cdot)\)</span> balances exploration and
-exploitation. The former is characterised by areas with no or only a few
-observed data points where the uncertainty of the Gaussian process is high, and
-the latter by areas where the posterior mean of the Gaussian process is high.
-This exploration-exploitation trade-off ensures that Bayesian optimisation does
-not converge to the first (potentially local) maximum it encounters but
-gradually explores the full input space.</p>
+the test point that, based on the current training data <span class="math notranslate nohighlight">\(\mathcal{D_n}\)</span>,
+has the highest potential to be the global optimum. To do this, an acquisition
+function <span class="math notranslate nohighlight">\(\alpha (\cdot)\)</span> balances exploration and exploitation. The
+former is characterised by areas with no or only a few observed data points
+where the uncertainty of the Gaussian process is high, and the latter by areas
+where the posterior mean of the Gaussian process is high. This
+exploration-exploitation trade-off ensures that Bayesian optimisation does not
+converge to the first (potentially local) maximum it encounters, but efficently
+explores the full input space.</p>
 <section id="analytical-acquisition-functions">
 <h3>Analytical acquisition functions<a class="headerlink" href="#analytical-acquisition-functions" title="Permalink to this heading">#</a></h3>
-<p>NUBO supports two of the most popular acquisition functions that are grounded
+<p>NUBO supports two of the most popular acquisition functions that are, grounded
 in a rich history of theoretical and empirical research. Expected improvement
-(EI) <a class="footnote-reference brackets" href="#jones1998" id="id17" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a> selects points with the biggest potential of improving on
-the current best observation while upper confidence bound (UCB)
+(EI) <a class="footnote-reference brackets" href="#jones1998" id="id17" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a> selects points with the biggest potential to improve on
+the current best observation, while upper confidence bound (UCB)
 <a class="footnote-reference brackets" href="#srinivas2010" id="id18" role="doc-noteref"><span class="fn-bracket">[</span>14<span class="fn-bracket">]</span></a> takes an optimistic view of the posterior uncertainty and
 assumes it to be true to a user-defined level. Expected improvement (EI) is
 defined as</p>
@@ -421,7 +421,7 @@ defined as</p>
 <span class="math notranslate nohighlight">\(\mu_n(\cdot)\)</span> and <span class="math notranslate nohighlight">\(\sigma_n(\cdot)\)</span> are the mean and the standard
 deviation of the posterior distribution of the Gaussian process,
 <span class="math notranslate nohighlight">\(y^{best}\)</span> is the current best observation, and <span class="math notranslate nohighlight">\(\Phi (\cdot)\)</span> and
-<span class="math notranslate nohighlight">\(\phi  (\cdot)\)</span> are the cumulative distribution function and the
+<span class="math notranslate nohighlight">\(\phi  (\cdot)\)</span> are the cumulative distribution function and
 probability density function of the standard normal distribution.</p>
 <figure class="align-default" id="id30">
 <img alt="_images/bo_ei.gif" src="_images/bo_ei.gif" />
@@ -451,23 +451,23 @@ bound acquisition function of a 1D toy function with a budget of
 20 evaluations.</span><a class="headerlink" href="#id31" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Both of these acquisition functions can be computed analytically by maximising
-them with a deterministic optimiser, such as L-BFGS-B <a class="footnote-reference brackets" href="#zhu1997" id="id19" role="doc-noteref"><span class="fn-bracket">[</span>20<span class="fn-bracket">]</span></a> for bounded
-unconstraint problems or SLSQP <a class="footnote-reference brackets" href="#kraft1994" id="id20" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a> for bounded constraint problems.
-However, this only works for the sequential single-point problems for which
-every point suggested by Bayesian optimisation is observed through the
-objective function <span class="math notranslate nohighlight">\(f( \boldsymbol x)\)</span> immediatley before the
-optimisation loop is repeated.</p>
+<p>Both of these acquisition functions can be maximised with a deterministic
+optimiser, such as L-BFGS-B <a class="footnote-reference brackets" href="#zhu1997" id="id19" role="doc-noteref"><span class="fn-bracket">[</span>20<span class="fn-bracket">]</span></a> for bounded unconstrained problems or
+SLSQP <a class="footnote-reference brackets" href="#kraft1994" id="id20" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a> for bounded constrained problems. However, this only works
+for the sequential single-point problems for which every point suggested by
+Bayesian optimisation is observed via the objective function
+<span class="math notranslate nohighlight">\(f( \boldsymbol x)\)</span> immediatley, before the optimisation loop is
+repeated.</p>
 </section>
 <section id="monte-carlo-acquisition-functions">
 <h3>Monte Carlo acquisition functions<a class="headerlink" href="#monte-carlo-acquisition-functions" title="Permalink to this heading">#</a></h3>
 <p>For parallel multi-point batches or asynchronous optimisation, the analytical
-acquisition functions are in general intractable. To use Bayesian
-optimisation in these cases, NUBO supports the approximation of the analytical
-acquisition function through Monte Carlo sampling <a class="footnote-reference brackets" href="#snoek2012" id="id21" role="doc-noteref"><span class="fn-bracket">[</span>13<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#wilson2018" id="id22" role="doc-noteref"><span class="fn-bracket">[</span>18<span class="fn-bracket">]</span></a>.</p>
+acquisition functions are in general intractable. To use Bayesian optimisation
+in these cases, NUBO supports the approximation of the analytical acquisition
+function through Monte Carlo sampling <a class="footnote-reference brackets" href="#snoek2012" id="id21" role="doc-noteref"><span class="fn-bracket">[</span>13<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#wilson2018" id="id22" role="doc-noteref"><span class="fn-bracket">[</span>18<span class="fn-bracket">]</span></a>.</p>
 <p>The idea is to draw a large number of samples directly from the posterior
-distribution and then to approximate the acquisition by averaging these so
-called Monte Carlo samples. This method is made viable by reparameterising the
+distribution and then to approximate the acquisition functions by averaging
+these Monte Carlo samples. This method is made viable by reparameterising the
 acquisition functions and then computing samples from the posterior
 distribution by utilising base samples from a standard normal distribution
 <span class="math notranslate nohighlight">\(z \sim \mathcal{N} (0, 1)\)</span>.</p>
@@ -479,7 +479,7 @@ distribution by utilising base samples from a standard normal distribution
 <div class="math notranslate nohighlight">
 \[\alpha_{UCB}^{MC} (\boldsymbol X_*) = \max \left(\mu_n(\boldsymbol X_*) + \sqrt{\frac{\beta \pi}{2}} \lvert \boldsymbol L \boldsymbol z \rvert \right),\]</div>
 </div>
-<p>where <span class="math notranslate nohighlight">\(\mu_n(\cdot)\)</span> is the mean of the predictive distribution of the
+<p>where <span class="math notranslate nohighlight">\(\mu_n(\cdot)\)</span> is the mean of the posterior distribution of the
 Gaussian process, <span class="math notranslate nohighlight">\(\boldsymbol L\)</span> is the lower triangular matrix of the
 Cholesky decomposition of the covariance matrix
 <span class="math notranslate nohighlight">\(\boldsymbol L \boldsymbol L^T = K(\boldsymbol X_n, \boldsymbol X_n)\)</span>,
@@ -487,22 +487,22 @@ Cholesky decomposition of the covariance matrix
 <span class="math notranslate nohighlight">\(\mathcal{N} (0, 1)\)</span>, <span class="math notranslate nohighlight">\(y^{best}\)</span> is the current best observation,
 <span class="math notranslate nohighlight">\(\beta\)</span> is the trade-off parameter, and <span class="math notranslate nohighlight">\(ReLU (\cdot)\)</span> is the
 rectified linear unit function that zeros all values below 0 and leaves the
-rest as is.</p>
-<p>Due to the randomness of the Monte Carlo samples, these acquisition functions
+rest unchanged.</p>
+<p>Due to the randomness in the Monte Carlo samples, these acquisition functions
 can only be optimised by stochastic optimisers, such as Adam <a class="footnote-reference brackets" href="#kingma2015" id="id23" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a>.
 However, there is some empirical evidence that fixing the base samples for
 individual Bayesian optimisation loops does not affect the performance
-negatively <a class="footnote-reference brackets" href="#balandat2020" id="id24" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>. This method would allow deterministic optimiser to
-be used but could potentially introduce bias due to sampling randomness. NUBO
+negatively <a class="footnote-reference brackets" href="#balandat2020" id="id24" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>. This method would allow deterministic optimisers to
+be used, but could potentially introduce bias due to sampling randomness. NUBO
 lets you decide which variant you prefer by setting <code class="docutils literal notranslate"><span class="pre">fix_base_samples</span></code> and
 choosing the prefered optimiser. Bounded problems can be solved with Adam
 (<code class="docutils literal notranslate"><span class="pre">fix_base_samples</span> <span class="pre">=</span> <span class="pre">False</span></code>) or L-BFGS-B (<code class="docutils literal notranslate"><span class="pre">fix_base_samples</span> <span class="pre">=</span> <span class="pre">True</span></code>) and
 constraint problems can be solved with SLSQP (<code class="docutils literal notranslate"><span class="pre">fix_base_samples</span> <span class="pre">=</span> <span class="pre">True</span></code>).</p>
 <p>Furthermore, two optimisation strategies for batches are possible
-<a class="footnote-reference brackets" href="#wilson2018" id="id25" role="doc-noteref"><span class="fn-bracket">[</span>18<span class="fn-bracket">]</span></a>: The default is a joint optimisation approach where the
+<a class="footnote-reference brackets" href="#wilson2018" id="id25" role="doc-noteref"><span class="fn-bracket">[</span>18<span class="fn-bracket">]</span></a>: The default is a joint optimisation approach, where the
 acquisition functions are optimised over all points of the batch
 simultaneously. The second option is a greedy sequential approach where one
-point after the other is selected holding all previous points fixed until the
+point after another is selected, holding all previous points fixed until the
 batch is full. Empirical evidence shows that both methods approximate the
 acquisition successfully. However, the greedy approach seems to have a slight
 edge over the joint strategy for some examples <a class="footnote-reference brackets" href="#wilson2018" id="id26" role="doc-noteref"><span class="fn-bracket">[</span>18<span class="fn-bracket">]</span></a>. It is also

@@ -2,9 +2,9 @@
 
 Get started
 ===========
-This brief introduction will teach you how to install NUBO from the GitHub
-repository and how to set up a Bayesian optimisation loop to maximise a toy
-function using NUBO's pre-defined Gaussian process as the surrogate model.
+This brief introduction will teach you in detail how to install NUBO from the
+GitHub repository and how to set up a Bayesian optimisation loop to maximise a
+toy function using NUBO's pre-defined Gaussian process as the surrogate model.
 
 Installing NUBO
 ---------------
@@ -21,7 +21,7 @@ Optimising a toy function with NUBO
 -----------------------------------
 First, we set-up the toy function we want to optimise. In this case we choose
 the 6-dimensional Hartmann function, a multi-modal function with one global
-optimum. This synthetic test function acts as a surrogate for a black box
+optimum. This synthetic test function acts as a substitute for a black box
 objective function, such as an experiment or a simulation.
 
 .. code-block:: python
@@ -52,7 +52,7 @@ points per input dimension resulting in a total of 30 data points.
     y_train = func(x_train)
 
 In NUBO, training inputs ``x_train`` should be a two-dimensional
-``torch.Tensor`` (a matrix) where the rows are individual points and the
+``torch.Tensor`` (a matrix), where the rows are individual points and the
 columns are individual dimensions. In this example, our training data has size
 30 x 6. The training outputs ``y_train`` should be a one-dimensional
 ``torch.Tensor`` (a vector) with one entry for each training input (here
@@ -69,17 +69,18 @@ bounds manually.
     bounds = torch.tensor([[0., 0., 0., 0., 0., 0.],
                            [1., 1., 1., 1., 1., 1.]])
 
-Now, we can prepare the Bayesian optimisation loop. We choose NUBO's
-pre-defined Gaussian process that comes with a constant mean function and a
-Matern 5/2 kernel. We also use the Gaussian likelihood to estimate
-observational noise. We estimate its hyper-parameters via maximum likelihood
+Now we can prepare the Bayesian optimisation loop. We choose NUBO's predefined
+Gaussian process that by default has a constant mean function and a Matern 5/2
+kernel. We also use the Gaussian likelihood to estimate observational noise. We
+estimate the Gaussian processes hyper-parameters via maximum likelihood
 estimation (MLE) using the Adam optimiser. For the acquisition function, we
 implement the analytical upper confidence bound (UCB) with trade-off parameter
 :math:`\beta = 1.96^2` (corresponding to 95% confidence intervals for the
 Gaussian distribution) and optimise it with the L-BFGS-B algorithm using a
-multi-start approach with five starts. These multiple starts ensure that the
-optimiser does not get stuck in a local optimum. The Bayesian optimisation loop
-is run for 40 iterations giving an evaluation budget of 70.
+multi-start approach with five starts. These multiple starts help to ensure
+that the optimiser does not get stuck in a local optimum. The Bayesian
+optimisation loop is run for 40 iterations, giving a total evaluation budget of
+70.
 
  .. code-block:: python
 
@@ -134,7 +135,7 @@ is run for 40 iterations giving an evaluation budget of 70.
     New best at evaluation 66: 	 Inputs: [0.2096 0.142  0.4767 0.2757 0.3112 0.6573], 	 Outputs: [-3.3209]
     New best at evaluation 70: 	 Inputs: [0.2076 0.1527 0.4728 0.2802 0.3109 0.6594], 	 Outputs: [-3.321]
 
-Finally, we print the overall best solution: We get -3.3210 on evaluation 70
+Finally, we print the overall best solution: we get -3.3210 on evaluation 70,
 which approximaties the true optimum of -3.3224.
 
 .. code-block:: python
@@ -145,7 +146,7 @@ which approximaties the true optimum of -3.3224.
 
 ::
 
-    Evaluation: 70 	 Solution: 3.3210
+    Evaluation: 70 	 Solution: -3.3210
 
 The estimated parameters of the Gaussian process can be viewed as follows:
 

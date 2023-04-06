@@ -375,19 +375,19 @@ below via maximum likelihood estimation (MLE).</p>
 corresponding uncertainty) over 20 iterations.</span><a class="headerlink" href="#id29" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>NUBO uses the <code class="docutils literal notranslate"><span class="pre">GPyTorch</span></code> package <a class="footnote-reference brackets" href="#gardner2018" id="id15" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> for surrogate modelling.
-This is a very powerful package that allows the implementation of a wide
-selection of models ranging from exact Gaussian processes to approximate and
-even deep Gaussian processes. Besides maximum likelihood estimation (MLE)
-<code class="docutils literal notranslate"><span class="pre">GPyTorch</span></code> also supports maximum a posteriori estimation (MAP) and fully
-Bayesian estimation to estimate the hyper-parameter. It also comes with a rich
-documentation, many practical examples, and a large community.</p>
+<p>NUBO uses the <cite>GPyTorch</cite> package <a class="footnote-reference brackets" href="#gardner2018" id="id15" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> for surrogate modelling. This
+is a very powerful package that allows the implementation of a wide selection
+of models ranging from exact Gaussian processes to approximate and even deep
+Gaussian processes. Besides maximum likelihood estimation (MLE) <cite>GPyTorch</cite> also
+supports maximum a posteriori estimation (MAP) and fully Bayesian estimation to
+estimate the hyper-parameter. It also comes with a rich documentation, many
+practical examples, and a large community.</p>
 <p>NUBO provides a Gaussian process for off-the-shelf use with a constant mean
 function and a Matern 5/2 covariance kernel that, due to its flexibility, is
 especially suited for practical optimisation <a class="footnote-reference brackets" href="#snoek2012" id="id16" role="doc-noteref"><span class="fn-bracket">[</span>13<span class="fn-bracket">]</span></a>. A tutorial on how
 to implement a custom Gaussian process to use with NUBO can be found in the
 examples section. For more complex models we recommend consulting the
-<code class="docutils literal notranslate"><span class="pre">GPyTorch</span></code> <a class="reference external" href="https://docs.gpytorch.ai/en/stable">documentation</a>.</p>
+<cite>GPyTorch</cite> <a class="reference external" href="https://docs.gpytorch.ai/en/stable">documentation</a>.</p>
 </section>
 <section id="acquisition-function">
 <span id="acquisition"></span><h2>Acquisition function<a class="headerlink" href="#acquisition-function" title="Permalink to this heading">#</a></h2>
@@ -436,7 +436,7 @@ improvement acquisition function of a 1D toy function with a budget of
 <div class="math notranslate nohighlight">
 \[\alpha_{UCB} (\boldsymbol X_*) = \mu_n(\boldsymbol X_*) + \sqrt{\beta} \sigma_n(\boldsymbol X_*),\]</div>
 </div>
-<p>where <span class="math notranslate nohighlight">\(\beta\)</span> is a pre-defined trade-off parameter, and
+<p>where <span class="math notranslate nohighlight">\(\beta\)</span> is a predefined trade-off parameter, and
 <span class="math notranslate nohighlight">\(\mu_n(\cdot)\)</span> and <span class="math notranslate nohighlight">\(\sigma_n(\cdot)\)</span> are the mean and the standard
 deviation of the posterior distribution of the Gaussian process. The animation
 below shows how the acquisition would look when <span class="math notranslate nohighlight">\(\beta\)</span> is set to 16. For

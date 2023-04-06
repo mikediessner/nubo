@@ -3,27 +3,26 @@
 Custom Gaussian process
 =======================
 This notebook gives an introduction to specifying custom Gaussian processes
-with ```GPyTorch`` that can be used with NUBO.
+with *GPyTorch* that can be used with NUBO.
 
 Define Gaussian process
 -----------------------
 A Gaussian process is defined by its mean function and its covariance kernel.
 Both are specified in the ``__init__()`` method of the ``GaussianProcess``
-class below and can easily be replaced by the desired function or kernel.
-While ``GPyTorch`` offers many different options, the most common choices are
-the zero mean or constant mean function and the Matern or RBF kernel. Some
-kernels, such as the Matern and the RBF kernel, are only defined for a certain
-range. They need to be scaled through the ``ScaleKernel`` to be used with all
-problems. The length-scale parameters of the covariance kernel can either be
-represented as a single length-scale or as one length-scale parameter for each
-input dimensions. The latter is known as automatic relevance determination
-(ARD) and allows inputs to be differently correlated. The ``forward()`` method
-takes a test point and returns the predictive multivariate normal distribution.
-All other properties of the Gaussian process are inherited by the ``ExactGP``
-class making it easy to implement custom Gaussian processes with ``GPyTorch``
-for NUBO. For more information about Gaussian processes and about options for
-the prior mean function and the prior covariance kernel see ``GPyTorch``'s
-documentation_.
+class below and can easily be replaced by the desired function or kernel. While
+`GPyTorch` offers many different options, the most common choices are the zero
+mean or constant mean function and the Matern or RBF kernel. Some kernels, such
+as the Matern and the RBF kernel, are only defined for a certain range. They
+need to be scaled through the ``ScaleKernel`` to be used with all problems. The
+length-scale parameters of the covariance kernel can either be represented as a
+single length-scale or as one length-scale parameter for each input dimensions.
+The latter is known as automatic relevance determination (ARD) and allows
+inputs to be differently correlated. The ``forward()`` method takes a test
+point and returns the predictive multivariate normal distribution. All other
+properties of the Gaussian process are inherited by the ``ExactGP`` class
+making it easy to implement custom Gaussian processes with `GPyTorch` for NUBO.
+For more information about Gaussian processes and about options for the prior
+mean function and the prior covariance kernel see `GPyTorch`'s documentation_.
 
 .. code-block:: python
 
@@ -91,7 +90,7 @@ the observation noise of your objective function. In this case, you can still
 decide if you want to estimate any additional noise. This example continues
 with the full estimation of the noise level. NUBO has the convenience function
 ``fit_gp()`` that maximises the log marginal likelihood with maximum likelihood
-estimation (MLE) using ``torch``'s Adam optimiser.
+estimation (MLE) using *torch*'s Adam optimiser.
 
 .. code-block:: python
 

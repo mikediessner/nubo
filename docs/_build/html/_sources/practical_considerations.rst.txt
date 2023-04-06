@@ -30,7 +30,7 @@ Gaussian process
     experiments and simulations.
 
 **What likelihood should I specify?**
-    For exact Gaussian processes, ``GPyTorch`` provides two main options that
+    For exact Gaussian processes, `GPyTorch` provides two main options that
     differ with regards to their computation of the observational noise
     :math:`\sigma^2`: The ``GaussianLikelihood`` estimates the observation
     noise while the ``FixedNoiseGaussianLikelihood`` holds it fixed. If

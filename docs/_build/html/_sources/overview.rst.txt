@@ -63,7 +63,7 @@ Contents
 **Surrogate models**
   NUBO focuses on the use of Gaussian Processes as surrogates for the objective
   function. Gaussian Processes [#Gramacy2020]_ [#Williams2006]_ are specified
-  through the ``GPyTorch`` package [#Gardner2018]_, a powerful package that
+  through the `GPyTorch` package [#Gardner2018]_, a powerful package that
   allows the implementation of a wide selection of models ranging from exact
   Gaussian processes to approximate and even deep Gaussian processes.
   Hyper-parameters can be estimated via maximum likelihood estimation (MLE),

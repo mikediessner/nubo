@@ -89,7 +89,7 @@ class UpperConfidenceBound(AcquisitionFunction):
     .. math::
         \alpha_{UCB} (\boldsymbol X_*) = \mu_n(\boldsymbol X_*) + \sqrt{\beta} \sigma_n(\boldsymbol X_*),
 
-    where :math:`\beta` is a pre-defined trade-off parameter, and
+    where :math:`\beta` is a predefined trade-off parameter, and
     :math:`\mu_n(\cdot)` and :math:`\sigma_n(\cdot)` are the mean and the
     standard deviation of the posterior distribution of the Gaussian process.
 

@@ -169,20 +169,20 @@ below via maximum likelihood estimation (MLE).
         Figure 2: Change of Gaussian process model (prediction and
         corresponding uncertainty) over 20 iterations.
 
-NUBO uses the ``GPyTorch`` package [#Gardner2018]_ for surrogate modelling.
-This is a very powerful package that allows the implementation of a wide
-selection of models ranging from exact Gaussian processes to approximate and
-even deep Gaussian processes. Besides maximum likelihood estimation (MLE)
-``GPyTorch`` also supports maximum a posteriori estimation (MAP) and fully
-Bayesian estimation to estimate the hyper-parameter. It also comes with a rich
-documentation, many practical examples, and a large community.
+NUBO uses the `GPyTorch` package [#Gardner2018]_ for surrogate modelling. This
+is a very powerful package that allows the implementation of a wide selection
+of models ranging from exact Gaussian processes to approximate and even deep
+Gaussian processes. Besides maximum likelihood estimation (MLE) `GPyTorch` also
+supports maximum a posteriori estimation (MAP) and fully Bayesian estimation to
+estimate the hyper-parameter. It also comes with a rich documentation, many
+practical examples, and a large community.
 
 NUBO provides a Gaussian process for off-the-shelf use with a constant mean
 function and a Matern 5/2 covariance kernel that, due to its flexibility, is
 especially suited for practical optimisation [#Snoek2012]_. A tutorial on how
 to implement a custom Gaussian process to use with NUBO can be found in the
 examples section. For more complex models we recommend consulting the
-``GPyTorch`` `documentation`_.
+`GPyTorch` `documentation`_.
 
 .. _acquisition:
 
@@ -235,7 +235,7 @@ The upper confidence bound (UCB) acquisition function can be computed as
 .. math::
     \alpha_{UCB} (\boldsymbol X_*) = \mu_n(\boldsymbol X_*) + \sqrt{\beta} \sigma_n(\boldsymbol X_*),
 
-where :math:`\beta` is a pre-defined trade-off parameter, and 
+where :math:`\beta` is a predefined trade-off parameter, and 
 :math:`\mu_n(\cdot)` and :math:`\sigma_n(\cdot)` are the mean and the standard
 deviation of the posterior distribution of the Gaussian process. The animation
 below shows how the acquisition would look when :math:`\beta` is set to 16. For

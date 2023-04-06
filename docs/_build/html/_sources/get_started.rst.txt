@@ -3,14 +3,14 @@
 Get started
 ===========
 This brief introduction will teach you in detail how to install NUBO from the
-GitHub repository and how to set up a Bayesian optimisation loop to maximise a
-toy function using NUBO's pre-defined Gaussian process as the surrogate model.
+`GitHub repository`_ and how to set up a Bayesian optimisation loop to maximise
+a toy function using NUBO's predefined Gaussian process as the surrogate model.
 
 Installing NUBO
 ---------------
-Install NUBO and all its dependencies directly from the GitHub repository using
-the packet manager `pip` with the following code. We recommend the use of a
-virtual environment.
+Install NUBO and all its dependencies directly from the `GitHub repository`_
+using the `Python package manager`_ *pip* with the following code. We recommend
+the use of a virtual environment.
 
 ::
 
@@ -22,7 +22,10 @@ Optimising a toy function with NUBO
 First, we set-up the toy function we want to optimise. In this case we choose
 the 6-dimensional Hartmann function, a multi-modal function with one global
 optimum. This synthetic test function acts as a substitute for a black box
-objective function, such as an experiment or a simulation.
+objective function, such as an experiment or a simulation. The ``bounds`` of
+the input space are defined as a two-dimensional ``torch.Tensor`` where the
+first row gives the lower bounds for all input dimensions and the second row
+gives the corresponding upper bounds.
 
 .. code-block:: python
 
@@ -56,18 +59,7 @@ In NUBO, training inputs ``x_train`` should be a two-dimensional
 columns are individual dimensions. In this example, our training data has size
 30 x 6. The training outputs ``y_train`` should be a one-dimensional
 ``torch.Tensor`` (a vector) with one entry for each training input (here
-``y_train`` has size 30). The ``bounds`` of the input space are defined as a
-two-dimensional ``torch.Tensor`` where the first row gives the lower bounds for
-all input dimensions and the second row gives the corresponding upper bounds.
-In the example above, the bounds are given as an attribute of the
-``Hartmann6D`` class. The code snippet below shows how you could set up the
-bounds manually.
-
-.. code-block:: python
-
-    # specify bounds manually
-    bounds = torch.tensor([[0., 0., 0., 0., 0., 0.],
-                           [1., 1., 1., 1., 1., 1.]])
+``y_train`` has size 30).
 
 Now we can prepare the Bayesian optimisation loop. We choose NUBO's predefined
 Gaussian process that by default has a constant mean function and a Matern 5/2
@@ -164,3 +156,7 @@ The estimated parameters of the Gaussian process can be viewed as follows:
     Covariance kernel output-scale: 0.2943
     Covariance kernel length-scale: tensor([[0.5552, 0.5305, 0.6730, 0.3610, 0.2741, 0.3786]])
     Estimated noise/nugget: 0.0001
+
+
+.. _`GitHub repository`: https://github.com/mikediessner/nubo
+.. _`Python package manager`: https://pip.pypa.io/en/latest/

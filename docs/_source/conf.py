@@ -21,7 +21,9 @@ extensions = [
     'sphinx.ext.napoleon',
     'sphinx.ext.autosummary',
     'myst_parser',
-    'nbsphinx'
+    'nbsphinx',
+    'sphinx_copybutton',
+    'sphinxext.opengraph'
 ]
 
 source_suffix = ['.rst', '.md']
@@ -32,6 +34,14 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
+
+html_static_path = ['_static']
+html_css_files = [
+    'custom.css',
+]
+html_js_files = [
+    'custom.js',
+]
 
 html_theme = 'furo'
 html_title = 'NUBO'

@@ -28,7 +28,7 @@ distributed as an open-source software under the
  ## Install NUBO
 
 Install NUBO and all its dependencies directly from the
-[Python Package Index](https://pypi.org) using the
+[Python Package Index](https://pypi.org) *PyPI* using the
 [Python package manager](https://pip.pypa.io/en/latest/) *pip* with the
 following code. We recommend the use of a virtual environment.
 

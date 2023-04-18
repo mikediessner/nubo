@@ -8,13 +8,13 @@ a toy function using NUBO's predefined Gaussian process as the surrogate model.
 
 Installing NUBO
 ---------------
-Install NUBO and all its dependencies directly from the `GitHub repository`_
+Install NUBO and all its dependencies directly from the `PyPI`_
 using the `Python package manager`_ *pip* with the following code. We recommend
 the use of a virtual environment.
 
 ::
 
-    pip install git+https://github.com/mikediessner/nubo
+    pip install nubopy
 
 
 Optimising a toy function with NUBO
@@ -158,5 +158,5 @@ The estimated parameters of the Gaussian process can be viewed as follows:
     Estimated noise/nugget: 0.0001
 
 
-.. _`GitHub repository`: https://github.com/mikediessner/nubo
+.. _`GitHub repository`: https://pypi.org/
 .. _`Python package manager`: https://pip.pypa.io/en/latest/

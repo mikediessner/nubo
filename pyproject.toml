@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nubopy"
+version = "1.0.3"
+authors = [
+  { name="Mike Diessner", email="m.diessner2@ncl.ac.uk" },
+]
+description = "A transparent Python package for Bayesian optimisation"
+readme = "README.md"
+requires-python = ">=3.7"
+dependencies = ["torch", "gpytorch", "scipy", "numpy"]
+classifiers = [
+        "Intended Audience :: Science/Research",
+        "Programming Language :: Python :: 3",
+]
+
+[project.urls]
+"Homepage" = "https://mikediessner.github.io/nubo"

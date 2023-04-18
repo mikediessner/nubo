@@ -24,3 +24,12 @@ distributed as an open-source software under the
  > Thanks for considering NUBO. If you have any questions, comments, or issues
  > feel free to email us at m.diessner2@newcastle.ac.uk. Any feedback is highly
  > appreciated and will help make NUBO better in the future.
+
+ ## Install NUBO
+
+Install NUBO and all its dependencies directly from the
+[PyPI](https://pypi.org) using the
+[Python package manager](https://pip.pypa.io/en/latest/) *pip* with the
+following code. We recommend the use of a virtual environment.
+
+    pip install nubopy

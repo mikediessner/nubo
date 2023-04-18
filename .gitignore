@@ -5,3 +5,5 @@ nubo.egg-info/
 plots/
 full_requirements.txt
 .ipynb_checkpoints/
+nubopy.egg-info/
+dist/

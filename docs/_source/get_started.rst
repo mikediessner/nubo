@@ -158,5 +158,6 @@ The estimated parameters of the Gaussian process can be viewed as follows:
     Estimated noise/nugget: 0.0001
 
 
+.. _`GitHub repository`: https://github.com/mikediessner/nubo/
 .. _`Python Package Index`: https://pypi.org/
 .. _`Python package manager`: https://pip.pypa.io/en/latest/

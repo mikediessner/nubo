@@ -28,6 +28,8 @@ def single(func: Callable,
         One of "L-BFGS-B", "SLSQP", or "Adam".
     bounds : ``torch.Tensor``
         (size 2 x d) Optimisation bounds of input space.
+    constraints : ``dict`` or ``list`` of ``dict``, optional
+        Optimisation constraints.
     discrete : ``dict``
         Possible values for all discrete inputs in the shape {dim1: [values1],
         dim2: [values2], etc.}, e.g. {0: [1., 2., 3.], 3: [-0.1, -0.2, 100.]}.

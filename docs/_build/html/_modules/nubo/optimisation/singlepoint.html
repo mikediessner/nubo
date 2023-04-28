@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
-    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 6.1.3 and Furo 2023.03.27 -->
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 6.2.1 and Furo 2023.03.27 -->
         <title>nubo.optimisation.singlepoint - NUBO</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
@@ -247,6 +247,8 @@
 <span class="sd">        One of &quot;L-BFGS-B&quot;, &quot;SLSQP&quot;, or &quot;Adam&quot;.</span>
 <span class="sd">    bounds : ``torch.Tensor``</span>
 <span class="sd">        (size 2 x d) Optimisation bounds of input space.</span>
+<span class="sd">    constraints : ``dict`` or ``list`` of ``dict``, optional</span>
+<span class="sd">        Optimisation constraints.</span>
 <span class="sd">    discrete : ``dict``</span>
 <span class="sd">        Possible values for all discrete inputs in the shape {dim1: [values1],</span>
 <span class="sd">        dim2: [values2], etc.}, e.g. {0: [1., 2., 3.], 3: [-0.1, -0.2, 100.]}.</span>

@@ -8,12 +8,15 @@
 <meta property="og:url" content="nubo.optimisation.html" />
 <meta property="og:site_name" content="NUBO" />
 <meta property="og:description" content="Single-point optimisation: Multi-point optimisation: Mixed optimisation: Deterministic optimisers: Stochastic optimisers: Optimisation utilities:" />
+<meta property="og:image:width" content="1146" />
+<meta property="og:image:height" content="600" />
 <meta property="og:image" content="/_images/social_previews/summary_nubo.optimisation_1444425f.png" />
 <meta property="og:image:alt" content="Single-point optimisation: Multi-point optimisation: Mixed optimisation: Deterministic optimisers: Stochastic optimisers: Optimisation utilities:" />
 <meta name="description" content="Single-point optimisation: Multi-point optimisation: Mixed optimisation: Deterministic optimisers: Stochastic optimisers: Optimisation utilities:" />
+<meta name="twitter:card" content="summary_large_image" />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Test function module" href="nubo.test_functions.html" /><link rel="prev" title="Surrogate module" href="nubo.models.html" />
 
-    <link rel="shortcut icon" href="_static/favicon.ico"/><!-- Generated with Sphinx 6.1.3 and Furo 2023.03.27 -->
+    <link rel="shortcut icon" href="_static/favicon.ico"/><!-- Generated with Sphinx 6.2.1 and Furo 2023.03.27 -->
         <title>Optimisation module - NUBO</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
@@ -244,6 +247,8 @@ optimiser. Minimises <cite>func</cite>.</p>
 <dt><strong>method</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">str</span></code></span></dt><dd><p>One of “L-BFGS-B”, “SLSQP”, or “Adam”.</p>
 </dd>
 <dt><strong>bounds</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 2 x d) Optimisation bounds of input space.</p>
+</dd>
+<dt><strong>constraints</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">dict</span></code> or <code class="docutils literal notranslate"><span class="pre">list</span></code> of <code class="docutils literal notranslate"><span class="pre">dict</span></code>, optional</span></dt><dd><p>Optimisation constraints.</p>
 </dd>
 <dt><strong>discrete</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">dict</span></code></span></dt><dd><p>Possible values for all discrete inputs in the shape {dim1: [values1],
 dim2: [values2], etc.}, e.g. {0: [1., 2., 3.], 3: [-0.1, -0.2, 100.]}.</p>

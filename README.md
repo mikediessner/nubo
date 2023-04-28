@@ -1,7 +1,7 @@
 # NUBO
 
 NUBO, short for Newcastle University Bayesian optimisation, is a Bayesian
-optimisation framework for the optimisation of expensive-to-evaluate black box
+optimisation framework for the optimisation of expensive-to-evaluate black-box
 functions, such as physical experiments and computer simulations. It is
 developed and maintained by the
 [Fluid Dynamics Lab](https://www.experimental-fluid-dynamics.com) at

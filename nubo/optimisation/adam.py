@@ -74,7 +74,7 @@ def adam(func: Callable,
     Used for optimising Monte Carlo acquisition function when base samples are
     not fixed. Bounds are enforced by transforming `func` with the sigmoid
     function and scaling results. Picks the best `num_starts` points from a
-    total `num_samples` Latin hypercube samples to initialise the optimser.
+    total `num_samples` Latin hypercube samples to initialise the optimiser.
     Returns the best result. Minimises `func`.
 
     Parameters
@@ -205,7 +205,7 @@ def adam_mixed(func: Callable,
     Used for optimising Monte Carlo acquisition function when base samples are
     not fixed. Bounds are enforced by clamping where values exceed them. Picks
     the best `num_starts` points from a total `num_samples` Latin hypercube
-    samples to initialise the optimser. Returns the best result. Minimises
+    samples to initialise the optimiser. Returns the best result. Minimises
     `func`.
 
     Parameters

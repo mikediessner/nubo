@@ -35,7 +35,7 @@ class MCExpectedImprovement(AcquisitionFunction):
     fix_base_samples : ``bool``
         Whether base samples used to compute Monte Carlo samples of
         acquisition function should be fixed for the optimisation step.
-        If false (default) stochastic optimizer (Adam) have to be used. If
+        If false (default) stochastic optimizer (Adam) has to be used. If
         true deterministic optimizer (L-BFGS-B, SLSQP) can be used.
     base_samples : ``NoneType`` or ``torch.Tensor``
         Base samples used to compute Monte Carlo samples drawn if
@@ -65,7 +65,7 @@ class MCExpectedImprovement(AcquisitionFunction):
         fix_base_samples : ``bool``, optional
             Whether base samples used to compute Monte Carlo samples of
             acquisition function should be fixed for the optimisation step.
-            If false (default) stochastic optimizer (Adam) have to be used. If
+            If false (default) stochastic optimizer (Adam) has to be used. If
             true deterministic optimizer (L-BFGS-B, SLSQP) can be used.
         """
         
@@ -147,7 +147,7 @@ class MCUpperConfidenceBound(AcquisitionFunction):
     fix_base_samples : ``bool``
         Whether base samples used to compute Monte Carlo samples of
         acquisition function should be fixed for the optimisation step.
-        If false (default) stochastic optimizer (Adam) have to be used. If
+        If false (default) stochastic optimizer (Adam) has to be used. If
         true deterministic optimizer (L-BFGS-B, SLSQP) can be used.
     base_samples : ``NoneType`` or ``torch.Tensor``
         Base samples used to compute Monte Carlo samples drawn if
@@ -176,7 +176,7 @@ class MCUpperConfidenceBound(AcquisitionFunction):
         fix_base_samples : ``bool``
             Whether base samples used to compute Monte Carlo samples of
             acquisition function should be fixed for the optimisation step.
-            If false (default) stochastic optimizer (Adam) have to be used. If
+            If false (default) stochastic optimizer (Adam) has to be used. If
             true deterministic optimizer (L-BFGS-B, SLSQP) can be used.
         base_samples : ``NoneType`` or ``torch.Tensor``
             Base samples used to compute Monte Carlo samples drawn if

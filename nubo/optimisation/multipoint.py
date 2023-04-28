@@ -103,7 +103,7 @@ def multi_sequential(func: Callable,
     Optimises Monte Carlo acquisition functions to return multi-point batches
     for parallel evaluation. Computes one point after the other for a batch
     always keeping previous points fixed, i.e. compute point 1, compute point 2
-    holding point 1 fixed, compute point 3 holding point 1 and 2 fixed and so
+    holding point 1 fixed, compute point 3 holding points 1 and 2 fixed and so
     on until the batch is full. Minimises `func`.
 
     Parameters

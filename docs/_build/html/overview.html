@@ -7,11 +7,11 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="overview.html" />
 <meta property="og:site_name" content="NUBO" />
-<meta property="og:description" content="NUBO, short for Newcastle University Bayesian optimisation, is a Bayesian optimisation framework for the optimisation of expensive-to-evaluate black box functions, such as physical experiments and ..." />
-<meta property="og:image" content="/_images/social_previews/summary_overview_e3348aab.png" />
-<meta property="og:image:alt" content="NUBO, short for Newcastle University Bayesian optimisation, is a Bayesian optimisation framework for the optimisation of expensive-to-evaluate black box func..." />
-<meta name="description" content="NUBO, short for Newcastle University Bayesian optimisation, is a Bayesian optimisation framework for the optimisation of expensive-to-evaluate black box functions, such as physical experiments and ..." />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Get started" href="get_started.html" /><link rel="prev" title="NUBO: A transparent Python package for Bayesian optimisation" href="index.html" />
+<meta property="og:description" content="NUBO, short for Newcastle University Bayesian optimisation, is a Bayesian optimisation framework for the optimisation of expensive-to-evaluate black-box functions, such as physical experiments and ..." />
+<meta property="og:image" content="/_images/social_previews/summary_overview_bf130244.png" />
+<meta property="og:image:alt" content="NUBO, short for Newcastle University Bayesian optimisation, is a Bayesian optimisation framework for the optimisation of expensive-to-evaluate black-box func..." />
+<meta name="description" content="NUBO, short for Newcastle University Bayesian optimisation, is a Bayesian optimisation framework for the optimisation of expensive-to-evaluate black-box functions, such as physical experiments and ..." />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Get started" href="get_started.html" /><link rel="prev" title="NUBO: A Transparent Python Package for Bayesian Optimisation" href="index.html" />
 
     <link rel="shortcut icon" href="_static/favicon.ico"/><!-- Generated with Sphinx 6.1.3 and Furo 2023.03.27 -->
         <title>Overview - NUBO</title>
@@ -229,7 +229,7 @@
           <section id="overview">
 <h1>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h1>
 <p>NUBO, short for Newcastle University Bayesian optimisation, is a Bayesian
-optimisation framework for the optimisation of expensive-to-evaluate black box
+optimisation framework for the optimisation of expensive-to-evaluate black-box
 functions, such as physical experiments and computer simulations. It is
 developed and maintained by the <a class="reference external" href="https://www.experimental-fluid-dynamics.com">Fluid Dynamics Lab</a> at
 <a class="reference external" href="https://www.ncl.ac.uk">Newcastle University</a>. NUBO focuses primarily on transparency and user
@@ -242,9 +242,9 @@ optimisation to your specific problem by writing the optimisation loop yourself
 using the provided building blocks. Only algorithms and methods that are
 sufficiently tested and validated to perform well are included in NUBO. This
 ensures that the package remains compact and does not overwhelm the user with
-an unnecessary large number of options. The package is written in <a class="reference external" href="https://www.python.org">Python</a> but
+an unnecessarily large number of options. The package is written in <a class="reference external" href="https://www.python.org">Python</a> but
 does not require expert knowledge of Python to optimise your simulations and
-experiments. NUBO is distributed as an open-source software under the
+experiments. NUBO is distributed as open-source software under the
 <a class="reference external" href="https://github.com/mikediessner/nubo/blob/main/LICENSE.md">BSD 3-Clause licence</a>.</p>
 <div class="seealso admonition">
 <p class="admonition-title">Contact</p>
@@ -255,7 +255,7 @@ appreciated and will help make NUBO better in the future.</p>
 <section id="bayesian-optimisation">
 <h2>Bayesian optimisation<a class="headerlink" href="#bayesian-optimisation" title="Permalink to this heading">#</a></h2>
 <p><a class="reference internal" href="bayesian_optimisation.html#bo"><span class="std std-ref">Bayesian optimisation</span></a> <a class="footnote-reference brackets" href="#frazier2018" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#gramacy2020" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#jones1998" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>
-<a class="footnote-reference brackets" href="#shahriari2015" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#snoek2012" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a> is a surrogate model-based optimisation
+<a class="footnote-reference brackets" href="#shahriari2015" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#snoek2012" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a> is a surrogate model-based optimisation
 algorithm that aims to maximise an <a class="reference internal" href="bayesian_optimisation.html#objfunc"><span class="std std-ref">objective function</span></a> in a
 minimum number of function evaluations. The underlying mathematical expression
 of the objective function is usually unknown or non-existent and every function
@@ -263,10 +263,10 @@ evaluation is expensive. Solving such a function requires a cost-effective and
 sample-efficient optimisation strategy. Bayesian optimisation fulfils these
 criteria by representing the objective function through a
 <a class="reference internal" href="bayesian_optimisation.html#model"><span class="std std-ref">surrogate model</span></a>, often a Gaussian process <a class="footnote-reference brackets" href="#gramacy2020" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>
-<a class="footnote-reference brackets" href="#williams2006" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></a>. This representation can be used to find the next point
+<a class="footnote-reference brackets" href="#williams2006" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>13<span class="fn-bracket">]</span></a>. This representation can be used to find the next point
 that should be evaluated by maximising a criterion specified through an
 <a class="reference internal" href="bayesian_optimisation.html#acquisition"><span class="std std-ref">acquisition function</span></a>. A popular criterion is, for
-example, the expected improvement (EI) <a class="footnote-reference brackets" href="#jones1998" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>, that is the expectation
+example, the expected improvement (EI) <a class="footnote-reference brackets" href="#jones1998" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>, which is the expectation
 that the new point returns a better solution than the current best point.
 Bayesian optimisation is performed in a loop where training data is used to fit
 the surrogate model before the next point suggested by the acquisition function
@@ -287,7 +287,7 @@ criterion is met.</p>
 <h2>Contents<a class="headerlink" href="#contents" title="Permalink to this heading">#</a></h2>
 <dl class="simple">
 <dt><strong>Surrogate models</strong></dt><dd><p>NUBO focuses on the use of Gaussian Processes as surrogates for the objective
-function. Gaussian Processes <a class="footnote-reference brackets" href="#gramacy2020" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#williams2006" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></a> are specified
+function. Gaussian Processes <a class="footnote-reference brackets" href="#gramacy2020" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#williams2006" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>13<span class="fn-bracket">]</span></a> are specified
 through the <cite>GPyTorch</cite> package <a class="footnote-reference brackets" href="#gardner2018" id="id11" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>, a powerful package that
 allows the implementation of a wide selection of models ranging from exact
 Gaussian processes to approximate and even deep Gaussian processes.
@@ -296,27 +296,27 @@ maximum a posteriori estimation (MAP) or fully Bayesian estimation.</p>
 </dd>
 <dt><strong>Acquisition functions</strong></dt><dd><p>NUBO supports the use of analytical acquisition functions and approximations
 through Monte Carlo sampling. Analytical expected improvement (EI)
-<a class="footnote-reference brackets" href="#jones1998" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> and upper confidence bound (UCB) <a class="footnote-reference brackets" href="#srinivas2010" id="id13" role="doc-noteref"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></a> can be used
+<a class="footnote-reference brackets" href="#jones1998" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> and upper confidence bound (UCB) <a class="footnote-reference brackets" href="#srinivas2010" id="id13" role="doc-noteref"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></a> can be used
 for sequential single-point problems where results are evaluated after each
 iteration. Multi-point batches for parallel evaluation or asynchronous
 problems, where the optimisation algorithm is continued while other points
 are still being evaluated, can be performed via Monte Carlo acquisition
-functions <a class="footnote-reference brackets" href="#wilson2018" id="id14" role="doc-noteref"><span class="fn-bracket">[</span>13<span class="fn-bracket">]</span></a>.</p>
+functions <a class="footnote-reference brackets" href="#wilson2018" id="id14" role="doc-noteref"><span class="fn-bracket">[</span>14<span class="fn-bracket">]</span></a>.</p>
 </dd>
 <dt><strong>Optimisers</strong></dt><dd><p>The deterministic analytical acquisition functions are optimised via
-multi-start L-BFGS-B <a class="footnote-reference brackets" href="#zhu1997" id="id15" role="doc-noteref"><span class="fn-bracket">[</span>14<span class="fn-bracket">]</span></a> if the input space is restricted by box
+multi-start L-BFGS-B <a class="footnote-reference brackets" href="#zhu1997" id="id15" role="doc-noteref"><span class="fn-bracket">[</span>15<span class="fn-bracket">]</span></a> if the input space is restricted by box
 bounds or multi-start SLSQP <a class="footnote-reference brackets" href="#kraft1994" id="id16" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a> if the input space is also
 restricted by constraints. The stochastic Monte Carlo acquisition functions
 that are based on random samples are maximised with the stochastic optimiser
-Adam <a class="footnote-reference brackets" href="#kingma2015" id="id17" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a>. NUBO also supports optimisation of mixed parameter space
+Adam <a class="footnote-reference brackets" href="#kingma2015" id="id17" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a>. NUBO also supports the optimisation of mixed parameter space
 (continuous and discrete).</p>
 </dd>
 <dt><strong>Design of experiments</strong></dt><dd><p>Initial training data points can be generated with space-filling designs.
 NUBO supports random or maximin Latin hypercube designs <a class="footnote-reference brackets" href="#mckay2000" id="id18" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a>.</p>
 </dd>
-<dt><strong>Synthetic test functions</strong></dt><dd><p>NUBO provides ten synthetic test functions that allow validation of Bayesian
-optimisation algorithms before applying them to expensive experiments
-<a class="footnote-reference brackets" href="#surjanovic2023" id="id19" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a>.</p>
+<dt><strong>Synthetic test functions</strong></dt><dd><p>NUBO provides ten synthetic test functions that allow the validation of
+Bayesian optimisation algorithms before applying them to expensive
+experiments <a class="footnote-reference brackets" href="#surjanovic2023" id="id19" role="doc-noteref"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></a>.</p>
 </dd>
 </dl>
 <figure class="align-default" id="id21">
@@ -330,62 +330,66 @@ recommended. Click to expand.</span><a class="headerlink" href="#id21" title="Pe
 <aside class="footnote-list brackets">
 <aside class="footnote brackets" id="frazier2018" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
-<p>P I Frazier, “A tutorial on Bayesian optimization,” <em>arXiv preprint arXiv:1807.02811</em>, 2018.</p>
+<p>P I Frazier, “A Tutorial on Bayesian Optimization,” <em>arXiv preprint arXiv:1807.02811</em>, 2018.</p>
 </aside>
 <aside class="footnote brackets" id="gardner2018" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id11">2</a><span class="fn-bracket">]</span></span>
-<p>J Gardner, G Pleiss, K Q Weinberger, D Bindel, and A G Wilson, “GPyTorch: Blackbox matrix-matrix Gaussian process inference with GPU acceleration,” <em>Advances in neural information processing systems</em>, vol. 31, 2018.</p>
+<p>J Gardner, G Pleiss, K Q Weinberger, D Bindel, and A G Wilson, “GPyTorch: Blackbox Matrix-Matrix Gaussian Process Inference with Gpu Acceleration,” <em>Advances in Neural Information Processing Systems</em>, vol. 31, 2018.</p>
 </aside>
 <aside class="footnote brackets" id="gramacy2020" role="note">
 <span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id2">1</a>,<a role="doc-backlink" href="#id6">2</a>,<a role="doc-backlink" href="#id9">3</a>)</span>
-<p>R B Gramacy, <em>Surrogates: Gaussian process modeling, design, and optimization for the applied sciences</em>, 1st ed. Boca Raton, FL: CRC press, 2020.</p>
+<p>R B Gramacy, <em>Surrogates: Gaussian Process Modeling, Design, and Optimization for the Applied Sciences</em>, 1st ed. Boca Raton, FL: CRC press, 2020.</p>
 </aside>
 <aside class="footnote brackets" id="jones1998" role="note">
 <span class="label"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id3">1</a>,<a role="doc-backlink" href="#id8">2</a>,<a role="doc-backlink" href="#id12">3</a>)</span>
-<p>D R Jones, M Schonlau, and W J Welch, “Efficient global optimization of expensive black-box functions,” <em>Journal of global optimization</em>, vol. 13, no. 4, p. 566, 1998.</p>
+<p>D R Jones, M Schonlau, and W J Welch, “Efficient Global Optimization of Expensive Black-Box Functions,” <em>Journal of Global Optimization</em>, vol. 13, no. 4, p. 566, 1998.</p>
 </aside>
 <aside class="footnote brackets" id="kingma2015" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id17">5</a><span class="fn-bracket">]</span></span>
-<p>D P Kingma and J Ba, “Adam: A method for stochastic optimization,” <em>Proceedings of the 3rd international conference on learning representations</em>, 2015.</p>
+<p>D P Kingma and J Ba, “Adam: A Method for Stochastic Optimization,” <em>Proceedings of the 3rd International Conference on Learning Representations</em>, 2015.</p>
 </aside>
 <aside class="footnote brackets" id="kraft1994" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id16">6</a><span class="fn-bracket">]</span></span>
-<p>D Kraft, “Algorithm 733: TOMP-Fortran modules for optimal control calculations,” <em>ACM Transactions on Mathematical Software (TOMS)</em>, vol. 20, no. 3, p. 262-281, 1994.</p>
+<p>D Kraft, “Algorithm 733: TOMP-Fortran Modules for Optimal Control Calculations,” <em>ACM Transactions on Mathematical Software (TOMS)</em>, vol. 20, no. 3, p. 262-281, 1994.</p>
 </aside>
 <aside class="footnote brackets" id="mckay2000" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id18">7</a><span class="fn-bracket">]</span></span>
-<p>M D McKay, R J Beckman, and W J Conover, “A comparison of three methods for selecting values of input variables in the analysis of output from a computer code,” <em>Technometrics</em>, vol. 42, no. 1, p. 55-61, 2000.</p>
+<p>M D McKay, R J Beckman, and W J Conover, “A Comparison of Three Methods for Selecting Values of Input Variables in the Analysis of Output from a Computer Code,” <em>Technometrics</em>, vol. 42, no. 1, p. 55-61, 2000.</p>
+</aside>
+<aside class="footnote brackets" id="oconnor2023" role="note">
+<span class="label"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></span>
+<p>J O’Connor, M Diessner, K Wilson, R D Whalley, A Wynn, and S Laizet, “Optimisation and Analysis of Streamwise-Varying Wall-Normal Blowing in a Turbulent Boundary Layer,” <em>Flow, Turbulence and Combustion</em>, 2023.</p>
 </aside>
 <aside class="footnote brackets" id="shahriari2015" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">8</a><span class="fn-bracket">]</span></span>
-<p>B Shahriari, K Swersky, Z Wang, R P Adams, and N De Freitas, “Taking the human out of the loop: A review of Bayesian optimization,” <em>Proceedings of the IEEE</em>, vol. 104, no. 1, p. 148-175, 2015.</p>
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">9</a><span class="fn-bracket">]</span></span>
+<p>B Shahriari, K Swersky, Z Wang, R P Adams, and N De Freitas, “Taking the Human Out of the Loop: A Review of Bayesian Optimization,” <em>Proceedings of the IEEE</em>, vol. 104, no. 1, p. 148-175, 2015.</p>
 </aside>
 <aside class="footnote brackets" id="snoek2012" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">9</a><span class="fn-bracket">]</span></span>
-<p>J Snoek, H Larochelle, and R P Adams, “Practical Bayesian optimization of machine learning algorithms,” <em>Advances in neural information processing systems</em>, vol. 25, 2012.</p>
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">10</a><span class="fn-bracket">]</span></span>
+<p>J Snoek, H Larochelle, and R P Adams, “Practical Bayesian Optimization of Machine Learning Algorithms,” <em>Advances in Neural Information Processing Systems</em>, vol. 25, 2012.</p>
 </aside>
 <aside class="footnote brackets" id="surjanovic2023" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id19">10</a><span class="fn-bracket">]</span></span>
-<p>S Surjanovic and D Bingham, “Virtual library of simulation experiments: Test functions and datasets,” <em>sfu.ca</em>. [Online]. Available: <a class="reference external" href="https://www.sfu.ca/~ssurjano/optimization.html">https://www.sfu.ca/~ssurjano/optimization.html</a>. [Accessed March 11, 2023].</p>
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id19">11</a><span class="fn-bracket">]</span></span>
+<p>S Surjanovic and D Bingham, “Virtual Library of Simulation Experiments: Test Functions and Datasets,” <em>sfu.ca</em>. [Online]. Available: <a class="reference external" href="https://www.sfu.ca/~ssurjano/optimization.html">https://www.sfu.ca/~ssurjano/optimization.html</a>. [Accessed March 11, 2023].</p>
 </aside>
 <aside class="footnote brackets" id="srinivas2010" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id13">11</a><span class="fn-bracket">]</span></span>
-<p>N Srinivas, A Krause, S M Kakade, and M Seeger, “Gaussian process optimization in the bandit setting: No regret and experimental design,” <em>Proceedings of the 27th international conference on machine learning</em>, p. 1015-1022, 2010.</p>
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id13">12</a><span class="fn-bracket">]</span></span>
+<p>N Srinivas, A Krause, S M Kakade, and M Seeger, “Gaussian Process Optimization in the Bandit Setting: No Regret and Experimental Design,” <em>Proceedings of the 27th International Conference on Machine Learning</em>, p. 1015-1022, 2010.</p>
 </aside>
 <aside class="footnote brackets" id="williams2006" role="note">
-<span class="label"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span>13<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id7">1</a>,<a role="doc-backlink" href="#id10">2</a>)</span>
-<p>C K I Williams, and C E Rasmussen, <em>Gaussian processes for machine learning</em>, 2nd ed. Cambridge, MA: MIT press, 2006.</p>
+<p>C K I Williams, and C E Rasmussen, <em>Gaussian Processes for Machine Learning</em>, 2nd ed. Cambridge, MA: MIT press, 2006.</p>
 </aside>
 <aside class="footnote brackets" id="wilson2018" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id14">13</a><span class="fn-bracket">]</span></span>
-<p>J Wilson, F Hutter, and M Deisenroth, “Maximizing acquisition functions for Bayesian optimization,” <em>Advances in neural information processing systems</em>, vol. 31, 2018.</p>
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id14">14</a><span class="fn-bracket">]</span></span>
+<p>J Wilson, F Hutter, and M Deisenroth, “Maximizing Acquisition Functions for Bayesian Optimization,” <em>Advances in Neural Information Processing Systems</em>, vol. 31, 2018.</p>
 </aside>
 <aside class="footnote brackets" id="zhu1997" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id15">14</a><span class="fn-bracket">]</span></span>
-<p>C Zhu, R H Byrd, P Lu, J Nocedal, “Algorithm 778: L-BFGS-B: Fortran subroutines for large-scale bound-constrained optimization,” <em>ACM Transactions on mathematical software (TOMS)</em>, vol. 23, no. 4, p. 550-560, 1997.</p>
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id15">15</a><span class="fn-bracket">]</span></span>
+<p>C Zhu, R H Byrd, P Lu, J Nocedal, “Algorithm 778: L-BFGS-B: Fortran Subroutines for Large-Scale Bound-Constrained Optimization,” <em>ACM Transactions on Mathematical Software (TOMS)</em>, vol. 23, no. 4, p. 550-560, 1997.</p>
 </aside>
 </aside>
 </section>

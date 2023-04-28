@@ -232,7 +232,7 @@
 optimisation algorithm and its element, including the surrogate model and
 acquisition functions. While this introduction covers all critical details and
 will be sufficient to get started with Bayesian optimisation and understand how
-NUBO works, it should not be considered as exhaustive. Where appropriate,
+NUBO works, it should not be considered exhaustive. Where appropriate,
 references highlight resources for additional reading that will present a more
 detailed picture of Bayesian optimisation than is possible here.</p>
 <section id="maximisation-problem">
@@ -246,7 +246,7 @@ problem</p>
 <p>where the input space is usually continuous and bounded by a hyper-rectangle
 <span class="math notranslate nohighlight">\(\mathcal{X} \in [a, b]^d\)</span> with <span class="math notranslate nohighlight">\(a, b \in \mathbb{R}\)</span>. The function
 <span class="math notranslate nohighlight">\(f(\boldsymbol x)\)</span> is most commonly a derivative-free
-expensive-to-evaluate black box function that only allows inputs
+expensive-to-evaluate black-box function that only allows inputs
 <span class="math notranslate nohighlight">\(\boldsymbol x_i\)</span> to be queried and outputs <span class="math notranslate nohighlight">\(y_i\)</span> to be observed
 without gaining any further insights into the underlying system. We assume any
 noise <span class="math notranslate nohighlight">\(\epsilon\)</span> that is introduced when taking measurements to be
@@ -262,11 +262,11 @@ of data points and corresponding observations is defined as</p>
 <span class="math notranslate nohighlight">\(\boldsymbol X_n = \{\boldsymbol x_i \}_{i=1}^n\)</span> and their training
 outputs as vector <span class="math notranslate nohighlight">\(\boldsymbol y_n = \{y_i\}_{i=1}^n\)</span>.</p>
 <p>Many simulations and experiments in various disciplines can be formulated to
-fit this discription. For example, Bayesian optimisation was used in the field
-of computational fluid dynamics to maximise the drag reduction via active
+fit this description. For example, Bayesian optimisation was used in the field
+of computational fluid dynamics to maximise drag reduction via active
 control of blowing actuators <a class="footnote-reference brackets" href="#diessner2022" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#oconnor2023" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#mahfoze2019" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a>,
 in chemical engineering for molecular design, drug discovery, molecular
-modeling, electrolyte design, and additive manufacturing <a class="footnote-reference brackets" href="#wang2022" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>15<span class="fn-bracket">]</span></a>, and in
+modelling, electrolyte design, and additive manufacturing <a class="footnote-reference brackets" href="#wang2022" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>15<span class="fn-bracket">]</span></a>, and in
 computer science to fine-tune hyper-parameters of machine learning models
 <a class="footnote-reference brackets" href="#wu2019" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>19<span class="fn-bracket">]</span></a> or in architecture search for neural networks <a class="footnote-reference brackets" href="#white2021" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>16<span class="fn-bracket">]</span></a>.</p>
 </section>
@@ -291,7 +291,7 @@ the next point suggested by the acquisition function is evaluated and added to
 the training data (see the algorithm below). The process then restarts and
 gathers more information about the objective function with each iteration.
 Bayesian optimisation is run for as many iterations as the evaluation budget
-<span class="math notranslate nohighlight">\(N\)</span> allows, until a satisfactory solution is found, or unitl a predefined
+<span class="math notranslate nohighlight">\(N\)</span> allows until a satisfactory solution is found, or until a predefined
 stopping criterion is met.</p>
 <div class="seealso admonition">
 <p class="admonition-title">Algorithm</p>
@@ -310,7 +310,7 @@ stopping criterion is met.</p>
 </div>
 <p>The animation below illustrates how the Bayesian optimisation algorithm works
 on an optimisation loop that runs for 20 iterations. The surrogate model uses
-the available observaions to provide a prediction and its uncertainty (here
+the available observations to provide a prediction and its uncertainty (here
 shown as 95% confidence intervals around the prediction). This is our best
 estimate of the underlying objective function. This estimate is then used in
 the acquisition function to evaluate which point is most likely to improve over
@@ -319,8 +319,8 @@ candidate to be observed from the objective function, before it is added to the
 training data and the whole process is repeated again. The animation shows how
 the surrogate model gets closer to the truth with each iteration and how the
 acquisition function explores the input space by exploring regions with high
-uncertainty and exploits regions with a high prediction. This property, also
-called the exploration-exploitation trade-off, is a corner stone of the
+uncertainty and exploiting regions with a high prediction. This property also
+called the exploration-exploitation trade-off, is a cornerstone of the
 acquisition functions provided in NUBO.</p>
 <figure class="align-default" id="id28">
 <img alt="_images/bo.gif" src="_images/bo.gif" />
@@ -390,7 +390,7 @@ is a very powerful package that allows the implementation of a wide selection
 of models ranging from exact Gaussian processes to approximate and even deep
 Gaussian processes. Besides maximum likelihood estimation (MLE) <cite>GPyTorch</cite> also
 supports maximum a posteriori estimation (MAP) and fully Bayesian estimation to
-estimate the hyper-parameter. It also comes with a rich documentation, many
+estimate the hyper-parameter. It also comes with rich documentation, many
 practical examples, and a large community.</p>
 <p>NUBO provides a Gaussian process for off-the-shelf use with a constant mean
 function and a Matern 5/2 covariance kernel that, due to its flexibility, is
@@ -402,7 +402,7 @@ examples section. For more complex models we recommend consulting the
 <section id="acquisition-function">
 <span id="acquisition"></span><h2>Acquisition function<a class="headerlink" href="#acquisition-function" title="Permalink to this heading">#</a></h2>
 <p>Acquisition functions use the posterior distribution of the Gaussian process
-<span class="math notranslate nohighlight">\(\mathcal{GP}\)</span> to compute a criterion that assess if a test point is a
+<span class="math notranslate nohighlight">\(\mathcal{GP}\)</span> to compute a criterion that assesses if a test point is a
 good potential candidate point to evaluate via the objective function
 <span class="math notranslate nohighlight">\(f(\boldsymbol x)\)</span>. Thus, maximising the acquisition function suggests
 the test point that, based on the current training data <span class="math notranslate nohighlight">\(\mathcal{D_n}\)</span>,
@@ -412,8 +412,8 @@ former is characterised by areas with no or only a few observed data points
 where the uncertainty of the Gaussian process is high, and the latter by areas
 where the posterior mean of the Gaussian process is high. This
 exploration-exploitation trade-off ensures that Bayesian optimisation does not
-converge to the first (potentially local) maximum it encounters, but efficently
-explores the full input space.</p>
+converge to the first (potentially local) maximum it encounters, but
+efficiently explores the full input space.</p>
 <section id="analytical-acquisition-functions">
 <h3>Analytical acquisition functions<a class="headerlink" href="#analytical-acquisition-functions" title="Permalink to this heading">#</a></h3>
 <p>NUBO supports two of the most popular acquisition functions that are, grounded
@@ -462,10 +462,10 @@ bound acquisition function of a 1D toy function with a budget of
 </figcaption>
 </figure>
 <p>Both of these acquisition functions can be maximised with a deterministic
-optimiser, such as L-BFGS-B <a class="footnote-reference brackets" href="#zhu1997" id="id19" role="doc-noteref"><span class="fn-bracket">[</span>20<span class="fn-bracket">]</span></a> for bounded unconstrained problems or
-SLSQP <a class="footnote-reference brackets" href="#kraft1994" id="id20" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a> for bounded constrained problems. However, this only works
-for the sequential single-point problems for which every point suggested by
-Bayesian optimisation is observed via the objective function
+optimiser, such as L-BFGS-B <a class="footnote-reference brackets" href="#zhu1997" id="id19" role="doc-noteref"><span class="fn-bracket">[</span>20<span class="fn-bracket">]</span></a> for bounded and unconstrained problems
+or SLSQP <a class="footnote-reference brackets" href="#kraft1994" id="id20" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a> for bounded constrained problems. However, this only
+works for the sequential single-point problems for which every point suggested
+by Bayesian optimisation is observed via the objective function
 <span class="math notranslate nohighlight">\(f( \boldsymbol x)\)</span> immediatley, before the optimisation loop is
 repeated.</p>
 </section>
@@ -502,10 +502,10 @@ rest unchanged.</p>
 can only be optimised by stochastic optimisers, such as Adam <a class="footnote-reference brackets" href="#kingma2015" id="id23" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a>.
 However, there is some empirical evidence that fixing the base samples for
 individual Bayesian optimisation loops does not affect the performance
-negatively <a class="footnote-reference brackets" href="#balandat2020" id="id24" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>. This method would allow deterministic optimisers to
-be used, but could potentially introduce bias due to sampling randomness. NUBO
-lets you decide which variant you prefer by setting <code class="docutils literal notranslate"><span class="pre">fix_base_samples</span></code> and
-choosing the prefered optimiser. Bounded problems can be solved with Adam
+negatively <a class="footnote-reference brackets" href="#balandat2020" id="id24" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>. This method would allow deterministic optimisers
+to be used, but could potentially introduce bias due to sampling randomness.
+NUBO lets you decide which variant you prefer by setting <code class="docutils literal notranslate"><span class="pre">fix_base_samples</span></code>
+and choosing the preferred optimiser. Bounded problems can be solved with Adam
 (<code class="docutils literal notranslate"><span class="pre">fix_base_samples</span> <span class="pre">=</span> <span class="pre">False</span></code>) or L-BFGS-B (<code class="docutils literal notranslate"><span class="pre">fix_base_samples</span> <span class="pre">=</span> <span class="pre">True</span></code>) and
 constraint problems can be solved with SLSQP (<code class="docutils literal notranslate"><span class="pre">fix_base_samples</span> <span class="pre">=</span> <span class="pre">True</span></code>).</p>
 <p>Furthermore, two optimisation strategies for batches are possible
@@ -534,87 +534,87 @@ Click to expand.</span><a class="headerlink" href="#id32" title="Permalink to th
 <aside class="footnote-list brackets">
 <aside class="footnote brackets" id="balandat2020" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id24">1</a><span class="fn-bracket">]</span></span>
-<p>M Balandat <em>et al.</em>, “BoTorch: A framework for efficient Monte-CarloBayesian optimization,” <em>Advances in neural information processing systems</em>, vol. 33, 2020.</p>
+<p>M Balandat <em>et al.</em>, “BoTorch: A Framework for Efficient Monte-Carlo Bayesian Optimization,” <em>Advances in Neural Information Processing Systems</em>, vol. 33, 2020.</p>
 </aside>
 <aside class="footnote brackets" id="diessner2022" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">2</a><span class="fn-bracket">]</span></span>
-<p>M Diessner, J O’Connor, A Wynn, S Laizet, Y Guan, K Wilson, and R D Whalley, “Investigating Bayesian optimization for expensive-to-evaluate black box functions: Application in fluid dynamics,” <em>Frontiers in Applied Mathematics and Statistics</em>, 2022.</p>
+<p>M Diessner, J O’Connor, A Wynn, S Laizet, Y Guan, K Wilson, and R D Whalley, “Investigating Bayesian Optimization for Expensive-To-Evaluate Black Box Functions: Application in Fluid Dynamics,” <em>Frontiers in Applied Mathematics and Statistics</em>, 2022.</p>
 </aside>
 <aside class="footnote brackets" id="frazier2018" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">3</a><span class="fn-bracket">]</span></span>
-<p>P I Frazier, “A tutorial on Bayesian optimization,” <em>arXiv preprint arXiv:1807.02811</em>, 2018.</p>
+<p>P I Frazier, “A Tutorial on Bayesian Optimization,” <em>arXiv preprint arXiv:1807.02811</em>, 2018.</p>
 </aside>
 <aside class="footnote brackets" id="gardner2018" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id15">4</a><span class="fn-bracket">]</span></span>
-<p>J Gardner, G Pleiss, K Q Weinberger, D Bindel, and A G Wilson, “GPyTorch: Blackbox matrix-matrix Gaussian process inference with GPU acceleration,” <em>Advances in neural information processing systems</em>, vol. 31, 2018.</p>
+<p>J Gardner, G Pleiss, K Q Weinberger, D Bindel, and A G Wilson, “GPyTorch: Blackbox Matrix-Matrix Gaussian Process Inference with Gpu Acceleration,” <em>Advances in Neural Information Processing Systems</em>, vol. 31, 2018.</p>
 </aside>
 <aside class="footnote brackets" id="gramacy2020" role="note">
 <span class="label"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id8">1</a>,<a role="doc-backlink" href="#id13">2</a>)</span>
-<p>R B Gramacy, <em>Surrogates: Gaussian process modeling, design, and optimization for the applied sciences</em>, 1st ed. Boca Raton, FL: CRC press, 2020.</p>
+<p>R B Gramacy, <em>Surrogates: Gaussian Process Modeling, Design, and Optimization for the Applied Sciences</em>, 1st ed. Boca Raton, FL: CRC press, 2020.</p>
 </aside>
 <aside class="footnote brackets" id="jones1998" role="note">
 <span class="label"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id9">1</a>,<a role="doc-backlink" href="#id17">2</a>)</span>
-<p>D R Jones, M Schonlau, and W J Welch, “Efficient global optimization of expensive black-box functions,” <em>Journal of global optimization</em>, vol. 13, no. 4, p. 566, 1998.</p>
+<p>D R Jones, M Schonlau, and W J Welch, “Efficient Global Optimization of Expensive Black-Box Functions,” <em>Journal of Global Optimization</em>, vol. 13, no. 4, p. 566, 1998.</p>
 </aside>
 <aside class="footnote brackets" id="kingma2015" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id23">7</a><span class="fn-bracket">]</span></span>
-<p>D P Kingma and J Ba, “Adam: A method for stochastic optimization,” <em>Proceedings of the 3rd international conference on learning representations</em>, 2015.</p>
+<p>D P Kingma and J Ba, “Adam: A Method for Stochastic Optimization,” <em>Proceedings of the 3rd International Conference on Learning Representations</em>, 2015.</p>
 </aside>
 <aside class="footnote brackets" id="kraft1994" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id20">8</a><span class="fn-bracket">]</span></span>
-<p>D Kraft, “Algorithm 733: TOMP-Fortran modules for optimal control calculations,” <em>ACM Transactions on Mathematical Software (TOMS)</em>, vol. 20, no. 3, p. 262-281, 1994.</p>
+<p>D Kraft, “Algorithm 733: TOMP-Fortran Modules for Optimal Control Calculations,” <em>ACM Transactions on Mathematical Software (TOMS)</em>, vol. 20, no. 3, p. 262-281, 1994.</p>
 </aside>
 <aside class="footnote brackets" id="mahfoze2019" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">9</a><span class="fn-bracket">]</span></span>
-<p>O A Mahfoze, A Moody, A Wynn, R D Whalley, and S Laizet, “Reducing the skin-friction drag of a turbulent boundary-layer flow with low-amplitude wall-normal blowing within a Bayesian optimization framework,” <em>Physical review fluids</em>, vol. 4, no. 9, 2019.</p>
+<p>O A Mahfoze, A Moody, A Wynn, R D Whalley, and S Laizet, “Reducing the Skin-Friction Drag of a Turbulent Boundary-Layer Flow with Low-Amplitude Wall-Normal Blowing within a Bayesian Optimization Framework,” <em>Physical Review Fluids</em>, vol. 4, no. 9, 2019.</p>
 </aside>
 <aside class="footnote brackets" id="mckay2000" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id12">10</a><span class="fn-bracket">]</span></span>
-<p>M D McKay, R J Beckman, and W J Conover, “A comparison of three methods for selecting values of input variables in the analysis of output from a computer code,” <em>Technometrics</em>, vol. 42, no. 1, p. 55-61, 2000.</p>
+<p>M D McKay, R J Beckman, and W J Conover, “A Comparison of Three Methods for Selecting Values of Input Variables in the Analysis of Output from a Computer Code,” <em>Technometrics</em>, vol. 42, no. 1, p. 55-61, 2000.</p>
 </aside>
 <aside class="footnote brackets" id="oconnor2023" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">11</a><span class="fn-bracket">]</span></span>
-<p>J O’Connor, M Diessner, K Wilson, R D Whalley, A Wynn, and S Laizet, “Optimisation and analysis of streamwise-varying wall-normal blowing in a turbulent boundary layer,” <em>Flow, Turbulence and Combustion</em>, 2023.</p>
+<p>J O’Connor, M Diessner, K Wilson, R D Whalley, A Wynn, and S Laizet, “Optimisation and Analysis of Streamwise-Varying Wall-Normal Blowing in a Turbulent Boundary Layer,” <em>Flow, Turbulence and Combustion</em>, 2023.</p>
 </aside>
 <aside class="footnote brackets" id="shahriari2015" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">12</a><span class="fn-bracket">]</span></span>
-<p>B Shahriari, K Swersky, Z Wang, R P Adams, and N De Freitas, “Taking the human out of the loop: A review of Bayesian optimization,” <em>Proceedings of the IEEE</em>, vol. 104, no. 1, p. 148-175, 2015.</p>
+<p>B Shahriari, K Swersky, Z Wang, R P Adams, and N De Freitas, “Taking the Human Out of the Loop: A Review of Bayesian Optimization,” <em>Proceedings of the IEEE</em>, vol. 104, no. 1, p. 148-175, 2015.</p>
 </aside>
 <aside class="footnote brackets" id="snoek2012" role="note">
 <span class="label"><span class="fn-bracket">[</span>13<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id11">1</a>,<a role="doc-backlink" href="#id16">2</a>,<a role="doc-backlink" href="#id21">3</a>,<a role="doc-backlink" href="#id27">4</a>)</span>
-<p>J Snoek, H Larochelle, and R P Adams, “Practical Bayesian optimization of machine learning algorithms,” <em>Advances in neural information processing systems</em>, vol. 25, 2012.</p>
+<p>J Snoek, H Larochelle, and R P Adams, “Practical Bayesian Optimization of Machine Learning Algorithms,” <em>Advances in Neural Information Processing Systems</em>, vol. 25, 2012.</p>
 </aside>
 <aside class="footnote brackets" id="srinivas2010" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id18">14</a><span class="fn-bracket">]</span></span>
-<p>N Srinivas, A Krause, S M Kakade, and M Seeger, “Gaussian process optimization in the bandit setting: No regret and experimental design,” <em>Proceedings of the 27th international conference on machine learning</em>, p. 1015-1022, 2010.</p>
+<p>N Srinivas, A Krause, S M Kakade, and M Seeger, “Gaussian Process Optimization in the Bandit Setting: No Regret and Experimental Design,” <em>Proceedings of the 27th International Conference on Machine Learning</em>, p. 1015-1022, 2010.</p>
 </aside>
 <aside class="footnote brackets" id="wang2022" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">15</a><span class="fn-bracket">]</span></span>
-<p>K Wang and A W Dowling, “Bayesian optimization for chemical products and functional materials,” <em>Current opinion in chemical engineering</em>, vol. 36, 2022.</p>
+<p>K Wang and A W Dowling, “Bayesian optimization for chemical products and functional materials,” <em>Current Opinion in Chemical Engineering</em>, vol. 36, 2022.</p>
 </aside>
 <aside class="footnote brackets" id="white2021" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">16</a><span class="fn-bracket">]</span></span>
-<p>C White, W Neiswanger, and Y Savani, “Bananas: Bayesian optimization with neural architectures for neural architecture search,” <em>Proceedings of the AAAI conference on artificial intelligence</em>, vol. 35, no. 12, 2021.</p>
+<p>C White, W Neiswanger, and Y Savani, “Bananas: Bayesian Optimization with Neural Architectures for Neural Architecture Search,” <em>Proceedings of the Aaai Conference on Artificial Intelligence</em>, vol. 35, no. 12, 2021.</p>
 </aside>
 <aside class="footnote brackets" id="williams2006" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id14">17</a><span class="fn-bracket">]</span></span>
-<p>C K I Williams, and C E Rasmussen, <em>Gaussian processes for machine learning</em>, 2nd ed. Cambridge, MA: MIT press, 2006.</p>
+<p>C K I Williams, and C E Rasmussen, <em>Gaussian Processes for Machine Learning</em>, 2nd ed. Cambridge, MA: MIT press, 2006.</p>
 </aside>
 <aside class="footnote brackets" id="wilson2018" role="note">
 <span class="label"><span class="fn-bracket">[</span>18<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id22">1</a>,<a role="doc-backlink" href="#id25">2</a>,<a role="doc-backlink" href="#id26">3</a>)</span>
-<p>J Wilson, F Hutter, and M Deisenroth, “Maximizing acquisition functions for Bayesian optimization,” <em>Advances in neural information processing systems</em>, vol. 31, 2018.</p>
+<p>J Wilson, F Hutter, and M Deisenroth, “Maximizing Acquisition Functions for Bayesian Optimization,” <em>Advances in Neural Information Processing Systems</em>, vol. 31, 2018.</p>
 </aside>
 <aside class="footnote brackets" id="wu2019" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">19</a><span class="fn-bracket">]</span></span>
-<p>J Wu, X Y Chen, H Zhang, L D Xiong, H Lei, and S H Deng, “Hyperparameter optimization for machine learning models based on Bayesian optimization,” <em>Journal of electronic science and technology</em>, vol. 17, no. 1, p. 26-40, 2019.</p>
+<p>J Wu, X Y Chen, H Zhang, L D Xiong, H Lei, and S H Deng, “Hyperparameter Optimization for Machine Learning Models Based on Bayesian Optimization,” <em>Journal of Electronic Science and Technology</em>, vol. 17, no. 1, p. 26-40, 2019.</p>
 </aside>
 <aside class="footnote brackets" id="zhu1997" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id19">20</a><span class="fn-bracket">]</span></span>
-<p>C Zhu, R H Byrd, P Lu, J Nocedal, “Algorithm 778: L-BFGS-B: Fortran subroutines for large-scale bound-constrained optimization,” <em>ACM Transactions on mathematical software (TOMS)</em>, vol. 23, no. 4, p. 550-560, 1997.</p>
+<p>C Zhu, R H Byrd, P Lu, J Nocedal, “Algorithm 778: L-BFGS-B: Fortran Subroutines for Large-Scale Bound-Constrained Optimization,” <em>ACM Transactions on Mathematical Software (TOMS)</em>, vol. 23, no. 4, p. 550-560, 1997.</p>
 </aside>
 </aside>
 </section>

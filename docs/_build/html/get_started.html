@@ -242,9 +242,9 @@ recommend the use of a virtual environment.</p>
 </section>
 <section id="optimising-a-toy-function-with-nubo">
 <h2>Optimising a toy function with NUBO<a class="headerlink" href="#optimising-a-toy-function-with-nubo" title="Permalink to this heading">#</a></h2>
-<p>First, we set-up the toy function we want to optimise. In this case we choose
+<p>First, we set up the toy function we want to optimise. In this case, we choose
 the 6-dimensional Hartmann function, a multi-modal function with one global
-optimum. This synthetic test function acts as a substitute for a black box
+optimum. This synthetic test function acts as a substitute for a black-box
 objective function, such as an experiment or a simulation. The <code class="docutils literal notranslate"><span class="pre">bounds</span></code> of
 the input space are defined as a two-dimensional <code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code> where the
 first row gives the lower bounds for all input dimensions and the second row
@@ -284,9 +284,9 @@ Gaussian process that by default has a constant mean function and a Matern 5/2
 kernel. We also use the Gaussian likelihood to estimate observational noise. We
 estimate the Gaussian processes hyper-parameters via maximum likelihood
 estimation (MLE) using the Adam optimiser. For the acquisition function, we
-implement the analytical upper confidence bound (UCB) with trade-off parameter
-<span class="math notranslate nohighlight">\(\beta = 1.96^2\)</span> (corresponding to 95% confidence intervals for the
-Gaussian distribution) and optimise it with the L-BFGS-B algorithm using a
+implement the analytical upper confidence bound (UCB) with a trade-off
+parameter <span class="math notranslate nohighlight">\(\beta = 1.96^2\)</span> (corresponding to 95% confidence intervals for
+the Gaussian distribution) and optimise it with the L-BFGS-B algorithm using a
 multi-start approach with five starts. These multiple starts help to ensure
 that the optimiser does not get stuck in a local optimum. The Bayesian
 optimisation loop is run for 40 iterations, giving a total evaluation budget of
@@ -345,7 +345,7 @@ optimisation loop is run for 40 iterations, giving a total evaluation budget of
 </pre></div>
 </div>
 <p>Finally, we print the overall best solution: we get -3.3210 on evaluation 70,
-which approximaties the true optimum of -3.3224.</p>
+which approximates the true optimum of -3.3224.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># results</span>
 <span class="n">best_iter</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">y_train</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Evaluation: </span><span class="si">{</span><span class="n">best_iter</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> </span><span class="se">\t</span><span class="s2"> Solution: </span><span class="si">{</span><span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="n">y_train</span><span class="p">[</span><span class="n">best_iter</span><span class="p">])</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>

@@ -19,9 +19,9 @@ recommend the use of a virtual environment.
 
 Optimising a toy function with NUBO
 -----------------------------------
-First, we set-up the toy function we want to optimise. In this case we choose
+First, we set up the toy function we want to optimise. In this case, we choose
 the 6-dimensional Hartmann function, a multi-modal function with one global
-optimum. This synthetic test function acts as a substitute for a black box
+optimum. This synthetic test function acts as a substitute for a black-box
 objective function, such as an experiment or a simulation. The ``bounds`` of
 the input space are defined as a two-dimensional ``torch.Tensor`` where the
 first row gives the lower bounds for all input dimensions and the second row
@@ -66,9 +66,9 @@ Gaussian process that by default has a constant mean function and a Matern 5/2
 kernel. We also use the Gaussian likelihood to estimate observational noise. We
 estimate the Gaussian processes hyper-parameters via maximum likelihood
 estimation (MLE) using the Adam optimiser. For the acquisition function, we
-implement the analytical upper confidence bound (UCB) with trade-off parameter
-:math:`\beta = 1.96^2` (corresponding to 95% confidence intervals for the
-Gaussian distribution) and optimise it with the L-BFGS-B algorithm using a
+implement the analytical upper confidence bound (UCB) with a trade-off
+parameter :math:`\beta = 1.96^2` (corresponding to 95% confidence intervals for
+the Gaussian distribution) and optimise it with the L-BFGS-B algorithm using a
 multi-start approach with five starts. These multiple starts help to ensure
 that the optimiser does not get stuck in a local optimum. The Bayesian
 optimisation loop is run for 40 iterations, giving a total evaluation budget of
@@ -128,7 +128,7 @@ optimisation loop is run for 40 iterations, giving a total evaluation budget of
     New best at evaluation 70: 	 Inputs: [0.2076 0.1527 0.4728 0.2802 0.3109 0.6594], 	 Outputs: [-3.321]
 
 Finally, we print the overall best solution: we get -3.3210 on evaluation 70,
-which approximaties the true optimum of -3.3224.
+which approximates the true optimum of -3.3224.
 
 .. code-block:: python
 

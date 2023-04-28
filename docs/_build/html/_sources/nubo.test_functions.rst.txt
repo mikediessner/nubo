@@ -4,7 +4,7 @@ Test function module
 .. admonition:: References
    :class: seealso
 
-   - S Surjanovic and D Bingham, "Virtual library of simulation experiments: Test functions and datasets," *sfu.ca*. [Online]. Available: https://www.sfu.ca/~ssurjano/optimization.html. [Accessed March 11, 2023].
+   - S Surjanovic and D Bingham, "Virtual Library of Simulation Experiments: Test Functions and Datasets," *sfu.ca*. [Online]. Available: https://www.sfu.ca/~ssurjano/optimization.html. [Accessed March 11, 2023].
 
 Parent class
 ------------

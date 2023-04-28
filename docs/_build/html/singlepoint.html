@@ -7,10 +7,10 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="singlepoint.html" />
 <meta property="og:site_name" content="NUBO" />
-<meta property="og:description" content="In this example, NUBO is used for sequential single-point optimisation. The Hartmann6D synthetic test function acts as a substitute for a black box objective funtion, such as an experiment or a sim..." />
-<meta property="og:image" content="/_images/social_previews/summary_singlepoint_5db8251a.png" />
-<meta property="og:image:alt" content="In this example, NUBO is used for sequential single-point optimisation. The Hartmann6D synthetic test function acts as a substitute for a black box objective..." />
-<meta name="description" content="In this example, NUBO is used for sequential single-point optimisation. The Hartmann6D synthetic test function acts as a substitute for a black box objective funtion, such as an experiment or a sim..." />
+<meta property="og:description" content="In this example, NUBO is used for sequential single-point optimisation. The Hartmann6D synthetic test function acts as a substitute for a black-box objective function, such as an experiment or a si..." />
+<meta property="og:image" content="/_images/social_previews/summary_singlepoint_00444f15.png" />
+<meta property="og:image:alt" content="In this example, NUBO is used for sequential single-point optimisation. The Hartmann6D synthetic test function acts as a substitute for a black-box objective..." />
+<meta name="description" content="In this example, NUBO is used for sequential single-point optimisation. The Hartmann6D synthetic test function acts as a substitute for a black-box objective function, such as an experiment or a si..." />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Parallel multi-point joint Bayesian optimisation" href="multipoint_joint.html" /><link rel="prev" title="Custom Gaussian process" href="custom_gp.html" />
 
     <link rel="shortcut icon" href="_static/favicon.ico"/><!-- Generated with Sphinx 6.1.3 and Furo 2023.03.27 -->
@@ -229,8 +229,8 @@
         <article role="main">
           <section id="Sequential-single-point-Bayesian-optimisation">
 <h1>Sequential single-point Bayesian optimisation<a class="headerlink" href="#Sequential-single-point-Bayesian-optimisation" title="Permalink to this heading">#</a></h1>
-<p>In this example, NUBO is used for sequential single-point optimisation. The <code class="docutils literal notranslate"><span class="pre">Hartmann6D</span></code> synthetic test function acts as a substitute for a black box objective funtion, such as an experiment or a simulation. We use the analytical acquisiton function <code class="docutils literal notranslate"><span class="pre">UpperConfidenceBound</span></code> with <span class="math notranslate nohighlight">\(\beta = 1.96^2\)</span> corresponding to the 95% confidence interval of the Gaussian distribution. We optimise this acquisition function with the L-BFGS-B algorithm with 5 starts to avoid getting stuck in a local
-maximum. The optimisation loop is run for 40 iterations and finds a solution close the true optimum of -3.3224.</p>
+<p>In this example, NUBO is used for sequential single-point optimisation. The <code class="docutils literal notranslate"><span class="pre">Hartmann6D</span></code> synthetic test function acts as a substitute for a black-box objective function, such as an experiment or a simulation. We use the analytical acquisition function <code class="docutils literal notranslate"><span class="pre">UpperConfidenceBound</span></code> with <span class="math notranslate nohighlight">\(\beta = 1.96^2\)</span> corresponding to the 95% confidence interval of the Gaussian distribution. We optimise this acquisition function with the L-BFGS-B algorithm with 5 starts to avoid getting stuck in a local
+maximum. The optimisation loop is run for 40 iterations and finds a solution close to the true optimum of -3.3224.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>

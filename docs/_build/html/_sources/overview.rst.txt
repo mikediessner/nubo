@@ -1,7 +1,7 @@
 Overview
 ========
 NUBO, short for Newcastle University Bayesian optimisation, is a Bayesian
-optimisation framework for the optimisation of expensive-to-evaluate black box
+optimisation framework for the optimisation of expensive-to-evaluate black-box
 functions, such as physical experiments and computer simulations. It is
 developed and maintained by the `Fluid Dynamics Lab`_ at
 `Newcastle University`_. NUBO focuses primarily on transparency and user
@@ -14,9 +14,9 @@ optimisation to your specific problem by writing the optimisation loop yourself
 using the provided building blocks. Only algorithms and methods that are
 sufficiently tested and validated to perform well are included in NUBO. This
 ensures that the package remains compact and does not overwhelm the user with
-an unnecessary large number of options. The package is written in Python_ but
+an unnecessarily large number of options. The package is written in Python_ but
 does not require expert knowledge of Python to optimise your simulations and
-experiments. NUBO is distributed as an open-source software under the
+experiments. NUBO is distributed as open-source software under the
 `BSD 3-Clause licence`_.
 
 .. admonition:: Contact
@@ -40,7 +40,7 @@ criteria by representing the objective function through a
 [#Williams2006]_. This representation can be used to find the next point
 that should be evaluated by maximising a criterion specified through an
 :ref:`acquisition function <acquisition>`. A popular criterion is, for
-example, the expected improvement (EI) [#Jones1998]_, that is the expectation
+example, the expected improvement (EI) [#Jones1998]_, which is the expectation
 that the new point returns a better solution than the current best point.
 Bayesian optimisation is performed in a loop where training data is used to fit
 the surrogate model before the next point suggested by the acquisition function
@@ -85,7 +85,7 @@ Contents
   bounds or multi-start SLSQP [#Kraft1994]_ if the input space is also
   restricted by constraints. The stochastic Monte Carlo acquisition functions
   that are based on random samples are maximised with the stochastic optimiser
-  Adam [#Kingma2015]_. NUBO also supports optimisation of mixed parameter space
+  Adam [#Kingma2015]_. NUBO also supports the optimisation of mixed parameter space
   (continuous and discrete).
 
 **Design of experiments**
@@ -93,9 +93,9 @@ Contents
   NUBO supports random or maximin Latin hypercube designs [#McKay2000]_.
 
 **Synthetic test functions**
-  NUBO provides ten synthetic test functions that allow validation of Bayesian
-  optimisation algorithms before applying them to expensive experiments
-  [#Surjanovic2023]_.
+  NUBO provides ten synthetic test functions that allow the validation of
+  Bayesian optimisation algorithms before applying them to expensive
+  experiments [#Surjanovic2023]_.
 
 .. figure:: flowchart.png
   :target: https://mikediessner.github.io/nubo/_build/html/_images/flowchart.png
@@ -110,17 +110,18 @@ Contents
 .. _Python: https://www.python.org
 .. _`BSD 3-Clause licence`: https://github.com/mikediessner/nubo/blob/main/LICENSE.md
 
-.. [#Frazier2018] P I Frazier, "A tutorial on Bayesian optimization," *arXiv preprint arXiv:1807.02811*, 2018.
-.. [#Gardner2018] J Gardner, G Pleiss, K Q Weinberger, D Bindel, and A G Wilson, "GPyTorch: Blackbox matrix-matrix Gaussian process inference with GPU acceleration," *Advances in neural information processing systems*, vol. 31, 2018.
-.. [#Gramacy2020] R B Gramacy, *Surrogates: Gaussian process modeling, design, and optimization for the applied sciences*, 1st ed. Boca Raton, FL: CRC press, 2020.
-.. [#Jones1998] D R Jones, M Schonlau, and W J Welch, "Efficient global optimization of expensive black-box functions," *Journal of global optimization*, vol. 13, no. 4, p. 566, 1998.
-.. [#Kingma2015] D P Kingma and J Ba, "Adam: A method for stochastic optimization," *Proceedings of the 3rd international conference on learning representations*, 2015.
-.. [#Kraft1994] D Kraft, "Algorithm 733: TOMP-Fortran modules for optimal control calculations," *ACM Transactions on Mathematical Software (TOMS)*, vol. 20, no. 3, p. 262-281, 1994.
-.. [#McKay2000] M D McKay, R J Beckman, and W J Conover, "A comparison of three methods for selecting values of input variables in the analysis of output from a computer code," *Technometrics*, vol. 42, no. 1, p. 55-61, 2000.
-.. [#Shahriari2015] B Shahriari, K Swersky, Z Wang, R P Adams, and N De Freitas, "Taking the human out of the loop: A review of Bayesian optimization," *Proceedings of the IEEE*, vol. 104, no. 1, p. 148-175, 2015.
-.. [#Snoek2012] J Snoek, H Larochelle, and R P Adams, "Practical Bayesian optimization of machine learning algorithms," *Advances in neural information processing systems*, vol. 25, 2012.
-.. [#Surjanovic2023] S Surjanovic and D Bingham, "Virtual library of simulation experiments: Test functions and datasets," *sfu.ca*. [Online]. Available: https://www.sfu.ca/~ssurjano/optimization.html. [Accessed March 11, 2023].
-.. [#Srinivas2010] N Srinivas, A Krause, S M Kakade, and M Seeger, "Gaussian process optimization in the bandit setting: No regret and experimental design," *Proceedings of the 27th international conference on machine learning*, p. 1015-1022, 2010.
-.. [#Williams2006] C K I Williams, and C E Rasmussen, *Gaussian processes for machine learning*, 2nd ed. Cambridge, MA: MIT press, 2006.
-.. [#Wilson2018] J Wilson, F Hutter, and M Deisenroth, "Maximizing acquisition functions for Bayesian optimization," *Advances in neural information processing systems*, vol. 31, 2018.
-.. [#Zhu1997] C Zhu, R H Byrd, P Lu, J Nocedal, "Algorithm 778: L-BFGS-B: Fortran subroutines for large-scale bound-constrained optimization," *ACM Transactions on mathematical software (TOMS)*, vol. 23, no. 4, p. 550-560, 1997.
+.. [#Frazier2018] P I Frazier, "A Tutorial on Bayesian Optimization," *arXiv preprint arXiv:1807.02811*, 2018.
+.. [#Gardner2018] J Gardner, G Pleiss, K Q Weinberger, D Bindel, and A G Wilson, "GPyTorch: Blackbox Matrix-Matrix Gaussian Process Inference with Gpu Acceleration," *Advances in Neural Information Processing Systems*, vol. 31, 2018.
+.. [#Gramacy2020] R B Gramacy, *Surrogates: Gaussian Process Modeling, Design, and Optimization for the Applied Sciences*, 1st ed. Boca Raton, FL: CRC press, 2020.
+.. [#Jones1998] D R Jones, M Schonlau, and W J Welch, "Efficient Global Optimization of Expensive Black-Box Functions," *Journal of Global Optimization*, vol. 13, no. 4, p. 566, 1998.
+.. [#Kingma2015] D P Kingma and J Ba, "Adam: A Method for Stochastic Optimization," *Proceedings of the 3rd International Conference on Learning Representations*, 2015.
+.. [#Kraft1994] D Kraft, "Algorithm 733: TOMP-Fortran Modules for Optimal Control Calculations," *ACM Transactions on Mathematical Software (TOMS)*, vol. 20, no. 3, p. 262-281, 1994.
+.. [#McKay2000] M D McKay, R J Beckman, and W J Conover, "A Comparison of Three Methods for Selecting Values of Input Variables in the Analysis of Output from a Computer Code," *Technometrics*, vol. 42, no. 1, p. 55-61, 2000.
+.. [#OConnor2023] J O'Connor, M Diessner, K Wilson, R D Whalley, A Wynn, and S Laizet, "Optimisation and Analysis of Streamwise-Varying Wall-Normal Blowing in a Turbulent Boundary Layer," *Flow, Turbulence and Combustion*, 2023.
+.. [#Shahriari2015] B Shahriari, K Swersky, Z Wang, R P Adams, and N De Freitas, "Taking the Human Out of the Loop: A Review of Bayesian Optimization," *Proceedings of the IEEE*, vol. 104, no. 1, p. 148-175, 2015.
+.. [#Snoek2012] J Snoek, H Larochelle, and R P Adams, "Practical Bayesian Optimization of Machine Learning Algorithms," *Advances in Neural Information Processing Systems*, vol. 25, 2012.
+.. [#Surjanovic2023] S Surjanovic and D Bingham, "Virtual Library of Simulation Experiments: Test Functions and Datasets," *sfu.ca*. [Online]. Available: https://www.sfu.ca/~ssurjano/optimization.html. [Accessed March 11, 2023].
+.. [#Srinivas2010] N Srinivas, A Krause, S M Kakade, and M Seeger, "Gaussian Process Optimization in the Bandit Setting: No Regret and Experimental Design," *Proceedings of the 27th International Conference on Machine Learning*, p. 1015-1022, 2010.
+.. [#Williams2006] C K I Williams, and C E Rasmussen, *Gaussian Processes for Machine Learning*, 2nd ed. Cambridge, MA: MIT press, 2006.
+.. [#Wilson2018] J Wilson, F Hutter, and M Deisenroth, "Maximizing Acquisition Functions for Bayesian Optimization," *Advances in Neural Information Processing Systems*, vol. 31, 2018.
+.. [#Zhu1997] C Zhu, R H Byrd, P Lu, J Nocedal, "Algorithm 778: L-BFGS-B: Fortran Subroutines for Large-Scale Bound-Constrained Optimization," *ACM Transactions on Mathematical Software (TOMS)*, vol. 23, no. 4, p. 550-560, 1997.

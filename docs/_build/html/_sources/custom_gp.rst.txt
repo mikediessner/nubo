@@ -15,7 +15,7 @@ mean or constant mean function and the Matern or RBF kernel. Some kernels, such
 as the Matern and the RBF kernel, are only defined for a certain range. They
 need to be scaled through the ``ScaleKernel`` to be used with all problems. The
 length-scale parameters of the covariance kernel can either be represented as a
-single length-scale or as one length-scale parameter for each input dimensions.
+single length-scale or as one length-scale parameter for each input dimension.
 The latter is known as automatic relevance determination (ARD) and allows
 inputs to be differently correlated. The ``forward()`` method takes a test
 point and returns the predictive multivariate normal distribution. All other

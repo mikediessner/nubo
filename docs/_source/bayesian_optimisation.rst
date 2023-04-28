@@ -6,7 +6,7 @@ The following introduction aims to give a concise explanation of the Bayesian
 optimisation algorithm and its element, including the surrogate model and
 acquisition functions. While this introduction covers all critical details and
 will be sufficient to get started with Bayesian optimisation and understand how
-NUBO works, it should not be considered as exhaustive. Where appropriate,
+NUBO works, it should not be considered exhaustive. Where appropriate,
 references highlight resources for additional reading that will present a more
 detailed picture of Bayesian optimisation than is possible here.
 
@@ -23,7 +23,7 @@ problem
 where the input space is usually continuous and bounded by a hyper-rectangle
 :math:`\mathcal{X} \in [a, b]^d` with :math:`a, b \in \mathbb{R}`. The function
 :math:`f(\boldsymbol x)` is most commonly a derivative-free
-expensive-to-evaluate black box function that only allows inputs
+expensive-to-evaluate black-box function that only allows inputs
 :math:`\boldsymbol x_i` to be queried and outputs :math:`y_i` to be observed
 without gaining any further insights into the underlying system. We assume any
 noise :math:`\epsilon` that is introduced when taking measurements to be
@@ -40,11 +40,11 @@ and we further define training inputs as matrix
 outputs as vector :math:`\boldsymbol y_n = \{y_i\}_{i=1}^n`.
 
 Many simulations and experiments in various disciplines can be formulated to
-fit this discription. For example, Bayesian optimisation was used in the field
-of computational fluid dynamics to maximise the drag reduction via active
+fit this description. For example, Bayesian optimisation was used in the field
+of computational fluid dynamics to maximise drag reduction via active
 control of blowing actuators [#Diessner2022]_ [#OConnor2023]_ [#Mahfoze2019]_,
 in chemical engineering for molecular design, drug discovery, molecular
-modeling, electrolyte design, and additive manufacturing [#Wang2022]_, and in
+modelling, electrolyte design, and additive manufacturing [#Wang2022]_, and in
 computer science to fine-tune hyper-parameters of machine learning models
 [#Wu2019]_ or in architecture search for neural networks [#White2021]_.
 
@@ -69,7 +69,7 @@ the next point suggested by the acquisition function is evaluated and added to
 the training data (see the algorithm below). The process then restarts and
 gathers more information about the objective function with each iteration.
 Bayesian optimisation is run for as many iterations as the evaluation budget
-:math:`N` allows, until a satisfactory solution is found, or unitl a predefined
+:math:`N` allows until a satisfactory solution is found, or until a predefined
 stopping criterion is met.
 
 .. admonition:: Algorithm
@@ -94,7 +94,7 @@ stopping criterion is met.
 
 The animation below illustrates how the Bayesian optimisation algorithm works
 on an optimisation loop that runs for 20 iterations. The surrogate model uses
-the available observaions to provide a prediction and its uncertainty (here
+the available observations to provide a prediction and its uncertainty (here
 shown as 95% confidence intervals around the prediction). This is our best
 estimate of the underlying objective function. This estimate is then used in
 the acquisition function to evaluate which point is most likely to improve over
@@ -103,8 +103,8 @@ candidate to be observed from the objective function, before it is added to the
 training data and the whole process is repeated again. The animation shows how
 the surrogate model gets closer to the truth with each iteration and how the
 acquisition function explores the input space by exploring regions with high
-uncertainty and exploits regions with a high prediction. This property, also
-called the exploration-exploitation trade-off, is a corner stone of the
+uncertainty and exploiting regions with a high prediction. This property also
+called the exploration-exploitation trade-off, is a cornerstone of the
 acquisition functions provided in NUBO.
 
 .. only:: html
@@ -174,7 +174,7 @@ is a very powerful package that allows the implementation of a wide selection
 of models ranging from exact Gaussian processes to approximate and even deep
 Gaussian processes. Besides maximum likelihood estimation (MLE) `GPyTorch` also
 supports maximum a posteriori estimation (MAP) and fully Bayesian estimation to
-estimate the hyper-parameter. It also comes with a rich documentation, many
+estimate the hyper-parameter. It also comes with rich documentation, many
 practical examples, and a large community.
 
 NUBO provides a Gaussian process for off-the-shelf use with a constant mean
@@ -189,7 +189,7 @@ examples section. For more complex models we recommend consulting the
 Acquisition function
 --------------------
 Acquisition functions use the posterior distribution of the Gaussian process
-:math:`\mathcal{GP}` to compute a criterion that assess if a test point is a 
+:math:`\mathcal{GP}` to compute a criterion that assesses if a test point is a 
 good potential candidate point to evaluate via the objective function
 :math:`f(\boldsymbol x)`. Thus, maximising the acquisition function suggests
 the test point that, based on the current training data :math:`\mathcal{D_n}`,
@@ -199,8 +199,8 @@ former is characterised by areas with no or only a few observed data points
 where the uncertainty of the Gaussian process is high, and the latter by areas
 where the posterior mean of the Gaussian process is high. This
 exploration-exploitation trade-off ensures that Bayesian optimisation does not
-converge to the first (potentially local) maximum it encounters, but efficently
-explores the full input space.
+converge to the first (potentially local) maximum it encounters, but
+efficiently explores the full input space.
 
 Analytical acquisition functions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -252,10 +252,10 @@ around the posterior mean of the Gaussian process is equal to using
         20 evaluations. 
 
 Both of these acquisition functions can be maximised with a deterministic
-optimiser, such as L-BFGS-B [#Zhu1997]_ for bounded unconstrained problems or
-SLSQP [#Kraft1994]_ for bounded constrained problems. However, this only works
-for the sequential single-point problems for which every point suggested by
-Bayesian optimisation is observed via the objective function
+optimiser, such as L-BFGS-B [#Zhu1997]_ for bounded and unconstrained problems
+or SLSQP [#Kraft1994]_ for bounded constrained problems. However, this only
+works for the sequential single-point problems for which every point suggested
+by Bayesian optimisation is observed via the objective function
 :math:`f( \boldsymbol x)` immediatley, before the optimisation loop is
 repeated.
 
@@ -293,10 +293,10 @@ Due to the randomness in the Monte Carlo samples, these acquisition functions
 can only be optimised by stochastic optimisers, such as Adam [#Kingma2015]_.
 However, there is some empirical evidence that fixing the base samples for
 individual Bayesian optimisation loops does not affect the performance
-negatively [#Balandat2020]_. This method would allow deterministic optimisers to
-be used, but could potentially introduce bias due to sampling randomness. NUBO
-lets you decide which variant you prefer by setting ``fix_base_samples`` and
-choosing the prefered optimiser. Bounded problems can be solved with Adam 
+negatively [#Balandat2020]_. This method would allow deterministic optimisers
+to be used, but could potentially introduce bias due to sampling randomness.
+NUBO lets you decide which variant you prefer by setting ``fix_base_samples``
+and choosing the preferred optimiser. Bounded problems can be solved with Adam 
 (``fix_base_samples = False``) or L-BFGS-B (``fix_base_samples = True``) and
 constraint problems can be solved with SLSQP (``fix_base_samples = True``).
 
@@ -327,23 +327,23 @@ considered directly in the optimisation.
 
 .. _documentation: https://docs.gpytorch.ai/en/stable
 
-.. [#Balandat2020] M Balandat *et al.*, "BoTorch: A framework for efficient Monte-CarloBayesian optimization," *Advances in neural information processing systems*, vol. 33, 2020.
-.. [#Diessner2022] M Diessner, J O'Connor, A Wynn, S Laizet, Y Guan, K Wilson, and R D Whalley, "Investigating Bayesian optimization for expensive-to-evaluate black box functions: Application in fluid dynamics," *Frontiers in Applied Mathematics and Statistics*, 2022. 
-.. [#Frazier2018] P I Frazier, "A tutorial on Bayesian optimization," *arXiv preprint arXiv:1807.02811*, 2018.
-.. [#Gardner2018] J Gardner, G Pleiss, K Q Weinberger, D Bindel, and A G Wilson, "GPyTorch: Blackbox matrix-matrix Gaussian process inference with GPU acceleration," *Advances in neural information processing systems*, vol. 31, 2018.
-.. [#Gramacy2020] R B Gramacy, *Surrogates: Gaussian process modeling, design, and optimization for the applied sciences*, 1st ed. Boca Raton, FL: CRC press, 2020.
-.. [#Jones1998] D R Jones, M Schonlau, and W J Welch, "Efficient global optimization of expensive black-box functions," *Journal of global optimization*, vol. 13, no. 4, p. 566, 1998.
-.. [#Kingma2015] D P Kingma and J Ba, "Adam: A method for stochastic optimization," *Proceedings of the 3rd international conference on learning representations*, 2015.
-.. [#Kraft1994] D Kraft, "Algorithm 733: TOMP-Fortran modules for optimal control calculations," *ACM Transactions on Mathematical Software (TOMS)*, vol. 20, no. 3, p. 262-281, 1994.
-.. [#Mahfoze2019] O A Mahfoze, A Moody, A Wynn, R D Whalley, and S Laizet, "Reducing the skin-friction drag of a turbulent boundary-layer flow with low-amplitude wall-normal blowing within a Bayesian optimization framework," *Physical review fluids*, vol. 4, no. 9, 2019.
-.. [#McKay2000] M D McKay, R J Beckman, and W J Conover, "A comparison of three methods for selecting values of input variables in the analysis of output from a computer code," *Technometrics*, vol. 42, no. 1, p. 55-61, 2000.
-.. [#OConnor2023] J O'Connor, M Diessner, K Wilson, R D Whalley, A Wynn, and S Laizet, "Optimisation and analysis of streamwise-varying wall-normal blowing in a turbulent boundary layer," *Flow, Turbulence and Combustion*, 2023.
-.. [#Shahriari2015] B Shahriari, K Swersky, Z Wang, R P Adams, and N De Freitas, "Taking the human out of the loop: A review of Bayesian optimization," *Proceedings of the IEEE*, vol. 104, no. 1, p. 148-175, 2015.
-.. [#Snoek2012] J Snoek, H Larochelle, and R P Adams, "Practical Bayesian optimization of machine learning algorithms," *Advances in neural information processing systems*, vol. 25, 2012.
-.. [#Srinivas2010] N Srinivas, A Krause, S M Kakade, and M Seeger, "Gaussian process optimization in the bandit setting: No regret and experimental design," *Proceedings of the 27th international conference on machine learning*, p. 1015-1022, 2010.
-.. [#Wang2022] K Wang and A W Dowling, "Bayesian optimization for chemical products and functional materials," *Current opinion in chemical engineering*, vol. 36, 2022.
-.. [#White2021] C White, W Neiswanger, and Y Savani, "Bananas: Bayesian optimization with neural architectures for neural architecture search," *Proceedings of the AAAI conference on artificial intelligence*, vol. 35, no. 12, 2021.
-.. [#Williams2006] C K I Williams, and C E Rasmussen, *Gaussian processes for machine learning*, 2nd ed. Cambridge, MA: MIT press, 2006.
-.. [#Wilson2018] J Wilson, F Hutter, and M Deisenroth, "Maximizing acquisition functions for Bayesian optimization," *Advances in neural information processing systems*, vol. 31, 2018.
-.. [#Wu2019] J Wu, X Y Chen, H Zhang, L D Xiong, H Lei, and S H Deng, "Hyperparameter optimization for machine learning models based on Bayesian optimization," *Journal of electronic science and technology*, vol. 17, no. 1, p. 26-40, 2019.
-.. [#Zhu1997] C Zhu, R H Byrd, P Lu, J Nocedal, "Algorithm 778: L-BFGS-B: Fortran subroutines for large-scale bound-constrained optimization," *ACM Transactions on mathematical software (TOMS)*, vol. 23, no. 4, p. 550-560, 1997.
+.. [#Balandat2020] M Balandat *et al.*, "BoTorch: A Framework for Efficient Monte-Carlo Bayesian Optimization," *Advances in Neural Information Processing Systems*, vol. 33, 2020.
+.. [#Diessner2022] M Diessner, J O'Connor, A Wynn, S Laizet, Y Guan, K Wilson, and R D Whalley, "Investigating Bayesian Optimization for Expensive-To-Evaluate Black Box Functions: Application in Fluid Dynamics," *Frontiers in Applied Mathematics and Statistics*, 2022. 
+.. [#Frazier2018] P I Frazier, "A Tutorial on Bayesian Optimization," *arXiv preprint arXiv:1807.02811*, 2018.
+.. [#Gardner2018] J Gardner, G Pleiss, K Q Weinberger, D Bindel, and A G Wilson, "GPyTorch: Blackbox Matrix-Matrix Gaussian Process Inference with Gpu Acceleration," *Advances in Neural Information Processing Systems*, vol. 31, 2018.
+.. [#Gramacy2020] R B Gramacy, *Surrogates: Gaussian Process Modeling, Design, and Optimization for the Applied Sciences*, 1st ed. Boca Raton, FL: CRC press, 2020.
+.. [#Jones1998] D R Jones, M Schonlau, and W J Welch, "Efficient Global Optimization of Expensive Black-Box Functions," *Journal of Global Optimization*, vol. 13, no. 4, p. 566, 1998.
+.. [#Kingma2015] D P Kingma and J Ba, "Adam: A Method for Stochastic Optimization," *Proceedings of the 3rd International Conference on Learning Representations*, 2015.
+.. [#Kraft1994] D Kraft, "Algorithm 733: TOMP-Fortran Modules for Optimal Control Calculations," *ACM Transactions on Mathematical Software (TOMS)*, vol. 20, no. 3, p. 262-281, 1994.
+.. [#Mahfoze2019] O A Mahfoze, A Moody, A Wynn, R D Whalley, and S Laizet, "Reducing the Skin-Friction Drag of a Turbulent Boundary-Layer Flow with Low-Amplitude Wall-Normal Blowing within a Bayesian Optimization Framework," *Physical Review Fluids*, vol. 4, no. 9, 2019.
+.. [#McKay2000] M D McKay, R J Beckman, and W J Conover, "A Comparison of Three Methods for Selecting Values of Input Variables in the Analysis of Output from a Computer Code," *Technometrics*, vol. 42, no. 1, p. 55-61, 2000.
+.. [#OConnor2023] J O'Connor, M Diessner, K Wilson, R D Whalley, A Wynn, and S Laizet, "Optimisation and Analysis of Streamwise-Varying Wall-Normal Blowing in a Turbulent Boundary Layer," *Flow, Turbulence and Combustion*, 2023.
+.. [#Shahriari2015] B Shahriari, K Swersky, Z Wang, R P Adams, and N De Freitas, "Taking the Human Out of the Loop: A Review of Bayesian Optimization," *Proceedings of the IEEE*, vol. 104, no. 1, p. 148-175, 2015.
+.. [#Snoek2012] J Snoek, H Larochelle, and R P Adams, "Practical Bayesian Optimization of Machine Learning Algorithms," *Advances in Neural Information Processing Systems*, vol. 25, 2012.
+.. [#Srinivas2010] N Srinivas, A Krause, S M Kakade, and M Seeger, "Gaussian Process Optimization in the Bandit Setting: No Regret and Experimental Design," *Proceedings of the 27th International Conference on Machine Learning*, p. 1015-1022, 2010.
+.. [#Wang2022] K Wang and A W Dowling, "Bayesian optimization for chemical products and functional materials," *Current Opinion in Chemical Engineering*, vol. 36, 2022.
+.. [#White2021] C White, W Neiswanger, and Y Savani, "Bananas: Bayesian Optimization with Neural Architectures for Neural Architecture Search," *Proceedings of the Aaai Conference on Artificial Intelligence*, vol. 35, no. 12, 2021.
+.. [#Williams2006] C K I Williams, and C E Rasmussen, *Gaussian Processes for Machine Learning*, 2nd ed. Cambridge, MA: MIT press, 2006.
+.. [#Wilson2018] J Wilson, F Hutter, and M Deisenroth, "Maximizing Acquisition Functions for Bayesian Optimization," *Advances in Neural Information Processing Systems*, vol. 31, 2018.
+.. [#Wu2019] J Wu, X Y Chen, H Zhang, L D Xiong, H Lei, and S H Deng, "Hyperparameter Optimization for Machine Learning Models Based on Bayesian Optimization," *Journal of Electronic Science and Technology*, vol. 17, no. 1, p. 26-40, 2019.
+.. [#Zhu1997] C Zhu, R H Byrd, P Lu, J Nocedal, "Algorithm 778: L-BFGS-B: Fortran Subroutines for Large-Scale Bound-Constrained Optimization," *ACM Transactions on Mathematical Software (TOMS)*, vol. 23, no. 4, p. 550-560, 1997.

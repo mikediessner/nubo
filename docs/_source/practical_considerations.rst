@@ -11,7 +11,7 @@ General
     A rule of thumb for Gaussian process models is to have at least 10 points
     per input dimension [#Baker2021]_ [#Domingo2019]_ [#Owen2017]_. However,
     empirical evidence shows that reducing this to 5 or even 1 point(s) per
-    input dimensions does not result in worse solutions for Bayesian
+    input dimension does not result in worse solutions for Bayesian
     optimisation [#Diessner2022]_.
 
 **How does NUBO optimise a mixed parameter space with continuous and discrete variables?**
@@ -19,12 +19,12 @@ General
     combination of the discrete inputs and optimising over the remaining
     continuous inputs. The best point found over all possible discrete
     combinations is used. While this avoids issues due to rounding, it can be
-    time-consuming for many discrete dimension and possible values.
+    time-consuming for many discrete dimensions and possible values.
 
 Gaussian process
 ----------------
 **What prior mean function and prior covariance kernel should I use?**
-    For practical Bayesian optimisation a zero or constant mean function with
+    For practical Bayesian optimisation, a zero or constant mean function with
     a Matern 5/2 kernel is recommended [#Snoek2012]_. Other kernels, such as
     the RBF kernel, might be too smooth to be able to represent realistic
     experiments and simulations.
@@ -66,20 +66,20 @@ Acquisition function
     decide to fix the base samples, deterministic optimisers can be used in the
     same way as for the analytical acquisition functions. While fixing the base
     samples could introduce some sampling bias, there is empirical evidence
-    that it does not affect the performance negatively [#Balandat2020]_.
+    that it does not affect performance negatively [#Balandat2020]_.
 
 ----
 
 .. [#Baker2021] E Baker, "Emulation of Stochastic Computer Models with an Application to Building Design," Ph.D. dissertation, Department of Mathematics, Univ. Exeter, Exeter, 2021.
-.. [#Balandat2020] M Balandat *et al.*, "BoTorch: A framework for efficient Monte-Carlo Bayesian optimization," *Advances in neural information processing systems*, vol. 33, 2020.
-.. [#Diessner2022] M Diessner, J O'Connor, A Wynn, S Laizet, Y Guan, K Wilson, and R D Whalley, "Investigating Bayesian optimization for expensive-to-evaluate black box functions: Application in fluid dynamics," *Frontiers in Applied Mathematics and Statistics*, 2022. 
+.. [#Balandat2020] M Balandat *et al.*, "BoTorch: A Framework for Efficient Monte-Carlo Bayesian Optimization," *Advances in Neural Information Processing Systems*, vol. 33, 2020.
+.. [#Diessner2022] M Diessner, J O'Connor, A Wynn, S Laizet, Y Guan, K Wilson, and R D Whalley, "Investigating Bayesian Optimization for Expensive-To-Evaluate Black Box Functions: Application in Fluid Dynamics," *Frontiers in Applied Mathematics and Statistics*, 2022. 
 .. [#Domingo2019] D Domingo, "Gaussian Process Emulation: Theory and Applications to the Problem of Past Climate Reconstruction," Ph.D. dissertation, School of Mathematics, Univ. Leeds, Leeds, 2019.
-.. [#Gramacy2012] R B Gramacy, and H K H Lee, "Cases for the nugget in modeling computer experiments," *Statistics and computing*, vol. 22, p. 713-722, 2012.
-.. [#Jones1998] D R Jones, M Schonlau, and W J Welch, "Efficient global optimization of expensive black-box functions," *Journal of global optimization*, vol. 13, no. 4, p. 566, 1998.
-.. [#Kingma2015] D P Kingma and J Ba, "Adam: A method for stochastic optimization," *Proceedings of the 3rd international conference on learning representations*, 2015.
-.. [#Kraft1994] D Kraft, "Algorithm 733: TOMP-Fortran modules for optimal control calculations," *ACM Transactions on Mathematical Software (TOMS)*, vol. 20, no. 3, p. 262-281, 1994.
-.. [#Owen2017] N E Owen, "A comparison of polynomial chaos and Gaussian process emulation for uncertainty quantification in computer experiments," Ph.D. dissertation, Department of Mathematics, Univ. Exeter, Exeter, 2017.
-.. [#Snoek2012] J Snoek, H Larochelle, and R P Adams, "Practical Bayesian optimization of machine learning algorithms," *Advances in neural information processing systems*, vol. 25, 2012.
-.. [#Srinivas2010] N Srinivas, A Krause, S M Kakade, and M Seeger, "Gaussian process optimization in the bandit setting: No regret and experimental design," *Proceedings of the 27th international conference on machine learning*, p. 1015-1022, 2010.
-.. [#Wilson2018] J Wilson, F Hutter, and M Deisenroth, "Maximizing acquisition functions for Bayesian optimization," *Advances in neural information processing systems*, vol. 31, 2018.
-.. [#Zhu1997] C Zhu, R H Byrd, P Lu, J Nocedal, "Algorithm 778: L-BFGS-B: Fortran subroutines for large-scale bound-constrained optimization," *ACM Transactions on mathematical software (TOMS)*, vol. 23, no. 4, p. 550-560, 1997.
+.. [#Gramacy2012] R B Gramacy, and H K H Lee, “Cases for the Nugget in Modeling Computer Experiments,” *Statistics and Computing*, vol. 22, p. 713-722, 2012.
+.. [#Jones1998] D R Jones, M Schonlau, and W J Welch, "Efficient Global Optimization of Expensive Black-Box Functions," *Journal of Global Optimization*, vol. 13, no. 4, p. 566, 1998.
+.. [#Kingma2015] D P Kingma and J Ba, "Adam: A Method for Stochastic Optimization," *Proceedings of the 3rd International Conference on Learning Representations*, 2015.
+.. [#Kraft1994] D Kraft, "Algorithm 733: TOMP-Fortran Modules for Optimal Control Calculations," *ACM Transactions on Mathematical Software (TOMS)*, vol. 20, no. 3, p. 262-281, 1994.
+.. [#Owen2017] N E Owen, "A Comparison of Polynomial Chaos and Gaussian Process Emulation for Uncertainty Quantification in Computer Experiments," Ph.D. dissertation, Department of Mathematics, Univ. Exeter, Exeter, 2017.
+.. [#Snoek2012] J Snoek, H Larochelle, and R P Adams, "Practical Bayesian Optimization of Machine Learning Algorithms," *Advances in Neural Information Processing Systems*, vol. 25, 2012.
+.. [#Srinivas2010] N Srinivas, A Krause, S M Kakade, and M Seeger, "Gaussian Process Optimization in the Bandit Setting: No Regret and Experimental Design," *Proceedings of the 27th International Conference on Machine Learning*, p. 1015-1022, 2010.
+.. [#Wilson2018] J Wilson, F Hutter, and M Deisenroth, "Maximizing Acquisition Functions for Bayesian Optimization," *Advances in Neural Information Processing Systems*, vol. 31, 2018.
+.. [#Zhu1997] C Zhu, R H Byrd, P Lu, J Nocedal, "Algorithm 778: L-BFGS-B: Fortran Subroutines for Large-Scale Bound-Constrained Optimization," *ACM Transactions on Mathematical Software (TOMS)*, vol. 23, no. 4, p. 550-560, 1997.

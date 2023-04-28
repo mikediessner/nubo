@@ -14,8 +14,8 @@ Analytical acquisition functions
 .. admonition:: References
    :class: seealso
 
-   - D R Jones, M Schonlau, and W J Welch, "Efficient global optimization of expensive black-box functions," *Journal of global optimization*, vol. 13, no. 4, p. 566, 1998.
-   - N Srinivas, A Krause, S M Kakade, and M Seeger, "Gaussian process optimization in the bandit setting: No regret and experimental design," *Proceedings of the 27th international conference on machine learning*, p. 1015-1022, 2010.
+   - D R Jones, M Schonlau, and W J Welch, "Efficient Global Optimization of Expensive Black-Box Functions," *Journal of Global Optimization*, vol. 13, no. 4, p. 566, 1998.
+   - N Srinivas, A Krause, S M Kakade, and M Seeger, "Gaussian Process Optimization in the Bandit Setting: No Regret and Experimental Design," *Proceedings of the 27th International Conference on Machine Learning*, p. 1015-1022, 2010.
 
 .. automodule:: nubo.acquisition.analytical
    :members:
@@ -28,7 +28,7 @@ Monte Carlo aquisition functions
 .. admonition:: References
    :class: seealso
 
-   - J Wilson, F Hutter, and M Deisenroth, "Maximizing acquisition functions for Bayesian optimization," *Advances in neural information processing systems*, vol. 31, 2018.
+   - J Wilson, F Hutter, and M Deisenroth, "Maximizing Acquisition Functions for Bayesian Optimization," *Advances in Neural Information Processing Systems*, vol. 31, 2018.
 
 .. automodule:: nubo.acquisition.monte_carlo
    :members:

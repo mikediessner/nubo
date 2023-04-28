@@ -15,7 +15,7 @@ Multi-point optimisation
 .. admonition:: References
    :class: seealso
    
-   - J Wilson, F Hutter, and M Deisenroth, "Maximizing acquisition functions for Bayesian optimization," *Advances in neural information processing systems*, vol. 31, 2018.
+   - J Wilson, F Hutter, and M Deisenroth, "Maximizing Acquisition Functions for Bayesian Optimization," *Advances in Neural Information Processing Systems*, vol. 31, 2018.
 
 .. automodule:: nubo.optimisation.multipoint
    :members:
@@ -36,7 +36,7 @@ Deterministic optimisers
 .. admonition:: References
    :class: seealso
    
-   - P Virtanen *et al.*, "SciPy 1.0: Fundamental algorithms for scientific computing in Python,"" *Nature methods*, vol. 17, no. 3, p. 261-272, 2020.
+   - P Virtanen *et al.*, "SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python,"" *Nature Methods*, vol. 17, no. 3, p. 261-272, 2020.
 
 .. automodule:: nubo.optimisation.lbfgsb
    :members:
@@ -54,8 +54,8 @@ Stochastic optimisers
 .. admonition:: References
    :class: seealso
 
-   - D P Kingma and J Ba, "Adam: A method for stochastic optimization," *Proceedings of the 3rd international conference on learning representations*, 2015.
-   - A Paszke, *et al.*, "PyTorch: An imperative style, high-performance deep learning library," *In advances in neural information processing systems*, vol. 32, 2019.
+   - D P Kingma and J Ba, "Adam: A Method for Stochastic Optimization," *Proceedings of the 3rd International Conference on Learning Representations*, 2015.
+   - A Paszke, *et al.*, "PyTorch: An Imperative Style, High-Performance Deep Learning Library," *In Advances in Neural Information Processing Systems*, vol. 32, 2019.
 
 .. automodule:: nubo.optimisation.adam
    :members:

@@ -38,9 +38,7 @@ following code. We recommend the use of a virtual environment.S
 
 If you are using NUBO for your research, please cite as:
 
-    Mike Diessner, Kevin Wilson, and Richard D. Whalley. "NUBO: A Transparent 
-    Python Package for Bayesian Optimisation," _arXiv preprint 
-    arXiv:2305.06709_, 2023.
+    Mike Diessner, Kevin Wilson, and Richard D. Whalley. "NUBO: A Transparent Python Package for Bayesian Optimisation," arXiv preprint arXiv:2305.06709, 2023.
 
 If you are using Bibtex, please cite as:
 

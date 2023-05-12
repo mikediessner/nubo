@@ -25,7 +25,7 @@ distributed as an open-source software under the
  > feel free to email us at m.diessner2@newcastle.ac.uk. Any feedback is highly
  > appreciated and will help make NUBO better in the future.
 
- ## Install NUBO
+## Install NUBO
 
 Install NUBO and all its dependencies directly from the
 [Python Package Index](https://pypi.org) *PyPI* using the
@@ -33,3 +33,22 @@ Install NUBO and all its dependencies directly from the
 following code. We recommend the use of a virtual environment.
 
     pip install nubopy
+
+## Cite NUBO
+
+If you are using NUBO for your research, please cite as:
+
+    Mike Diessner, Kevin Wilson, and Richard D. Whalley. "NUBO: A Transparent 
+    Python Package for Bayesian Optimisation," _arXiv preprint 
+    arXiv:2305.06709_, 2023.
+
+If you are using Bibtex, please cite as:
+
+```
+    @article{diessner2023nubo,
+             title={NUBO: A Transparent Python Package for Bayesian Optimisation},
+             author={Diessner, Mike and Wilson, Kevin and Whalley, Richard D},
+             journal={arXiv preprint arXiv:2305.06709},
+             year={2023}
+    }
+```

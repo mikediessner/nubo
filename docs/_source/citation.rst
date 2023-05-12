@@ -1,18 +1,21 @@
 Citation
 ========
 
-We are currently working on a dedicated reference paper for NUBO. In the meantime, please cite as:  
+If you are using NUBO for your research, please cite as:  
 
-  M Diessner, J O'Connor, A Wynn, S Laizet, Y Guan, K Wilson, and R D Whalley, "Investigating Bayesian Optimization for Expensive-To-Evaluate Black-Box Functions: Application in Fluid Dynamics," *Frontiers in Applied Mathematics and Statistics*, vol. 8, 2022. 
+    M Diessner, K Wilson, and R D Whalley. "NUBO: A Transparent 
+    Python Package for Bayesian Optimisation," *arXiv preprint 
+    arXiv:2305.06709*, 2023.
+  
+If you are using Bibtex, please cite as:
 
-BibTex::
+.. code-block:: text
 
-    @article{nubo2022,
-      title = {Investigating Bayesian optimization for expensive-to-evaluate black-box functions: Application in fluid dynamics},
-      author = {Diessner, Mike and O'Connor, Joseph and Wynn, Andrew and Laizet, Sylvain and Guan, Yu and Wilson, Kevin and Whalley, Richard D},
-      journal = {Frontiers in Applied Mathematics and Statistics},
-      volume = {8},
-      year = {2022}
+    @article{diessner2023nubo,
+             title={NUBO: A Transparent Python Package for Bayesian Optimisation},
+             author={Diessner, Mike and Wilson, Kevin and Whalley, Richard D},
+             journal={arXiv preprint arXiv:2305.06709},
+             year={2023}
     }
 
 

@@ -1,16 +1,17 @@
 import torch
 from torch import Tensor
 from nubo.utils import LatinHypercubeSampling, unnormalise
-from typing import Callable
+from typing import Callable, Optional, Tuple
 
 
 def gen_candidates(func: Callable,
                    bounds: Tensor,
                    num_candidates: int,
-                   num_samples: int) -> Tensor:
+                   num_samples: int,
+                   args: Optional[Tuple]=()) -> Tensor:
     """
     Generate candidates for multi-start optimisation using a maximin Latin 
-    hypercube design.
+    hypercube design or a uniform distribution for one candidate point.
 
     Parameters
     ----------
@@ -22,6 +23,8 @@ def gen_candidates(func: Callable,
         Number of candidates.
     num_samples : ``int``
         Number of samples from which to draw the starts.
+    args : ``Tuple``, optional
+        Arguments for function to maximise in order.
 
     Returns
     -------
@@ -32,14 +35,18 @@ def gen_candidates(func: Callable,
     dims = bounds.size(1)
 
     # generate samples
-    lhs = LatinHypercubeSampling(dims)
-    samples = lhs.maximin(num_samples)
+    if num_samples == 1:
+        samples = torch.rand((1, dims))
+    else:
+        lhs = LatinHypercubeSampling(dims)
+        samples = lhs.random(num_samples)
+
     samples = unnormalise(samples, bounds=bounds)
 
     # evaluate samples
     samples_res = torch.zeros(num_samples)
     for n in range(num_samples):
-        samples_res[n] = func(samples[n, :].reshape(1, -1))
+        samples_res[n] = func(samples[n, :].reshape(1, -1), *args)
 
     # select best candidates (smallest output)
     _, best_i = torch.topk(samples_res, num_candidates, largest=False)

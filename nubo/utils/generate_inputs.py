@@ -10,7 +10,8 @@ def gen_inputs(num_points: int,
                bounds: Optional[Tensor]=None,
                num_lhd: Optional[int]=1000) -> Tensor:
     """
-    Generate data inputs from a maximin Latin hypercube design.
+    Generate data inputs from a maximin Latin hypercube design or from a
+    uniform distribution for one data point.
 
     Parameters
     ----------
@@ -33,8 +34,12 @@ def gen_inputs(num_points: int,
     if bounds == None:
         bounds = torch.Tensor([[0.]*num_dims, [1.]*num_dims])
 
-    lhs = LatinHypercubeSampling(dims=num_dims)
-    points = lhs.maximin(points=num_points, samples=num_lhd)
+    if num_points == 1:
+        points = torch.rand((1, num_dims))
+    else:
+        lhs = LatinHypercubeSampling(dims=num_dims)
+        points = lhs.maximin(points=num_points, samples=num_lhd)
+
     points = unnormalise(points, bounds=bounds)
 
     return points

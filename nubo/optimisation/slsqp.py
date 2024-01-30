@@ -7,7 +7,7 @@ from nubo.optimisation import gen_candidates
 
 def slsqp(func: Callable,
           bounds: Tensor,
-          constraints: dict | list,
+          constraints: Optional[dict | Tuple[dict]]=(),
           num_starts: Optional[int]=10,
           num_samples: Optional[int]=100,
           **kwargs: Any) -> Tuple[Tensor, Tensor]:
@@ -26,8 +26,8 @@ def slsqp(func: Callable,
         Function to optimise.
     bounds : ``torch.Tensor``
         (size 2 x d) Optimisation bounds of input space.
-    constraints : ``dict`` or ``list`` of ``dict``
-        Optimisation constraints.
+    constraints : ``dict`` or ``Tuple`` of ``dict``, optional
+        Optimisation constraints, default is no constraints.
     num_starts : ``int``, optional
         Number of start for multi-start optimisation, default is 10.
     num_samples : ``int``, optional
@@ -56,7 +56,12 @@ def slsqp(func: Callable,
     
     # iteratively optimise over candidates
     for i in range(num_starts):
-        result = minimize(func, x0=candidates[i], method="SLSQP", bounds=opt_bounds, constraints=constraints, **kwargs)
+        result = minimize(func,
+                          x0=candidates[i],
+                          method="SLSQP",
+                          bounds=opt_bounds,
+                          constraints=constraints,
+                          **kwargs)
         results[i, :] = torch.from_numpy(result["x"].reshape(1, -1))
         func_results[i] = float(result["fun"])
     

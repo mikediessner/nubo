@@ -14,7 +14,7 @@
 <meta property="og:image:alt" content="Parent class: Analytical acquisition functions: Monte Carlo aquisition functions:" />
 <meta name="description" content="Parent class: Analytical acquisition functions: Monte Carlo aquisition functions:" />
 <meta name="twitter:card" content="summary_large_image" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Surrogate module" href="nubo.models.html" /><link rel="prev" title="Bayesian optimisation with known observational noise" href="fixed_noise.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Surrogate module" href="nubo.models.html" /><link rel="prev" title="Algorithms module" href="nubo.algorithms.html" />
 
     <link rel="shortcut icon" href="_static/favicon.ico"/><!-- Generated with Sphinx 6.2.1 and Furo 2023.03.27 -->
         <title>Acquisition module - NUBO</title>
@@ -190,6 +190,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="nubo.algorithms.html">Algorithms module</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Acquisition module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nubo.models.html">Surrogate module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nubo.optimisation.html">Optimisation module</a></li>
@@ -411,7 +412,7 @@ that zeros all values below 0 and leaves the rest as is.</p>
 </dd>
 <dt><strong>fix_base_samples</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">bool</span></code></span></dt><dd><p>Whether base samples used to compute Monte Carlo samples of
 acquisition function should be fixed for the optimisation step.
-If false (default) stochastic optimizer (Adam) have to be used. If
+If false (default) stochastic optimizer (Adam) has to be used. If
 true deterministic optimizer (L-BFGS-B, SLSQP) can be used.</p>
 </dd>
 <dt><strong>base_samples</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">NoneType</span></code> or <code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>Base samples used to compute Monte Carlo samples drawn if
@@ -481,7 +482,7 @@ of the Cholesky decomposition of the covariance matrix
 </dd>
 <dt><strong>fix_base_samples</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">bool</span></code></span></dt><dd><p>Whether base samples used to compute Monte Carlo samples of
 acquisition function should be fixed for the optimisation step.
-If false (default) stochastic optimizer (Adam) have to be used. If
+If false (default) stochastic optimizer (Adam) has to be used. If
 true deterministic optimizer (L-BFGS-B, SLSQP) can be used.</p>
 </dd>
 <dt><strong>base_samples</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">NoneType</span></code> or <code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>Base samples used to compute Monte Carlo samples drawn if
@@ -542,14 +543,14 @@ by averaging Monte Carlo samples.</p>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="fixed_noise.html">
+          <a class="prev-page" href="nubo.algorithms.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Bayesian optimisation with known observational noise</div>
+                <div class="title">Algorithms module</div>
                 
               </div>
             </a>

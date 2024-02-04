@@ -190,6 +190,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="nubo.algorithms.html">Algorithms module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nubo.acquisition.html">Acquisition module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nubo.models.html">Surrogate module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nubo.optimisation.html">Optimisation module</a></li>
@@ -324,7 +325,8 @@ that for every dimension each equal part contains exactly one point.</p>
 <span class="target" id="module-nubo.utils.generate_inputs"></span><dl class="py function">
 <dt class="sig sig-object py" id="nubo.utils.generate_inputs.gen_inputs">
 <span class="sig-prename descclassname"><span class="pre">nubo.utils.generate_inputs.</span></span><span class="sig-name descname"><span class="pre">gen_inputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_lhd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/utils/generate_inputs.html#gen_inputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.utils.generate_inputs.gen_inputs" title="Permalink to this definition">#</a></dt>
-<dd><p>Generate data inputs from a maximin Latin hypercube design.</p>
+<dd><p>Generate data inputs from a maximin Latin hypercube design or from a
+uniform distribution for one data point.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>

@@ -3,21 +3,21 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<meta property="og:title" content="NUBO: A Transparent Python Package for Bayesian Optimisation" />
+<meta property="og:title" content="Algorithms module" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="index.html" />
+<meta property="og:url" content="nubo.algorithms.html" />
 <meta property="og:site_name" content="NUBO" />
-<meta property="og:description" content="NUBO, short for Newcastle University Bayesian optimisation, is a Bayesian optimisation framework for the optimisation of expensive-to-evaluate black-box functions, such as physical experiments and ..." />
+<meta property="og:description" content="This module provides some implementations of algorithms that address a specific problem or challenge for easy, off-the-shelf use. Environmental conditions:" />
 <meta property="og:image:width" content="1146" />
 <meta property="og:image:height" content="600" />
 <meta property="og:image" content="/None" />
-<meta property="og:image:alt" content="NUBO, short for Newcastle University Bayesian optimisation, is a Bayesian optimisation framework for the optimisation of expensive-to-evaluate black-box func..." />
-<meta name="description" content="NUBO, short for Newcastle University Bayesian optimisation, is a Bayesian optimisation framework for the optimisation of expensive-to-evaluate black-box functions, such as physical experiments and ..." />
+<meta property="og:image:alt" content="This module provides some implementations of algorithms that address a specific problem or challenge for easy, off-the-shelf use. Environmental conditions:" />
+<meta name="description" content="This module provides some implementations of algorithms that address a specific problem or challenge for easy, off-the-shelf use. Environmental conditions:" />
 <meta name="twitter:card" content="summary_large_image" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Overview" href="overview.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="Utility module" href="nubo.utils.html" />
 
     <link rel="shortcut icon" href="_static/favicon.ico"/><!-- Generated with Sphinx 6.2.1 and Furo 2023.03.27 -->
-        <title>NUBO</title>
+        <title>Algorithms module - NUBO</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
@@ -136,7 +136,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="#"><div class="brand">NUBO</div></a>
+      <a href="index.html"><div class="brand">NUBO</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -156,7 +156,7 @@
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
-      <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
   
   <span class="sidebar-brand-text">NUBO</span>
@@ -189,13 +189,13 @@
 <li class="toctree-l1"><a class="reference internal" href="fixed_noise.html">Bayesian optimisation with known observational noise</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="nubo.acquisition.html">Acquisition module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nubo.models.html">Surrogate module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nubo.optimisation.html">Optimisation module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nubo.test_functions.html">Test function module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nubo.utils.html">Utility module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nubo.algorithms.html">Algorithms module</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Algorithms module</a></li>
 </ul>
 
 </div>
@@ -230,95 +230,56 @@
           </label>
         </div>
         <article role="main">
-          <section id="nubo-a-transparent-python-package-for-bayesian-optimisation">
-<h1>NUBO: A Transparent Python Package for Bayesian Optimisation<a class="headerlink" href="#nubo-a-transparent-python-package-for-bayesian-optimisation" title="Permalink to this heading">#</a></h1>
-<p>NUBO, short for Newcastle University Bayesian optimisation, is a Bayesian
-optimisation framework for the optimisation of expensive-to-evaluate black-box
-functions, such as physical experiments and computer simulations. It is
-developed and maintained by the <a class="reference external" href="https://www.experimental-fluid-dynamics.com">Fluid Dynamics Lab</a> at
-<a class="reference external" href="https://www.ncl.ac.uk">Newcastle University</a>. NUBO focuses primarily on transparency and user
-experience to make Bayesian optimisation easily accessible to researchers from
-all disciplines. Transparency is ensured by clean and comprehensible code,
-precise references, and thorough documentation. User experience is ensured
-by a modular and flexible design, easy-to-write syntax, and careful selection
-of Bayesian optimisation algorithms. NUBO allows you to tailor Bayesian
-optimisation to your specific problem by writing the optimisation loop yourself
-using the provided building blocks. Only algorithms and methods that are
-sufficiently tested and validated to perform well are included in NUBO. This
-ensures that the package remains compact and does not overwhelm the user with an
-unnecessarily large number of options. The package is written in <a class="reference external" href="https://www.python.org">Python</a> but does
-not require expert knowledge of Python to optimise your simulations and
-experiments. NUBO is distributed as open-source software under the
-<a class="reference external" href="https://github.com/mikediessner/nubo/blob/main/LICENSE.md">BSD 3-Clause licence</a>.</p>
-<div class="seealso admonition">
-<p class="admonition-title">Contact</p>
-<p>Thanks for considering NUBO. If you have any questions, comments, or issues
-feel free to email us at <a class="reference external" href="mailto:m&#46;diessner2&#37;&#52;&#48;newcastle&#46;ac&#46;uk">m<span>&#46;</span>diessner2<span>&#64;</span>newcastle<span>&#46;</span>ac<span>&#46;</span>uk</a>. Any feedback is highly
-appreciated and will help make NUBO better in the future.</p>
-</div>
-<p>On this page, you can find an overview of the three main documentation sections
-consisting of (i) an introduction to Bayesian optimisation with NUBO, (ii) a
-selection of examples that can be used as boilerplate code, and (iii) detailed
-references for all of NUBO’s functions and objects.</p>
-<section id="nubo">
-<h2>NUBO<a class="headerlink" href="#nubo" title="Permalink to this heading">#</a></h2>
-<p>The NUBO section contains general information about the package, gives a
-concise introduction to <a class="reference internal" href="bayesian_optimisation.html#bo"><span class="std std-ref">Bayesian optimisation</span></a>, and explains its
-components, such as the <a class="reference internal" href="bayesian_optimisation.html#model"><span class="std std-ref">surrogate model</span></a> and
-<a class="reference internal" href="bayesian_optimisation.html#acquisition"><span class="std std-ref">acquisition functions</span></a>. It also provides a
-<a class="reference internal" href="get_started.html#get-started"><span class="std std-ref">quick start guide</span></a> to NUBO allowing you to start optimising
-your simulations and experiments in minutes. This is the place to start your
-Bayesian optimisation journey with NUBO.</p>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">NUBO:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="get_started.html">Get started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bayesian_optimisation.html">A primer on Bayesian optimisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="practical_considerations.html">Practical considerations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="citation.html">Citation</a></li>
-<li class="toctree-l1"><a class="reference external" href="http://github.com/mikediessner/nubo">GitHub</a></li>
-</ul>
-</div>
-</section>
-<section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
-<p>The Examples section provides guides to some problems that NUBO has been
-designed to optimise and shows how to implement
-<a class="reference internal" href="custom_gp.html#custom-gp"><span class="std std-ref">custom surrogate models</span></a>. This boilerplate code is a good
-starting point when tailoring a Bayesian optimisation algorithm to your
-specific problem.</p>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="custom_gp.html">Custom Gaussian process</a></li>
-<li class="toctree-l1"><a class="reference internal" href="singlepoint.html">Sequential single-point Bayesian optimisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="multipoint_joint.html">Parallel multi-point joint Bayesian optimisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="multipoint_sequential.html">Parallel multi-point sequential Bayesian optimisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="multipoint_fixed.html">Parallel multi-point Bayesian optimisation with fixed base samples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="asynchronous_bo.html">Asynchronous Bayesian optimisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="constrained_bo.html">Constrained single-point Bayesian optimisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mixed_parameters.html">Bayesian optimisation with continuous and discrete parameters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="fixed_noise.html">Bayesian optimisation with known observational noise</a></li>
-</ul>
-</div>
-</section>
-<section id="package-reference">
-<h2>Package reference<a class="headerlink" href="#package-reference" title="Permalink to this heading">#</a></h2>
-<p>The Package reference section gives detailed documentation of all of NUBO’s
-functionality. This is where you want to go first when you are not sure how
-a specific object or function should be used.</p>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="nubo.acquisition.html">Acquisition module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nubo.models.html">Surrogate module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nubo.optimisation.html">Optimisation module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nubo.test_functions.html">Test function module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nubo.utils.html">Utility module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nubo.algorithms.html">Algorithms module</a></li>
-</ul>
-</div>
+          <section id="algorithms-module">
+<h1>Algorithms module<a class="headerlink" href="#algorithms-module" title="Permalink to this heading">#</a></h1>
+<p>This module provides some implementations of algorithms that address a specific
+problem or challenge for easy, off-the-shelf use.</p>
+<section id="module-nubo.algorithms.environmental_conditions">
+<span id="environmental-conditions"></span><h2>Environmental conditions<a class="headerlink" href="#module-nubo.algorithms.environmental_conditions" title="Permalink to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="nubo.algorithms.environmental_conditions.envbo">
+<span class="sig-prename descclassname"><span class="pre">nubo.algorithms.environmental_conditions.</span></span><span class="sig-name descname"><span class="pre">envbo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">env_dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">env_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constraints</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalise_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">standardise_y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_starts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/algorithms/environmental_conditions.html#envbo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.algorithms.environmental_conditions.envbo" title="Permalink to this definition">#</a></dt>
+<dd><p>ENVBO is a Bayesian optimisation algorithm for problems with uncontrollable
+variablesthat are given externally by environmental conditions. This
+function represents a single optimisation step that needs to be wrapped in
+a loop where new measurements of the environmental variables are provided
+at each iteration. Assumes a maximisation problem.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>x_train</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x d) Training inputs.</p>
+</dd>
+<dt><strong>y_train</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n) Training outputs.</p>
+</dd>
+<dt><strong>env_dims</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">List</span></code> of <code class="docutils literal notranslate"><span class="pre">int</span></code></span></dt><dd><p>List of indices of environmental variables.</p>
+</dd>
+<dt><strong>env_values</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">float</span></code> or <code class="docutils literal notranslate"><span class="pre">List</span></code> of <code class="docutils literal notranslate"><span class="pre">float</span></code></span></dt><dd><p>List of values of environmental variables.</p>
+</dd>
+<dt><strong>bounds</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 2 x d) Optimisation bounds of input space.</p>
+</dd>
+<dt><strong>constraints</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">dict</span></code> or <code class="docutils literal notranslate"><span class="pre">Tuple</span></code> of <code class="docutils literal notranslate"><span class="pre">dict</span></code>, optional</span></dt><dd><p>Optimisation constraints on inputs, default is no constraints.</p>
+</dd>
+<dt><strong>normalise_x: bool, optional</strong></dt><dd><p>Whether inputs should be normalised before optimisation, default is
+False.</p>
+</dd>
+<dt><strong>standardise_y: bool, optional</strong></dt><dd><p>Whether outpus should be standardised before optimisation, default is
+False</p>
+</dd>
+<dt><strong>num_starts</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code>, optional</span></dt><dd><p>Number of start for multi-start optimisation, default is 10.</p>
+</dd>
+<dt><strong>num_samples</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code>, optional</span></dt><dd><p>Number of samples from which to draw the starts, default is 100.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></dt><dd><p>(size 1 x d) Maximiser inputs.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 </section>
 
@@ -327,16 +288,18 @@ a specific object or function should be used.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="overview.html">
+          
+          <a class="prev-page" href="nubo.utils.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
-                  <span>Next</span>
+                  <span>Previous</span>
                 </div>
-                <div class="title">Overview</div>
+                
+                <div class="title">Utility module</div>
+                
               </div>
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -367,10 +330,11 @@ a specific object or function should be used.</p>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">NUBO: A Transparent Python Package for Bayesian Optimisation</a><ul>
-<li><a class="reference internal" href="#nubo">NUBO</a></li>
-<li><a class="reference internal" href="#examples">Examples</a></li>
-<li><a class="reference internal" href="#package-reference">Package reference</a></li>
+<li><a class="reference internal" href="#">Algorithms module</a><ul>
+<li><a class="reference internal" href="#module-nubo.algorithms.environmental_conditions">Environmental conditions</a><ul>
+<li><a class="reference internal" href="#nubo.algorithms.environmental_conditions.envbo"><code class="docutils literal notranslate"><span class="pre">envbo()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

@@ -89,6 +89,7 @@ a specific object or function should be used.
    nubo.optimisation.rst
    nubo.test_functions.rst
    nubo.utils.rst
+   nubo.algorithms.rst
 
 .. _`Fluid Dynamics Lab`: https://www.experimental-fluid-dynamics.com
 .. _`Newcastle University`: https://www.ncl.ac.uk

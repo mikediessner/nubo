@@ -7,3 +7,4 @@ full_requirements.txt
 .ipynb_checkpoints/
 nubopy.egg-info/
 dist/
+constrained_LHS.txt

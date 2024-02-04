@@ -178,6 +178,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../nubo.algorithms.html">Algorithms module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../nubo.acquisition.html">Acquisition module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../nubo.models.html">Surrogate module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../nubo.optimisation.html">Optimisation module</a></li>
@@ -229,7 +230,8 @@
                <span class="n">bounds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tensor</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                <span class="n">num_lhd</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Generate data inputs from a maximin Latin hypercube design.</span>
+<span class="sd">    Generate data inputs from a maximin Latin hypercube design or from a</span>
+<span class="sd">    uniform distribution for one data point.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -252,8 +254,12 @@
     <span class="k">if</span> <span class="n">bounds</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">bounds</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">([[</span><span class="mf">0.</span><span class="p">]</span><span class="o">*</span><span class="n">num_dims</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.</span><span class="p">]</span><span class="o">*</span><span class="n">num_dims</span><span class="p">])</span>
 
-    <span class="n">lhs</span> <span class="o">=</span> <span class="n">LatinHypercubeSampling</span><span class="p">(</span><span class="n">dims</span><span class="o">=</span><span class="n">num_dims</span><span class="p">)</span>
-    <span class="n">points</span> <span class="o">=</span> <span class="n">lhs</span><span class="o">.</span><span class="n">maximin</span><span class="p">(</span><span class="n">points</span><span class="o">=</span><span class="n">num_points</span><span class="p">,</span> <span class="n">samples</span><span class="o">=</span><span class="n">num_lhd</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">num_points</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">points</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_dims</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">lhs</span> <span class="o">=</span> <span class="n">LatinHypercubeSampling</span><span class="p">(</span><span class="n">dims</span><span class="o">=</span><span class="n">num_dims</span><span class="p">)</span>
+        <span class="n">points</span> <span class="o">=</span> <span class="n">lhs</span><span class="o">.</span><span class="n">maximin</span><span class="p">(</span><span class="n">points</span><span class="o">=</span><span class="n">num_points</span><span class="p">,</span> <span class="n">samples</span><span class="o">=</span><span class="n">num_lhd</span><span class="p">)</span>
+
     <span class="n">points</span> <span class="o">=</span> <span class="n">unnormalise</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">points</span></div>

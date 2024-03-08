@@ -1,0 +1,382 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Optimisation with changing environmental conditions" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="envbo.html" />
+<meta property="og:site_name" content="NUBO" />
+<meta property="og:description" content="Sometimes we cannot control every input parameter ourselves and some uncontrollable variables are given externally by environmental conditions. Some common examples are temperature and humidity in ..." />
+<meta name="description" content="Sometimes we cannot control every input parameter ourselves and some uncontrollable variables are given externally by environmental conditions. Some common examples are temperature and humidity in ..." />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Custom Gaussian process" href="custom_gp.html" /><link rel="prev" title="Typical problems" href="basic_optimisation.html" />
+
+    <link rel="shortcut icon" href="_static/favicon.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+        <title>Optimisation with changing environmental conditions - NUBO</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css?v=2aa19091" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=7707a854" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">NUBO</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">NUBO</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">NUBO:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="get_started.html">Get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bayesian_optimisation.html">A primer on Bayesian optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="practical_considerations.html">Practical considerations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="citation.html">Citation</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://github.com/mikediessner/nubo">GitHub</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Off-the-shelf algorithms:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="basic_optimisation.html">Typical problems</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Optimisation with changing environmental conditions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Custom loop examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="custom_gp.html">Custom Gaussian process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="singlepoint.html">Sequential single-point Bayesian optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multipoint_joint.html">Parallel multi-point joint Bayesian optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multipoint_sequential.html">Parallel multi-point sequential Bayesian optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multipoint_fixed.html">Parallel multi-point Bayesian optimisation with fixed base samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asynchronous_bo.html">Asynchronous Bayesian optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constrained_bo.html">Constrained single-point Bayesian optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixed_parameters.html">Bayesian optimisation with continuous and discrete parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fixed_noise.html">Bayesian optimisation with known observational noise</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="nubo.algorithms.html">Algorithms module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nubo.acquisition.html">Acquisition module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nubo.models.html">Surrogate module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nubo.optimisation.html">Optimisation module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nubo.test_functions.html">Test function module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nubo.utils.html">Utility module</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="Optimisation-with-changing-environmental-conditions">
+<h1>Optimisation with changing environmental conditions<a class="headerlink" href="#Optimisation-with-changing-environmental-conditions" title="Link to this heading">#</a></h1>
+<p>Sometimes we cannot control every input parameter ourselves and some uncontrollable variables are given externally by environmental conditions. Some common examples are temperature and humidity in a lab. This example assumes that the second input is uncontrollable and aims to solve the problem conditionally on measurements (in this case simulated by adding a small positive or negative value to the value of the uncontrollable input from the previous iteration). The <code class="docutils literal notranslate"><span class="pre">Hartmann6D</span></code> synthetic test
+function acts as a substitute for a black-box objective function, such as an experiment or a simulation. The resulting data points can be used as training data of a machine learning model, such as a Gaussian process, to predict the optimal values of all controllable parameters conditionally on measurements of the uncontrollable variable. The <code class="docutils literal notranslate"><span class="pre">ENVBOPredictionModel</span></code> provides an implementation of this approach for easy use. The model can only be used to predict controllable parameters based on
+environmental values that ENVBO explored during optimisation. Going beyond the explored range will result in extrapolation that is not informative when using Gaussian processes. For example, if the range of the environmental values explored during optimisaion 0.1 to 0.4, the model should not used to predict for environmental values larger than 0.4.</p>
+<p>The example below assumes that input 2 of the Hartmann function cannot be controlled and optimises conditionally on its values. The resulting candidates are then used to train a Gaussian process as a prediction model that predicts the optimal inputs for <span class="math notranslate nohighlight">\(x_2 = 0.3\)</span> with a predicted output of -3.09.</p>
+<p>For more details, we refer to M Diessner, KJ Wilson, and RD Whalley, “On the development of a practical Bayesian optimisation algorithm for expensive experiments and simulations with changing environmental conditions,” <em>arXiv preprint arXiv:2402.03006</em>, 2024.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import torch
+from nubo.algorithms import envbo, ENVBOPredictionModel
+from nubo.test_functions import Hartmann6D
+from nubo.utils import gen_inputs
+
+
+# test function
+func = Hartmann6D(minimise=False)
+dims = 6
+
+# specify bounds
+bounds = torch.tensor([[0., 0., 0., 0., 0., 0.], [1., 1., 1., 1., 1., 1.]])
+
+# training data
+x_train = gen_inputs(num_points=dims*5,
+                     num_dims=dims,
+                     bounds=bounds)
+y_train = func(x_train)
+
+# Bayesian optimisation loop
+iters = 40
+
+for iter in range(iters):
+
+    env_dims = 1
+    env_value = x_train[-1, env_dims] + torch.normal(0.0, torch.tensor(0.05))
+    env_value = torch.clamp(env_value, min=0, max=1)
+
+    # NUBO
+    x_new = envbo(x_train=x_train,
+                  y_train=y_train,
+                  env_dims=env_dims,
+                  env_values=env_value.tolist(),
+                  bounds=bounds)
+
+    # evaluate new point
+    y_new = func(x_new)
+
+    # add to data
+    x_train = torch.vstack((x_train, x_new))
+    y_train = torch.hstack((y_train, y_new))
+
+    # print new best
+    if y_new &gt; torch.max(y_train[:-1]):
+        print(f&quot;New best at evaluation {len(y_train)}: \t Inputs: {x_new.numpy().reshape(dims).round(4)}, \t Outputs: {-y_new.numpy().round(4)}&quot;)
+
+# results
+best_iter = int(torch.argmax(y_train))
+print(f&quot;Evaluation: {best_iter+1} \t Solution: {-float(y_train[best_iter]):.4f}&quot;)
+
+# predict optimal values of controllable parameters based on environmental measurements
+model = ENVBOPredictionModel(x_train, y_train, env_dims, bounds)
+
+x_pred, y_pred = model.predict(0.3)
+
+print(f&quot;Predicted optimal inputs: {x_pred}&quot;)
+print(f&quot;Predicted output: {-y_pred}&quot;)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+New best at evaluation 54:       Inputs: [0.2106 0.4684 0.5974 0.2002 0.2793 0.6266],    Outputs: [-2.1139]
+New best at evaluation 56:       Inputs: [0.2048 0.4332 0.5424 0.221  0.3003 0.642 ],    Outputs: [-2.4382]
+New best at evaluation 57:       Inputs: [0.1765 0.4425 0.4714 0.2499 0.3253 0.6641],    Outputs: [-2.4523]
+New best at evaluation 58:       Inputs: [0.1846 0.3954 0.4932 0.2447 0.3144 0.6652],    Outputs: [-2.6823]
+New best at evaluation 60:       Inputs: [0.1745 0.2582 0.4871 0.2476 0.3043 0.6805],    Outputs: [-3.1487]
+Evaluation: 60   Solution: -3.1487
+Predicted optimal inputs: tensor([[0.1843, 0.3000, 0.4632, 0.2626, 0.3019, 0.6726]])
+Predicted output: tensor([-3.0859])
+</pre></div></div>
+</div>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="custom_gp.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Custom Gaussian process</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="basic_optimisation.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Typical problems</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Mike Diessner
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=6f037312"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/custom.js?v=60b15ab8"></script>
+    </body>
+</html>

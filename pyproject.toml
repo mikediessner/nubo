@@ -4,14 +4,17 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "nubopy"
-version = "1.1.0"
+version = "1.2.0"
 authors = [
   { name="Mike Diessner", email="m.diessner2@ncl.ac.uk" },
 ]
 description = "A transparent Python package for Bayesian optimisation"
 readme = "README.md"
 requires-python = ">=3.10"
-dependencies = ["torch", "gpytorch", "scipy", "numpy"]
+dependencies = ["torch>=2.0.0",
+                "gpytorch>=1.10",
+                "scipy>=1.10.0",
+                "numpy>=1.24.0"]
 classifiers = [
         "Intended Audience :: Science/Research",
         "Programming Language :: Python :: 3",

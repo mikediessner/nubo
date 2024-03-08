@@ -328,22 +328,22 @@ considered directly in the optimisation.
 .. _documentation: https://docs.gpytorch.ai/en/stable
 
 .. [#Balandat2020] M Balandat *et al.*, "BoTorch: A Framework for Efficient Monte-Carlo Bayesian Optimization," *Advances in Neural Information Processing Systems*, vol. 33, 2020.
-.. [#Diessner2022] M Diessner, J O'Connor, A Wynn, S Laizet, Y Guan, K Wilson, and R D Whalley, "Investigating Bayesian Optimization for Expensive-To-Evaluate Black Box Functions: Application in Fluid Dynamics," *Frontiers in Applied Mathematics and Statistics*, 2022. 
-.. [#Frazier2018] P I Frazier, "A Tutorial on Bayesian Optimization," *arXiv preprint arXiv:1807.02811*, 2018.
-.. [#Gardner2018] J Gardner, G Pleiss, K Q Weinberger, D Bindel, and A G Wilson, "GPyTorch: Blackbox Matrix-Matrix Gaussian Process Inference with Gpu Acceleration," *Advances in Neural Information Processing Systems*, vol. 31, 2018.
-.. [#Gramacy2020] R B Gramacy, *Surrogates: Gaussian Process Modeling, Design, and Optimization for the Applied Sciences*, 1st ed. Boca Raton, FL: CRC press, 2020.
-.. [#Jones1998] D R Jones, M Schonlau, and W J Welch, "Efficient Global Optimization of Expensive Black-Box Functions," *Journal of Global Optimization*, vol. 13, no. 4, p. 566, 1998.
-.. [#Kingma2015] D P Kingma and J Ba, "Adam: A Method for Stochastic Optimization," *Proceedings of the 3rd International Conference on Learning Representations*, 2015.
+.. [#Diessner2022] M Diessner, J O'Connor, A Wynn, S Laizet, Y Guan, KJ Wilson, and RD Whalley, "Investigating Bayesian Optimization for Expensive-To-Evaluate Black Box Functions: Application in Fluid Dynamics," *Frontiers in Applied Mathematics and Statistics*, 2022. 
+.. [#Frazier2018] PI Frazier, "A Tutorial on Bayesian Optimization," *arXiv preprint arXiv:1807.02811*, 2018.
+.. [#Gardner2018] J Gardner, G Pleiss, KQ Weinberger, D Bindel, and AG Wilson, "GPyTorch: Blackbox Matrix-Matrix Gaussian Process Inference with Gpu Acceleration," *Advances in Neural Information Processing Systems*, vol. 31, 2018.
+.. [#Gramacy2020] RB Gramacy, *Surrogates: Gaussian Process Modeling, Design, and Optimization for the Applied Sciences*, 1st ed. Boca Raton, FL: CRC press, 2020.
+.. [#Jones1998] DR Jones, M Schonlau, and WJ Welch, "Efficient Global Optimization of Expensive Black-Box Functions," *Journal of Global Optimization*, vol. 13, no. 4, p. 566, 1998.
+.. [#Kingma2015] DP Kingma and J Ba, "Adam: A Method for Stochastic Optimization," *Proceedings of the 3rd International Conference on Learning Representations*, 2015.
 .. [#Kraft1994] D Kraft, "Algorithm 733: TOMP-Fortran Modules for Optimal Control Calculations," *ACM Transactions on Mathematical Software (TOMS)*, vol. 20, no. 3, p. 262-281, 1994.
-.. [#Mahfoze2019] O A Mahfoze, A Moody, A Wynn, R D Whalley, and S Laizet, "Reducing the Skin-Friction Drag of a Turbulent Boundary-Layer Flow with Low-Amplitude Wall-Normal Blowing within a Bayesian Optimization Framework," *Physical Review Fluids*, vol. 4, no. 9, 2019.
-.. [#McKay2000] M D McKay, R J Beckman, and W J Conover, "A Comparison of Three Methods for Selecting Values of Input Variables in the Analysis of Output from a Computer Code," *Technometrics*, vol. 42, no. 1, p. 55-61, 2000.
-.. [#OConnor2023] J O'Connor, M Diessner, K Wilson, R D Whalley, A Wynn, and S Laizet, "Optimisation and Analysis of Streamwise-Varying Wall-Normal Blowing in a Turbulent Boundary Layer," *Flow, Turbulence and Combustion*, 2023.
-.. [#Shahriari2015] B Shahriari, K Swersky, Z Wang, R P Adams, and N De Freitas, "Taking the Human Out of the Loop: A Review of Bayesian Optimization," *Proceedings of the IEEE*, vol. 104, no. 1, p. 148-175, 2015.
-.. [#Snoek2012] J Snoek, H Larochelle, and R P Adams, "Practical Bayesian Optimization of Machine Learning Algorithms," *Advances in Neural Information Processing Systems*, vol. 25, 2012.
-.. [#Srinivas2010] N Srinivas, A Krause, S M Kakade, and M Seeger, "Gaussian Process Optimization in the Bandit Setting: No Regret and Experimental Design," *Proceedings of the 27th International Conference on Machine Learning*, p. 1015-1022, 2010.
-.. [#Wang2022] K Wang and A W Dowling, "Bayesian optimization for chemical products and functional materials," *Current Opinion in Chemical Engineering*, vol. 36, 2022.
+.. [#Mahfoze2019] OA Mahfoze, A Moody, A Wynn, RD Whalley, and S Laizet, "Reducing the Skin-Friction Drag of a Turbulent Boundary-Layer Flow with Low-Amplitude Wall-Normal Blowing within a Bayesian Optimization Framework," *Physical Review Fluids*, vol. 4, no. 9, 2019.
+.. [#McKay2000] MD McKay, RJ Beckman, and WJ Conover, "A Comparison of Three Methods for Selecting Values of Input Variables in the Analysis of Output from a Computer Code," *Technometrics*, vol. 42, no. 1, p. 55-61, 2000.
+.. [#OConnor2023] J O'Connor, M Diessner, KJ Wilson, RD Whalley, A Wynn, and S Laizet, "Optimisation and Analysis of Streamwise-Varying Wall-Normal Blowing in a Turbulent Boundary Layer," *Flow, Turbulence and Combustion*, 2023.
+.. [#Shahriari2015] B Shahriari, K Swersky, Z Wang, RP Adams, and N De Freitas, "Taking the Human Out of the Loop: A Review of Bayesian Optimization," *Proceedings of the IEEE*, vol. 104, no. 1, p. 148-175, 2015.
+.. [#Snoek2012] J Snoek, H Larochelle, and RP Adams, "Practical Bayesian Optimization of Machine Learning Algorithms," *Advances in Neural Information Processing Systems*, vol. 25, 2012.
+.. [#Srinivas2010] N Srinivas, A Krause, SM Kakade, and M Seeger, "Gaussian Process Optimization in the Bandit Setting: No Regret and Experimental Design," *Proceedings of the 27th International Conference on Machine Learning*, p. 1015-1022, 2010.
+.. [#Wang2022] K Wang and AW Dowling, "Bayesian optimization for chemical products and functional materials," *Current Opinion in Chemical Engineering*, vol. 36, 2022.
 .. [#White2021] C White, W Neiswanger, and Y Savani, "Bananas: Bayesian Optimization with Neural Architectures for Neural Architecture Search," *Proceedings of the Aaai Conference on Artificial Intelligence*, vol. 35, no. 12, 2021.
-.. [#Williams2006] C K I Williams, and C E Rasmussen, *Gaussian Processes for Machine Learning*, 2nd ed. Cambridge, MA: MIT press, 2006.
+.. [#Williams2006] CKI Williams, and CE Rasmussen, *Gaussian Processes for Machine Learning*, 2nd ed. Cambridge, MA: MIT press, 2006.
 .. [#Wilson2018] J Wilson, F Hutter, and M Deisenroth, "Maximizing Acquisition Functions for Bayesian Optimization," *Advances in Neural Information Processing Systems*, vol. 31, 2018.
-.. [#Wu2019] J Wu, X Y Chen, H Zhang, L D Xiong, H Lei, and S H Deng, "Hyperparameter Optimization for Machine Learning Models Based on Bayesian Optimization," *Journal of Electronic Science and Technology*, vol. 17, no. 1, p. 26-40, 2019.
-.. [#Zhu1997] C Zhu, R H Byrd, P Lu, J Nocedal, "Algorithm 778: L-BFGS-B: Fortran Subroutines for Large-Scale Bound-Constrained Optimization," *ACM Transactions on Mathematical Software (TOMS)*, vol. 23, no. 4, p. 550-560, 1997.
+.. [#Wu2019] J Wu, XY Chen, H Zhang, LD Xiong, H Lei, and SH Deng, "Hyperparameter Optimization for Machine Learning Models Based on Bayesian Optimization," *Journal of Electronic Science and Technology*, vol. 17, no. 1, p. 26-40, 2019.
+.. [#Zhu1997] C Zhu, RH Byrd, P Lu, J Nocedal, "Algorithm 778: L-BFGS-B: Fortran Subroutines for Large-Scale Bound-Constrained Optimization," *ACM Transactions on Mathematical Software (TOMS)*, vol. 23, no. 4, p. 550-560, 1997.

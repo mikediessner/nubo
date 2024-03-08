@@ -1,28 +1,23 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="en" data-content_root="./">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta property="og:title" content="Algorithms module" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="nubo.algorithms.html" />
 <meta property="og:site_name" content="NUBO" />
-<meta property="og:description" content="This module provides some implementations of algorithms that address a specific problem or challenge for easy, off-the-shelf use. Environmental conditions:" />
-<meta property="og:image:width" content="1146" />
-<meta property="og:image:height" content="600" />
-<meta property="og:image" content="/None" />
-<meta property="og:image:alt" content="This module provides some implementations of algorithms that address a specific problem or challenge for easy, off-the-shelf use. Environmental conditions:" />
-<meta name="description" content="This module provides some implementations of algorithms that address a specific problem or challenge for easy, off-the-shelf use. Environmental conditions:" />
-<meta name="twitter:card" content="summary_large_image" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="Utility module" href="nubo.utils.html" />
+<meta property="og:description" content="This module provides some implementations of algorithms that address a specific problem or challenge for easy, off-the-shelf use. Optimisation: Environmental conditions:" />
+<meta name="description" content="This module provides some implementations of algorithms that address a specific problem or challenge for easy, off-the-shelf use. Optimisation: Environmental conditions:" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Acquisition module" href="nubo.acquisition.html" /><link rel="prev" title="Bayesian optimisation with known observational noise" href="fixed_noise.html" />
 
-    <link rel="shortcut icon" href="_static/favicon.ico"/><!-- Generated with Sphinx 6.2.1 and Furo 2023.03.27 -->
+    <link rel="shortcut icon" href="_static/favicon.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
         <title>Algorithms module - NUBO</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=7707a854" />
     
     
 
@@ -176,7 +171,12 @@
 <li class="toctree-l1"><a class="reference internal" href="citation.html">Citation</a></li>
 <li class="toctree-l1"><a class="reference external" href="http://github.com/mikediessner/nubo">GitHub</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<p class="caption" role="heading"><span class="caption-text">Off-the-shelf algorithms:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="basic_optimisation.html">Typical problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="envbo.html">Optimisation with changing environmental conditions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Custom loop examples:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="custom_gp.html">Custom Gaussian process</a></li>
 <li class="toctree-l1"><a class="reference internal" href="singlepoint.html">Sequential single-point Bayesian optimisation</a></li>
@@ -190,12 +190,12 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
 <ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Algorithms module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nubo.acquisition.html">Acquisition module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nubo.models.html">Surrogate module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nubo.optimisation.html">Optimisation module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nubo.test_functions.html">Test function module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nubo.utils.html">Utility module</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Algorithms module</a></li>
 </ul>
 
 </div>
@@ -231,16 +231,155 @@
         </div>
         <article role="main">
           <section id="algorithms-module">
-<h1>Algorithms module<a class="headerlink" href="#algorithms-module" title="Permalink to this heading">#</a></h1>
+<h1>Algorithms module<a class="headerlink" href="#algorithms-module" title="Link to this heading">#</a></h1>
 <p>This module provides some implementations of algorithms that address a specific
 problem or challenge for easy, off-the-shelf use.</p>
-<section id="module-nubo.algorithms.environmental_conditions">
-<span id="environmental-conditions"></span><h2>Environmental conditions<a class="headerlink" href="#module-nubo.algorithms.environmental_conditions" title="Permalink to this heading">#</a></h2>
+<section id="optimisation">
+<h2>Optimisation<a class="headerlink" href="#optimisation" title="Link to this heading">#</a></h2>
+<div class="seealso admonition">
+<p class="admonition-title">References</p>
+<p>For expected improvement with noisy observations see:
+- RB Gramacy, <em>Surrogates: Gaussian Process Modeling, Design, and Optimization for the Applied Sciences</em>, 1st ed. Boca Raton, FL: CRC press, 2020.</p>
+</div>
+<span class="target" id="module-nubo.algorithms.optimise"></span><dl class="py function">
+<dt class="sig sig-object py" id="nubo.algorithms.optimise.optimise">
+<span class="sig-prename descclassname"><span class="pre">nubo.algorithms.optimise.</span></span><span class="sig-name descname"><span class="pre">optimise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">acquisition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'EI'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constraints</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">discrete</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noisy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_pending</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mc_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">128</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalise_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">standardise_y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_starts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/algorithms/optimise.html#optimise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.algorithms.optimise.optimise" title="Link to this definition">#</a></dt>
+<dd><p>Off-the-shelf optimisation step. Allows optimisation of expensive
+experiments and simulations with single-point and multi-point candidates,
+input constraints, continuous and discrete parameters, noisy observations,
+and pending training data points. You can select between expected
+improvement and upper confidence bound acquisition functions.</p>
+<p>Uses analytical acquisition functions with the L-BFGS-B optimiser for
+single-point optimisation and Monte Carlo acquisition functions with the
+Adam optimiser for multi-point and asynchronous optimisation. Fixes base
+samples when input constraints are provided for the latter and optimises all
+constrained problems via the SLSQP optimiser.</p>
+<p>For expected improvement with noisy observaions, the maximum of the Gaussian
+process posterior mean is taken as a plugin value.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>x_train</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x d) Training inputs.</p>
+</dd>
+<dt><strong>y_train</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n) Training outputs.</p>
+</dd>
+<dt><strong>bounds</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 2 x d) Optimisation bounds of input space.</p>
+</dd>
+<dt><strong>batch_size: ``int``, optional</strong></dt><dd><p>Number of new candidate points to return, default is 1.</p>
+</dd>
+<dt><strong>acquisition: ``str``, optional</strong></dt><dd><p>Acquisition function to use. Must be “EI” or “UCB”, default is “EI”.</p>
+</dd>
+<dt><strong>beta: ``int``, optional</strong></dt><dd><p>Trade-off parameter for UCB acquisition function, default is 4.0. No
+impact on when EI is specified.</p>
+</dd>
+<dt><strong>constraints</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">dict</span></code> or <code class="docutils literal notranslate"><span class="pre">Tuple</span></code> of <code class="docutils literal notranslate"><span class="pre">dict</span></code>, optional</span></dt><dd><p>Optimisation constraints on inputs, default is no constraints.</p>
+</dd>
+<dt><strong>discrete</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">dict</span></code>, optional</span></dt><dd><p>Possible values for all discrete inputs in the shape {dim1: [values1],
+dim2: [values2], etc.}, e.g. {0: [1., 2., 3.], 3: [-0.1, -0.2, 100.]}.</p>
+</dd>
+<dt><strong>noisy</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">bool</span></code>, optional</span></dt><dd><p>Specifies if observations are noisy.</p>
+</dd>
+<dt><strong>x_pending</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code>, optional</span></dt><dd><p>(size n x d) Training inputs of currently pending points, default is no
+pending points.</p>
+</dd>
+<dt><strong>mc_samples</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code>, optional</span></dt><dd><p>Number of Monte Carlo samples to approximate the acquisition function,
+default is 128. Has no effect on analytical acquisition functions.</p>
+</dd>
+<dt><strong>normalise_x: bool, optional</strong></dt><dd><p>Whether inputs should be normalised before optimisation, default is
+False.</p>
+</dd>
+<dt><strong>standardise_y: bool, optional</strong></dt><dd><p>Whether outpus should be standardised before optimisation, default is
+False</p>
+</dd>
+<dt><strong>num_starts</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code>, optional</span></dt><dd><p>Number of start for multi-start optimisation, default is 10.</p>
+</dd>
+<dt><strong>num_samples</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">int</span></code>, optional</span></dt><dd><p>Number of samples from which to draw the starts, default is 100.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></dt><dd><p>(size batch_size x d) New candidate inputs.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="environmental-conditions">
+<h2>Environmental conditions<a class="headerlink" href="#environmental-conditions" title="Link to this heading">#</a></h2>
+<div class="seealso admonition">
+<p class="admonition-title">References</p>
+<ul class="simple">
+<li><p>M Diessner, KJ Wilson, and RD Whalley, “On the development of a practical Bayesian optimisation algorithm for expensive experiments and simulations with changing environmental conditions,” <em>arXiv preprint arXiv:2402.03006</em>, 2024.</p></li>
+</ul>
+</div>
+<span class="target" id="module-nubo.algorithms.environmental_conditions"></span><dl class="py class">
+<dt class="sig sig-object py" id="nubo.algorithms.environmental_conditions.ENVBOPredictionModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.algorithms.environmental_conditions.</span></span><span class="sig-name descname"><span class="pre">ENVBOPredictionModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">env_dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constraints</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/algorithms/environmental_conditions.html#ENVBOPredictionModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.algorithms.environmental_conditions.ENVBOPredictionModel" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Prediction model for ENVBO algorithm.</p>
+<p>Predicts optimal values for controllable parameters conditional on
+measurements of environmental variables. First, it uses a Gaussian process
+to model the relationship between all controllable and environmental inputs
+and the outputs. Second, it predicts optimal input values of the
+controllable parameters by holding environmental inputs fixed to the
+provided measurements and maximising the posterior mean of the Gaussian
+process model. Assumes a maximisation problem.</p>
+<dl class="field-list">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>x_train</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n x d) Training inputs.</p>
+</dd>
+<dt><strong>y_train</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size n) Training outputs.</p>
+</dd>
+<dt><strong>env_dims</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">List</span></code> of <code class="docutils literal notranslate"><span class="pre">int</span></code></span></dt><dd><p>List of indices of environmental variables.</p>
+</dd>
+<dt><strong>env_values</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">List</span></code> of <code class="docutils literal notranslate"><span class="pre">float</span></code></span></dt><dd><p>List of values of environmental variables.</p>
+</dd>
+<dt><strong>bounds</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 2 x d) Optimisation bounds of input space.</p>
+</dd>
+<dt><strong>constraints</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">dict</span></code> or <code class="docutils literal notranslate"><span class="pre">Tuple</span></code> of <code class="docutils literal notranslate"><span class="pre">dict</span></code>, optional</span></dt><dd><p>Optimisation constraints, default is no constraints.</p>
+</dd>
+<dt><strong>likelihood</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">gpytorch.likelihoods.Likelihood</span></code></span></dt><dd><p>Likelihood.</p>
+</dd>
+<dt><strong>model</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">gpytorch.models.GP</span></code></span></dt><dd><p>Gaussian Process model.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nubo.algorithms.environmental_conditions.ENVBOPredictionModel.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/nubo/algorithms/environmental_conditions.html#ENVBOPredictionModel.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.algorithms.environmental_conditions.ENVBOPredictionModel.predict" title="Link to this definition">#</a></dt>
+<dd><p>Predict values for controllable parameters conditional on measurements
+of environmental variables.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>env_values</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">float</span></code> or <code class="docutils literal notranslate"><span class="pre">List</span></code> of <code class="docutils literal notranslate"><span class="pre">float</span></code></span></dt><dd><p>List of values of environmental variables.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl>
+<dt><strong>x_new</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 1 x d) Minimiser inputs conditional on environmental values.</p>
+</dd>
+<dt><strong>pred_new</strong><span class="classifier"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></span></dt><dd><p>(size 1) Predicted minimiser output conditional on environmental
+values.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="nubo.algorithms.environmental_conditions.envbo">
-<span class="sig-prename descclassname"><span class="pre">nubo.algorithms.environmental_conditions.</span></span><span class="sig-name descname"><span class="pre">envbo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">env_dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">env_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constraints</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalise_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">standardise_y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_starts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/algorithms/environmental_conditions.html#envbo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.algorithms.environmental_conditions.envbo" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">nubo.algorithms.environmental_conditions.</span></span><span class="sig-name descname"><span class="pre">envbo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">env_dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">env_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constraints</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalise_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">standardise_y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_starts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/algorithms/environmental_conditions.html#envbo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.algorithms.environmental_conditions.envbo" title="Link to this definition">#</a></dt>
 <dd><p>ENVBO is a Bayesian optimisation algorithm for problems with uncontrollable
-variablesthat are given externally by environmental conditions. This
+variables that are given externally by environmental conditions. This
 function represents a single optimisation step that needs to be wrapped in
 a loop where new measurements of the environmental variables are provided
 at each iteration. Assumes a maximisation problem.</p>
@@ -273,7 +412,7 @@ False</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></dt><dd><p>(size 1 x d) Maximiser inputs.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code></dt><dd><p>(size 1 x d) New candidate inputs.</p>
 </dd>
 </dl>
 </dd>
@@ -288,15 +427,23 @@ False</p>
       <footer>
         
         <div class="related-pages">
-          
-          <a class="prev-page" href="nubo.utils.html">
+          <a class="next-page" href="nubo.acquisition.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Acquisition module</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="fixed_noise.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Utility module</div>
+                <div class="title">Bayesian optimisation with known observational noise</div>
                 
               </div>
             </a>
@@ -304,7 +451,7 @@ False</p>
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2023, Mike Diessner
+                Copyright &#169; 2024, Mike Diessner
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             
@@ -331,7 +478,15 @@ False</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Algorithms module</a><ul>
-<li><a class="reference internal" href="#module-nubo.algorithms.environmental_conditions">Environmental conditions</a><ul>
+<li><a class="reference internal" href="#optimisation">Optimisation</a><ul>
+<li><a class="reference internal" href="#nubo.algorithms.optimise.optimise"><code class="docutils literal notranslate"><span class="pre">optimise()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#environmental-conditions">Environmental conditions</a><ul>
+<li><a class="reference internal" href="#nubo.algorithms.environmental_conditions.ENVBOPredictionModel"><code class="docutils literal notranslate"><span class="pre">ENVBOPredictionModel</span></code></a><ul>
+<li><a class="reference internal" href="#nubo.algorithms.environmental_conditions.ENVBOPredictionModel.predict"><code class="docutils literal notranslate"><span class="pre">ENVBOPredictionModel.predict()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#nubo.algorithms.environmental_conditions.envbo"><code class="docutils literal notranslate"><span class="pre">envbo()</span></code></a></li>
 </ul>
 </li>
@@ -346,13 +501,13 @@ False</p>
       
     </aside>
   </div>
-</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/scripts/furo.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+</div><script src="_static/documentation_options.js?v=6f037312"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="_static/custom.js"></script>
+    <script src="_static/custom.js?v=60b15ab8"></script>
     </body>
 </html>

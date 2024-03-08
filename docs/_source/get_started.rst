@@ -5,6 +5,8 @@ Get started
 This brief introduction will teach you in detail how to install NUBO from the
 `GitHub repository`_ and how to set up a Bayesian optimisation loop to maximise
 a toy function using NUBO's predefined Gaussian process as the surrogate model.
+You can also use one of our off-the-shelf algorithm to get started quickly. For
+more details see the `Off-the-shelf algorithms` section in the menu on the left.
 
 Installing NUBO
 ---------------

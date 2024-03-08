@@ -1,1 +1,2 @@
-from .environmental_conditions import envbo, _cond_optim
+from .optimise import optimise
+from .environmental_conditions import envbo, _cond_optim, ENVBOPredictionModel

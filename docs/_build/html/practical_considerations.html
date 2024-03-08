@@ -1,28 +1,23 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="en" data-content_root="./">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta property="og:title" content="Practical considerations" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="practical_considerations.html" />
 <meta property="og:site_name" content="NUBO" />
 <meta property="og:description" content="Below are some considerations that should be taken into account when deciding on the design of the Bayesian optimisation loop with NUBO. This section features some of the most common questions abou..." />
-<meta property="og:image:width" content="1146" />
-<meta property="og:image:height" content="600" />
-<meta property="og:image" content="/_images/social_previews/summary_practical_considerations_2eb701c1.png" />
-<meta property="og:image:alt" content="Below are some considerations that should be taken into account when deciding on the design of the Bayesian optimisation loop with NUBO. This section feature..." />
 <meta name="description" content="Below are some considerations that should be taken into account when deciding on the design of the Bayesian optimisation loop with NUBO. This section features some of the most common questions abou..." />
-<meta name="twitter:card" content="summary_large_image" />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Citation" href="citation.html" /><link rel="prev" title="A primer on Bayesian optimisation" href="bayesian_optimisation.html" />
 
-    <link rel="shortcut icon" href="_static/favicon.ico"/><!-- Generated with Sphinx 6.2.1 and Furo 2023.03.27 -->
+    <link rel="shortcut icon" href="_static/favicon.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
         <title>Practical considerations - NUBO</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=7707a854" />
     
     
 
@@ -176,7 +171,12 @@
 <li class="toctree-l1"><a class="reference internal" href="citation.html">Citation</a></li>
 <li class="toctree-l1"><a class="reference external" href="http://github.com/mikediessner/nubo">GitHub</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<p class="caption" role="heading"><span class="caption-text">Off-the-shelf algorithms:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="basic_optimisation.html">Typical problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="envbo.html">Optimisation with changing environmental conditions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Custom loop examples:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="custom_gp.html">Custom Gaussian process</a></li>
 <li class="toctree-l1"><a class="reference internal" href="singlepoint.html">Sequential single-point Bayesian optimisation</a></li>
@@ -231,13 +231,13 @@
         </div>
         <article role="main">
           <section id="practical-considerations">
-<h1>Practical considerations<a class="headerlink" href="#practical-considerations" title="Permalink to this heading">#</a></h1>
+<h1>Practical considerations<a class="headerlink" href="#practical-considerations" title="Link to this heading">#</a></h1>
 <p>Below are some considerations that should be taken into account when
 deciding on the design of the Bayesian optimisation loop with NUBO. This
 section features some of the most common questions about Bayesian optimisation
 and NUBO and is frequently updated.</p>
 <section id="general">
-<h2>General<a class="headerlink" href="#general" title="Permalink to this heading">#</a></h2>
+<h2>General<a class="headerlink" href="#general" title="Link to this heading">#</a></h2>
 <dl class="simple">
 <dt><strong>How many initial data points do I need?</strong></dt><dd><p>A rule of thumb for Gaussian process models is to have at least 10 points
 per input dimension <a class="footnote-reference brackets" href="#baker2021" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#domingo2019" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#owen2017" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a>. However,
@@ -254,7 +254,7 @@ time-consuming for many discrete dimensions and possible values.</p>
 </dl>
 </section>
 <section id="gaussian-process">
-<h2>Gaussian process<a class="headerlink" href="#gaussian-process" title="Permalink to this heading">#</a></h2>
+<h2>Gaussian process<a class="headerlink" href="#gaussian-process" title="Link to this heading">#</a></h2>
 <dl class="simple">
 <dt><strong>What prior mean function and prior covariance kernel should I use?</strong></dt><dd><p>For practical Bayesian optimisation, a zero or constant mean function with
 a Matern 5/2 kernel is recommended <a class="footnote-reference brackets" href="#snoek2012" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a>. Other kernels, such as
@@ -274,7 +274,7 @@ also estimate any additional noise besides the observational noise
 </dl>
 </section>
 <section id="acquisition-function">
-<h2>Acquisition function<a class="headerlink" href="#acquisition-function" title="Permalink to this heading">#</a></h2>
+<h2>Acquisition function<a class="headerlink" href="#acquisition-function" title="Link to this heading">#</a></h2>
 <dl class="simple">
 <dt><strong>Which acquisition function should I use?</strong></dt><dd><p>NUBO supports two acquisition functions: Expected improvement (EI)
 <a class="footnote-reference brackets" href="#jones1998" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a> and upper confidence bound (UCB) <a class="footnote-reference brackets" href="#srinivas2010" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></a>. While both
@@ -302,59 +302,59 @@ that it does not affect performance negatively <a class="footnote-reference brac
 </dl>
 <hr class="docutils" />
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="baker2021" role="note">
+<aside class="footnote brackets" id="baker2021" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
 <p>E Baker, “Emulation of Stochastic Computer Models with an Application to Building Design,” Ph.D. dissertation, Department of Mathematics, Univ. Exeter, Exeter, 2021.</p>
 </aside>
-<aside class="footnote brackets" id="balandat2020" role="note">
+<aside class="footnote brackets" id="balandat2020" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id15">2</a><span class="fn-bracket">]</span></span>
 <p>M Balandat <em>et al.</em>, “BoTorch: A Framework for Efficient Monte-Carlo Bayesian Optimization,” <em>Advances in Neural Information Processing Systems</em>, vol. 33, 2020.</p>
 </aside>
-<aside class="footnote brackets" id="diessner2022" role="note">
+<aside class="footnote brackets" id="diessner2022" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id4">1</a>,<a role="doc-backlink" href="#id9">2</a>)</span>
-<p>M Diessner, J O’Connor, A Wynn, S Laizet, Y Guan, K Wilson, and R D Whalley, “Investigating Bayesian Optimization for Expensive-To-Evaluate Black Box Functions: Application in Fluid Dynamics,” <em>Frontiers in Applied Mathematics and Statistics</em>, 2022.</p>
+<p>M Diessner, J O’Connor, A Wynn, S Laizet, Y Guan, KJ Wilson, and RD Whalley, “Investigating Bayesian Optimization for Expensive-To-Evaluate Black Box Functions: Application in Fluid Dynamics,” <em>Frontiers in Applied Mathematics and Statistics</em>, 2022.</p>
 </aside>
-<aside class="footnote brackets" id="domingo2019" role="note">
+<aside class="footnote brackets" id="domingo2019" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">4</a><span class="fn-bracket">]</span></span>
 <p>D Domingo, “Gaussian Process Emulation: Theory and Applications to the Problem of Past Climate Reconstruction,” Ph.D. dissertation, School of Mathematics, Univ. Leeds, Leeds, 2019.</p>
 </aside>
-<aside class="footnote brackets" id="gramacy2012" role="note">
+<aside class="footnote brackets" id="gramacy2012" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">5</a><span class="fn-bracket">]</span></span>
-<p>R B Gramacy, and H K H Lee, “Cases for the Nugget in Modeling Computer Experiments,” <em>Statistics and Computing</em>, vol. 22, p. 713-722, 2012.</p>
+<p>RB Gramacy, and HKH Lee, “Cases for the Nugget in Modeling Computer Experiments,” <em>Statistics and Computing</em>, vol. 22, p. 713-722, 2012.</p>
 </aside>
-<aside class="footnote brackets" id="jones1998" role="note">
+<aside class="footnote brackets" id="jones1998" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">6</a><span class="fn-bracket">]</span></span>
-<p>D R Jones, M Schonlau, and W J Welch, “Efficient Global Optimization of Expensive Black-Box Functions,” <em>Journal of Global Optimization</em>, vol. 13, no. 4, p. 566, 1998.</p>
+<p>DR Jones, M Schonlau, and WJ Welch, “Efficient Global Optimization of Expensive Black-Box Functions,” <em>Journal of Global Optimization</em>, vol. 13, no. 4, p. 566, 1998.</p>
 </aside>
-<aside class="footnote brackets" id="kingma2015" role="note">
+<aside class="footnote brackets" id="kingma2015" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id14">7</a><span class="fn-bracket">]</span></span>
-<p>D P Kingma and J Ba, “Adam: A Method for Stochastic Optimization,” <em>Proceedings of the 3rd International Conference on Learning Representations</em>, 2015.</p>
+<p>DP Kingma and J Ba, “Adam: A Method for Stochastic Optimization,” <em>Proceedings of the 3rd International Conference on Learning Representations</em>, 2015.</p>
 </aside>
-<aside class="footnote brackets" id="kraft1994" role="note">
+<aside class="footnote brackets" id="kraft1994" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id13">8</a><span class="fn-bracket">]</span></span>
 <p>D Kraft, “Algorithm 733: TOMP-Fortran Modules for Optimal Control Calculations,” <em>ACM Transactions on Mathematical Software (TOMS)</em>, vol. 20, no. 3, p. 262-281, 1994.</p>
 </aside>
-<aside class="footnote brackets" id="owen2017" role="note">
+<aside class="footnote brackets" id="owen2017" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">9</a><span class="fn-bracket">]</span></span>
-<p>N E Owen, “A Comparison of Polynomial Chaos and Gaussian Process Emulation for Uncertainty Quantification in Computer Experiments,” Ph.D. dissertation, Department of Mathematics, Univ. Exeter, Exeter, 2017.</p>
+<p>NE Owen, “A Comparison of Polynomial Chaos and Gaussian Process Emulation for Uncertainty Quantification in Computer Experiments,” Ph.D. dissertation, Department of Mathematics, Univ. Exeter, Exeter, 2017.</p>
 </aside>
-<aside class="footnote brackets" id="snoek2012" role="note">
+<aside class="footnote brackets" id="snoek2012" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id5">1</a>,<a role="doc-backlink" href="#id10">2</a>)</span>
-<p>J Snoek, H Larochelle, and R P Adams, “Practical Bayesian Optimization of Machine Learning Algorithms,” <em>Advances in Neural Information Processing Systems</em>, vol. 25, 2012.</p>
+<p>J Snoek, H Larochelle, and RP Adams, “Practical Bayesian Optimization of Machine Learning Algorithms,” <em>Advances in Neural Information Processing Systems</em>, vol. 25, 2012.</p>
 </aside>
-<aside class="footnote brackets" id="srinivas2010" role="note">
+<aside class="footnote brackets" id="srinivas2010" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">11</a><span class="fn-bracket">]</span></span>
-<p>N Srinivas, A Krause, S M Kakade, and M Seeger, “Gaussian Process Optimization in the Bandit Setting: No Regret and Experimental Design,” <em>Proceedings of the 27th International Conference on Machine Learning</em>, p. 1015-1022, 2010.</p>
+<p>N Srinivas, A Krause, SM Kakade, and M Seeger, “Gaussian Process Optimization in the Bandit Setting: No Regret and Experimental Design,” <em>Proceedings of the 27th International Conference on Machine Learning</em>, p. 1015-1022, 2010.</p>
 </aside>
-<aside class="footnote brackets" id="wilson2018" role="note">
+<aside class="footnote brackets" id="wilson2018" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id11">12</a><span class="fn-bracket">]</span></span>
 <p>J Wilson, F Hutter, and M Deisenroth, “Maximizing Acquisition Functions for Bayesian Optimization,” <em>Advances in Neural Information Processing Systems</em>, vol. 31, 2018.</p>
 </aside>
-<aside class="footnote brackets" id="zhu1997" role="note">
+<aside class="footnote brackets" id="zhu1997" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id12">13</a><span class="fn-bracket">]</span></span>
-<p>C Zhu, R H Byrd, P Lu, J Nocedal, “Algorithm 778: L-BFGS-B: Fortran Subroutines for Large-Scale Bound-Constrained Optimization,” <em>ACM Transactions on Mathematical Software (TOMS)</em>, vol. 23, no. 4, p. 550-560, 1997.</p>
+<p>C Zhu, RH Byrd, P Lu, J Nocedal, “Algorithm 778: L-BFGS-B: Fortran Subroutines for Large-Scale Bound-Constrained Optimization,” <em>ACM Transactions on Mathematical Software (TOMS)</em>, vol. 23, no. 4, p. 550-560, 1997.</p>
 </aside>
 </aside>
 </section>
@@ -389,7 +389,7 @@ that it does not affect performance negatively <a class="footnote-reference brac
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2023, Mike Diessner
+                Copyright &#169; 2024, Mike Diessner
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             
@@ -430,15 +430,15 @@ that it does not affect performance negatively <a class="footnote-reference brac
       
     </aside>
   </div>
-</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/scripts/furo.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+</div><script src="_static/documentation_options.js?v=6f037312"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="_static/custom.js"></script>
+    <script src="_static/custom.js?v=60b15ab8"></script>
     </body>
 </html>

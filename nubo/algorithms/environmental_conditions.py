@@ -1,4 +1,5 @@
 import torch
+import numpy as np
 from nubo.utils import normalise, unnormalise, standardise
 from nubo.models import GaussianProcess, fit_gp
 from nubo.acquisition import ExpectedImprovement
@@ -23,7 +24,7 @@ def envbo(x_train: torch.Tensor,
           num_samples: Optional[int]=100) -> torch.Tensor:
     """
     ENVBO is a Bayesian optimisation algorithm for problems with uncontrollable
-    variablesthat are given externally by environmental conditions. This
+    variables that are given externally by environmental conditions. This
     function represents a single optimisation step that needs to be wrapped in
     a loop where new measurements of the environmental variables are provided
     at each iteration. Assumes a maximisation problem.
@@ -56,7 +57,7 @@ def envbo(x_train: torch.Tensor,
     Returns
     -------
     ``torch.Tensor``
-        (size 1 x d) Maximiser inputs.
+        (size 1 x d) New candidate inputs.
     """
 
     # get number of parameters
@@ -182,13 +183,13 @@ def _cond_optim(func: Callable,
 
 
 def _slsqp(func: Callable,
-          env_dims: List[int],
-          env_values: List[float],
-          bounds: torch.Tensor,
-          constraints: Optional[dict | Tuple[dict]]=(),
-          num_starts: Optional[int]=10,
-          num_samples: Optional[int]=100,
-          **kwargs: Any) -> Tuple[torch.Tensor, torch.Tensor]:
+           env_dims: List[int],
+           env_values: List[float],
+           bounds: torch.Tensor,
+           constraints: Optional[dict | Tuple[dict]]=(),
+           num_starts: Optional[int]=10,
+           num_samples: Optional[int]=100,
+           **kwargs: Any) -> Tuple[torch.Tensor, torch.Tensor]:
     """
     Special version of the multi-start SLSQP optimiser for optimisation with
     environmental conditions using the ``scipy.optimize.minimize``
@@ -259,3 +260,123 @@ def _slsqp(func: Callable,
     best_func_result = torch.reshape(func_results[best_i], (1,))
 
     return best_result, best_func_result
+
+
+class ENVBOPredictionModel:
+    """
+    Prediction model for ENVBO algorithm.
+    
+    Predicts optimal values for controllable parameters conditional on
+    measurements of environmental variables. First, it uses a Gaussian process
+    to model the relationship between all controllable and environmental inputs
+    and the outputs. Second, it predicts optimal input values of the
+    controllable parameters by holding environmental inputs fixed to the
+    provided measurements and maximising the posterior mean of the Gaussian
+    process model. Assumes a maximisation problem.
+
+    Attributes
+    ----------
+    x_train : ``torch.Tensor``
+        (size n x d) Training inputs.
+    y_train : ``torch.Tensor``
+        (size n) Training outputs.
+    env_dims : ``List`` of ``int``
+        List of indices of environmental variables.
+    env_values : ``List`` of ``float``
+        List of values of environmental variables.
+    bounds : ``torch.Tensor``
+        (size 2 x d) Optimisation bounds of input space.
+    constraints : ``dict`` or ``Tuple`` of ``dict``, optional
+        Optimisation constraints, default is no constraints.
+    likelihood : ``gpytorch.likelihoods.Likelihood``
+        Likelihood.
+    model : ``gpytorch.models.GP``
+        Gaussian Process model.
+    """
+
+    def __init__(self,
+                 x_train : torch.Tensor,
+                 y_train : torch.Tensor,
+                 env_dims : int | List[int],
+                 bounds : torch.Tensor,
+                 constraints : Optional[dict | Tuple[dict]]=()) -> None:
+        """
+        Initialise Gaussian process as prediction model.
+
+        Parameters
+        ----------
+        x_train : ``torch.Tensor``
+            (size n x d) Training inputs.
+        y_train : ``torch.Tensor``
+            (size n) Training outputs.
+        env_dims : ``int`` or ``List`` of ``int``
+            List of indices of environmental variables.
+        env_values : ``List`` of ``float``
+            List of values of environmental variables.
+        bounds : ``torch.Tensor``
+            (size 2 x d) Optimisation bounds of input space.
+        constraints : ``dict`` or ``Tuple`` of ``dict``, optional
+            Optimisation constraints, default is no constraints.
+        """
+
+        self.x_train = x_train
+        self.y_train = y_train
+        self.env_dims = env_dims
+        self.bounds = bounds
+        self.constraints = constraints
+
+        self.likelihood = GaussianLikelihood()
+        self.model = GaussianProcess(self.x_train, self.y_train, self.likelihood)
+        fit_gp(self.x_train, self.y_train, self.model, self.likelihood)
+   
+
+    def predict(self,
+                env_values : float | List[float]) -> Tuple[torch.Tensor, torch.Tensor]:
+        """
+        Predict values for controllable parameters conditional on measurements
+        of environmental variables.
+
+        Parameters
+        ----------
+        env_values : ``float`` or ``List`` of ``float``
+            List of values of environmental variables.
+
+        Returns
+        -------
+        x_new : ``torch.Tensor``
+            (size 1 x d) Minimiser inputs conditional on environmental values.
+        pred_new : ``torch.Tensor``
+            (size 1) Predicted minimiser output conditional on environmental
+            values.
+        """
+
+        self.model.eval()
+
+        # Objective function for predictions
+        def predict(x):
+
+            x = x.reshape((1, -1))
+            numpy = False
+
+            if isinstance(x, np.ndarray):
+                numpy = True
+                x = torch.from_numpy(x)
+
+            pred = self.model(x)
+            mean = pred.mean.detach()
+
+            if numpy:
+                mean = mean.numpy()
+
+            return -mean
+
+        # Optimise
+        x_new, pred_new = _cond_optim(func=predict,
+                                      env_dims=self.env_dims,
+                                      env_values=env_values,
+                                      bounds=self.bounds,
+                                      constraints=self.constraints,
+                                      num_starts=10,
+                                      num_samples=200)
+        
+        return x_new, -pred_new

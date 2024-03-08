@@ -11,13 +11,13 @@ precise references, and thorough documentation. User experience is ensured
 by a modular and flexible design, easy-to-write syntax, and careful selection
 of Bayesian optimisation algorithms. NUBO allows you to tailor Bayesian
 optimisation to your specific problem by writing the optimisation loop yourself
-using the provided building blocks. Only algorithms and methods that are
-sufficiently tested and validated to perform well are included in NUBO. This
-ensures that the package remains compact and does not overwhelm the user with an
-unnecessarily large number of options. The package is written in Python_ but does
-not require expert knowledge of Python to optimise your simulations and
-experiments. NUBO is distributed as open-source software under the
-`BSD 3-Clause licence`_.
+using the provided building blocks or using an off-the-shelf algorithm for
+common problems. Only algorithms and methods that are sufficiently tested and
+validated to perform well are included in NUBO. This ensures that the package
+remains compact and does not overwhelm the user with an unnecessarily large
+number of options. The package is written in Python_ but does not require expert
+knowledge of Python to optimise your simulations and experiments. NUBO is
+distributed as open-source software under the `BSD 3-Clause licence`_.
 
 .. admonition:: Contact
    :class: seealso
@@ -27,8 +27,9 @@ experiments. NUBO is distributed as open-source software under the
    appreciated and will help make NUBO better in the future.
 
 On this page, you can find an overview of the three main documentation sections
-consisting of (i) an introduction to Bayesian optimisation with NUBO, (ii) a
-selection of examples that can be used as boilerplate code, and (iii) detailed
+consisting of (i) an introduction to Bayesian optimisation with NUBO, (ii) 
+off-the-shelf algorithms for an easy and quick start with NUBO, (iii) a
+selection of examples that can be used as boilerplate code, and (iv) detailed
 references for all of NUBO's functions and objects.
 
 NUBO
@@ -52,8 +53,25 @@ Bayesian optimisation journey with NUBO.
    citation.rst
    GitHub <http://github.com/mikediessner/nubo>
 
-Examples
---------
+Off-the-shelf algorithms
+------------------------
+Off-the-shelf algorithms provide the quickest and easiest way of optimising
+expensive black-box functions with NUBO. Basic optimiation covers a wide range
+of common optimisation problems such as single-point or multi-point optimisation
+with inputs constraints or asynchronous optimisation. If your problem is more
+complex, the next sections explains how to write custom optimisation loops
+yourself.
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Off-the-shelf algorithms:
+
+   basic_optimisation.ipynb
+   envbo.ipynb
+
+
+Custom loop examples
+--------------------
 The Examples section provides guides to some problems that NUBO has been
 designed to optimise and shows how to implement
 :ref:`custom surrogate models <custom_gp>`. This boilerplate code is a good
@@ -62,7 +80,7 @@ specific problem.
 
 .. toctree::
    :maxdepth: 1
-   :caption: Examples:
+   :caption: Custom loop examples:
 
    custom_gp.rst
    singlepoint.ipynb
@@ -84,12 +102,12 @@ a specific object or function should be used.
    :maxdepth: 1
    :caption: Package reference:
 
+   nubo.algorithms.rst
    nubo.acquisition.rst
    nubo.models.rst
    nubo.optimisation.rst
    nubo.test_functions.rst
    nubo.utils.rst
-   nubo.algorithms.rst
 
 .. _`Fluid Dynamics Lab`: https://www.experimental-fluid-dynamics.com
 .. _`Newcastle University`: https://www.ncl.ac.uk

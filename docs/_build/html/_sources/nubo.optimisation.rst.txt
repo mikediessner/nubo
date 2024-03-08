@@ -54,7 +54,7 @@ Stochastic optimisers
 .. admonition:: References
    :class: seealso
 
-   - D P Kingma and J Ba, "Adam: A Method for Stochastic Optimization," *Proceedings of the 3rd International Conference on Learning Representations*, 2015.
+   - DP Kingma and J Ba, "Adam: A Method for Stochastic Optimization," *Proceedings of the 3rd International Conference on Learning Representations*, 2015.
    - A Paszke, *et al.*, "PyTorch: An Imperative Style, High-Performance Deep Learning Library," *In Advances in Neural Information Processing Systems*, vol. 32, 2019.
 
 .. automodule:: nubo.optimisation.adam

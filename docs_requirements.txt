@@ -1,0 +1,9 @@
+nubopy
+jupyter
+sphinx
+furo
+numpydoc
+myst_parser
+nbsphinx
+sphinx-copybutton
+sphinxext-opengraph

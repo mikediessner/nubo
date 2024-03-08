@@ -72,14 +72,14 @@ Acquisition function
 
 .. [#Baker2021] E Baker, "Emulation of Stochastic Computer Models with an Application to Building Design," Ph.D. dissertation, Department of Mathematics, Univ. Exeter, Exeter, 2021.
 .. [#Balandat2020] M Balandat *et al.*, "BoTorch: A Framework for Efficient Monte-Carlo Bayesian Optimization," *Advances in Neural Information Processing Systems*, vol. 33, 2020.
-.. [#Diessner2022] M Diessner, J O'Connor, A Wynn, S Laizet, Y Guan, K Wilson, and R D Whalley, "Investigating Bayesian Optimization for Expensive-To-Evaluate Black Box Functions: Application in Fluid Dynamics," *Frontiers in Applied Mathematics and Statistics*, 2022. 
+.. [#Diessner2022] M Diessner, J O'Connor, A Wynn, S Laizet, Y Guan, KJ Wilson, and RD Whalley, "Investigating Bayesian Optimization for Expensive-To-Evaluate Black Box Functions: Application in Fluid Dynamics," *Frontiers in Applied Mathematics and Statistics*, 2022. 
 .. [#Domingo2019] D Domingo, "Gaussian Process Emulation: Theory and Applications to the Problem of Past Climate Reconstruction," Ph.D. dissertation, School of Mathematics, Univ. Leeds, Leeds, 2019.
-.. [#Gramacy2012] R B Gramacy, and H K H Lee, “Cases for the Nugget in Modeling Computer Experiments,” *Statistics and Computing*, vol. 22, p. 713-722, 2012.
-.. [#Jones1998] D R Jones, M Schonlau, and W J Welch, "Efficient Global Optimization of Expensive Black-Box Functions," *Journal of Global Optimization*, vol. 13, no. 4, p. 566, 1998.
-.. [#Kingma2015] D P Kingma and J Ba, "Adam: A Method for Stochastic Optimization," *Proceedings of the 3rd International Conference on Learning Representations*, 2015.
+.. [#Gramacy2012] RB Gramacy, and HKH Lee, “Cases for the Nugget in Modeling Computer Experiments,” *Statistics and Computing*, vol. 22, p. 713-722, 2012.
+.. [#Jones1998] DR Jones, M Schonlau, and WJ Welch, "Efficient Global Optimization of Expensive Black-Box Functions," *Journal of Global Optimization*, vol. 13, no. 4, p. 566, 1998.
+.. [#Kingma2015] DP Kingma and J Ba, "Adam: A Method for Stochastic Optimization," *Proceedings of the 3rd International Conference on Learning Representations*, 2015.
 .. [#Kraft1994] D Kraft, "Algorithm 733: TOMP-Fortran Modules for Optimal Control Calculations," *ACM Transactions on Mathematical Software (TOMS)*, vol. 20, no. 3, p. 262-281, 1994.
-.. [#Owen2017] N E Owen, "A Comparison of Polynomial Chaos and Gaussian Process Emulation for Uncertainty Quantification in Computer Experiments," Ph.D. dissertation, Department of Mathematics, Univ. Exeter, Exeter, 2017.
-.. [#Snoek2012] J Snoek, H Larochelle, and R P Adams, "Practical Bayesian Optimization of Machine Learning Algorithms," *Advances in Neural Information Processing Systems*, vol. 25, 2012.
-.. [#Srinivas2010] N Srinivas, A Krause, S M Kakade, and M Seeger, "Gaussian Process Optimization in the Bandit Setting: No Regret and Experimental Design," *Proceedings of the 27th International Conference on Machine Learning*, p. 1015-1022, 2010.
+.. [#Owen2017] NE Owen, "A Comparison of Polynomial Chaos and Gaussian Process Emulation for Uncertainty Quantification in Computer Experiments," Ph.D. dissertation, Department of Mathematics, Univ. Exeter, Exeter, 2017.
+.. [#Snoek2012] J Snoek, H Larochelle, and RP Adams, "Practical Bayesian Optimization of Machine Learning Algorithms," *Advances in Neural Information Processing Systems*, vol. 25, 2012.
+.. [#Srinivas2010] N Srinivas, A Krause, SM Kakade, and M Seeger, "Gaussian Process Optimization in the Bandit Setting: No Regret and Experimental Design," *Proceedings of the 27th International Conference on Machine Learning*, p. 1015-1022, 2010.
 .. [#Wilson2018] J Wilson, F Hutter, and M Deisenroth, "Maximizing Acquisition Functions for Bayesian Optimization," *Advances in Neural Information Processing Systems*, vol. 31, 2018.
-.. [#Zhu1997] C Zhu, R H Byrd, P Lu, J Nocedal, "Algorithm 778: L-BFGS-B: Fortran Subroutines for Large-Scale Bound-Constrained Optimization," *ACM Transactions on Mathematical Software (TOMS)*, vol. 23, no. 4, p. 550-560, 1997.
+.. [#Zhu1997] C Zhu, RH Byrd, P Lu, J Nocedal, "Algorithm 778: L-BFGS-B: Fortran Subroutines for Large-Scale Bound-Constrained Optimization," *ACM Transactions on Mathematical Software (TOMS)*, vol. 23, no. 4, p. 550-560, 1997.

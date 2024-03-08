@@ -1,28 +1,23 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="en" data-content_root="./">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta property="og:title" content="Custom Gaussian process" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="custom_gp.html" />
 <meta property="og:site_name" content="NUBO" />
 <meta property="og:description" content="This notebook gives an introduction to specifying custom Gaussian processes with GPyTorch that can be used with NUBO. Define Gaussian process: A Gaussian process is defined by its mean function and..." />
-<meta property="og:image:width" content="1146" />
-<meta property="og:image:height" content="600" />
-<meta property="og:image" content="/_images/social_previews/summary_custom_gp_848fbb5d.png" />
-<meta property="og:image:alt" content="This notebook gives an introduction to specifying custom Gaussian processes with GPyTorch that can be used with NUBO. Define Gaussian process: A Gaussian pro..." />
 <meta name="description" content="This notebook gives an introduction to specifying custom Gaussian processes with GPyTorch that can be used with NUBO. Define Gaussian process: A Gaussian process is defined by its mean function and..." />
-<meta name="twitter:card" content="summary_large_image" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Sequential single-point Bayesian optimisation" href="singlepoint.html" /><link rel="prev" title="Citation" href="citation.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Sequential single-point Bayesian optimisation" href="singlepoint.html" /><link rel="prev" title="Optimisation with changing environmental conditions" href="envbo.html" />
 
-    <link rel="shortcut icon" href="_static/favicon.ico"/><!-- Generated with Sphinx 6.2.1 and Furo 2023.03.27 -->
+    <link rel="shortcut icon" href="_static/favicon.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
         <title>Custom Gaussian process - NUBO</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=7707a854" />
     
     
 
@@ -176,7 +171,12 @@
 <li class="toctree-l1"><a class="reference internal" href="citation.html">Citation</a></li>
 <li class="toctree-l1"><a class="reference external" href="http://github.com/mikediessner/nubo">GitHub</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<p class="caption" role="heading"><span class="caption-text">Off-the-shelf algorithms:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="basic_optimisation.html">Typical problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="envbo.html">Optimisation with changing environmental conditions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Custom loop examples:</span></p>
 <ul class="current">
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Custom Gaussian process</a></li>
 <li class="toctree-l1"><a class="reference internal" href="singlepoint.html">Sequential single-point Bayesian optimisation</a></li>
@@ -231,11 +231,11 @@
         </div>
         <article role="main">
           <section id="custom-gaussian-process">
-<span id="custom-gp"></span><h1>Custom Gaussian process<a class="headerlink" href="#custom-gaussian-process" title="Permalink to this heading">#</a></h1>
+<span id="custom-gp"></span><h1>Custom Gaussian process<a class="headerlink" href="#custom-gaussian-process" title="Link to this heading">#</a></h1>
 <p>This notebook gives an introduction to specifying custom Gaussian processes
 with <em>GPyTorch</em> that can be used with NUBO.</p>
 <section id="define-gaussian-process">
-<h2>Define Gaussian process<a class="headerlink" href="#define-gaussian-process" title="Permalink to this heading">#</a></h2>
+<h2>Define Gaussian process<a class="headerlink" href="#define-gaussian-process" title="Link to this heading">#</a></h2>
 <p>A Gaussian process is defined by its mean function and its covariance kernel.
 Both are specified in the <code class="docutils literal notranslate"><span class="pre">__init__()</span></code> method of the <code class="docutils literal notranslate"><span class="pre">GaussianProcess</span></code>
 class below and can easily be replaced by the desired function or kernel. While
@@ -286,7 +286,7 @@ mean function and the prior covariance kernel see <cite>GPyTorch</cite>’s <a c
 </div>
 </section>
 <section id="generate-training-data">
-<h2>Generate training data<a class="headerlink" href="#generate-training-data" title="Permalink to this heading">#</a></h2>
+<h2>Generate training data<a class="headerlink" href="#generate-training-data" title="Link to this heading">#</a></h2>
 <p>To use the Gaussian process, we first generate some training data.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nubo.test_functions</span> <span class="kn">import</span> <span class="n">Hartmann6D</span>
 <span class="kn">from</span> <span class="nn">nubo.utils</span> <span class="kn">import</span> <span class="n">gen_inputs</span>
@@ -306,7 +306,7 @@ mean function and the prior covariance kernel see <cite>GPyTorch</cite>’s <a c
 </div>
 </section>
 <section id="fit-gaussian-process">
-<h2>Fit Gaussian process<a class="headerlink" href="#fit-gaussian-process" title="Permalink to this heading">#</a></h2>
+<h2>Fit Gaussian process<a class="headerlink" href="#fit-gaussian-process" title="Link to this heading">#</a></h2>
 <p>Before we fit the Gaussian process to the training data, we first have to
 decide on the likelihood that should be used. There are two likelihoods we want
 to consider here: First, we have the standard <code class="docutils literal notranslate"><span class="pre">GaussianLikelihood</span></code>. This
@@ -343,7 +343,7 @@ estimation (MLE) using <em>torch</em>’s Adam optimiser.</p>
 </div>
 </section>
 <section id="make-predictions-for-test-points">
-<h2>Make predictions for test points<a class="headerlink" href="#make-predictions-for-test-points" title="Permalink to this heading">#</a></h2>
+<h2>Make predictions for test points<a class="headerlink" href="#make-predictions-for-test-points" title="Link to this heading">#</a></h2>
 <p>With the fitted Gaussian process in hand, we can easily predict the mean and
 the variance of previously unobserved test points. Below, we sample five points
 randomly and print the predictive mean and variance that define the predictive
@@ -390,14 +390,14 @@ process specified above.</p>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="citation.html">
+          <a class="prev-page" href="envbo.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Citation</div>
+                <div class="title">Optimisation with changing environmental conditions</div>
                 
               </div>
             </a>
@@ -405,7 +405,7 @@ process specified above.</p>
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2023, Mike Diessner
+                Copyright &#169; 2024, Mike Diessner
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             
@@ -447,15 +447,15 @@ process specified above.</p>
       
     </aside>
   </div>
-</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/scripts/furo.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+</div><script src="_static/documentation_options.js?v=6f037312"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="_static/custom.js"></script>
+    <script src="_static/custom.js?v=60b15ab8"></script>
     </body>
 </html>

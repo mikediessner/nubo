@@ -1,28 +1,23 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="en" data-content_root="./">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta property="og:title" content="NUBO: A Transparent Python Package for Bayesian Optimisation" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="index.html" />
 <meta property="og:site_name" content="NUBO" />
 <meta property="og:description" content="NUBO, short for Newcastle University Bayesian optimisation, is a Bayesian optimisation framework for the optimisation of expensive-to-evaluate black-box functions, such as physical experiments and ..." />
-<meta property="og:image:width" content="1146" />
-<meta property="og:image:height" content="600" />
-<meta property="og:image" content="/None" />
-<meta property="og:image:alt" content="NUBO, short for Newcastle University Bayesian optimisation, is a Bayesian optimisation framework for the optimisation of expensive-to-evaluate black-box func..." />
 <meta name="description" content="NUBO, short for Newcastle University Bayesian optimisation, is a Bayesian optimisation framework for the optimisation of expensive-to-evaluate black-box functions, such as physical experiments and ..." />
-<meta name="twitter:card" content="summary_large_image" />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Overview" href="overview.html" />
 
-    <link rel="shortcut icon" href="_static/favicon.ico"/><!-- Generated with Sphinx 6.2.1 and Furo 2023.03.27 -->
+    <link rel="shortcut icon" href="_static/favicon.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
         <title>NUBO</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=7707a854" />
     
     
 
@@ -176,7 +171,12 @@
 <li class="toctree-l1"><a class="reference internal" href="citation.html">Citation</a></li>
 <li class="toctree-l1"><a class="reference external" href="http://github.com/mikediessner/nubo">GitHub</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<p class="caption" role="heading"><span class="caption-text">Off-the-shelf algorithms:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="basic_optimisation.html">Typical problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="envbo.html">Optimisation with changing environmental conditions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Custom loop examples:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="custom_gp.html">Custom Gaussian process</a></li>
 <li class="toctree-l1"><a class="reference internal" href="singlepoint.html">Sequential single-point Bayesian optimisation</a></li>
@@ -190,12 +190,12 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="nubo.algorithms.html">Algorithms module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nubo.acquisition.html">Acquisition module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nubo.models.html">Surrogate module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nubo.optimisation.html">Optimisation module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nubo.test_functions.html">Test function module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nubo.utils.html">Utility module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nubo.algorithms.html">Algorithms module</a></li>
 </ul>
 
 </div>
@@ -231,7 +231,7 @@
         </div>
         <article role="main">
           <section id="nubo-a-transparent-python-package-for-bayesian-optimisation">
-<h1>NUBO: A Transparent Python Package for Bayesian Optimisation<a class="headerlink" href="#nubo-a-transparent-python-package-for-bayesian-optimisation" title="Permalink to this heading">#</a></h1>
+<h1>NUBO: A Transparent Python Package for Bayesian Optimisation<a class="headerlink" href="#nubo-a-transparent-python-package-for-bayesian-optimisation" title="Link to this heading">#</a></h1>
 <p>NUBO, short for Newcastle University Bayesian optimisation, is a Bayesian
 optimisation framework for the optimisation of expensive-to-evaluate black-box
 functions, such as physical experiments and computer simulations. It is
@@ -243,13 +243,13 @@ precise references, and thorough documentation. User experience is ensured
 by a modular and flexible design, easy-to-write syntax, and careful selection
 of Bayesian optimisation algorithms. NUBO allows you to tailor Bayesian
 optimisation to your specific problem by writing the optimisation loop yourself
-using the provided building blocks. Only algorithms and methods that are
-sufficiently tested and validated to perform well are included in NUBO. This
-ensures that the package remains compact and does not overwhelm the user with an
-unnecessarily large number of options. The package is written in <a class="reference external" href="https://www.python.org">Python</a> but does
-not require expert knowledge of Python to optimise your simulations and
-experiments. NUBO is distributed as open-source software under the
-<a class="reference external" href="https://github.com/mikediessner/nubo/blob/main/LICENSE.md">BSD 3-Clause licence</a>.</p>
+using the provided building blocks or using an off-the-shelf algorithm for
+common problems. Only algorithms and methods that are sufficiently tested and
+validated to perform well are included in NUBO. This ensures that the package
+remains compact and does not overwhelm the user with an unnecessarily large
+number of options. The package is written in <a class="reference external" href="https://www.python.org">Python</a> but does not require expert
+knowledge of Python to optimise your simulations and experiments. NUBO is
+distributed as open-source software under the <a class="reference external" href="https://github.com/mikediessner/nubo/blob/main/LICENSE.md">BSD 3-Clause licence</a>.</p>
 <div class="seealso admonition">
 <p class="admonition-title">Contact</p>
 <p>Thanks for considering NUBO. If you have any questions, comments, or issues
@@ -257,11 +257,12 @@ feel free to email us at <a class="reference external" href="mailto:m&#46;diessn
 appreciated and will help make NUBO better in the future.</p>
 </div>
 <p>On this page, you can find an overview of the three main documentation sections
-consisting of (i) an introduction to Bayesian optimisation with NUBO, (ii) a
-selection of examples that can be used as boilerplate code, and (iii) detailed
+consisting of (i) an introduction to Bayesian optimisation with NUBO, (ii)
+off-the-shelf algorithms for an easy and quick start with NUBO, (iii) a
+selection of examples that can be used as boilerplate code, and (iv) detailed
 references for all of NUBO’s functions and objects.</p>
 <section id="nubo">
-<h2>NUBO<a class="headerlink" href="#nubo" title="Permalink to this heading">#</a></h2>
+<h2>NUBO<a class="headerlink" href="#nubo" title="Link to this heading">#</a></h2>
 <p>The NUBO section contains general information about the package, gives a
 concise introduction to <a class="reference internal" href="bayesian_optimisation.html#bo"><span class="std std-ref">Bayesian optimisation</span></a>, and explains its
 components, such as the <a class="reference internal" href="bayesian_optimisation.html#model"><span class="std std-ref">surrogate model</span></a> and
@@ -281,15 +282,31 @@ Bayesian optimisation journey with NUBO.</p>
 </ul>
 </div>
 </section>
-<section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
+<section id="off-the-shelf-algorithms">
+<h2>Off-the-shelf algorithms<a class="headerlink" href="#off-the-shelf-algorithms" title="Link to this heading">#</a></h2>
+<p>Off-the-shelf algorithms provide the quickest and easiest way of optimising
+expensive black-box functions with NUBO. Basic optimiation covers a wide range
+of common optimisation problems such as single-point or multi-point optimisation
+with inputs constraints or asynchronous optimisation. If your problem is more
+complex, the next sections explains how to write custom optimisation loops
+yourself.</p>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Off-the-shelf algorithms:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="basic_optimisation.html">Typical problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="envbo.html">Optimisation with changing environmental conditions</a></li>
+</ul>
+</div>
+</section>
+<section id="custom-loop-examples">
+<h2>Custom loop examples<a class="headerlink" href="#custom-loop-examples" title="Link to this heading">#</a></h2>
 <p>The Examples section provides guides to some problems that NUBO has been
 designed to optimise and shows how to implement
 <a class="reference internal" href="custom_gp.html#custom-gp"><span class="std std-ref">custom surrogate models</span></a>. This boilerplate code is a good
 starting point when tailoring a Bayesian optimisation algorithm to your
 specific problem.</p>
 <div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<p class="caption" role="heading"><span class="caption-text">Custom loop examples:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="custom_gp.html">Custom Gaussian process</a></li>
 <li class="toctree-l1"><a class="reference internal" href="singlepoint.html">Sequential single-point Bayesian optimisation</a></li>
@@ -304,19 +321,19 @@ specific problem.</p>
 </div>
 </section>
 <section id="package-reference">
-<h2>Package reference<a class="headerlink" href="#package-reference" title="Permalink to this heading">#</a></h2>
+<h2>Package reference<a class="headerlink" href="#package-reference" title="Link to this heading">#</a></h2>
 <p>The Package reference section gives detailed documentation of all of NUBO’s
 functionality. This is where you want to go first when you are not sure how
 a specific object or function should be used.</p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Package reference:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="nubo.algorithms.html">Algorithms module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nubo.acquisition.html">Acquisition module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nubo.models.html">Surrogate module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nubo.optimisation.html">Optimisation module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nubo.test_functions.html">Test function module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nubo.utils.html">Utility module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nubo.algorithms.html">Algorithms module</a></li>
 </ul>
 </div>
 </section>
@@ -341,7 +358,7 @@ a specific object or function should be used.</p>
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2023, Mike Diessner
+                Copyright &#169; 2024, Mike Diessner
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             
@@ -369,7 +386,8 @@ a specific object or function should be used.</p>
             <ul>
 <li><a class="reference internal" href="#">NUBO: A Transparent Python Package for Bayesian Optimisation</a><ul>
 <li><a class="reference internal" href="#nubo">NUBO</a></li>
-<li><a class="reference internal" href="#examples">Examples</a></li>
+<li><a class="reference internal" href="#off-the-shelf-algorithms">Off-the-shelf algorithms</a></li>
+<li><a class="reference internal" href="#custom-loop-examples">Custom loop examples</a></li>
 <li><a class="reference internal" href="#package-reference">Package reference</a></li>
 </ul>
 </li>
@@ -382,13 +400,13 @@ a specific object or function should be used.</p>
       
     </aside>
   </div>
-</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/scripts/furo.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+</div><script src="_static/documentation_options.js?v=6f037312"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="_static/custom.js"></script>
+    <script src="_static/custom.js?v=60b15ab8"></script>
     </body>
 </html>

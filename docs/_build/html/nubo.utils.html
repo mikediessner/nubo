@@ -1,28 +1,23 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="en" data-content_root="./">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta property="og:title" content="Utility module" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="nubo.utils.html" />
 <meta property="og:site_name" content="NUBO" />
 <meta property="og:description" content="Data generation: Data transformations:" />
-<meta property="og:image:width" content="1146" />
-<meta property="og:image:height" content="600" />
-<meta property="og:image" content="/_images/social_previews/summary_nubo.utils_aecfc5e3.png" />
-<meta property="og:image:alt" content="Data generation: Data transformations:" />
 <meta name="description" content="Data generation: Data transformations:" />
-<meta name="twitter:card" content="summary_large_image" />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="Test function module" href="nubo.test_functions.html" />
 
-    <link rel="shortcut icon" href="_static/favicon.ico"/><!-- Generated with Sphinx 6.2.1 and Furo 2023.03.27 -->
+    <link rel="shortcut icon" href="_static/favicon.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
         <title>Utility module - NUBO</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=7707a854" />
     
     
 
@@ -176,7 +171,12 @@
 <li class="toctree-l1"><a class="reference internal" href="citation.html">Citation</a></li>
 <li class="toctree-l1"><a class="reference external" href="http://github.com/mikediessner/nubo">GitHub</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<p class="caption" role="heading"><span class="caption-text">Off-the-shelf algorithms:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="basic_optimisation.html">Typical problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="envbo.html">Optimisation with changing environmental conditions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Custom loop examples:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="custom_gp.html">Custom Gaussian process</a></li>
 <li class="toctree-l1"><a class="reference internal" href="singlepoint.html">Sequential single-point Bayesian optimisation</a></li>
@@ -231,18 +231,18 @@
         </div>
         <article role="main">
           <section id="utility-module">
-<h1>Utility module<a class="headerlink" href="#utility-module" title="Permalink to this heading">#</a></h1>
+<h1>Utility module<a class="headerlink" href="#utility-module" title="Link to this heading">#</a></h1>
 <section id="data-generation">
-<h2>Data generation<a class="headerlink" href="#data-generation" title="Permalink to this heading">#</a></h2>
+<h2>Data generation<a class="headerlink" href="#data-generation" title="Link to this heading">#</a></h2>
 <div class="seealso admonition">
 <p class="admonition-title">References</p>
 <ul class="simple">
-<li><p>M D McKay, R J Beckman, and W J Conover, “A Comparison of Three Methods for Selecting Values of Input Variables in the Analysis of Output from a Computer Code,” <em>Technometrics</em>, vol. 42, no. 1, p. 55-61, 2000.</p></li>
+<li><p>MD McKay, RJ Beckman, and WJ Conover, “A Comparison of Three Methods for Selecting Values of Input Variables in the Analysis of Output from a Computer Code,” <em>Technometrics</em>, vol. 42, no. 1, p. 55-61, 2000.</p></li>
 </ul>
 </div>
 <span class="target" id="module-nubo.utils.latin_hypercube"></span><dl class="py class">
 <dt class="sig sig-object py" id="nubo.utils.latin_hypercube.LatinHypercubeSampling">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.utils.latin_hypercube.</span></span><span class="sig-name descname"><span class="pre">LatinHypercubeSampling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/utils/latin_hypercube.html#LatinHypercubeSampling"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.utils.latin_hypercube.LatinHypercubeSampling" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nubo.utils.latin_hypercube.</span></span><span class="sig-name descname"><span class="pre">LatinHypercubeSampling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nubo/utils/latin_hypercube.html#LatinHypercubeSampling"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.utils.latin_hypercube.LatinHypercubeSampling" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Latin hypercube sampling.</p>
 <p>Generates a space-filling design. Two options are possible: sampling from a
@@ -275,7 +275,7 @@ returns the one with the largest minimal distance between points.</p>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="nubo.utils.latin_hypercube.LatinHypercubeSampling.maximin">
-<span class="sig-name descname"><span class="pre">maximin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/utils/latin_hypercube.html#LatinHypercubeSampling.maximin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.utils.latin_hypercube.LatinHypercubeSampling.maximin" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">maximin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/utils/latin_hypercube.html#LatinHypercubeSampling.maximin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.utils.latin_hypercube.LatinHypercubeSampling.maximin" title="Link to this definition">#</a></dt>
 <dd><p>Draw a maximin Latin hypercube sample.</p>
 <p>Draws a large number of random Latin hypercube samples and selects the
 one with the largest minimal distance between points.</p>
@@ -299,7 +299,7 @@ one with the largest minimal distance between points.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="nubo.utils.latin_hypercube.LatinHypercubeSampling.random">
-<span class="sig-name descname"><span class="pre">random</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/utils/latin_hypercube.html#LatinHypercubeSampling.random"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.utils.latin_hypercube.LatinHypercubeSampling.random" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">random</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/utils/latin_hypercube.html#LatinHypercubeSampling.random"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.utils.latin_hypercube.LatinHypercubeSampling.random" title="Link to this definition">#</a></dt>
 <dd><p>Draw a random Latin hypercube sample.</p>
 <p>To sample <span class="math notranslate nohighlight">\(n\)</span> points, the random Latin hypercube divides each
 dimension into <span class="math notranslate nohighlight">\(n\)</span> equal parts and places <span class="math notranslate nohighlight">\(n\)</span> points such
@@ -324,7 +324,7 @@ that for every dimension each equal part contains exactly one point.</p>
 
 <span class="target" id="module-nubo.utils.generate_inputs"></span><dl class="py function">
 <dt class="sig sig-object py" id="nubo.utils.generate_inputs.gen_inputs">
-<span class="sig-prename descclassname"><span class="pre">nubo.utils.generate_inputs.</span></span><span class="sig-name descname"><span class="pre">gen_inputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_lhd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/utils/generate_inputs.html#gen_inputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.utils.generate_inputs.gen_inputs" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">nubo.utils.generate_inputs.</span></span><span class="sig-name descname"><span class="pre">gen_inputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_lhd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/utils/generate_inputs.html#gen_inputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.utils.generate_inputs.gen_inputs" title="Link to this definition">#</a></dt>
 <dd><p>Generate data inputs from a maximin Latin hypercube design or from a
 uniform distribution for one data point.</p>
 <dl class="field-list">
@@ -352,10 +352,10 @@ bounds are a [0, 1]^`num_dims`.</p>
 
 </section>
 <section id="module-nubo.utils.transform">
-<span id="data-transformations"></span><h2>Data transformations<a class="headerlink" href="#module-nubo.utils.transform" title="Permalink to this heading">#</a></h2>
+<span id="data-transformations"></span><h2>Data transformations<a class="headerlink" href="#module-nubo.utils.transform" title="Link to this heading">#</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="nubo.utils.transform.standardise">
-<span class="sig-prename descclassname"><span class="pre">nubo.utils.transform.</span></span><span class="sig-name descname"><span class="pre">standardise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/utils/transform.html#standardise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.utils.transform.standardise" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">nubo.utils.transform.</span></span><span class="sig-name descname"><span class="pre">standardise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/utils/transform.html#standardise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.utils.transform.standardise" title="Link to this definition">#</a></dt>
 <dd><p>Standardise data by subtracting the mean and dividing by the standard
 deviation:</p>
 <div class="math-wrapper docutils container">
@@ -381,7 +381,7 @@ deviation:</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nubo.utils.transform.normalise">
-<span class="sig-prename descclassname"><span class="pre">nubo.utils.transform.</span></span><span class="sig-name descname"><span class="pre">normalise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/utils/transform.html#normalise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.utils.transform.normalise" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">nubo.utils.transform.</span></span><span class="sig-name descname"><span class="pre">normalise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/utils/transform.html#normalise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.utils.transform.normalise" title="Link to this definition">#</a></dt>
 <dd><p>Normalise data to the unit cube <span class="math notranslate nohighlight">\([0, 1]^d\)</span>.</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
@@ -408,7 +408,7 @@ deviation:</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nubo.utils.transform.unnormalise">
-<span class="sig-prename descclassname"><span class="pre">nubo.utils.transform.</span></span><span class="sig-name descname"><span class="pre">unnormalise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/utils/transform.html#unnormalise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.utils.transform.unnormalise" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">nubo.utils.transform.</span></span><span class="sig-name descname"><span class="pre">unnormalise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/nubo/utils/transform.html#unnormalise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nubo.utils.transform.unnormalise" title="Link to this definition">#</a></dt>
 <dd><p>Revere normalisation to the provided bounds.</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
@@ -457,7 +457,7 @@ deviation:</p>
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2023, Mike Diessner
+                Copyright &#169; 2024, Mike Diessner
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             
@@ -510,15 +510,15 @@ deviation:</p>
       
     </aside>
   </div>
-</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/scripts/furo.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+</div><script src="_static/documentation_options.js?v=6f037312"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="_static/custom.js"></script>
+    <script src="_static/custom.js?v=60b15ab8"></script>
     </body>
 </html>
